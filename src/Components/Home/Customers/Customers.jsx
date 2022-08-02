@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import AVTODOPROYEKT from './img/АВТОДОПРОЕКТ.png'
@@ -42,25 +42,33 @@ import rosatom_gspi from './img/rosatom_gspi.png'
 import Rosgeologiya from './img/Росгеология.png'
 import SPB_NII_ENERGOIZYSKANIYA from './img/СПБ_НИИ_ЭНЕРГОИЗЫСКАНИЯ.jpeg'
 
-
-
 import './Customers.css'
 export default function Customers() {
+	const [currentSlide, setCurrentSlide] = useState(0)
+
+	useEffect(() => {
+		setCurrentSlide(1)
+	}, [])
+
 	return (
 		<>
 			<div className="customers-objects">
-				<h1>Наши заказчики</h1>
 				<Carousel
 					className="customers-carousel"
 					showStatus={false}
 					showThumbs={false}
-					showArrows={true}
+					showArrows={false}
 					infiniteLoop={true}
 					autoPlay={true}
-					swipeable={true}
-					stopOnHover={true}
-					transitionTime={1000}
+					swipeable={false}
+					stopOnHover={false}
+					transitionTime={20000}
 					dynamicHeight={false}
+					showIndicators={false}
+					useKeyboardArrows={false}
+					interval={20000}
+					selectedItem={currentSlide}
+					onChange={(index) => setCurrentSlide(index)}
 				>
 					<div className="customers-object">
 						<div className="table">
@@ -119,165 +127,185 @@ export default function Customers() {
 								></div>
 							</div>
 							<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${NPC_Osnova})` }}
-									></div>
-								</div>								
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${NPC_Osnova})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{
+										backgroundImage: `url(${SPB_NII_ENERGOIZYSKANIYA})`,
+									}}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${Rosgeologiya})` }}
+								></div>
+							</div>
 						</div>
 					</div>
 					<div className="customers-object">
-						<div className="table">							
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${Mosgeoproyekt})` }}
-									></div>
-								</div>													
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${RusskayaBurovayaKompaniya})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${NOEKS})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${SpetsProyektPut})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${ENERGOTRANSPROYEKT})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${NPTSIZ})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${ROSZHELDORPROYEKT})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${GIPROSTROYMOST})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${rosatom_gspi})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${Stroyizyskaniya})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${Delta40})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${ZHELDORPROYEKT})` }}
-									></div>
-								</div>
+						<div className="table">
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${Mosgeoproyekt})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{
+										backgroundImage: `url(${RusskayaBurovayaKompaniya})`,
+									}}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${NOEKS})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${SpetsProyektPut})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${ENERGOTRANSPROYEKT})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${NPTSIZ})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${ROSZHELDORPROYEKT})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${GIPROSTROYMOST})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${rosatom_gspi})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${Stroyizyskaniya})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${Delta40})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${ZHELDORPROYEKT})` }}
+								></div>
+							</div>
 						</div>
 					</div>
 					<div className="customers-object">
-						<div className="table">							
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${Inzhgeokom})` }}
-									></div>
-								</div>													
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${MosEnergoProyet})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${Nizhegordaproyekt})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${NITS})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${PermaprostInzhiniring})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${Proinzhgrupp})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${SakhalinTISIZ})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${SoyuzGeoStroyServis})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${TikhookeanskayaInzhKompaniya})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${EUSP})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${MoskovskayaKollegiyaAdvokatov})` }}
-									></div>
-								</div>
-								<div className="cart">
-									<div
-										className="customer"
-										style={{ backgroundImage: `url(${TSGI})` }}
-									></div>
-								</div>
+						<div className="table">
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${Inzhgeokom})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${MosEnergoProyet})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${Nizhegordaproyekt})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${NITS})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${PermaprostInzhiniring})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${Proinzhgrupp})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${SakhalinTISIZ})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${SoyuzGeoStroyServis})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{
+										backgroundImage: `url(${TikhookeanskayaInzhKompaniya})`,
+									}}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${EUSP})` }}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{
+										backgroundImage: `url(${MoskovskayaKollegiyaAdvokatov})`,
+									}}
+								></div>
+							</div>
+							<div className="cart">
+								<div
+									className="customer"
+									style={{ backgroundImage: `url(${TSGI})` }}
+								></div>
+							</div>
 						</div>
-					</div>									
+					</div>
 				</Carousel>
 			</div>
 		</>

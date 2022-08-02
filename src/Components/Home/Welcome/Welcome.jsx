@@ -2,10 +2,12 @@ import React, { useContext } from 'react'
 
 import Context from '../../../context'
 import welcome from './imgs/welcome.png'
-import hill from './imgs/hill.png'
-import snow from './imgs/snow.png'
-import soil from './imgs/soil.png'
-import dinamic from './imgs/dinamic.png'
+import hill from './imgs/rock.svg'
+import snow from './imgs/snowflake.svg'
+import wave from './imgs/wave.svg'
+import chem from './imgs/bxs-flask.svg'
+import phys from './imgs/scales-2-line.svg'
+import mech from './imgs/mech.svg'
 
 import './Welcome.css'
 
@@ -46,17 +48,23 @@ export default function Welcome() {
 				<div className="welcome__labs">
 					<div className="labs_blur"></div>
 					<div className="labs-item">
-						<img src={soil} alt="" />
+						<img src={phys} alt="" />
 						Определение
 						<br />
-						физико-
+						физических
+						<br />
+						свойств грунтов
+					</div>
+					<div className="labs-item">
+						<img src={mech} alt="" />
+						Определение
 						<br />
 						механических
 						<br />
 						свойств грунтов
 					</div>
 					<div className="labs-item">
-						<img src={dinamic} alt="" />
+						<img src={wave} alt="" />
 						Динамическая
 						<br />
 						лаборатория
@@ -70,6 +78,12 @@ export default function Welcome() {
 					<div className="labs-item">
 						<img src={hill} alt="" />
 						Скальная
+						<br />
+						лаборатория
+					</div>
+					<div className="labs-item">
+						<img src={chem} alt="" />
+						Химическая
 						<br />
 						лаборатория
 					</div>

@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 
 import './Courses.css'
 
+import close from '../../Navigation/close-fill.svg'
+
 export default function Courses() {
+	const [showForm, setShowForm] = useState(false)
+
 	function useInputValue(defaultValue = '') {
 		const [value, setValue] = useState(defaultValue)
 
@@ -18,6 +22,7 @@ export default function Courses() {
 			value: () => value,
 		}
 	}
+
 	function useCheckValue(defaultValue = false) {
 		const [value, setValue] = useState(defaultValue)
 
@@ -46,6 +51,8 @@ export default function Courses() {
 	const user = useInputValue('')
 	const mail = useInputValue('')
 	const organization = useInputValue('')
+	const post = useInputValue('')
+
 	const phone = useInputValue('')
 
 	function inputFocus(event) {
@@ -75,7 +82,6 @@ export default function Courses() {
 		if (name.length < 3) {
 			return 'Имя не короче 3 символов'
 		}
-		
 		var regex = /[0-9!@#$%^&*?"')(+=._-]/
 
 		if (regex.test(name)) {
@@ -109,7 +115,6 @@ export default function Courses() {
 
 	function onSubmit(event) {
 		event.preventDefault()
-
 		console.log(event)
 
 		if (verifyName(user.value()) !== 'ok') {
@@ -127,13 +132,22 @@ export default function Courses() {
 		} else {
 			document.getElementById('mail').parentNode.classList.remove('error')
 		}
-
 		if (verifyPhone(phone.value()) !== 'ok') {
 			document.getElementById('phone').parentNode.classList.add('error')
 			document.getElementById('phone').parentNode.childNodes[2].innerHTML =
 				verifyPhone(phone.value())
 		} else {
 			document.getElementById('phone').parentNode.classList.remove('error')
+		}
+	}
+
+	function onCloseForm() {
+		setShowForm(false)
+	}
+
+	function wrapperClick(event) {
+		if (event.target === event.currentTarget) {
+			onCloseForm()
 		}
 	}
 
@@ -150,6 +164,7 @@ export default function Courses() {
 								проводит курсы повышения квалификации по лабораторным испытаниям
 								грунтов для целей численного моделирования Plaxis, Midas.
 							</p>
+							<h3>Курсы Midas</h3>
 							<p>
 								Для подачи заявки и оформления договора на курсы Midas
 								связываться с руководителем технического отдела ООО "МИДАС":
@@ -174,6 +189,7 @@ export default function Courses() {
 									rusupport@midasit.com
 								</a>
 							</p>
+							<h3>Курсы Plaxis</h3>
 							<p>
 								Для подачи заявки и оформления договора на курсы Plaxis
 								связываться по e-mail:&nbsp;
@@ -186,164 +202,222 @@ export default function Courses() {
 									education@mdgt.ru
 								</a>
 							</p>
-							<p>Или воспользуйтесь формой записи ниже.</p>
-						</div>
-						<div className="courses-card">
-							<form
-								className="courses-form"
-								action="#"
-								method="post"
-								onSubmit={onSubmit}
+							<div className="show-form--block">
+								Или воспользуйтесь формой записи
+							</div>
+							<button
+								className="main-title_btn"
+								onClick={() => {
+									setShowForm(true)
+								}}
 							>
-								<h3>Запись на курсы</h3>
-								<div className="course-type">
-									<div className="course-type__btn" id="midas">
-										<input
-											type="checkbox"
-											name="midas"
-											className="course-type__btn_input"
-											id="midas-input"
-											value={midas.bind.value}
-											checked={midas.bind.value}
-											onChange={(event) => {
-												plaxis.clear('plaxis')
-												midas.bind.onChange(event)
-											}}
-										></input>
-										<label
-											htmlFor="midas-input"
-											className="course-type__btn_label"
-										>
-											Midas
-										</label>
-									</div>
-
-									<div className="course-type__btn" id="plaxis">
-										<input
-											type="checkbox"
-											name="plaxis"
-											id="plaxis-input"
-											className="course-type__btn_input"
-											checked={plaxis.bind.value}
-											value={plaxis.bind.value}
-											onChange={(event) => {
-												midas.clear('midas')
-												plaxis.bind.onChange(event)
-											}}
-										></input>
-										<label
-											htmlFor="plaxis-input"
-											className="course-type__btn_label"
-										>
-											Plaxis
-										</label>
-									</div>
-								</div>
-
-								<div className="couses-form__text-input">
-									<input
-										className="text-input__input"
-										type="text"
-										name="student_name"
-										id="name"
-										onFocus={inputFocus}
-										onBlur={inputBlur}
-										{...user.bind}
-									/>
-									<div className="text-input__label-notch">
-										<div className="text-input__label-notch-outline--leading"></div>
-										<div className="text-input__label-notch-outline--label">
-											<label htmlFor="name">ФИО</label>
-										</div>
-										<div className="text-input__label-notch-outline--trailing"></div>
-									</div>
-									<div className="course-type__error"></div>
-								</div>
-
-								<div className="couses-form__text-input">
-									<input
-										className="text-input__input"
-										type="text"
-										name="student_mail"
-										id="mail"
-										onFocus={inputFocus}
-										onBlur={inputBlur}
-										{...mail.bind}
-									/>
-									<div className="text-input__label-notch">
-										<div className="text-input__label-notch-outline--leading"></div>
-										<div className="text-input__label-notch-outline--label">
-											<label htmlFor="mail">Почта</label>
-										</div>
-										<div className="text-input__label-notch-outline--trailing"></div>
-									</div>
-									<div className="course-type__error"></div>
-								</div>
-
-								<div className="couses-form__text-input">
-									<input
-										className="text-input__input"
-										type="text"
-										name="student_phone"
-										id="phone"
-										onFocus={inputFocus}
-										onBlur={inputBlur}
-										{...phone.bind}
-										value={phone.bind.value}
-										onChange={(event) => {
-											event.target.value = event.target.value
-												.replaceAll(' ', '')
-												.replaceAll('(', '')
-												.replaceAll(')', '')
-											phone.bind.onChange(event)
-										}}
-										placeholder="+7"
-									/>
-									<div className="text-input__label-notch">
-										<div className="text-input__label-notch-outline--leading"></div>
-										<div className="text-input__label-notch-outline--label">
-											<label htmlFor="phone">Телефон</label>
-										</div>
-										<div className="text-input__label-notch-outline--trailing"></div>
-									</div>
-									<div className="course-type__error"></div>
-								</div>
-
-								<div className="couses-form__text-input">
-									<input
-										className="text-input__input"
-										type="text"
-										name="student_organization"
-										id="organization"
-										onFocus={inputFocus}
-										onBlur={inputBlur}
-										{...organization.bind}
-									/>
-									<div className="text-input__label-notch">
-										<div className="text-input__label-notch-outline--leading"></div>
-										<div className="text-input__label-notch-outline--label">
-											<label htmlFor="organization">Организация</label>
-										</div>
-										<div className="text-input__label-notch-outline--trailing"></div>
-									</div>
-									<div className="course-type__error"></div>
-								</div>
-
-								<button
-									className="main-title_btn course-form__submit-btn "
-									type="submit"
-									disabled={!(midas.value() || plaxis.value())}
-								>
-									Отправить
-								</button>
-
-								<div className="courses-form--sub">
-									Нажимая на кнопку «Отправить«, вы даете согласие на обработку
-									персональных данных и соглашаетесь с{' '}
-									<a href="/">политикой конфиденциальности.</a>
-								</div>
-							</form>
+								Записаться
+							</button>
 						</div>
+						{showForm ? (
+							<div className="courses-card__wrapper" onClick={wrapperClick}>
+								<div className="courses-card">
+									<form
+										className="courses-form"
+										action="#"
+										method="post"
+										onSubmit={onSubmit}
+									>
+										<h3>Запись на курсы</h3>
+										<div className="couses-form__text-input">
+											<input
+												className="text-input__input"
+												type="text"
+												name="student_name"
+												id="name"
+												onFocus={inputFocus}
+												onBlur={inputBlur}
+												{...user.bind}
+											/>
+											<div className="text-input__label-notch">
+												<div className="text-input__label-notch-outline--leading"></div>
+												<div className="text-input__label-notch-outline--label">
+													<label htmlFor="name">ФИО</label>
+												</div>
+												<div className="text-input__label-notch-outline--trailing"></div>
+											</div>
+											<div className="course-type__error"></div>
+										</div>
+
+										<div className="couses-form__text-input">
+											<input
+												className="text-input__input"
+												type="email"
+												name="student_mail"
+												id="mail"
+												onFocus={inputFocus}
+												onBlur={inputBlur}
+												{...mail.bind}
+											/>
+											<div className="text-input__label-notch">
+												<div className="text-input__label-notch-outline--leading"></div>
+												<div className="text-input__label-notch-outline--label">
+													<label htmlFor="mail">Почта</label>
+												</div>
+												<div className="text-input__label-notch-outline--trailing"></div>
+											</div>
+											<div className="course-type__error"></div>
+										</div>
+
+										<div className="couses-form__text-input">
+											<input
+												className="text-input__input"
+												type="tel"
+												name="student_phone"
+												id="phone"
+												onFocus={inputFocus}
+												onBlur={inputBlur}
+												{...phone.bind}
+												value={phone.bind.value}
+												onChange={(event) => {
+													event.target.value = event.target.value
+														.replaceAll(' ', '')
+														.replaceAll('(', '')
+														.replaceAll(')', '')
+													phone.bind.onChange(event)
+												}}
+												placeholder="+7"
+											/>
+											<div className="text-input__label-notch">
+												<div className="text-input__label-notch-outline--leading"></div>
+												<div className="text-input__label-notch-outline--label">
+													<label htmlFor="phone">Телефон</label>
+												</div>
+												<div className="text-input__label-notch-outline--trailing"></div>
+											</div>
+											<div className="course-type__error"></div>
+										</div>
+
+										<div className="couses-form__text-input">
+											<input
+												className="text-input__input"
+												type="text"
+												name="student_organization"
+												id="organization"
+												onFocus={inputFocus}
+												onBlur={inputBlur}
+												{...organization.bind}
+											/>
+											<div className="text-input__label-notch">
+												<div className="text-input__label-notch-outline--leading"></div>
+												<div className="text-input__label-notch-outline--label">
+													<label htmlFor="organization">Организация</label>
+												</div>
+												<div className="text-input__label-notch-outline--trailing"></div>
+											</div>
+											<div className="course-type__error"></div>
+										</div>
+
+										<div className="couses-form__text-input">
+											<input
+												className="text-input__input"
+												type="text"
+												name="student_post"
+												id="post"
+												onFocus={inputFocus}
+												onBlur={inputBlur}
+												{...post.bind}
+											/>
+											<div className="text-input__label-notch">
+												<div className="text-input__label-notch-outline--leading"></div>
+												<div className="text-input__label-notch-outline--label">
+													<label htmlFor="post">Должность</label>
+												</div>
+												<div className="text-input__label-notch-outline--trailing"></div>
+											</div>
+											<div className="course-type__error"></div>
+										</div>
+
+										<div>Уровень разработки</div>
+										<div className="course-type">
+											<div className="course-type__btn" id="midas">
+												<input
+													type="checkbox"
+													name="midas"
+													className="course-type__btn_input"
+													id="midas-input"
+													value={midas.bind.value}
+													checked={midas.bind.value}
+													onChange={(event) => {
+														plaxis.clear('plaxis')
+														midas.bind.onChange(event)
+													}}
+													onFocus={(event) => {
+														event.currentTarget.parentNode.classList.add(
+															'selected'
+														)
+													}}
+													onBlur={(event) => {
+														event.currentTarget.parentNode.classList.remove(
+															'selected'
+														)
+													}}
+												></input>
+												<label
+													htmlFor="midas-input"
+													className="course-type__btn_label"
+												>
+													Начальный
+												</label>
+											</div>
+
+											<div className="course-type__btn" id="plaxis">
+												<input
+													type="checkbox"
+													name="plaxis"
+													id="plaxis-input"
+													className="course-type__btn_input"
+													checked={plaxis.bind.value}
+													value={plaxis.bind.value}
+													onChange={(event) => {
+														midas.clear('midas')
+														plaxis.bind.onChange(event)
+													}}
+													onFocus={(event) => {
+														event.currentTarget.parentNode.classList.add(
+															'selected'
+														)
+													}}
+													onBlur={(event) => {
+														event.currentTarget.parentNode.classList.remove(
+															'selected'
+														)
+													}}
+												></input>
+												<label
+													htmlFor="plaxis-input"
+													className="course-type__btn_label"
+												>
+													Уверенный
+												</label>
+											</div>
+										</div>
+
+										<button
+											className="main-title_btn course-form__submit-btn "
+											type="submit"
+											disabled={!(midas.value() || plaxis.value())}
+										>
+											Отправить
+										</button>
+
+										<div className="courses-form--sub">
+											Нажимая на кнопку "Отправить", вы даете согласие на
+											обработку персональных данных и соглашаетесь с{' '}
+											<a href="/">политикой конфиденциальности.</a>
+										</div>
+									</form>
+									<div className="courses__close" onClick={onCloseForm}>
+										<img src={close} alt="close" />
+									</div>
+								</div>
+							</div>
+						) : null}
 					</div>
 				</div>
 			</div>
