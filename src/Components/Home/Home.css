@@ -1,0 +1,31 @@
+.home-container {
+	padding-top: 61px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	padding-left: 24px;
+	padding-right: 24px;
+
+	row-gap: 24px;
+}
+
+.home-blur {
+	position: absolute;
+	left: -100vw;
+	top: -24px;
+
+	overflow: hidden;
+
+	width: 200vw;
+	height: calc(100% + 48px);
+
+	background-color: #fafafa;
+	opacity: 0.3;
+}
+
+@media screen and (max-width: 1099px) {
+	.home-container {
+		padding-top: 14px;
+	}
+}

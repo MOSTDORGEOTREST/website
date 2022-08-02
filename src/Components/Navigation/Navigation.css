@@ -1,0 +1,261 @@
+/* ======== НАВИГАЦИЯ ======== */
+
+/* весь блок навигации (по сути header) */
+.navbar-mdgt {
+	position: relative;
+	width: 100%;
+
+	top: 0;
+	left: 0;
+
+	/* transition: 0.4s; */
+
+	display: inline-flex;
+	justify-content: center;
+}
+
+.shadow {
+	position: absolute;
+	height: 100%;
+	width: 100vw;
+	box-shadow: 0 1px 4px var(--shadow-color);
+	box-sizing: content-box;
+	padding-bottom: 20px;
+}
+
+/* Сюда помещается весь контент хедера включая логотип и значки */
+.container-fluid-mdgt {
+	width: 100%;
+
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	align-items: center;
+
+	row-gap: 18px;
+
+	padding-top: 27px;
+	padding-left: var(--mb-1-5);
+	padding-right: var(--mb-1-5);
+	z-index: var(--z-tooltip);
+}
+
+.navbar-upper {
+	width: 100%;
+	display: inline-flex;
+
+	justify-content: space-between;
+	align-items: center;
+}
+
+.nabar__phone {
+	display: inline-flex;
+	flex-direction: column;
+
+	align-items: flex-end;
+
+	row-gap: 0.25rem;
+
+	color: inherit;
+	font-size: inherit;
+	font-family: inherit;
+}
+
+.nabar__phone-sub {
+	font-size: var(--small-font-size);
+}
+
+/* логотип */
+.navbar-brand {
+	color: var(--title-color);
+	white-space: nowrap;
+}
+
+/* далее свойства которые будут отменяться по мере необходимости для больших экранов */
+
+.navbar-nav {
+	padding: 5px, 0;
+}
+
+.navbar-brand {
+	display: inline-flex;
+	align-items: center;
+	column-gap: 0.5rem;
+}
+
+.navbar-brand:hover {
+	color: var(--first-color);
+}
+
+.navbar-brand__icon {
+	width: 108px;
+	height: 108px;
+	max-width: none;
+}
+
+.navbar-brand__line {
+	display: inline-block;
+	width: 0.3px;
+	height: 2rem;
+	border-radius: 2rem;
+	background-color: var(--text-color-super-light);
+}
+
+.navbar-brand__title-sub {
+	font-size: var(--smaller-font-size);
+	font-weight: var(--font-lighter);
+}
+
+.nav__toggle,
+.nav__close {
+	color: var(--title-color);
+}
+
+/* открыть */
+.nav__toggle {
+	display: none;
+	font-size: 1.15rem;
+	cursor: pointer;
+
+	padding: 24px 24px 24px 24px;
+}
+
+/* закрыть */
+.nav__close {
+	display: none;
+
+	font-size: 1.5rem;
+	position: absolute;
+	top: 45px;
+	right: 24px;
+	cursor: pointer;
+}
+
+/* ссылки */
+.navbar-nav {
+	display: flex;
+	flex-direction: row;
+	row-gap: 1.5rem;
+
+	flex-wrap: wrap;
+	column-gap: 20px;
+}
+
+.nav-link {
+	color: var(--title-color);
+
+	/* font-weight: var(--font-medium); */
+}
+
+.nav-link.is-active {
+	color: var(--first-color);
+}
+
+.nav-link:hover {
+	color: var(--first-color);
+}
+
+.navbar-collapse-wrapper,
+.navbar-collapse {
+	margin-left: 0;
+}
+
+/* КЛАССЫ ОТКРЫТИЯ-ЗАКРЫТИЯ МЕНЮ */
+
+.navbar-collapse-wrapper.navbar-collapse-wrapper-show,
+.navbar-collapse.navbar-collapse-show {
+	right: 0;
+}
+
+.body.body-hidden {
+	touch-action: none;
+	-webkit-overflow-scrolling: none;
+	overflow: hidden;
+	overscroll-behavior: none;
+}
+
+/* ======== БРЕЙКПОИНТЫ ДЛЯ РАЗНЫХ РАЗМЕРОВ ЭКРАНОВ ======== */
+@media screen and (max-width: 1099px) {
+	.navbar-nav {
+		column-gap: 10px;
+	}
+	.container-fluid-mdgt {
+		align-items: flex-start;
+	}
+	.navbar-brand__icon {
+		width: 90px;
+		height: 90px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.nabar__phone {
+		display: none;
+	}
+	.navbar-collapse-wrapper {
+		background-color: hsla(120, 81%, 6%, 0.5);
+		position: fixed;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		/* right: 0; */
+		right: -100%;
+		z-index: calc(var(--z-fixed) - 1);
+		overflow-y: auto;
+	}
+
+	/* сам список ссылок + кнопка "закрыть" */
+	.navbar-collapse {
+		position: absolute;
+		background-color: var(--container-color);
+		width: 50%;
+		min-width: fit-content;
+		height: 100%;
+		/* top: 0; */
+		/* right: 0; */
+		right: -100%;
+		box-shadow: -2px 0 4px hsla(var(--#1f2c1b), 24%, 15%, 0.1);
+		padding: 85px 0 0 3rem;
+		border-radius: 1rem 0 0 1rem;
+		transition: 0.3s;
+		z-index: var(--z-fixed);
+		overflow: auto;
+	}
+
+	.container-fluid-mdgt {
+		padding-right: 0px;
+	}
+
+	.nav-item:last-child {
+		margin-bottom: 1.5rem;
+	}
+
+	.nav__toggle,
+	.nav__close {
+		display: inline-flex;
+	}
+
+	.navbar-nav {
+		flex-direction: column;
+
+		padding-right: 10px;
+	}
+
+	.navbar-nav .nav-link {
+		display: inline-block;
+		width: 100%;
+
+		white-space: nowrap;
+	}
+
+	.navbar-brand__icon {
+		width: 65px;
+		height: 65px;
+	}
+
+	.container-fluid-mdgt {
+		flex-direction: row;
+
+		column-gap: 48px;
+	}
+}

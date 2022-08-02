@@ -1,0 +1,83 @@
+.home-objects {
+	position: relative;
+
+	width: 100vw;
+	height: 550px;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.carousel {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.object {
+	width: 100%;
+	height: 550px;
+
+	background-position: center center;
+	background-size: cover;
+}
+
+.object .legend {
+	background-color: transparent !important;
+	opacity: 1 !important;
+
+	font-size: var(--h1-font-size) !important;
+	font-weight: var(--font-medium) !important;
+
+	top: 80% !important;
+	margin-top: 0 !important;
+	padding-top: 0 !important;
+
+	bottom: auto !important;
+
+	height: fit-content !important;
+}
+
+.legend .legend-copy {
+	font-size: var(--smaller-font-size);
+	color: #ccc;
+	opacity: 1;
+
+	position: relative;
+
+	width: fit-content;
+
+	margin-top: 8px;
+}
+
+.carousel .control-next {
+	padding-right: 20px !important;
+}
+.carousel .control-next.control-arrow:before {
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	display: inline-block;
+	padding: 3px;
+	transform: rotate(-45deg) scale(2);
+}
+
+.carousel .control-prev {
+	padding-left: 20px !important;
+}
+.carousel .control-prev.control-arrow:before {
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	display: inline-block;
+	padding: 3px;
+	transform: rotate(135deg) scale(2);
+}
+
+.carousel .control-prev:hover,
+.carousel .control-next:hover {
+	background-color: transparent !important;
+}
+
+/* .carousel .slider.animated {
+	transition: all 0.35s cubic-bezier(0.42, 0.42, 0.74, 0.74);
+} */

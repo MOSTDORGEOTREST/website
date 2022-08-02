@@ -1,0 +1,80 @@
+import React, { useContext } from 'react'
+
+import Context from '../../../context'
+import welcome from './imgs/welcome.png'
+import hill from './imgs/hill.png'
+import snow from './imgs/snow.png'
+import soil from './imgs/soil.png'
+import dinamic from './imgs/dinamic.png'
+
+import './Welcome.css'
+
+export default function Welcome() {
+	const { setShowPrice } = useContext(Context)
+
+	function onShowPrice() {
+		setShowPrice(true)
+	}
+
+	return (
+		<>
+			<div className="home-welcome">
+				<div className="welcome__main">
+					<div className="welcome__main-title">
+						<h1 className="welcome__main-title_main">
+							Лидер в лабораторных
+							<br />
+							испытаниях грунтов
+						</h1>
+						<h3 className="welcome__main-title_sub">
+							В нашей лаборатории
+							<br />
+							для выполнения испытаний грунтов
+							<br />
+							мы используем самое передовое оборудование
+							<br />
+							отечественных и зарубежных производителей
+						</h3>
+						<button className="main-title_btn" onClick={onShowPrice}>
+							Посмотреть цены
+						</button>
+					</div>
+					<div className="main_title_img">
+						<img src={welcome} alt="Welcome" />
+					</div>
+				</div>
+				<div className="welcome__labs">
+					<div className="labs_blur"></div>
+					<div className="labs-item">
+						<img src={soil} alt="" />
+						Определение
+						<br />
+						физико-
+						<br />
+						механических
+						<br />
+						свойств грунтов
+					</div>
+					<div className="labs-item">
+						<img src={dinamic} alt="" />
+						Динамическая
+						<br />
+						лаборатория
+					</div>
+					<div className="labs-item">
+						<img src={snow} alt="" />
+						Мерзлотная
+						<br />
+						лаборатория
+					</div>
+					<div className="labs-item">
+						<img src={hill} alt="" />
+						Скальная
+						<br />
+						лаборатория
+					</div>
+				</div>
+			</div>
+		</>
+	)
+}
