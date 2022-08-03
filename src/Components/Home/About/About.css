@@ -1,0 +1,264 @@
+.home-about,
+.about-content {
+	position: relative;
+
+	width: 100%;
+	min-height: 550px;
+}
+
+.home-about {
+	padding-top: 24px;
+}
+
+.about__wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	row-gap: 18px;
+}
+
+.about-content {
+	display: flex;
+	flex-direction: column;
+	row-gap: 18px;
+}
+
+.about__info {
+	display: flex;
+	flex-direction: column;
+	row-gap: 8px;
+	line-height: 32px;
+}
+
+.customers__heading {
+	padding-top: calc(24px - 18px);
+
+	align-self: center;
+}
+
+/* ============== БЛОК С ДОКУМЕНТАМИ ============== */
+
+.about-docs {
+	display: inline-flex;
+	justify-content: space-between;
+	column-gap: 8px;
+	row-gap: 8px;
+	flex-wrap: wrap;
+}
+
+.about-docs__card-wrapper {
+	width: 354px;
+
+	height: fit-content;
+
+	border: 1px solid var(--title-color);
+	border-radius: 4px;
+
+	padding: 16px;
+
+	color: inherit;
+}
+
+.about-docs__card-wrapper,
+.about-docs__card,
+.docs__card-list,
+.docs__card-btn,
+.docs__card-btn img {
+	transition: 0.4s;
+}
+
+.about-docs__card-wrapper:hover {
+	box-shadow: 0px 1px 4px var(--shadow-color), 0px -1px 4px var(--shadow-color);
+}
+
+.about-docs__card {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	column-gap: 16px;
+}
+
+.about-docs__card:hover .docs__card-btn {
+	transform: translateY(4px);
+}
+
+.docs__card-title_main {
+	line-height: 2rem;
+}
+
+.docs__card-title_sub {
+	line-height: 1.2rem;
+	font-size: var(--smaller-font-size);
+	opacity: 0.6;
+}
+
+.docs__card-list {
+	width: 100%;
+
+	overflow: hidden;
+	height: 0;
+}
+
+.about-docs__card-wrapper.show .docs__card-btn img {
+	transform: rotate(180deg);
+}
+
+.docs__card-list {
+	display: flex;
+	flex-direction: column;
+}
+
+.docs__card-list-item {
+	color: inherit;
+
+	min-height: 56px;
+	height: 56px;
+	width: 100%;
+
+	display: inline-flex;
+	align-items: center;
+	column-gap: 32px;
+
+	padding-right: 16px;
+
+	border-radius: 4px;
+}
+
+.docs__card-list-item:hover {
+	background-color: #f2fcee;
+}
+
+.about-docs__card-title-img img {
+	width: 60px;
+	height: 60px;
+}
+
+.docs__card-list-item p {
+	font-size: var(--small-font-size);
+}
+
+@media screen and (max-width: 425px) {
+	.about-docs__card-wrapper {
+		width: 100%;
+	}
+}
+
+/* ============== БЛОК С ПРИБОРАМИ ============== */
+
+.about-props {
+	display: flex;
+	flex-direction: column;
+
+	row-gap: 18px;
+}
+
+.about-props__block {
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	grid-template-areas:
+		'desc desc'
+		'img img-2';
+
+	row-gap: 8px;
+	column-gap: 18px;
+}
+
+.about-props__block-img {
+	grid-area: img;
+}
+
+.about-props__block-img:last-child {
+	grid-area: img-2;
+}
+
+@media screen and (max-width: 375px) {
+	.about-props__block:nth-child(3) {
+		grid-template-areas:
+			'desc'
+			'img'
+			'img-2';
+	}
+}
+
+.about-props__block-description {
+	max-width: none;
+	grid-area: desc;
+	text-align: justify;
+	margin-bottom: 1rem;
+	line-height: 32px;
+}
+
+.about-props__block-description h4 {
+	text-align: center;
+	font-size: var(--h2-font-size);
+	font-weight: var(--font-medium);
+	margin-bottom: var(--mb-1);
+}
+
+.about-props__block-img {
+	height: 130px;
+	width: auto;
+}
+
+.about-props__block:nth-child(4) .about-props__block-description p {
+	text-align: center;
+}
+
+@media screen and (min-width: 769px) {
+	.about-props__block {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.about-props__block:nth-child(2) .about-props__block-img:last-child {
+		order: -1;
+	}
+	.about-props__block:nth-child(2) .about-props__block-description h4 {
+		text-align: left;
+	}
+
+	.about-props__block-description {
+		order: 0;
+	}
+
+	.about-props__block:nth-child(3) .about-props__block-img:first-child {
+		order: 1;
+	}
+	.about-props__block:nth-child(3) .about-props__block-description h4 {
+		text-align: left;
+	}
+}
+
+@media screen and (min-width: 969px) {
+	.about-props__block-img {
+		height: 220px;
+		width: auto;
+	}
+}
+
+/* ============== БЛОК С ИСПЫТАНИЯМИ ============== */
+.about-tests {
+	padding-top: 18px;
+
+	display: flex;
+	flex-direction: column;
+
+	row-gap: 18px;
+}
+
+.about-tests-info {
+	display: flex;
+	flex-direction: column;
+
+	row-gap: 18px;
+}
+.about-tests-info p {
+	line-height: 32px;
+}
+
+.about-tests-docs .about-docs__card-wrapper {
+	width: fit-content;
+}

@@ -32,6 +32,12 @@
 	opacity: 0.6;
 }
 
+.info__contact-item {
+	color: inherit;
+	font-family: inherit;
+	font-size: inherit;
+}
+
 @media screen and (max-width: 768px) {
 	.contacts-info {
 		padding: 30px 30px 40px 30px;

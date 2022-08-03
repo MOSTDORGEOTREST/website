@@ -3,7 +3,7 @@ import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 
 import Aeroport_Sheremetyevo from './imgs/Аэропорт_Шереметьево.jpg'
-import Biznes_tsentr_Skolkovo from './imgs/Бизнес_центр_Сколково.png'
+import Biznes_tsentr_Skolkovo from './imgs/Бизнес_центр_Сколково.jpg'
 import Big_Ice_Palace_Big_Sochi from './imgs/Большой_ледовый_дворец_Большой_г._Сочи.jpg'
 import Bolshoy_Moskvoretskiy_most_Moskva from './imgs/Большой_Москворецкий_мост_г._Москва.jpg'
 import Dom_pravitelstva_Rossiyskoy_Federatsii from './imgs/Дом_правительства_Российской_Федерации.jpg'
@@ -74,7 +74,9 @@ export default function Objects() {
 						>
 							<div className="legend">
 								Бизнес-центр Сколково{' '}
-								<div className="legend-copy">Фото: sberuniversity.ru</div>
+								<div className="legend-copy">
+									Фото: Школа управления «Сколково»
+								</div>
 							</div>
 						</div>
 						<div
@@ -93,7 +95,9 @@ export default function Objects() {
 						>
 							<div className="legend">
 								Дом правительства Российской Федерации{' '}
-								<div className="legend-copy"></div>
+								<div className="legend-copy">
+									Фото: Риа Новости | Екатерина Чеснокова
+								</div>
 							</div>
 						</div>
 						<div
@@ -101,7 +105,8 @@ export default function Objects() {
 							style={{ backgroundImage: `url(${Zhivopisnyy_most})` }}
 						>
 							<div className="legend">
-								Живописный мост <div className="legend-copy">Фото: mos.ru</div>
+								Живописный мост{' '}
+								<div className="legend-copy">Фото: М. Денисова. Mos.ru</div>
 							</div>
 						</div>
 						<div
@@ -156,14 +161,16 @@ export default function Objects() {
 						>
 							<div className="legend">
 								Большой Москворецкий мост{' '}
-								<div className="legend-copy">Фото: www.msmap.ru/</div>
+								<div className="legend-copy">Фото: www.msmap.ru</div>
 							</div>
 						</div>
 						<div
 							className="object"
 							style={{ backgroundImage: `url(${Biznes_tsentr_Skolkovo_mob})` }}
 						>
-							Бизнес-центр Сколково <div className="legend-copy"></div>
+							<div className="legend-copy">
+								Фото: Школа управления «Сколково»
+							</div>
 						</div>
 						<div
 							className="object"
@@ -181,7 +188,9 @@ export default function Objects() {
 						>
 							<div className="legend">
 								Дом правительства Российской Федерации
-								<div className="legend-copy">Фото: wikimedia.org</div>
+								<div className="legend-copy">
+									Фото: Риа Новости | Екатерина Чеснокова
+								</div>
 							</div>
 						</div>
 						<div
@@ -189,7 +198,8 @@ export default function Objects() {
 							style={{ backgroundImage: `url(${Zhivopisnyy_most_mob})` }}
 						>
 							<div className="legend">
-								Живописный мост <div className="legend-copy">Фото: mos.ru</div>
+								Живописный мост{' '}
+								<div className="legend-copy">Фото: М. Денисова. Mos.ru</div>
 							</div>
 						</div>
 						<div
