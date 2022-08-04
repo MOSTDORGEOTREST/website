@@ -1,3 +1,9 @@
+# Запуск докера:
+
+    `docker build . -t website:latest`
+
+    `docker run -it --rm -d -p 3000:80/tcp --name web2 website`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
