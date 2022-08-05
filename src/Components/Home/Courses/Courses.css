@@ -130,6 +130,9 @@
 	.courses-block__info {
 		max-width: 100%;
 	}
+	.courses__info p {
+		text-align: justify;
+	}
 }
 
 .courses__close {

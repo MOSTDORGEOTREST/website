@@ -1,0 +1,71 @@
+.home-labs,
+.labs-content {
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	row-gap: 18px;
+
+	width: 100%;
+	height: fit-content;
+}
+
+.labs-grid {
+	display: grid;
+
+	width: 100%;
+
+	column-gap: 16px;
+	row-gap: 40px;
+
+	grid-template-columns: repeat(3, 1fr);
+	grid-auto-rows: repeat(3, 1fr);
+}
+
+.labs-card {
+	display: flex;
+	flex-direction: column;
+
+	width: 100%;
+	/* min-width: 360px; */
+
+	/* border: 1px solid var(--title-color);
+	border-radius: 4px; */
+
+	overflow: hidden;
+}
+
+.labs-card__video {
+	width: 100%;
+	height: fit-content;
+}
+
+.labs-card__title {
+	padding: 8px;
+	font-size: var(--normal-font-size);
+	line-height: 2rem;
+}
+
+@media screen and (max-width: 1160px) {
+	.labs-card__title {
+		font-size: var(--small-font-size);
+	}
+}
+
+@media screen and (max-width: 969px) {
+	.labs-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+	.labs-card__title {
+		font-size: var(--normal-font-size);
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.labs-grid {
+		grid-template-columns: 1fr;
+	}
+	.labs-card__title {
+		font-size: var(--normal-font-size);
+	}
+}

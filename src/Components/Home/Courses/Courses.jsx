@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import './Courses.css'
 
@@ -6,6 +6,9 @@ import close from '../../Navigation/close-fill.svg'
 
 export default function Courses() {
 	const [showForm, setShowForm] = useState(false)
+
+	const plaxisShowingGif = useRef(false)
+	const midasShowingGif = useRef(false)
 
 	function useInputValue(defaultValue = '') {
 		const [value, setValue] = useState(defaultValue)
@@ -200,14 +203,15 @@ export default function Courses() {
 										alt="Midas"
 										title="Midas"
 										onMouseEnter={(event) => {
-											event.currentTarget.src = '/common_imgs/Midas.gif'
-										}}
-										onMouseLeave={(event) => {
-											const myEvent = event
-											setTimeout(() => {
-												console.log(myEvent)
-												myEvent.target.src = '/common_imgs/Midas_1.png'
-											}, 4000)
+											const midasEvent = event
+											if (!midasShowingGif.current) {
+												midasShowingGif.current = true
+												midasEvent.target.src = '/common_imgs/Midas.gif'
+												setTimeout(() => {
+													midasEvent.target.src = '/common_imgs/Midas_1.png'
+													midasShowingGif.current = false
+												}, 5000)
+											}
 										}}
 									/>
 								</div>
@@ -247,17 +251,18 @@ export default function Courses() {
 								<div className="courses-block__gif">
 									<img
 										src="/common_imgs/Plaxis_1.png"
-										alt="Midas"
-										title="Midas"
+										alt="Plaxis"
+										title="Plaxis"
 										onMouseEnter={(event) => {
-											event.currentTarget.src = '/common_imgs/Plaxis.gif'
-										}}
-										onMouseLeave={(event) => {
-											const myEvent = event
-											setTimeout(() => {
-												console.log(myEvent)
-												myEvent.target.src = '/common_imgs/Plaxis_1.png'
-											}, 4000)
+											const plaxisEvent = event
+											if (!plaxisShowingGif.current) {
+												plaxisShowingGif.current = true
+												plaxisEvent.target.src = '/common_imgs/Plaxis.gif'
+												setTimeout(() => {
+													plaxisEvent.target.src = '/common_imgs/Plaxis_1.png'
+													plaxisShowingGif.current = false
+												}, 5000)
+											}
 										}}
 									/>
 								</div>
