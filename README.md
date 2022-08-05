@@ -1,8 +1,7 @@
-# Запуск докера:
+# MDGT site starter:
 
-    `docker build . -t website:latest`
-
-    `docker run -it --rm -d -p 3000:80/tcp --name web2 website`
+`docker build . -t website:latest` - для сборки проекта
+`docker run -it --rm -d -p 80:80/tcp --name web2 website` - для запуска проекта в режиме daemon
 
 # Getting Started with Create React App
 

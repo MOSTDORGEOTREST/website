@@ -12,11 +12,13 @@ export default function Price() {
 	const { setShowPrice } = useContext(Context)
 
 	function onClosePrice() {
+		const body = document.getElementById('body')
+		body.classList.remove('body-hidden')
 		setShowPrice(false)
 	}
 
 	function wrapperClick(event) {
-		console.log(event.target, event.currentTarget)
+		// console.log(event.target, event.currentTarget)
 		if (event.target === event.currentTarget) {
 			onClosePrice()
 		}
@@ -53,7 +55,7 @@ export default function Price() {
 					</div>
 					<iframe
 						width="912px"
-						height="13600px"
+						height="13900px"
 						frameBorder="0"
 						title="table"
 						src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTFUo_5Tw5nFzQVP4vDLbJCO0a2J4Y3zmEN66KoESw9VZOro48XZz96YJ8h6B_vFrUyJSHlxwRAuLTm/pubhtml?gid=555134310&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false&amp;range=A1:G354&amp;rm=minimal"

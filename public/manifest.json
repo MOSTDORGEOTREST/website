@@ -1,9 +1,20 @@
 {
-	"short_name": "React App",
-	"name": "Create React App Sample",
-	"icons": [],
-	"start_url": ".",
+	"short_name": "МДГТ",
+	"name": "Геотехническая лаборатория МОСТДОРЕГОТРЕСТ",
+	"icons": [
+		{
+			"src": "mdgt.png",
+			"type": "image/x-png",
+			"sizes": "200x200"
+		},
+		{
+			"src": "mdgt.ico",
+			"type": "image/ico",
+			"sizes": "200x200"
+		}
+	],
+	"start_url": "/",
 	"display": "standalone",
-	"theme_color": "#000000",
-	"background_color": "#ffffff"
+	"theme_color": "#f2fcee",
+	"background_color": "#f2fcee"
 }

@@ -7,7 +7,7 @@ import snow from './imgs/snowflake.svg'
 import wave from './imgs/wave.svg'
 import chem from './imgs/bxs-flask.svg'
 import phys from './imgs/scales-2-line.svg'
-import mech from './imgs/mech.svg'
+import mech from './imgs/mech.png'
 
 import './Welcome.css'
 
@@ -15,12 +15,14 @@ export default function Welcome() {
 	const { setShowPrice } = useContext(Context)
 
 	function onShowPrice() {
+		const body = document.getElementById('body')
+		body.classList.add('body-hidden')
 		setShowPrice(true)
 	}
 
 	return (
 		<>
-			<div className="home-welcome">
+			<div className="home-welcome" id="welcome">
 				<div className="welcome__main">
 					<div className="welcome__main-title">
 						<h1 className="welcome__main-title_main">
@@ -29,13 +31,9 @@ export default function Welcome() {
 							испытаниях грунтов
 						</h1>
 						<h3 className="welcome__main-title_sub">
-							В нашей лаборатории
-							<br />
-							для выполнения испытаний грунтов
-							<br />
-							мы используем самое передовое оборудование
-							<br />
-							отечественных и зарубежных производителей
+							В нашей лаборатории для выполнения испытаний грунтов мы используем
+							самое передовое оборудование отечественных и зарубежных
+							производителей
 						</h3>
 						<button className="main-title_btn" onClick={onShowPrice}>
 							Посмотреть цены

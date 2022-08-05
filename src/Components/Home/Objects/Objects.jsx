@@ -37,7 +37,7 @@ export default function Objects() {
 						showThumbs={false}
 						showArrows={true}
 						infiniteLoop={true}
-						autoPlay={false}
+						autoPlay={true}
 						swipeable={false}
 						stopOnHover={true}
 						transitionTime={1000}
@@ -133,7 +133,7 @@ export default function Objects() {
 						showThumbs={false}
 						showArrows={true}
 						infiniteLoop={true}
-						autoPlay={false}
+						autoPlay={true}
 						swipeable={true}
 						stopOnHover={true}
 						transitionTime={1000}
@@ -168,8 +168,12 @@ export default function Objects() {
 							className="object"
 							style={{ backgroundImage: `url(${Biznes_tsentr_Skolkovo_mob})` }}
 						>
-							<div className="legend-copy">
-								Фото: Школа управления «Сколково»
+							<div className="legend">
+								{' '}
+								Бизнес-центр Сколково{' '}
+								<div className="legend-copy">
+									Фото: Школа управления «Сколково»
+								</div>
 							</div>
 						</div>
 						<div

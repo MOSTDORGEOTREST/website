@@ -18,10 +18,14 @@ export default function Navigation() {
 	const { setShowPrice } = useContext(Context)
 
 	function openNav() {
+		const body = document.getElementById('body')
+		body.classList.add('body-hidden')
 		setToggleNav(true)
 	}
 
 	function closeNav() {
+		const body = document.getElementById('body')
+		body.classList.remove('body-hidden')
 		setToggleNav(false)
 	}
 
@@ -30,7 +34,16 @@ export default function Navigation() {
 		if (toggleNav) {
 			closeNav()
 		}
+		const body = document.getElementById('body')
+		body.classList.add('body-hidden')
 		setShowPrice(true)
+	}
+
+	function wrapperClick(event) {
+		// console.log(event.target, event.currentTarget)
+		if (event.target === event.currentTarget) {
+			closeNav()
+		}
 	}
 
 	return (
@@ -40,10 +53,12 @@ export default function Navigation() {
 					<div className="navbar-upper">
 						<NavLink to="/" className="navbar-brand">
 							<img className="navbar-brand__icon" src={logo} alt="logo" />
-							Геотехническая лаборатория
-							<br />
-							Мостдоргеотрест
 						</NavLink>
+						<div className="navbar-upper__title">
+							ГЕОТЕХНИЧЕСКАЯ ЛАБОРАТОРИЯ
+							<br />
+							МОСТДОРГЕОТРЕСТ
+						</div>
 						<a
 							href="tel:+74956566910"
 							target="_blank"
@@ -62,6 +77,7 @@ export default function Navigation() {
 								: 'navbar-collapse-wrapper'
 						}
 						id="navbar-collapse-wrapper"
+						onClick={wrapperClick}
 					>
 						<div
 							className={
@@ -73,17 +89,27 @@ export default function Navigation() {
 						>
 							<ul className="navbar-nav">
 								<li className="nav-item">
-									<NavLink className="nav-link" to="/">
+									<NavLink className="nav-link" to="/" onClick={closeNav}>
 										Главная
 									</NavLink>
 								</li>
 								<li className="nav-item">
-									<HashLink smooth to="/#about" className="nav-link">
+									<HashLink
+										smooth
+										to="/#about"
+										className="nav-link"
+										onClick={closeNav}
+									>
 										О лаборатории
 									</HashLink>
 								</li>
 								<li className="nav-item">
-									<HashLink smooth to="/#tests" className="nav-link">
+									<HashLink
+										smooth
+										to="/#tests"
+										className="nav-link"
+										onClick={closeNav}
+									>
 										Испытания грунтов
 									</HashLink>
 								</li>
@@ -102,18 +128,28 @@ export default function Navigation() {
 										Производство оборудования
 									</a>
 								</li>
-								<li className="nav-item">
+								{/* <li className="nav-item">
 									<HashLink smooth to="/#papers" className="nav-link">
 										Статьи
 									</HashLink>
-								</li>
+								</li> */}
 								<li className="nav-item">
-									<HashLink smooth to="/#courses" className="nav-link">
+									<HashLink
+										smooth
+										to="/#courses"
+										className="nav-link"
+										onClick={closeNav}
+									>
 										Курсы
 									</HashLink>
 								</li>
 								<li className="nav-item">
-									<HashLink smooth to="/#contacts" className="nav-link">
+									<HashLink
+										smooth
+										to="/#contacts"
+										className="nav-link"
+										onClick={closeNav}
+									>
 										Контакты
 									</HashLink>
 								</li>

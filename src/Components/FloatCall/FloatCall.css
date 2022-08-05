@@ -1,0 +1,36 @@
+.float-call {
+	position: fixed;
+
+	right: 30px;
+	bottom: 80px;
+
+	display: inline-flex;
+
+	justify-content: center;
+	align-items: center;
+
+	width: 40px;
+	height: 40px;
+
+	border-radius: 50%;
+
+	z-index: var(--z-tooltip);
+
+	background-color: var(--first-color);
+	opacity: 0.8;
+
+	color: #fff;
+}
+
+.float-call img {
+	width: 24px;
+	height: 24px;
+
+	fill: #fff;
+}
+
+@media screen and (min-width: 769px) {
+	.float-call {
+		display: none;
+	}
+}

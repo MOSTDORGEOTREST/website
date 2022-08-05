@@ -28,6 +28,9 @@
 	flex-direction: column;
 	row-gap: 8px;
 	line-height: 32px;
+
+	text-align: justify;
+	hyphens: auto;
 }
 
 .customers__heading {
@@ -197,13 +200,13 @@
 	margin-bottom: var(--mb-1);
 }
 
+.about-props__block:first-child .about-props__block-description h4 {
+	text-align: left;
+}
+
 .about-props__block-img {
 	height: 130px;
 	width: auto;
-}
-
-.about-props__block:nth-child(4) .about-props__block-description p {
-	text-align: center;
 }
 
 @media screen and (min-width: 769px) {
@@ -254,6 +257,9 @@
 	flex-direction: column;
 
 	row-gap: 18px;
+
+	text-align: justify;
+	hyphens: auto;
 }
 .about-tests-info p {
 	line-height: 32px;

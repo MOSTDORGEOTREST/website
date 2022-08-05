@@ -48,11 +48,11 @@ export default function Courses() {
 
 	const midas = useCheckValue()
 	const plaxis = useCheckValue()
+
 	const user = useInputValue('')
 	const mail = useInputValue('')
 	const organization = useInputValue('')
 	const post = useInputValue('')
-
 	const phone = useInputValue('')
 
 	function inputFocus(event) {
@@ -142,6 +142,8 @@ export default function Courses() {
 	}
 
 	function onCloseForm() {
+		const body = document.getElementById('body')
+		body.classList.remove('body-hidden')
 		setShowForm(false)
 	}
 
@@ -164,55 +166,102 @@ export default function Courses() {
 								проводит курсы повышения квалификации по лабораторным испытаниям
 								грунтов для целей численного моделирования Plaxis, Midas.
 							</p>
-							<h3>Курсы Midas</h3>
-							<p>
-								Для подачи заявки и оформления договора на курсы Midas
-								связываться с руководителем технического отдела ООО "МИДАС":
-								<br />
-								Давыдов Кирилл Игоревич
-								<br /> тел:&nbsp;
-								<a
-									className="courses__info_mail"
-									href="tel:+79168126353"
-									target="_blank"
-									rel="noreferrer"
-								>
-									+7(916)&nbsp;812&nbsp;63&nbsp;53
-								</a>
-								&nbsp;e-mail:&nbsp;
-								<a
-									className="courses__info_mail"
-									href="mailto:rusupport@midasit.com"
-									target="_blank"
-									rel="noreferrer"
-								>
-									rusupport@midasit.com
-								</a>
-							</p>
-							<h3>Курсы Plaxis</h3>
-							<p>
-								Для подачи заявки и оформления договора на курсы Plaxis
-								связываться по e-mail:&nbsp;
-								<a
-									className="courses__info_mail"
-									href="mailto:education@mdgt.ru"
-									target="_blank"
-									rel="noreferrer"
-								>
-									education@mdgt.ru
-								</a>
-							</p>
-							<div className="show-form--block">
-								Или воспользуйтесь формой записи
+							<div className="courses-block">
+								<div className="courses-block__info">
+									<h3>Курсы Midas</h3>
+									<p>
+										Для подачи заявки и оформления договора на курсы Midas
+										связываться с руководителем технического отдела ООО "МИДАС":
+										<br />
+										Давыдов Кирилл Игоревич
+										<br /> тел:&nbsp;
+										<a
+											className="courses__info_mail"
+											href="tel:+79168126353"
+											target="_blank"
+											rel="noreferrer"
+										>
+											+7(916)&nbsp;812&nbsp;63&nbsp;53
+										</a>{' '}
+										mail:&nbsp;
+										<a
+											className="courses__info_mail"
+											href="mailto:rusupport@midasit.com"
+											target="_blank"
+											rel="noreferrer"
+										>
+											rusupport@midasit.com
+										</a>
+									</p>
+								</div>
+								<div className="courses-block__gif">
+									<img
+										src="/common_imgs/Midas_1.png"
+										alt="Midas"
+										title="Midas"
+										onMouseEnter={(event) => {
+											event.currentTarget.src = '/common_imgs/Midas.gif'
+										}}
+										onMouseLeave={(event) => {
+											const myEvent = event
+											setTimeout(() => {
+												console.log(myEvent)
+												myEvent.target.src = '/common_imgs/Midas_1.png'
+											}, 4000)
+										}}
+									/>
+								</div>
 							</div>
-							<button
-								className="main-title_btn"
-								onClick={() => {
-									setShowForm(true)
-								}}
-							>
-								Записаться
-							</button>
+							<div className="courses-block">
+								<div className="courses-block__info">
+									<h3>Курсы Plaxis</h3>
+									<p>
+										Для подачи заявки и оформления договора на курсы Plaxis
+										связываться по mail:&nbsp;
+										<a
+											className="courses__info_mail"
+											href="mailto:education@mdgt.ru"
+											target="_blank"
+											rel="noreferrer"
+										>
+											education@mdgt.ru
+										</a>
+									</p>
+									<div className="show-form--block">
+										В настоящий момент до конца 2022 запись на курсы не
+										производится. Для предварительной записи воспользуйтесь
+										формой ниже. Мы уведомим Вас о планируемых датах проведения
+										занятий.
+									</div>
+									<button
+										className="main-title_btn courses-btn"
+										onClick={() => {
+											const body = document.getElementById('body')
+											body.classList.add('body-hidden')
+											setShowForm(true)
+										}}
+									>
+										Записаться
+									</button>
+								</div>
+								<div className="courses-block__gif">
+									<img
+										src="/common_imgs/Plaxis_1.png"
+										alt="Midas"
+										title="Midas"
+										onMouseEnter={(event) => {
+											event.currentTarget.src = '/common_imgs/Plaxis.gif'
+										}}
+										onMouseLeave={(event) => {
+											const myEvent = event
+											setTimeout(() => {
+												console.log(myEvent)
+												myEvent.target.src = '/common_imgs/Plaxis_1.png'
+											}, 4000)
+										}}
+									/>
+								</div>
+							</div>
 						</div>
 						{showForm ? (
 							<div className="courses-card__wrapper" onClick={wrapperClick}>
@@ -224,12 +273,28 @@ export default function Courses() {
 										onSubmit={onSubmit}
 									>
 										<h3>Запись на курсы</h3>
-										<div className="couses-form__text-input">
+										<a
+											href="https://docs.google.com/forms/d/e/1FAIpQLSeh8HLdngqhccnyZtA1LxVuZb1ZFtAyxIkrsLZOfp_I6LU4Cw/viewform?usp=sf_link"
+											target="_blank"
+											rel="noreferrer"
+											className="courses-form__google-link"
+										>
+											Google форма
+										</a>
+
+										<div
+											className={
+												user.value().length > 0
+													? 'couses-form__text-input not-empty'
+													: 'couses-form__text-input'
+											}
+										>
 											<input
 												className="text-input__input"
 												type="text"
 												name="student_name"
 												id="name"
+												autoComplete="on"
 												onFocus={inputFocus}
 												onBlur={inputBlur}
 												{...user.bind}
@@ -239,17 +304,30 @@ export default function Courses() {
 												<div className="text-input__label-notch-outline--label">
 													<label htmlFor="name">ФИО</label>
 												</div>
-												<div className="text-input__label-notch-outline--trailing"></div>
+												<div
+													className="text-input__label-notch-outline--trailing"
+													onClick={(event) => {
+														event.preventDefault()
+														document.getElementById('name').focus()
+													}}
+												></div>
 											</div>
 											<div className="course-type__error"></div>
 										</div>
 
-										<div className="couses-form__text-input">
+										<div
+											className={
+												mail.value().length > 0
+													? 'couses-form__text-input not-empty'
+													: 'couses-form__text-input'
+											}
+										>
 											<input
 												className="text-input__input"
 												type="email"
 												name="student_mail"
 												id="mail"
+												autoComplete="on"
 												onFocus={inputFocus}
 												onBlur={inputBlur}
 												{...mail.bind}
@@ -259,12 +337,24 @@ export default function Courses() {
 												<div className="text-input__label-notch-outline--label">
 													<label htmlFor="mail">Почта</label>
 												</div>
-												<div className="text-input__label-notch-outline--trailing"></div>
+												<div
+													className="text-input__label-notch-outline--trailing"
+													onClick={(event) => {
+														event.preventDefault()
+														document.getElementById('mail').focus()
+													}}
+												></div>
 											</div>
 											<div className="course-type__error"></div>
 										</div>
 
-										<div className="couses-form__text-input">
+										<div
+											className={
+												phone.value().length > 0
+													? 'couses-form__text-input not-empty'
+													: 'couses-form__text-input'
+											}
+										>
 											<input
 												className="text-input__input"
 												type="tel"
@@ -272,6 +362,7 @@ export default function Courses() {
 												id="phone"
 												onFocus={inputFocus}
 												onBlur={inputBlur}
+												autoComplete="on"
 												{...phone.bind}
 												value={phone.bind.value}
 												onChange={(event) => {
@@ -288,17 +379,30 @@ export default function Courses() {
 												<div className="text-input__label-notch-outline--label">
 													<label htmlFor="phone">Телефон</label>
 												</div>
-												<div className="text-input__label-notch-outline--trailing"></div>
+												<div
+													className="text-input__label-notch-outline--trailing"
+													onClick={(event) => {
+														event.preventDefault()
+														document.getElementById('phone').focus()
+													}}
+												></div>
 											</div>
 											<div className="course-type__error"></div>
 										</div>
 
-										<div className="couses-form__text-input">
+										<div
+											className={
+												organization.value().length > 0
+													? 'couses-form__text-input not-empty'
+													: 'couses-form__text-input'
+											}
+										>
 											<input
 												className="text-input__input"
 												type="text"
 												name="student_organization"
 												id="organization"
+												autoComplete="on"
 												onFocus={inputFocus}
 												onBlur={inputBlur}
 												{...organization.bind}
@@ -308,17 +412,30 @@ export default function Courses() {
 												<div className="text-input__label-notch-outline--label">
 													<label htmlFor="organization">Организация</label>
 												</div>
-												<div className="text-input__label-notch-outline--trailing"></div>
+												<div
+													className="text-input__label-notch-outline--trailing"
+													onClick={(event) => {
+														event.preventDefault()
+														document.getElementById('organization').focus()
+													}}
+												></div>
 											</div>
 											<div className="course-type__error"></div>
 										</div>
 
-										<div className="couses-form__text-input">
+										<div
+											className={
+												post.value().length > 0
+													? 'couses-form__text-input not-empty'
+													: 'couses-form__text-input'
+											}
+										>
 											<input
 												className="text-input__input"
 												type="text"
 												name="student_post"
 												id="post"
+												autoComplete="on"
 												onFocus={inputFocus}
 												onBlur={inputBlur}
 												{...post.bind}
@@ -328,14 +445,27 @@ export default function Courses() {
 												<div className="text-input__label-notch-outline--label">
 													<label htmlFor="post">Должность</label>
 												</div>
-												<div className="text-input__label-notch-outline--trailing"></div>
+												<div
+													className="text-input__label-notch-outline--trailing"
+													onClick={(event) => {
+														event.preventDefault()
+														document.getElementById('post').focus()
+													}}
+												></div>
 											</div>
 											<div className="course-type__error"></div>
 										</div>
 
-										<div>Уровень разработки</div>
+										<div>Уровень владения Plaxis</div>
 										<div className="course-type">
-											<div className="course-type__btn" id="midas">
+											<div
+												className={
+													midas.value()
+														? 'course-type__btn not-empty'
+														: 'course-type__btn'
+												}
+												id="midas"
+											>
 												<input
 													type="checkbox"
 													name="midas"
@@ -366,7 +496,14 @@ export default function Courses() {
 												</label>
 											</div>
 
-											<div className="course-type__btn" id="plaxis">
+											<div
+												className={
+													plaxis.value()
+														? 'course-type__btn not-empty'
+														: 'course-type__btn'
+												}
+												id="plaxis"
+											>
 												<input
 													type="checkbox"
 													name="plaxis"
@@ -407,9 +544,9 @@ export default function Courses() {
 										</button>
 
 										<div className="courses-form--sub">
-											Нажимая на кнопку "Отправить", вы даете согласие на
+											Нажимая на кнопку «Отправить», вы даете согласие на
 											обработку персональных данных и соглашаетесь с{' '}
-											<a href="/">политикой конфиденциальности.</a>
+											<a href="#">политикой конфиденциальности.</a>
 										</div>
 									</form>
 									<div className="courses__close" onClick={onCloseForm}>

@@ -24,6 +24,7 @@ export default function Home() {
 
 				<Objects />
 
+
 				<About />
 				<Courses />
 				<Contacts />

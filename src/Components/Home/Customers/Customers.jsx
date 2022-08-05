@@ -9,7 +9,7 @@ import InzhGeo from './img/ИнжГео.png'
 import LENMORNIIPROYEKT from './img/ЛЕНМОРНИИПРОЕКТ.png'
 import MAGE from './img/МАГЭ.png'
 import Metrogiprotrans from './img/Метрогипртранс.png'
-import NOEKS from './img/НОЭКС.jpg'
+import NOEKS from './img/НОЭКС.png'
 import NPC_Osnova from './img/НПЦ_Основа.png'
 import PETRAKOMPLEKT from './img/ПЕТРАКОМПЛЕКТ.png'
 import Mosgeoproyekt from './img/Мосгеопроект.png'
@@ -36,11 +36,11 @@ import EUSP from './img/ЭУСП.png'
 import MoskovskayaKollegiyaAdvokatov from './img/МосковскаяКоллегияАдвокатов.png'
 import TSGI from './img/ЦГИ.gif'
 import GIPROSTROYMOST from './img/ГИПРОСТРОЙМОСТ.png'
-import mosgiptotrans from './img/mosgiptotrans.jpg'
+import mosgiptotrans from './img/mosgiptotrans.png'
 import Stroyizyskaniya from './img/Стройизыскания.png'
 import rosatom_gspi from './img/rosatom_gspi.png'
 import Rosgeologiya from './img/Росгеология.png'
-import SPB_NII_ENERGOIZYSKANIYA from './img/СПБ_НИИ_ЭНЕРГОИЗЫСКАНИЯ.jpeg'
+import SPB_NII_ENERGOIZYSKANIYA from './img/СПБ_НИИ_ЭНЕРГОИЗЫСКАНИЯ.png'
 
 import './Customers.css'
 export default function Customers() {
@@ -53,6 +53,13 @@ export default function Customers() {
 	return (
 		<>
 			<div className="customers-objects">
+				<div
+					className="noclicker"
+					onClick={(event) => {
+						event.stopPropagation()
+					}}
+				></div>
+
 				<Carousel
 					className="customers-carousel"
 					showStatus={false}
@@ -167,7 +174,7 @@ export default function Customers() {
 							<div className="cart">
 								<div
 									className="customer"
-									style={{ backgroundImage: `url(${NOEKS})` }}
+									style={{ backgroundImage: `url(${mosgiptotrans})` }}
 								></div>
 							</div>
 							<div className="cart">
@@ -231,7 +238,7 @@ export default function Customers() {
 							<div className="cart">
 								<div
 									className="customer"
-									style={{ backgroundImage: `url(${Inzhgeokom})` }}
+									style={{ backgroundImage: `url(${Geogradstroy})` }}
 								></div>
 							</div>
 							<div className="cart">
