@@ -42,8 +42,7 @@ export default function LabsVideo() {
 				<div className="home-blur"></div>
 				<div className="labs-content">
 					<h1>
-						Прямая видео трансляция
-						<br /> из производственных помещений
+						Прямая видео трансляция						
 					</h1>
 					<div className="labs-grid">
 						<div className="labs-card">
