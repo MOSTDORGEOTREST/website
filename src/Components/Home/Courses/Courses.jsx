@@ -3,6 +3,8 @@ import React, { useRef, useState } from 'react'
 import './Courses.css'
 
 import close from '../../Navigation/close-fill.svg'
+import pdf from '../About/pdf.svg'
+import programma from './programma.pdf'
 
 export default function Courses() {
 	const [showForm, setShowForm] = useState(false)
@@ -177,24 +179,25 @@ export default function Courses() {
 										связываться с руководителем технического отдела ООО "МИДАС":
 										<br />
 										Давыдов Кирилл Игоревич
-										<br /> тел:&nbsp;
-										<a
-											className="courses__info_mail"
-											href="tel:+79168126353"
-											target="_blank"
-											rel="noreferrer"
-										>
-											+7(916)&nbsp;812&nbsp;63&nbsp;53
-										</a>{' '}
-										mail:&nbsp;
-										<a
-											className="courses__info_mail"
-											href="mailto:rusupport@midasit.com"
-											target="_blank"
-											rel="noreferrer"
-										>
-											rusupport@midasit.com
-										</a>
+										<br />
+										<div className="courses-block__contacts">
+											<a
+												className="courses__info_mail"
+												href="tel:+79168126353"
+												target="_blank"
+												rel="noreferrer"
+											>
+												тел:&nbsp; +7(916)&nbsp;812&nbsp;63&nbsp;53
+											</a>{' '}
+											<a
+												className="courses__info_mail"
+												href="mailto:rusupport@midasit.com"
+												target="_blank"
+												rel="noreferrer"
+											>
+												mail:&nbsp;rusupport@midasit.com
+											</a>
+										</div>
 									</p>
 								</div>
 								<div className="courses-block__gif">
@@ -237,6 +240,35 @@ export default function Courses() {
 										формой ниже. Мы уведомим Вас о планируемых датах проведения
 										занятий.
 									</div>
+
+									<div className="courses-info__wrapper">
+										<a
+											href={programma}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="about-docs__card-wrapper about-docs__card-wrapper_left"
+											title="Скачать pdf"
+										>
+											<div className="about-docs__card">
+												<div className="about-docs__card-title-img">
+													<img src={pdf} alt="pdf" />
+												</div>
+												<div className="docs__card-title">
+													<h3 className="docs__card-title_main">
+														Программа курса
+													</h3>
+													<div className="docs__card-title_sub">
+														повышения квалификации Plaxis
+													</div>
+												</div>
+											</div>
+										</a>
+										<div className="courses-info__price">
+											<h3>Стоимость курса</h3>
+											<div>35&nbsp;000&nbsp;&#8381;</div>
+										</div>
+									</div>
+
 									<button
 										className="main-title_btn courses-btn"
 										onClick={() => {

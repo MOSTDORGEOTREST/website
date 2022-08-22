@@ -345,6 +345,7 @@ export default function About() {
 							</div>
 						</div>
 						<div className="about-tests" id="tests">
+							<h1>Испытания грунтов</h1>
 							<div className="about-tests-info">
 								<p>
 									Геотехническая лаборатория предоставляет своим клиентам полный

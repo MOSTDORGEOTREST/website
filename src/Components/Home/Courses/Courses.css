@@ -30,12 +30,24 @@
 	line-height: 32px;
 }
 
+.courses-block__contacts {
+	display: inline-flex;
+	flex-wrap: wrap;
+	width: 100%;
+	column-gap: 12px;
+	flex-direction: column;
+}
+
 .courses__info_mail {
 	font-weight: var(--font-medium);
 	color: var(--text-color);
 
-	text-decoration: none;
+	text-decoration: underline;
 	outline: none;
+
+	width: fit-content;
+	max-width: fit-content;
+	text-align: left;
 }
 
 .show-form--btn {
@@ -105,6 +117,23 @@
 
 	row-gap: 12px;
 }
+
+.show-form--block{
+	font-weight: var(--font-medium);
+}
+
+.courses-info__wrapper {
+	display: flex;
+	column-gap: 28px;
+	row-gap: 12px;
+	width: 100%;
+	flex-wrap: wrap;
+}
+
+.courses-info__price{
+	font-weight: var(--font-medium);
+}
+
 .courses-block__gif {
 	height: 200px;
 	width: fit-content;
