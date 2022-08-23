@@ -12,6 +12,10 @@ const Navigation = React.lazy(() =>
 	import('./Components/Navigation/Navigation')
 )
 
+const FloatVideo = React.lazy(() =>
+	import('./Components/FloatVideo/FloatVideo')
+)
+
 function App() {
 	const [showPrice, setShowPrice] = useState(false)
 
@@ -87,6 +91,8 @@ function App() {
 							<a href="#">Политика конфиденциальности</a>
 						</p>
 						{showCookie ? <Cookies /> : null}
+
+						<FloatVideo />
 					</div>
 				</Context.Provider>
 

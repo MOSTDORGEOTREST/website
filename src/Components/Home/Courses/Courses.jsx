@@ -174,7 +174,7 @@ export default function Courses() {
 							<div className="courses-block">
 								<div className="courses-block__info">
 									<h3>Курсы Midas</h3>
-									<p>
+									<div>
 										Для подачи заявки и оформления договора на курсы Midas
 										связываться с руководителем технического отдела ООО "МИДАС":
 										<br />
@@ -198,7 +198,7 @@ export default function Courses() {
 												mail:&nbsp;rusupport@midasit.com
 											</a>
 										</div>
-									</p>
+									</div>
 								</div>
 								<div className="courses-block__gif">
 									<img
