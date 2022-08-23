@@ -34,14 +34,14 @@ export default function Cookies() {
 					</p>
 				</div>
 				<div className="cookies__accept-btns">
-					<button
+					{/* <button
 						type="button"
 						title="Закрыть окно"
 						className="cookies__accept-btn"
 						onClick={eraseCookie}
 					>
 						Закрыть
-					</button>
+					</button> */}
 					<button
 						type="button"
 						title="Принять cookie"

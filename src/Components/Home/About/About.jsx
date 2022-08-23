@@ -36,19 +36,18 @@ import wille_rock from './devices/Wille_rock.png'
 
 // ОБРАЗЦЫ ПРОТОКОЛОВ
 import p1 from './Tests_docs/Компрессионное-сжатие-oбразец.pdf'
-import p2 from './Tests_docs/Одноосное-сжатие-Е-для-скального-грунта-oбразец.pdf'
 import p3 from './Tests_docs/Одноплоскостной-срез-oбразец.pdf'
 import p4 from './Tests_docs/Трёхосное-сжатие-вибро-oбразец.pdf'
 import p5 from './Tests_docs/Трехосное-сжатие-с-разгрузкой-oбразец.pdf'
 import p6 from './Tests_docs/Трёхосное-сжатие-F-C-E-oбразец.pdf'
 import p7 from './Tests_docs/Сейсморазжижжение-oбразец.pdf'
 import p8 from './Tests_docs/Первичная-и-вторичная-консолидация-oбразец.pdf'
-import p9 from './Tests_docs/Срез-по-поверхности-смерзания-oбразец.pdf'
 import p10 from './Tests_docs/Plaxis-OCR-oбразец-1.pdf'
 import p11 from './Tests_docs/Plaxis-Ohde-oбразец.pdf'
 import p12 from './Tests_docs/Plaxis-Дилатансия-срез-oбразец.pdf'
 import p13 from './Tests_docs/Коэффициент-бокового-давления-oбразец.pdf'
 import p14 from './Tests_docs/Plaxis-Разгрузка-oбразец.pdf'
+import p15 from './Tests_docs/Резонансная-колонка-образец.pdf'
 
 export default function About() {
 	function showList(event) {
@@ -108,6 +107,9 @@ export default function About() {
 								любой сложности.
 							</p>
 						</div>
+						<button className="main-title_btn courses-btn" onClick={() => {}}>
+							3D-тур
+						</button>
 						<div className="about-docs">
 							<div className="about-docs__card-wrapper">
 								<div className="about-docs__card" onClick={showList}>
@@ -414,21 +416,7 @@ export default function About() {
 												<img src={pdf} alt="pdf"></img>
 											</div>
 											<p>Испытания грунта методом компрессионного сжатия</p>
-										</a>
-										<a
-											href={p2}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="docs__card-list-item"
-										>
-											<div>
-												<img src={pdf} alt="pdf"></img>
-											</div>
-											<p>
-												Испытания грунта методом одноосного сжатия (E) для
-												скального грунта
-											</p>
-										</a>
+										</a>										
 										<a
 											href={p3}
 											target="_blank"
@@ -503,18 +491,7 @@ export default function About() {
 												<img src={pdf} alt="pdf"></img>
 											</div>
 											<p>Первичная и вторичная консолидация</p>
-										</a>
-										<a
-											href={p9}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="docs__card-list-item"
-										>
-											<div>
-												<img src={pdf} alt="pdf"></img>
-											</div>
-											<p>Срез по поверхности смерзания</p>
-										</a>
+										</a>										
 										<a
 											href={p10}
 											target="_blank"
@@ -569,6 +546,17 @@ export default function About() {
 												<img src={pdf} alt="pdf"></img>
 											</div>
 											<p>Plaxis-Разгрузка</p>
+										</a>
+										<a
+											href={p15}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="docs__card-list-item"
+										>
+											<div>
+												<img src={pdf} alt="pdf"></img>
+											</div>
+											<p>Испытания грунта в резонансной колонке</p>
 										</a>
 									</div>
 								</div>
