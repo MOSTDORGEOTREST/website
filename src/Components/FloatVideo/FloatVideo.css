@@ -37,6 +37,7 @@
 
 .float-video__wrapper.float-video__wrapper_expanded {
 	height: 500px;
+	max-height: 90vh;
 	width: 280px;
 }
 
