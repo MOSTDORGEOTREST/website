@@ -7,6 +7,7 @@ import Customers from '../Customers/Customers'
 // ИКОНКИ
 import arrowDown from './arrow-down.svg'
 import pdf from './pdf.svg'
+import globe from './bx-street-view.svg'
 
 // ДОКИ АО
 import AO_doc_1 from './AO_docs/Мосстройсертификация-от-09.01.2020-г-11.pdf'
@@ -107,9 +108,14 @@ export default function About() {
 								любой сложности.
 							</p>
 						</div>
-						<button className="main-title_btn courses-btn" onClick={() => {}}>
-							3D-тур
-						</button>
+						<a
+							className="main-title_btn main-title_btn_link-icon"
+							target="_blank"
+							href="3d/output/index.html"
+						>
+							<img src={globe} alt="globe"></img>
+							<div>3D-тур по лаборатории</div>
+						</a>
 						<div className="about-docs">
 							<div className="about-docs__card-wrapper">
 								<div className="about-docs__card" onClick={showList}>
@@ -416,7 +422,7 @@ export default function About() {
 												<img src={pdf} alt="pdf"></img>
 											</div>
 											<p>Испытания грунта методом компрессионного сжатия</p>
-										</a>										
+										</a>
 										<a
 											href={p3}
 											target="_blank"
@@ -491,7 +497,7 @@ export default function About() {
 												<img src={pdf} alt="pdf"></img>
 											</div>
 											<p>Первичная и вторичная консолидация</p>
-										</a>										
+										</a>
 										<a
 											href={p10}
 											target="_blank"

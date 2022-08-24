@@ -48,6 +48,23 @@
 	border-radius: 4px;
 }
 
+.main-title_btn.main-title_btn_link,
+.main-title_btn.main-title_btn_link-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.main-title_btn.main-title_btn_link-icon {
+	column-gap: 0.25rem;
+
+	align-self: center;
+}
+
+.main-title_btn.main-title_btn_link-icon img {
+	width: 36px;
+}
+
 .main-title_btn:hover {
 	background-color: var(--text-color);
 }

@@ -26,12 +26,7 @@ export default function Cookies() {
 		<>
 			<div className="cookies__box">
 				<div className="cookies__info">
-					<h3>Мы используем файлы cookie.</h3>
-					<p>
-						Мы используем cookie для обеспечения функционирования веб-сайта и
-						улучшения качества обслуживания. Если Вы не хотите, чтобы эти данные
-						обрабатывались, отключите cookies в настройках браузера.
-					</p>
+					<div>Для работы сайта мы используем файлы cookie.</div>
 				</div>
 				<div className="cookies__accept-btns">
 					{/* <button
