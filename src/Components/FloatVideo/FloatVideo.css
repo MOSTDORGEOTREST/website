@@ -4,8 +4,8 @@
 	justify-content: center;
 
 	position: fixed;
-	left: 9px;
-	bottom: 6px;
+	left: 0.75rem;
+	bottom: 0.75rem;
 
 	height: 200px;
 	width: 140px;
@@ -14,7 +14,7 @@
 
 	overflow: hidden;
 
-	border: 1px solid #ccc;
+	border: 1px solid #fff;
 	border-radius: 4px;
 
 	z-index: var(--z-fixed);
@@ -37,6 +37,7 @@
 
 .float-video__wrapper.float-video__wrapper_expanded {
 	height: 500px;
+	max-height: 90vh;
 	width: 280px;
 }
 
@@ -60,8 +61,8 @@
 
 	position: absolute;
 
-	top: 0.5rem;
-	right: 0.5rem;
+	top: 0.25rem;
+	right: 0.25rem;
 
 	z-index: calc(var(--z-fixed) + 1);
 }

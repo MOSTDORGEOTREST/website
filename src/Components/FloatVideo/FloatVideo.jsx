@@ -5,9 +5,12 @@ import { useState } from 'react'
 import './FloatVideo.css'
 
 import close from '../Navigation/close-fill-fff.svg'
+import min from './minimize.svg'
 
 export default function FloatVideo() {
 	const [videoLoaded, setVideoLoaded] = useState(false)
+	const [videoPlay, setVideoPlay] = useState(false)
+	const [videoOpened, setVideoOpened] = useState(false)
 	const [videoLink, setVideoLink] = useState('')
 
 	useEffect(() => {
@@ -21,28 +24,65 @@ export default function FloatVideo() {
 		setVideoLoaded(false)
 	}
 
+	function onMinimizeVideo(event) {
+		event.stopPropagation()
+
+		const videoItem = event.currentTarget.parentNode.querySelector(
+			'.float-video__video'
+		)
+		if (!videoItem) return
+
+		setVideoOpened(false)
+		setVideoPlay(false)
+		videoItem.pause()
+		videoItem.currentTime = 0
+		videoItem.muted = true
+	}
+
 	return (
 		<>
 			{videoLoaded ? (
 				<>
 					<div
-						className="float-video__wrapper"
+						className={
+							videoOpened
+								? 'float-video__wrapper float-video__wrapper_expanded'
+								: 'float-video__wrapper'
+						}
 						onClick={(event) => {
-							event.currentTarget.classList.toggle(
-								'float-video__wrapper_expanded'
-							)
 							const videoItem = event.currentTarget.querySelector(
 								'.float-video__video'
 							)
-							if (videoItem) {
-								videoItem.muted = !videoItem.muted
-								videoItem.currentTime = 0
+							if (!videoItem) return
+
+							if (videoOpened) {
+								if (!videoPlay) {
+									videoItem.play()
+									setVideoPlay(true)
+								}
+								if (videoPlay) {
+									videoItem.pause()
+									setVideoPlay(false)
+								}
+								return
 							}
+
+							if (!videoPlay) videoItem.play()
+							videoItem.muted = false
+							videoItem.currentTime = 0
+							setVideoPlay(true)
+							setVideoOpened(true)
 						}}
 					>
-						<div className="video__close" onClick={onCloseVideo}>
-							<img src={close} alt="close" />
-						</div>
+						{videoOpened ? (
+							<div className="video__close" onClick={onMinimizeVideo}>
+								<img src={min} alt="close" />
+							</div>
+						) : (
+							<div className="video__close" onClick={onCloseVideo}>
+								<img src={close} alt="close" />
+							</div>
+						)}
 
 						<video
 							className="float-video__video"
