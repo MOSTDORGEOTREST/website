@@ -124,9 +124,7 @@ export default function About() {
 											Разрешительные документы
 										</h3>
 										<div className="docs__card-title_sub">
-											Акционерное общество
-											<br />
-											МОСТДОРГЕОТРЕСТ
+											Акционерное общество МОСТДОРГЕОТРЕСТ
 										</div>
 									</div>
 									<div className="docs__card-btn">
@@ -192,9 +190,7 @@ export default function About() {
 											Разрешительные документы
 										</h3>
 										<div className="docs__card-title_sub">
-											Стуктурное подразделение
-											<br />
-											ООО МОСТДОРГЕОТРЕСТ
+											Стуктурное подразделение ООО МОСТДОРГЕОТРЕСТ
 										</div>
 									</div>
 									<div className="docs__card-btn">
@@ -248,7 +244,7 @@ export default function About() {
 								href={mosgosexpert}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="about-docs__card-wrapper"
+								className="about-docs__card-wrapper about-docs__card-wrapper_left"
 								title="Скачать pdf"
 							>
 								<div className="about-docs__card">
@@ -397,7 +393,7 @@ export default function About() {
 								</p>
 							</div>
 							<div className="about-tests-docs">
-								<div className="about-docs__card-wrapper">
+								<div className="about-docs__card-wrapper about-docs__card-wrapper_full-w">
 									<div className="about-docs__card" onClick={showList}>
 										<div className="docs__card-title">
 											<h3 className="docs__card-title_main">

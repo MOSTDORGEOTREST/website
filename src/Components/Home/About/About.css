@@ -42,19 +42,20 @@
 /* ============== БЛОК С ДОКУМЕНТАМИ ============== */
 
 .about-docs {
-	display: inline-flex;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(354px, 1fr));
+
 	column-gap: 8px;
 	row-gap: 8px;
-	flex-wrap: wrap;
 }
 
 .about-docs__card-wrapper {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	/* width: 354px; */
 
-	width: 354px;
-
+	min-height: 105px;
 	height: fit-content;
 
 	border: 1px solid var(--title-color);
@@ -87,6 +88,16 @@
 
 .about-docs__card-wrapper.about-docs__card-wrapper_left .about-docs__card {
 	justify-content: flex-start;
+}
+
+.about-docs__card-wrapper.about-docs__card-wrapper_full-w {
+	width: fit-content;
+}
+
+@media screen and (max-width: 768px) {
+	.about-docs__card-wrapper.about-docs__card-wrapper_full-w {
+		width: 100%;
+	}
 }
 
 .about-docs__card:hover .docs__card-btn {
@@ -149,8 +160,8 @@
 }
 
 @media screen and (max-width: 425px) {
-	.about-docs__card-wrapper {
-		width: 100%;
+	.about-docs {
+		grid-template-columns: repeat(auto-fit, 100%);
 	}
 }
 
@@ -260,8 +271,4 @@
 }
 .about-tests-info p {
 	line-height: 32px;
-}
-
-.about-tests-docs .about-docs__card-wrapper {
-	width: fit-content;
 }
