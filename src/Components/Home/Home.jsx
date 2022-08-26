@@ -10,6 +10,7 @@ import Courses from './Courses/Courses'
 import Contacts from './Contacts/Contacts'
 import Price from '../Price/Price'
 import About from './About/About'
+import Calculations from './Calculations/Calculations'
 
 const LabsVideo = React.lazy(() => import('./LabsVideo/LabsVideo'))
 
@@ -28,6 +29,7 @@ export default function Home() {
 				</React.Suspense>
 
 				<About />
+				<Calculations />
 				<Courses />
 				<Contacts />
 			</div>

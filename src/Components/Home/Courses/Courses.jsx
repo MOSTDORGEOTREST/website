@@ -161,7 +161,7 @@ export default function Courses() {
 	return (
 		<>
 			<div className="home-courses" id="courses">
-				<div className="home-blur"></div>
+				{/* <div className="home-blur"></div> */}
 				<div className="courses-content">
 					<h1>Курсы повышения квалификации</h1>
 					<div className="courses__wrapper">
@@ -235,9 +235,10 @@ export default function Courses() {
 										</a>
 									</p>
 									<div className="show-form--block">
-									В настоящий момент до конца 2022 свободных мест для записи, к сожалению, не осталось. 
-									Для предварительной записи воспользуйтесь формой ниже. 
-									Мы уведомим Вас о планируемых датах проведения занятий.
+										В настоящий момент до конца 2022 свободных мест для записи,
+										к сожалению, не осталось. Для предварительной записи
+										воспользуйтесь формой ниже. Мы уведомим Вас о планируемых
+										датах проведения занятий.
 									</div>
 
 									<div className="courses-info__wrapper">

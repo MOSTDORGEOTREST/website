@@ -114,9 +114,9 @@ export default function Navigation() {
 									</HashLink>
 								</li>
 								<li className="nav-item">
-									<a className={'nav-link'} href="." onClick={onPriceClick}>
-										Прайс-лист
-									</a>
+									<HashLink className="nav-link" smooth to="/#Calculations">
+										Рассчеты
+									</HashLink>
 								</li>
 								<li className="nav-item">
 									<a
