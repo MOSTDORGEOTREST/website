@@ -118,7 +118,7 @@
 	row-gap: 12px;
 }
 
-.show-form--block{
+.show-form--block {
 	font-weight: var(--font-medium);
 }
 
@@ -130,25 +130,25 @@
 	flex-wrap: wrap;
 }
 
-.courses-info__price{
+.courses-info__price {
 	font-weight: var(--font-medium);
 }
 
 .courses-block__gif {
-	height: 200px;
-	width: fit-content;
+	height: fit-content;
+	width: 500px;
 
 	padding-left: 2rem;
 }
 .courses-block__gif img {
-	height: 100%;
-	width: auto;
+	height: auto;
+	width: 100%;
 }
 
 @media screen and (max-width: 920px) {
 	.courses-block__gif {
-		height: 120px;
-		width: fit-content;
+		height: fit-content;
+		width: 400px;
 	}
 }
 
