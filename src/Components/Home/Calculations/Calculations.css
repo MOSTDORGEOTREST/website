@@ -23,8 +23,8 @@
 	display: flex;
 	flex-direction: column;
 
-	padding-top: 24px;
-	padding-bottom: 59px;
+	/* padding-top: 24px; */
+	/* padding-bottom: 59px; */
 	row-gap: 24px;
 
 	white-space: nowrap;
@@ -78,8 +78,9 @@
 	}
 
 	.calculations__main-title {
-		align-items: center;
-		text-align: center;
+		/* align-items: center;
+		text-align: center; */
+		width: 100%;
 	}
 
 	.home-calculations {
@@ -90,6 +91,9 @@
 		white-space: normal;
 
 		text-align: justify;
+	}
+	.calculations__main-title_sub {
+		max-width: none;
 	}
 }
 

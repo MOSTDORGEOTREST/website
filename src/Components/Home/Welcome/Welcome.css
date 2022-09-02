@@ -59,10 +59,17 @@
 	column-gap: 0.25rem;
 
 	align-self: center;
+
+	flex-direction: column;
 }
 
 .main-title_btn.main-title_btn_link-icon img {
+	position: relative;
 	width: 36px;
+}
+
+.main-title_btn.main-title_btn_link-icon div {
+	position: relative;
 }
 
 .main-title_btn:hover {

@@ -8,6 +8,7 @@ import Customers from '../Customers/Customers'
 import arrowDown from './arrow-down.svg'
 import pdf from './pdf.svg'
 import globe from './bx-street-view.svg'
+import back_3d from './3d_back.jpg'
 
 // ДОКИ АО
 import AO_doc_1 from './AO_docs/Мосстройсертификация-от-09.01.2020-г-11.pdf'
@@ -109,12 +110,15 @@ export default function About() {
 							</p>
 						</div>
 						<a
-							className="main-title_btn main-title_btn_link-icon"
+							className="main-title_btn main-title_btn_link-icon about-3d-btn"
 							target="_blank"
 							href="3d/output/index.html"
 						>
-							<img src={globe} alt="globe"></img>
-							<div>3D-тур по лаборатории</div>
+							<img src={back_3d} alt="" className="about-3d-btn__image" />
+							<div className="about-3d-btn__content">
+								<img src={globe} alt="globe"></img>
+								<div>3D-тур по лаборатории</div>
+							</div>
 						</a>
 						<div className="about-docs">
 							<div className="about-docs__card-wrapper">

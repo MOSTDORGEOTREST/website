@@ -12,6 +12,10 @@
 	row-gap: 18px;
 }
 
+.courses-content{
+	padding-top: 18px;
+}
+
 .courses__wrapper {
 	display: flex;
 	flex-direction: column;
