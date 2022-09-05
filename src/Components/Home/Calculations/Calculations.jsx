@@ -12,12 +12,12 @@ export default function Calculations() {
 				<div className="calculations__content">
 					<div className="calculations__main">
 						<div className="calculations__main-title">
-							<h1 className="calculations__main-title_main">Рассчеты</h1>
-							<h3 className="calculations__main-title_sub">
-								В нашей лаборатории проводятся геотехнические расчёты грунтовых
+							<h1 className="calculations__main-title_main">Расчеты</h1>
+							<div className="calculations__main-title_sub">
+								В нашей лаборатории проводятся геотехнические расчеты грунтовых
 								сооружений, таких как насыпи и откосы, с использованием ПК
 								Plaxis, а также аналитическими методами.
-							</h3>
+							</div>
 							<button className="main-title_btn" onClick={() => {}}>
 								Посмотреть цены
 							</button>
