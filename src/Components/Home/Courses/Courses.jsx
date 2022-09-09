@@ -175,31 +175,36 @@ export default function Courses() {
 								<div className="courses-block__info">
 									<h3>Курсы Midas</h3>
 									<div>
-									Курсы по обеспечению входными параметрами
-									 нелинейных моделей грунтов на данный момент
-									  входят в стоимость лицензии Midas GTX NX.
-									  Для подачи заявки и оформления договора на курсы
-									   связываться с руководителем технического отдела ООО "МИДАС"
+										Курсы по обеспечению входными параметрами нелинейных моделей
+										грунтов на данный момент входят в стоимость лицензии Midas
+										GTX NX. Для подачи заявки и оформления договора на курсы
+										связываться с руководителем технического отдела ООО "МИДАС"
 										<br />
 										Давыдов Кирилл Игоревич
 										<br />
 										<div className="courses-block__contacts">
-											<a
-												className="courses__info_mail"
-												href="tel:+79168126353"
-												target="_blank"
-												rel="noreferrer"
-											>
-												тел:&nbsp; +7(916)&nbsp;812&nbsp;63&nbsp;53
-											</a>{' '}
-											<a
-												className="courses__info_mail"
-												href="mailto:rusupport@midasit.com"
-												target="_blank"
-												rel="noreferrer"
-											>
-												mail:&nbsp;rusupport@midasit.com
-											</a>
+											<div className="courses-block__contacts__contact">
+												тел:&nbsp;
+												<a
+													className="courses__info_mail"
+													href="tel:+79168126353"
+													target="_blank"
+													rel="noreferrer"
+												>
+													+7(916)&nbsp;812&nbsp;63&nbsp;53
+												</a>
+											</div>
+											<div className="courses-block__contacts__contact">
+												mail:&nbsp;
+												<a
+													className="courses__info_mail"
+													href="mailto:rusupport@midasit.com"
+													target="_blank"
+													rel="noreferrer"
+												>
+													rusupport@midasit.com
+												</a>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -236,7 +241,7 @@ export default function Courses() {
 										>
 											education@mdgt.ru
 										</a>
-									</p>						
+									</p>
 
 									<div className="courses-info__wrapper">
 										<a

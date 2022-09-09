@@ -112,7 +112,7 @@ export default function About() {
 						<a
 							className="main-title_btn main-title_btn_link-icon about-3d-btn"
 							target="_blank"
-							href="3d/output/index.html"
+							href="3d/output-3/index.html"
 						>
 							<img src={back_3d} alt="" className="about-3d-btn__image" />
 							<div className="about-3d-btn__content">
