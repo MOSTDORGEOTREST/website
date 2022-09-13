@@ -33,6 +33,8 @@
 <!-- - - - - - - 8<- - - - - - cut here - - - - - 8<- - - - - - - -->
 		<script type="text/javascript" src="pano2vr_player.js">
 		</script>
+		<script type="text/javascript" src="skin.js">
+		</script>
 		<script src="webxr/three.min.js"></script>
 		<script src="webxr/webxr-polyfill.min.js"></script>
 		<div id="container" style="width:100%;height:100%;overflow:hidden;">
@@ -42,6 +44,8 @@
 	
 			// create the panorama player with the container
 			pano=new pano2vrPlayer("container");
+			// add the skin object
+			skin=new pano2vrSkin(pano);
 			// load the configuration
 		
 			window.addEventListener("load", function() {

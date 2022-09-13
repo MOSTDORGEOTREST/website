@@ -8,7 +8,7 @@ import Customers from '../Customers/Customers'
 import arrowDown from './arrow-down.svg'
 import pdf from './pdf.svg'
 import globe from './bx-street-view.svg'
-import back_3d from './3d_back.jpg'
+import back_3d from './3d_back.png'
 
 // ДОКИ АО
 import AO_doc_1 from './AO_docs/Мосстройсертификация-от-09.01.2020-г-11.pdf'

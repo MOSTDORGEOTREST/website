@@ -191,7 +191,7 @@ export default function Courses() {
 													target="_blank"
 													rel="noreferrer"
 												>
-													+7(916)&nbsp;812&nbsp;63&nbsp;53
+													+7&nbsp;(916)&nbsp;812&nbsp;63&nbsp;53
 												</a>
 											</div>
 											<div className="courses-block__contacts__contact">
