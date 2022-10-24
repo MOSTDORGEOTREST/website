@@ -1,29 +1,31 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!-- Pano2VR project file  -->
-<pano2vrconfig rev="18043" version="6.1.11">
+<pano2vrconfig version="6.1.11" rev="18043">
   <tour>
+    <start>node82</start>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/IMG_1452.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/IMG_1452.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>-0.556252</levelpitch>
+        <levelroll>0.165251</levelroll>
+        <leveltimestamp>2022-10-20T12:44:55</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>12.2365</start>
+          <start>10.9904</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-1.88605</start>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>75.9149</start>
+          <start>80.8869</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -39,13 +41,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T11:23:50</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T12:45:05</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-08T16:49:02</capturedatetime>
         <title>Лаборатория "МОСТДОРГЕОТРЕСТ"</title>
         <datetime>08.09.2022 16:49</datetime>
-        <tags>3d фото|Menu</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -53,8 +55,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-341.88</pan>
-            <tilt>-10.83</tilt>
+            <pan>-341.76</pan>
+            <tilt>-10.52</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -67,7 +69,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node57}</url>
+          <url>{node99}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -77,8 +79,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-13.13</pan>
-            <tilt>-1.74</tilt>
+            <pan>-157.67</pan>
+            <tilt>12.4</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -91,7 +93,7 @@
           <id>Point02</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node64}</url>
+          <url>{node89}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -101,8 +103,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-7.36</pan>
-            <tilt>-11.19</tilt>
+            <pan>-157.61</pan>
+            <tilt>0.77</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -115,7 +117,7 @@
           <id>Point03</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node72}</url>
+          <url>{node93}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -125,8 +127,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-156</pan>
-            <tilt>10.27</tilt>
+            <pan>-157.74</pan>
+            <tilt>-10.32</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -137,10 +139,9 @@
           <polygon/>
           <type>point</type>
           <id>Point04</id>
-          <title>Учебный класс</title>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node11}</url>
+          <url>{node94}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -150,8 +151,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-156.11</pan>
-            <tilt>0.83</tilt>
+            <pan>-13.36</pan>
+            <tilt>-3.98</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -162,10 +163,9 @@
           <polygon/>
           <type>point</type>
           <id>Point05</id>
-          <title>Склад с охлаждением</title>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node44}</url>
+          <url>{node84}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -175,8 +175,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-156.31</pan>
-            <tilt>-8.88</tilt>
+            <pan>-7.37</pan>
+            <tilt>-8.13</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -187,10 +187,9 @@
           <polygon/>
           <type>point</type>
           <id>Point06</id>
-          <title>Скальная лаборатория</title>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node43}</url>
+          <url>{node87}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -203,30 +202,31 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node58</id>
+      <id>node100</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/IMG_1451.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/IMG_1451.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>-0.449012</levelpitch>
+        <levelroll>-0.233545</levelroll>
+        <leveltimestamp>2022-10-20T12:44:30</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>-119.559</start>
+          <start>-114.285</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-12.8098</start>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>63.193</start>
+          <start>80.8869</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -242,13 +242,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T11:28:27</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T12:44:39</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-08T16:50:44</capturedatetime>
         <title>Морозильная камера 1</title>
         <datetime>08.09.2022 16:50</datetime>
-        <tags>3d фото|Menu</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -256,8 +256,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-296.66</pan>
-            <tilt>-6.96</tilt>
+            <pan>-295.34</pan>
+            <tilt>-5.79</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -270,7 +270,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node58}</url>
+          <url>{node100}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -283,30 +283,31 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node57</id>
+      <id>node99</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/GS__0081.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/GS__0081.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>-0.330102</levelpitch>
+        <levelroll>0.125775</levelroll>
+        <leveltimestamp>2022-10-20T12:47:48</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>-13.0592</start>
+          <start>-11.9438</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-4.35777</start>
+          <start>0.162205</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>71.0132</start>
+          <start>80.8869</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -322,13 +323,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T11:34:57</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T12:48:04</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-09T12:05:18</capturedatetime>
         <title>Определение механических свойств грунтов</title>
         <datetime>09.09.2022 12:05</datetime>
-        <tags>3d фото|Menu</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -336,8 +337,32 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-72.39</pan>
-            <tilt>-2.13</tilt>
+            <pan>-69.73</pan>
+            <tilt>-2.59</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <polygon/>
+          <type>point</type>
+          <id>Point01</id>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node86}</url>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-84.66</pan>
+            <tilt>0.53</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -350,7 +375,7 @@
           <id>Point02</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node67}</url>
+          <url>{node85}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -360,32 +385,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-135.93</pan>
-            <tilt>3.5</tilt>
-            <fov>10</fov>
-          </position>
-          <next>
-            <pan>0</pan>
-            <tilt>0</tilt>
-            <fov>0</fov>
-          </next>
-          <polygon/>
-          <type>point</type>
-          <id>Point01</id>
-          <linktype>node</linktype>
-          <linksubtype>unknown</linksubtype>
-          <url>{node72}</url>
-          <distance>0</distance>
-          <distanceauto>1</distanceauto>
-          <autoplace>0</autoplace>
-          <use3d>0</use3d>
-          <width>0</width>
-          <height>0</height>
-        </hotspot>
-        <hotspot>
-          <position>
-            <pan>-85.71</pan>
-            <tilt>0.82</tilt>
+            <pan>-98.66</pan>
+            <tilt>0.71</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -398,7 +399,7 @@
           <id>Point03</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node66}</url>
+          <url>{node90}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -408,8 +409,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-106.27</pan>
-            <tilt>-1.6</tilt>
+            <pan>-106.99</pan>
+            <tilt>-2.04</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -422,7 +423,7 @@
           <id>Point04</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node70}</url>
+          <url>{node82}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -432,8 +433,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-97.36</pan>
-            <tilt>1.01</tilt>
+            <pan>-136.8</pan>
+            <tilt>1.58</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -446,7 +447,7 @@
           <id>Point05</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node33}</url>
+          <url>{node88}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -459,30 +460,31 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node64</id>
+      <id>node84</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/GS__0084.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/GS__0084.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>-0.187936</levelpitch>
+        <levelroll>0.113002</levelroll>
+        <leveltimestamp>2022-10-20T12:58:35</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>162.741</start>
+          <start>168.556</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-8.11147</start>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>48.1448</start>
+          <start>46.2695</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -498,13 +500,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-09T13:31:42</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T12:58:57</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-09T12:09:12</capturedatetime>
         <title>Определение механических свойств грунтов 1</title>
         <datetime>09.09.2022 12:09</datetime>
-        <tags>3d фото</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -512,8 +514,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-239.15</pan>
-            <tilt>0.49</tilt>
+            <pan>-234.74</pan>
+            <tilt>-1.66</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -526,7 +528,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node66}</url>
+          <url>{node85}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -536,8 +538,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-24.15</pan>
-            <tilt>-9.97</tilt>
+            <pan>-267.83</pan>
+            <tilt>-1.11</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -550,31 +552,7 @@
           <id>Point02</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node72}</url>
-          <distance>0</distance>
-          <distanceauto>1</distanceauto>
-          <autoplace>0</autoplace>
-          <use3d>0</use3d>
-          <width>0</width>
-          <height>0</height>
-        </hotspot>
-        <hotspot>
-          <position>
-            <pan>-268.14</pan>
-            <tilt>0.81</tilt>
-            <fov>10</fov>
-          </position>
-          <next>
-            <pan>0</pan>
-            <tilt>0</tilt>
-            <fov>0</fov>
-          </next>
-          <polygon/>
-          <type>point</type>
-          <id>Point03</id>
-          <linktype>node</linktype>
-          <linksubtype>unknown</linksubtype>
-          <url>{node33}</url>
+          <url>{node90}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -585,7 +563,31 @@
         <hotspot>
           <position>
             <pan>-278.33</pan>
-            <tilt>-7.31</tilt>
+            <tilt>-1.35</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <polygon/>
+          <type>point</type>
+          <id>Point03</id>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node82}</url>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-20.1</pan>
+            <tilt>-14.99</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -598,7 +600,7 @@
           <id>Point04</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node70}</url>
+          <url>{node87}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -608,8 +610,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-120.05</pan>
-            <tilt>-4.44</tilt>
+            <pan>-118.63</pan>
+            <tilt>-7.77</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -622,7 +624,7 @@
           <id>Point05</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node64}</url>
+          <url>{node84}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -635,30 +637,31 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node67</id>
+      <id>node86</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/GS__0083.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/GS__0083.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>-2.74144</levelpitch>
+        <levelroll>-1.38493</levelroll>
+        <leveltimestamp>2022-10-20T12:59:55</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>-129.107</start>
+          <start>-144.966</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-8.13172</start>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>77.1977</start>
+          <start>46.2695</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -674,13 +677,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T12:10:40</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T13:00:02</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-09T12:08:20</capturedatetime>
         <title>Определение механических свойств грунтов 2</title>
         <datetime>09.09.2022 12:08</datetime>
-        <tags>3d фото</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -688,8 +691,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-252.66</pan>
-            <tilt>-6.57</tilt>
+            <pan>-84.23</pan>
+            <tilt>-1</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -702,7 +705,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node70}</url>
+          <url>{node96}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -712,8 +715,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-222.3</pan>
-            <tilt>-7.85</tilt>
+            <pan>-45.31</pan>
+            <tilt>-0.88</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -726,7 +729,7 @@
           <id>Point02</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node33}</url>
+          <url>{node97}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -736,8 +739,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-7.69</pan>
-            <tilt>3.44</tilt>
+            <pan>-6.74</pan>
+            <tilt>1.99</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -750,7 +753,7 @@
           <id>Point03</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node72}</url>
+          <url>{node87}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -760,8 +763,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-46.13</pan>
-            <tilt>-4.01</tilt>
+            <pan>-249.65</pan>
+            <tilt>-4.78</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -774,7 +777,31 @@
           <id>Point04</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node64}</url>
+          <url>{node82}</url>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-220.9</pan>
+            <tilt>-3.26</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <polygon/>
+          <type>point</type>
+          <id>Point05</id>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node90}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -787,25 +814,107 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node66</id>
+      <id>node85</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/GS__0047.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/GS__0047.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>-2.66933</levelpitch>
+        <levelroll>-0.213062</levelroll>
+        <leveltimestamp>2022-10-20T16:59:09</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>-5.31868</start>
+          <start>-6.76172</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-3.32854</start>
+          <start>0</start>
+          <min>-90</min>
+          <max>90</max>
+        </tilt>
+        <fov>
+          <start>102.715</start>
+          <minunit>pixels</minunit>
+          <minpixels>2</minpixels>
+          <max>120</max>
+          <maxfovstereographic>270</maxfovstereographic>
+          <maxfovfisheye>360</maxfovfisheye>
+        </fov>
+        <flyinstart>
+          <pan>0</pan>
+          <tilt>-90</tilt>
+          <fov>170</fov>
+        </flyinstart>
+        <pannorth>0</pannorth>
+        <scaletofit>1</scaletofit>
+        <projection>rectilinear</projection>
+        <flyinprojection>stereo</flyinprojection>
+        <defaultviewtimestamp>2022-10-20T16:59:18</defaultviewtimestamp>
+      </viewingparameter>
+      <userdata>
+        <capturedatetime>2022-09-08T14:23:00</capturedatetime>
+        <title>Морозильная камера 2</title>
+        <datetime>08.09.2022 14:23</datetime>
+        <tags>3D ТУР</tags>
+        <altitude>-10000</altitude>
+        <usealtitude>0</usealtitude>
+      </userdata>
+      <floorplans/>
+      <hotspots>
+        <hotspot>
+          <position>
+            <pan>-287.87</pan>
+            <tilt>-5.36</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <polygon/>
+          <type>point</type>
+          <id>Point01</id>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node85}</url>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+      </hotspots>
+      <output/>
+      <streetview/>
+      <streetviewproject/>
+      <sounds/>
+      <id>node82</id>
+    </panorama>
+    <panorama>
+      <input>
+        <patch/>
+        <type>auto</type>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/IMG_1428.JPG</filename>
+        <videotype>equi</videotype>
+        <levelpitch>3.07858</levelpitch>
+        <levelroll>-1.13119</levelroll>
+        <leveltimestamp>2022-10-20T13:02:40</leveltimestamp>
+      </input>
+      <viewingparameter>
+        <pan>
+          <start>-177.093</start>
+          <min>0</min>
+          <max>360</max>
+        </pan>
+        <tilt>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
@@ -826,151 +935,47 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T11:46:45</defaultviewtimestamp>
-      </viewingparameter>
-      <userdata>
-        <capturedatetime>2022-09-08T14:23:00</capturedatetime>
-        <title>Морозильная камера 2</title>
-        <datetime>08.09.2022 14:23</datetime>
-        <tags>3d фото|Menu</tags>
-        <altitude>-10000</altitude>
-        <usealtitude>0</usealtitude>
-      </userdata>
-      <floorplans/>
-      <hotspots>
-        <hotspot>
-          <position>
-            <pan>-290.95</pan>
-            <tilt>-15.17</tilt>
-            <fov>10</fov>
-          </position>
-          <next>
-            <pan>0</pan>
-            <tilt>0</tilt>
-            <fov>0</fov>
-          </next>
-          <polygon/>
-          <type>point</type>
-          <id>Point01</id>
-          <linktype>node</linktype>
-          <linksubtype>unknown</linksubtype>
-          <url>{node66}</url>
-          <distance>0</distance>
-          <distanceauto>1</distanceauto>
-          <autoplace>0</autoplace>
-          <use3d>0</use3d>
-          <width>0</width>
-          <height>0</height>
-        </hotspot>
-      </hotspots>
-      <output/>
-      <streetview/>
-      <streetviewproject/>
-      <sounds/>
-      <id>node70</id>
-    </panorama>
-    <panorama>
-      <input>
-        <patch/>
-        <type>auto</type>
-        <filename>../3d фото/IMG_1428.JPG</filename>
-        <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
-      </input>
-      <viewingparameter>
-        <pan>
-          <start>-171.227</start>
-          <min>0</min>
-          <max>360</max>
-        </pan>
-        <tilt>
-          <start>-5.77007</start>
-          <min>-90</min>
-          <max>90</max>
-        </tilt>
-        <fov>
-          <start>77.7442</start>
-          <minunit>pixels</minunit>
-          <minpixels>2</minpixels>
-          <max>120</max>
-          <maxfovstereographic>270</maxfovstereographic>
-          <maxfovfisheye>360</maxfovfisheye>
-        </fov>
-        <flyinstart>
-          <pan>0</pan>
-          <tilt>-90</tilt>
-          <fov>170</fov>
-        </flyinstart>
-        <pannorth>0</pannorth>
-        <scaletofit>1</scaletofit>
-        <projection>rectilinear</projection>
-        <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-09T13:59:07</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T13:02:47</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-08T14:12:08</capturedatetime>
         <title>Wille Geotechnik</title>
         <datetime>08.09.2022 14:12</datetime>
-        <tags>3d фото|Menu</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
       <floorplans/>
-      <hotspots>
-        <hotspot>
-          <position>
-            <pan>-142.4</pan>
-            <tilt>-5.88</tilt>
-            <fov>10</fov>
-          </position>
-          <next>
-            <pan>0</pan>
-            <tilt>0</tilt>
-            <fov>0</fov>
-          </next>
-          <polygon/>
-          <type>point</type>
-          <id>Point01</id>
-          <linktype>node</linktype>
-          <linksubtype>unknown</linksubtype>
-          <url>{node67}</url>
-          <distance>0</distance>
-          <distanceauto>1</distanceauto>
-          <autoplace>0</autoplace>
-          <use3d>0</use3d>
-          <width>0</width>
-          <height>0</height>
-        </hotspot>
-      </hotspots>
+      <hotspots/>
       <output/>
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node33</id>
+      <id>node90</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>C:/Users/Пользователь/Documents/3d/GS__0096.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/GS__0096.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>-1.98289</levelpitch>
+        <levelroll>0.0566371</levelroll>
+        <leveltimestamp>2022-10-20T15:29:17</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>5.75077</start>
+          <start>11.3739</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-7.48286</start>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>71.9349</start>
+          <start>88.0243</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -986,13 +991,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-09T14:49:19</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T15:29:21</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-09T14:35:03</capturedatetime>
         <title>Коридор 1</title>
         <datetime>09.09.2022 14:35</datetime>
-        <tags>3d</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -1000,8 +1005,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-332.2</pan>
-            <tilt>-2.16</tilt>
+            <pan>-331.85</pan>
+            <tilt>-2.93</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1014,7 +1019,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node74}</url>
+          <url>{node88}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1024,8 +1029,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-25.57</pan>
-            <tilt>-2.13</tilt>
+            <pan>-25.97</pan>
+            <tilt>-2.58</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1038,31 +1043,7 @@
           <id>Point02</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node77}</url>
-          <distance>0</distance>
-          <distanceauto>1</distanceauto>
-          <autoplace>0</autoplace>
-          <use3d>0</use3d>
-          <width>0</width>
-          <height>0</height>
-        </hotspot>
-        <hotspot>
-          <position>
-            <pan>-179.91</pan>
-            <tilt>0.05</tilt>
-            <fov>10</fov>
-          </position>
-          <next>
-            <pan>0</pan>
-            <tilt>0</tilt>
-            <fov>0</fov>
-          </next>
-          <polygon/>
-          <type>point</type>
-          <id>Point03</id>
-          <linktype>node</linktype>
-          <linksubtype>unknown</linksubtype>
-          <url>{node58}</url>
+          <url>{node83}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1075,25 +1056,26 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node72</id>
+      <id>node87</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>C:/Users/Пользователь/Documents/3d/GS__0098.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/GS__0098.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>0.441122</levelpitch>
+        <levelroll>-0.24559</levelroll>
+        <leveltimestamp>2022-10-20T15:29:34</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>-176.132</start>
+          <start>176.109</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-6.36676</start>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
@@ -1114,13 +1096,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-09T14:51:42</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T17:08:02</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-09T14:36:44</capturedatetime>
         <title>Коридор 2</title>
         <datetime>09.09.2022 14:36</datetime>
-        <tags>3d</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -1128,8 +1110,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-145.98</pan>
-            <tilt>-11.66</tilt>
+            <pan>-145.39</pan>
+            <tilt>-11.68</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1142,7 +1124,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node38}</url>
+          <url>{node91}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1152,8 +1134,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-220.48</pan>
-            <tilt>-3.2</tilt>
+            <pan>-220.22</pan>
+            <tilt>-4.97</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1166,7 +1148,7 @@
           <id>Point02</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node48}</url>
+          <url>{node97}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1176,8 +1158,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-281.45</pan>
-            <tilt>-9.91</tilt>
+            <pan>-288.6</pan>
+            <tilt>-6.73</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1190,7 +1172,7 @@
           <id>Point03</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node72}</url>
+          <url>{node87}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1203,30 +1185,31 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node74</id>
+      <id>node88</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/IMG_1433.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/IMG_1433.JPG</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
+        <leveltimestamp>2022-10-20T15:38:12</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>83.5773</start>
+          <start>80.8788</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-5.87535</start>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>120</start>
+          <start>87.6386</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -1242,13 +1225,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-09T14:53:47</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T15:38:25</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-08T14:35:00</capturedatetime>
         <title>Камеры трехосного сжатия ПрогрессГео</title>
         <datetime>08.09.2022 14:35</datetime>
-        <tags>3d фото|Menu</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -1256,8 +1239,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-67.79</pan>
-            <tilt>-5.99</tilt>
+            <pan>-68.94</pan>
+            <tilt>-6.12</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1270,7 +1253,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node74}</url>
+          <url>{node88}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1283,30 +1266,30 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node38</id>
+      <id>node91</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/IMG_1442.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/IMG_1442.JPG</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
       </input>
       <viewingparameter>
         <pan>
-          <start>-20.532</start>
+          <start>-18.3465</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-6.07145</start>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>70</start>
+          <start>87.6386</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -1322,13 +1305,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T14:23:10</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T15:39:02</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-09T09:35:37</capturedatetime>
         <title>Определение физических свойств грунтов</title>
         <datetime>09.09.2022 9:35</datetime>
-        <tags>3d фото|Menu</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -1336,8 +1319,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-340.55</pan>
-            <tilt>-2.21</tilt>
+            <pan>-280.01</pan>
+            <tilt>-1.94</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1350,7 +1333,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node45}</url>
+          <url>{node96}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1360,8 +1343,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-272.01</pan>
-            <tilt>-6.33</tilt>
+            <pan>-337.28</pan>
+            <tilt>0.8</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1374,7 +1357,7 @@
           <id>Point02</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node46}</url>
+          <url>{node95}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1384,8 +1367,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-199.4</pan>
-            <tilt>-3.8</tilt>
+            <pan>-204.55</pan>
+            <tilt>3.72</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1398,7 +1381,7 @@
           <id>Point03</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node72}</url>
+          <url>{node87}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1411,30 +1394,30 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node48</id>
+      <id>node97</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/IMG_1440.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/IMG_1440.JPG</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
       </input>
       <viewingparameter>
         <pan>
-          <start>-14.5741</start>
+          <start>-13.0511</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-0.50885</start>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>70</start>
+          <start>87.6386</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -1450,13 +1433,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T14:22:25</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T15:46:38</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-09T09:37:12</capturedatetime>
         <title>Определение физических свойств грунтов 1</title>
         <datetime>09.09.2022 9:37</datetime>
-        <tags>3d фото</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -1464,8 +1447,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-209.46</pan>
-            <tilt>1.72</tilt>
+            <pan>-154.38</pan>
+            <tilt>3.16</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1478,7 +1461,30 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node72}</url>
+          <url>{node97}</url>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-210.78</pan>
+            <tilt>2.94</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <polygon/>
+          <type>point</type>
+          <id>Point02</id>
+          <linktype>url</linktype>
+          <linksubtype>unknown</linksubtype>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1491,30 +1497,31 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node46</id>
+      <id>node96</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/IMG_1439.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/IMG_1439.JPG</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
+        <leveltimestamp>2022-10-20T15:54:41</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>0.667146</start>
+          <start>2.1739</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-10.8247</start>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>68.0298</start>
+          <start>87.6386</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -1530,13 +1537,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T14:23:21</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T15:54:50</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-09T09:38:34</capturedatetime>
         <title>Определение физических свойств грунтов 2</title>
         <datetime>09.09.2022 9:38</datetime>
-        <tags>3d фото</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -1544,8 +1551,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-177.95</pan>
-            <tilt>-0.04</tilt>
+            <pan>-179.6</pan>
+            <tilt>0.16</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1558,7 +1565,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node48}</url>
+          <url>{node97}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1571,30 +1578,31 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node45</id>
+      <id>node95</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/GS__0051.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/GS__0051.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>-0.046191</levelpitch>
+        <levelroll>0.330863</levelroll>
+        <leveltimestamp>2022-10-20T15:56:49</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>-95.9082</start>
+          <start>-97.7956</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-16.2203</start>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>120</start>
+          <start>87.6386</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -1610,13 +1618,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T14:19:51</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T15:56:53</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-08T14:30:48</capturedatetime>
         <title>Химическая лаборатория</title>
         <datetime>08.09.2022 14:30</datetime>
-        <tags>3d фото|Menu</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -1624,8 +1632,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-83.94</pan>
-            <tilt>-1.51</tilt>
+            <pan>-305.38</pan>
+            <tilt>-0.68</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1638,55 +1646,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node79}</url>
-          <distance>0</distance>
-          <distanceauto>1</distanceauto>
-          <autoplace>0</autoplace>
-          <use3d>0</use3d>
-          <width>0</width>
-          <height>0</height>
-        </hotspot>
-        <hotspot>
-          <position>
-            <pan>-305.15</pan>
-            <tilt>0.1</tilt>
-            <fov>10</fov>
-          </position>
-          <next>
-            <pan>0</pan>
-            <tilt>0</tilt>
-            <fov>0</fov>
-          </next>
-          <polygon/>
-          <type>point</type>
-          <id>Point02</id>
-          <linktype>node</linktype>
-          <linksubtype>unknown</linksubtype>
-          <url>{node72}</url>
-          <distance>0</distance>
-          <distanceauto>1</distanceauto>
-          <autoplace>0</autoplace>
-          <use3d>0</use3d>
-          <width>0</width>
-          <height>0</height>
-        </hotspot>
-        <hotspot>
-          <position>
-            <pan>-328.42</pan>
-            <tilt>0.03</tilt>
-            <fov>10</fov>
-          </position>
-          <next>
-            <pan>0</pan>
-            <tilt>0</tilt>
-            <fov>0</fov>
-          </next>
-          <polygon/>
-          <type>point</type>
-          <id>Point03</id>
-          <linktype>node</linktype>
-          <linksubtype>unknown</linksubtype>
-          <url>{node81}</url>
+          <url>{node87}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1699,209 +1659,26 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node77</id>
+      <id>node83</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/GS__0053.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/IMG_1438.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>-0.340249</levelpitch>
+        <levelroll>0.530971</levelroll>
+        <leveltimestamp>2022-10-20T16:06:53</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>150.153</start>
+          <start>17.036</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-5.47813</start>
-          <min>-90</min>
-          <max>90</max>
-        </tilt>
-        <fov>
-          <start>102.551</start>
-          <minunit>pixels</minunit>
-          <minpixels>2</minpixels>
-          <max>120</max>
-          <maxfovstereographic>270</maxfovstereographic>
-          <maxfovfisheye>360</maxfovfisheye>
-        </fov>
-        <flyinstart>
-          <pan>0</pan>
-          <tilt>-90</tilt>
-          <fov>170</fov>
-        </flyinstart>
-        <pannorth>0</pannorth>
-        <scaletofit>1</scaletofit>
-        <projection>rectilinear</projection>
-        <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T14:20:17</defaultviewtimestamp>
-      </viewingparameter>
-      <userdata>
-        <capturedatetime>2022-09-08T14:32:20</capturedatetime>
-        <title>Химическая лаборатория 1</title>
-        <datetime>08.09.2022 14:32</datetime>
-        <tags>3d фото|Menu</tags>
-        <altitude>-10000</altitude>
-        <usealtitude>0</usealtitude>
-      </userdata>
-      <floorplans/>
-      <hotspots>
-        <hotspot>
-          <position>
-            <pan>-305.36</pan>
-            <tilt>-16.75</tilt>
-            <fov>10</fov>
-          </position>
-          <next>
-            <pan>0</pan>
-            <tilt>0</tilt>
-            <fov>0</fov>
-          </next>
-          <polygon/>
-          <type>point</type>
-          <id>Point01</id>
-          <linktype>node</linktype>
-          <linksubtype>unknown</linksubtype>
-          <url>{node77}</url>
-          <distance>0</distance>
-          <distanceauto>1</distanceauto>
-          <autoplace>0</autoplace>
-          <use3d>0</use3d>
-          <width>0</width>
-          <height>0</height>
-        </hotspot>
-        <hotspot>
-          <position>
-            <pan>-317.29</pan>
-            <tilt>0.3</tilt>
-            <fov>10</fov>
-          </position>
-          <next>
-            <pan>0</pan>
-            <tilt>0</tilt>
-            <fov>0</fov>
-          </next>
-          <polygon/>
-          <type>point</type>
-          <id>Point02</id>
-          <linktype>node</linktype>
-          <linksubtype>unknown</linksubtype>
-          <url>{node72}</url>
-          <distance>0</distance>
-          <distanceauto>1</distanceauto>
-          <autoplace>0</autoplace>
-          <use3d>0</use3d>
-          <width>0</width>
-          <height>0</height>
-        </hotspot>
-      </hotspots>
-      <output/>
-      <streetview/>
-      <streetviewproject/>
-      <sounds/>
-      <id>node79</id>
-    </panorama>
-    <panorama>
-      <input>
-        <patch/>
-        <type>auto</type>
-        <filename>../3d фото/GS__0049.JPG</filename>
-        <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
-      </input>
-      <viewingparameter>
-        <pan>
-          <start>-18.7498</start>
-          <min>0</min>
-          <max>360</max>
-        </pan>
-        <tilt>
-          <start>-21.5917</start>
-          <min>-90</min>
-          <max>90</max>
-        </tilt>
-        <fov>
-          <start>70</start>
-          <minunit>pixels</minunit>
-          <minpixels>2</minpixels>
-          <max>120</max>
-          <maxfovstereographic>270</maxfovstereographic>
-          <maxfovfisheye>360</maxfovfisheye>
-        </fov>
-        <flyinstart>
-          <pan>0</pan>
-          <tilt>-90</tilt>
-          <fov>170</fov>
-        </flyinstart>
-        <pannorth>0</pannorth>
-        <scaletofit>1</scaletofit>
-        <projection>rectilinear</projection>
-        <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T14:21:30</defaultviewtimestamp>
-      </viewingparameter>
-      <userdata>
-        <capturedatetime>2022-09-08T14:28:03</capturedatetime>
-        <title>Химическая лаборатория 1</title>
-        <datetime>08.09.2022 14:28</datetime>
-        <tags>3d фото</tags>
-        <altitude>-10000</altitude>
-        <usealtitude>0</usealtitude>
-      </userdata>
-      <floorplans/>
-      <hotspots>
-        <hotspot>
-          <position>
-            <pan>-255.15</pan>
-            <tilt>-0.22</tilt>
-            <fov>10</fov>
-          </position>
-          <next>
-            <pan>0</pan>
-            <tilt>0</tilt>
-            <fov>0</fov>
-          </next>
-          <polygon/>
-          <type>point</type>
-          <id>Point01</id>
-          <linktype>node</linktype>
-          <linksubtype>unknown</linksubtype>
-          <url>{node77}</url>
-          <distance>0</distance>
-          <distanceauto>1</distanceauto>
-          <autoplace>0</autoplace>
-          <use3d>0</use3d>
-          <width>0</width>
-          <height>0</height>
-        </hotspot>
-      </hotspots>
-      <output/>
-      <streetview/>
-      <streetviewproject/>
-      <sounds/>
-      <id>node81</id>
-    </panorama>
-    <panorama>
-      <input>
-        <patch/>
-        <type>auto</type>
-        <filename>../3d фото/IMG_1438.JPG</filename>
-        <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
-      </input>
-      <viewingparameter>
-        <pan>
-          <start>40.1161</start>
-          <min>0</min>
-          <max>360</max>
-        </pan>
-        <tilt>
-          <start>0.864331</start>
+          <start>-6.06887</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
@@ -1922,13 +1699,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T14:41:53</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T16:07:47</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-08T14:48:31</capturedatetime>
         <title>Склад с охлаждением</title>
         <datetime>08.09.2022 14:48</datetime>
-        <tags>3d фото|Menu</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -1936,8 +1713,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-344.52</pan>
-            <tilt>-7.14</tilt>
+            <pan>-340.94</pan>
+            <tilt>-11.46</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1950,7 +1727,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node40}</url>
+          <url>{node92}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1960,8 +1737,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-119.09</pan>
-            <tilt>-2.99</tilt>
+            <pan>-121.04</pan>
+            <tilt>-5.08</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1974,7 +1751,7 @@
           <id>Point02</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node58}</url>
+          <url>{node100}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -1987,30 +1764,31 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node44</id>
+      <id>node94</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/IMG_1435.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/IMG_1435.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>-2.77199</levelpitch>
+        <levelroll>0.663525</levelroll>
+        <leveltimestamp>2022-10-20T16:09:41</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>174.496</start>
+          <start>172.622</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-9.67021</start>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>102.551</start>
+          <start>120</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -2026,13 +1804,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-09T11:22:32</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T16:09:47</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-08T14:46:58</capturedatetime>
         <title>Склад с охлаждением 2</title>
         <datetime>08.09.2022 14:46</datetime>
-        <tags>3d фото</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -2040,8 +1818,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-73.01</pan>
-            <tilt>-3.57</tilt>
+            <pan>-72.05</pan>
+            <tilt>-7.81</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -2054,7 +1832,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node44}</url>
+          <url>{node94}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -2067,30 +1845,31 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node40</id>
+      <id>node92</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/IMG_1437.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/IMG_1437.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>-2.92568</levelpitch>
+        <levelroll>-0.995823</levelroll>
+        <leveltimestamp>2022-10-20T16:15:31</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>-20.4175</start>
+          <start>-36.1287</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-7.67789</start>
+          <start>-1.6071</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>80.89</start>
+          <start>120</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -2106,13 +1885,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T14:43:04</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T16:16:31</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-08T14:52:09</capturedatetime>
         <title>Скальная лаборатория</title>
         <datetime>08.09.2022 14:52</datetime>
-        <tags>3d фото|Menu</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -2120,8 +1899,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-124.23</pan>
-            <tilt>-11.39</tilt>
+            <pan>-128.09</pan>
+            <tilt>-30.75</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -2134,7 +1913,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node42}</url>
+          <url>{node102}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -2144,8 +1923,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-217.8</pan>
-            <tilt>-7.03</tilt>
+            <pan>-217.65</pan>
+            <tilt>-5.33</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -2158,7 +1937,7 @@
           <id>Point02</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node58}</url>
+          <url>{node100}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -2171,30 +1950,31 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node43</id>
+      <id>node93</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/IMG_1436.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/IMG_1454.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>6.21983</levelpitch>
+        <levelroll>-0.344928</levelroll>
+        <leveltimestamp>2022-10-20T16:19:17</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>153.739</start>
+          <start>64.8881</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>5.98101</start>
+          <start>-12.0774</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>78.0753</start>
+          <start>120</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -2210,13 +1990,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T14:44:04</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T16:22:45</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-08T14:53:19</capturedatetime>
         <title>Скальная лаборатория 1</title>
         <datetime>08.09.2022 14:53</datetime>
-        <tags>3d фото</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -2224,8 +2004,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-103.98</pan>
-            <tilt>-5.46</tilt>
+            <pan>-103.08</pan>
+            <tilt>4.79</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -2238,7 +2018,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node43}</url>
+          <url>{node93}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -2251,30 +2031,31 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node42</id>
+      <id>node102</id>
     </panorama>
     <panorama>
       <input>
         <patch/>
         <type>auto</type>
-        <filename>../3d фото/IMG_1405.JPG</filename>
+        <filename>//192.168.0.1/Files/Обмен/Селиванова О. С/Иконки/3D ТУР/IMG_1405.JPG</filename>
         <videotype>equi</videotype>
-        <levelpitch>0</levelpitch>
-        <levelroll>0</levelroll>
+        <levelpitch>0.0933987</levelpitch>
+        <levelroll>-0.116864</levelroll>
+        <leveltimestamp>2022-10-20T16:32:38</leveltimestamp>
       </input>
       <viewingparameter>
         <pan>
-          <start>157.094</start>
+          <start>159.754</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>-13.7263</start>
+          <start>0</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>68.3778</start>
+          <start>81.8148</start>
           <minunit>pixels</minunit>
           <minpixels>2</minpixels>
           <max>120</max>
@@ -2290,13 +2071,13 @@
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>stereo</flyinprojection>
-        <defaultviewtimestamp>2022-09-13T14:42:40</defaultviewtimestamp>
+        <defaultviewtimestamp>2022-10-20T16:23:11</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <capturedatetime>2022-09-07T17:04:19</capturedatetime>
         <title>Учебный класс</title>
         <datetime>07.09.2022 17:04</datetime>
-        <tags>3d фото|Menu</tags>
+        <tags>3D ТУР</tags>
         <altitude>-10000</altitude>
         <usealtitude>0</usealtitude>
       </userdata>
@@ -2304,8 +2085,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-53.26</pan>
-            <tilt>-4.12</tilt>
+            <pan>-53.17</pan>
+            <tilt>0.29</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -2318,7 +2099,7 @@
           <id>Point01</id>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node58}</url>
+          <url>{node100}</url>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
           <autoplace>0</autoplace>
@@ -2331,9 +2112,8 @@
       <streetview/>
       <streetviewproject/>
       <sounds/>
-      <id>node11</id>
+      <id>node89</id>
     </panorama>
-    <start>node58</start>
   </tour>
   <panorama>
     <id>master</id>
@@ -2355,7 +2135,7 @@
           <enabled>1</enabled>
           <filename>output/index.html</filename>
           <values>
-            <value id="css"></value>
+            <value id="css"/>
             <value id="gginfo">false</value>
             <value id="htmltitle">$(upt)</value>
             <value id="jsxml">false</value>
@@ -2454,6 +2234,33 @@
         <webvr/>
         <tilesize>1440</tilesize>
         <filename>output-3/pano.xml</filename>
+      </htmlcss>
+      <htmlcss>
+        <html>
+          <values>
+            <value id="css"></value>
+            <value id="gginfo">false</value>
+            <value id="htmltitle">$(upt)</value>
+            <value id="jsxml">false</value>
+            <value id="parseanchor">false</value>
+          </values>
+          <enabled>1</enabled>
+          <filename>output-4/index.html</filename>
+        </html>
+        <facequality/>
+        <transition>
+          <zoomafterinfov>90</zoomafterinfov>
+          <zoomafteroutfov>20</zoomafteroutfov>
+        </transition>
+        <autorotate/>
+        <soundstransition/>
+        <flyintransition/>
+        <hotspottext/>
+        <hotspotstyle/>
+        <webvr/>
+        <tilesize>1440</tilesize>
+        <filename>output-4/pano.xml</filename>
+        <skinfile>1.ggsk</skinfile>
       </htmlcss>
     </output>
     <streetview/>
