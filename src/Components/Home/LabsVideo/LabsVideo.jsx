@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import "./LabsVideo.css";
-import "C:/projects/mdgt_site_frontend/src/Components/Home/About/About.jsx";
+import "../About/About.jsx";
 import ReactHlsPlayer from "../../hlsPlayer";
 import arrowDown from "../About/arrow-down.svg";
 import useWindowDimensions from "../../windowResizeHook";
