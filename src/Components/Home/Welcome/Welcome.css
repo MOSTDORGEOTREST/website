@@ -108,6 +108,8 @@
 	min-width: 150px;
 
 	row-gap: 0.75rem;
+
+	text-align: left;
 }
 
 .labs-item {
