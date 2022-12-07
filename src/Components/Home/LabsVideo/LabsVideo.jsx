@@ -4,8 +4,13 @@ import "./LabsVideo.css";
 import "C:/projects/mdgt_site_frontend/src/Components/Home/About/About.jsx";
 import ReactHlsPlayer from "../../hlsPlayer";
 import arrowDown from "../About/arrow-down.svg";
+import useWindowDimensions from "../../windowResizeHook";
 
 export default function LabsVideo() {
+  const { width } = useWindowDimensions();
+
+  const gridWrapper = React.useRef()
+
   const player1Ref = React.useRef();
   const player2Ref = React.useRef();
   const player3Ref = React.useRef();
@@ -42,6 +47,12 @@ export default function LabsVideo() {
     }
   }
 
+  useEffect(()=>{
+    if (gridWrapper.current && gridWrapper.current.parentNode.classList.contains("show")) {
+      gridWrapper.current.style.height = "fit-content"
+    }
+  }, [width])
+
   // function toggleControls() {
   // 	playerRef.current.controls = !playerRef.current.controls
   // }
@@ -68,7 +79,7 @@ export default function LabsVideo() {
                 <img src={arrowDown} alt="expand" />
               </div>
             </div>
-            <div className="labs-grid__wrapper">
+            <div className="labs-grid__wrapper" ref={gridWrapper}>
               <div className="labs-grid">
                 <div className="labs-card">
                   <div className="labs-card__video">
