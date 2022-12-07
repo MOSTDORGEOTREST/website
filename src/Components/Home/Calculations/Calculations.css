@@ -34,23 +34,21 @@
 	line-height: 32px;
 	font-weight: var(--font-base);
 	white-space: normal;
-
-	max-width: 455px;
+	text-align: justify;
 }
 
-.calculations__main img {
+.calculations__main .main_title_img {
+	width: 100% !important;
+	height: auto !important;
+	max-width: 100% !important;
+}
+
+.calculations__main .main_title_img img{
+	max-width: 100% !important;
 	width: 100%;
-	height: auto;
 }
 
 @media screen and (max-width: 1099px) {
-	.calculations__main img {
-		max-height: 290px;
-		max-width: none;
-
-		height: auto;
-	}
-
 	.home-calculations {
 		width: 100%;
 	}
@@ -67,6 +65,7 @@
 @media screen and (max-width: 768px) {
 	.calculations__main {
 		flex-direction: column;
+		row-gap: 18px;
 	}
 
 	.calculations__main-title {
