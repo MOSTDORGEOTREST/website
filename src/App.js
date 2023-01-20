@@ -92,7 +92,7 @@ function App() {
 						</p>
 						{showCookie ? <Cookies /> : null}
 
-						<FloatVideo />
+						{/* <FloatVideo /> */}
 					</div>
 				</Context.Provider>
 

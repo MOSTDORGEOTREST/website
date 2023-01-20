@@ -115,7 +115,7 @@ export default function Navigation() {
 								</li>
 								<li className="nav-item">
 									<HashLink className="nav-link" smooth to="/#Calculations">
-										Рассчеты
+										Расчеты
 									</HashLink>
 								</li>
 								<li className="nav-item">
