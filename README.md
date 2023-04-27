@@ -12,5 +12,5 @@
 `docker run -it --rm -d -p 80:80/tcp --name web2 website`
 
 ---------------------------------------
-![](https://s3.timeweb.com/cw78444-3db3e634-248a-495a-8c38-9f7322725c84/site/logo 100.jpg)
+![](https://s3.timeweb.com/cw78444-3db3e634-248a-495a-8c38-9f7322725c84/site/logo_100.jpg)
 developed by Olesya Selivanova
