@@ -10,8 +10,7 @@
 
 ## Для запуска проекта в режиме daemon на http://localhost:80:\
 `docker run -it --rm -d -p 80:80/tcp --name web2 website`
-* * *
-***
-- - -
+
 ---------------------------------------
-developed by MDGT
+
+developed by Olesya Selivanova
