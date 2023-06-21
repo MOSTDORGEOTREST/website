@@ -1,21 +1,11 @@
-FROM nginx
-
+FROM node:16 as react
 WORKDIR /usr/share/react
-
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs
-
 COPY package*.json ./
-
-RUN npm install
-
+RUN npm ci --prefer-offline --no-optional
 COPY . .
-
 RUN npm run build
-
+FROM nginx
 COPY nginx.conf /etc/nginx/nginx.conf
-
-RUN rm -r /usr/share/nginx/html/*
-
-RUN cp -a build/. /usr/share/nginx/html
-
+COPY --from=react /usr/share/react/build /usr/share/nginx/html
+RUN chown -R nginx:nginx /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"]

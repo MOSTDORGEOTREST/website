@@ -1,0 +1,8 @@
+version: '3'
+services:
+  sitelab:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - 80:80/tcp
