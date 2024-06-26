@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+/cert/crt.crt
+/cert/key.key
+
 # testing
 /coverage
 

@@ -5,4 +5,8 @@ services:
       context: .
       dockerfile: dockerfile
     ports:
-      - 80:80/tcp
+      - 80:80
+      - 443:443
+    volumes:
+      - ./cert:/etc/nginx/cert
+
