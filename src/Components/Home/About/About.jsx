@@ -11,17 +11,17 @@ import globe from './bx-street-view.svg'
 import back_3d from './3d_back.png'
 
 // ДОКИ АО
-import AO_doc_1 from './AO_docs/Мосстройсертификация-от-09.01.2020-г-11.pdf'
+import AO_doc_1 from './AO_docs/Мосстройсертификация до 09.01.2026 г.pdf'
 import AO_doc_2 from './AO_docs/Росаккредитация-от-23.04.2020-г.pdf'
-import AO_doc_3 from './AO_docs/РОСС-RU.0001.21АГ09-от-18.07.2022.pdf'
-import AO_doc_4 from './AO_docs/Сертификат-ИСО-9001-Система-менеджмента-качества.pdf'
-import AO_doc_5 from './AO_docs/СРО-Выписка-из-Реестра-членов-от-18.07.2022-гАО.pdf'
+import AO_doc_3 from './AO_docs/РОСС RU.0001.21АГ09 от 20.01.2025.pdf'
+import AO_doc_4 from './AO_docs/Сертификат ИСО СМК - до 24.09.2026.pdf'
+import AO_doc_5 from './AO_docs/СРО - Выписка из Реестра членов от 09.01.2025.pdf'
 
 // ДОКИ ООО
-import OOO_doc_1 from './OOO_docs/1Аккредитация-Промышленная-безопасность-ИЛ-АЛ-от-03.09.2021-г-объединены-сжатый.pdf'
-import OOO_doc_2 from './OOO_docs/Аккредитация-Мосстройсертификация-от-05.06.2022-г.pdf'
-import OOO_doc_3 from './OOO_docs/Сертификат-ИСО-9001-2015-от-22.06.2020-г.pdf'
-import OOO_doc_4 from './OOO_docs/СРО-Выписка-из-Реестра-членов-от-18.07.2022-г.pdf'
+import OOO_doc_1 from './OOO_docs/Аккредитация-Промышленная-безопасность-до-03.09.2026-г.pdf'
+import OOO_doc_2 from './OOO_docs/Аккредитация - Мосстройсертификация - до 05.06.2026 г.pdf'
+import OOO_doc_3 from './OOO_docs/Сертификат ИСО - СМК до 21.06.2026.pdf'
+import OOO_doc_4 from './OOO_docs/СРО - Выписка из Реестра членов от 09.01.2025 г.pdf'
 
 // Положение
 import mosgosexpert from './mosgosexpert.pdf'
