@@ -202,7 +202,7 @@
 		column-gap: 10px;
 	}
 	.container-fluid-mdgt {
-		align-items: flex-start;
+		/* align-items: flex-start; */
 	}
 	.navbar-brand__icon {
 		width: 90px;

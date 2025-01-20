@@ -118,7 +118,7 @@ export default function Navigation() {
 										Расчеты
 									</HashLink>
 								</li>
-								<li className="nav-item">
+								{/* <li className="nav-item">
 									<a
 										className="nav-link"
 										href="https://stabilometr.ru/"
@@ -127,13 +127,13 @@ export default function Navigation() {
 									>
 										Производство оборудования
 									</a>
-								</li>
+								</li> */}
 								{/* <li className="nav-item">
 									<HashLink smooth to="/#papers" className="nav-link">
 										Статьи
 									</HashLink>
 								</li> */}
-								<li className="nav-item">
+								{/* <li className="nav-item">
 									<HashLink
 										smooth
 										to="/#courses"
@@ -142,7 +142,7 @@ export default function Navigation() {
 									>
 										Курсы
 									</HashLink>
-								</li>
+								</li> */}
 								<li className="nav-item">
 									<HashLink
 										smooth

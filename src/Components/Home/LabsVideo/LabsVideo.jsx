@@ -9,7 +9,9 @@ import useWindowDimensions from "../../windowResizeHook";
 export default function LabsVideo() {
   const { width } = useWindowDimensions();
 
-  const gridWrapper = React.useRef()
+  const gridWrapper = React.useRef();
+
+  const aboutCard = React.useRef();
 
   const player1Ref = React.useRef();
   const player2Ref = React.useRef();
@@ -61,6 +63,12 @@ export default function LabsVideo() {
     setTimeout(() => {
       playVideo();
     }, 5000);
+
+    setTimeout(()=>{
+      aboutCard.current.click();
+    }, 10)
+    
+    
   }, []);
 
   return (
@@ -69,7 +77,7 @@ export default function LabsVideo() {
         <div className="home-blur"></div>
         <div className="labs-content">
         	<div className="about-docs__card-wrapper w-50">
-            <div className="about-docs__card" onClick={showGrid}>
+            <div className="about-docs__card" ref={aboutCard} onClick={showGrid}>
               <div className="docs__card-title">
                 <h3 className="docs__card-title_main">
 					Прямая видео трансляция
@@ -214,7 +222,7 @@ export default function LabsVideo() {
                     Исследование химических свойств
                   </h3>
                 </div>
-                <div className="labs-card">
+                {/* <div className="labs-card">
                   <div className="labs-card__video">
                     <ReactHlsPlayer
                       src="https://dev.mdgt.ru:8443/OnlineStream/6/index.m3u8"
@@ -240,8 +248,8 @@ export default function LabsVideo() {
                   <h3 className="labs-card__title">
                     Исследование механических свойств
                   </h3>
-                </div>
-                <div className="labs-card">
+                </div> */}
+                {/* <div className="labs-card">
                   <div className="labs-card__video">
                     <ReactHlsPlayer
                       src="https://dev.mdgt.ru:8443/OnlineStream/7/index.m3u8"
@@ -267,7 +275,7 @@ export default function LabsVideo() {
                   <h3 className="labs-card__title">
                     Исследование динамических свойств
                   </h3>
-                </div>
+                </div> */}
                 <div className="labs-card">
                   <div className="labs-card__video">
                     <ReactHlsPlayer
@@ -295,7 +303,7 @@ export default function LabsVideo() {
                     Исследование скальных грунтов
                   </h3>
                 </div>
-                <div className="labs-card">
+                {/* <div className="labs-card">
                   <div className="labs-card__video">
                     <ReactHlsPlayer
                       src="https://dev.mdgt.ru:8443/OnlineStream/9/index.m3u8"
@@ -319,7 +327,7 @@ export default function LabsVideo() {
                     />
                   </div>
                   <h3 className="labs-card__title">Учебный класс</h3>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

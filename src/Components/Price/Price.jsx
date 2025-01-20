@@ -5,8 +5,8 @@ import Context from '../../context'
 import close from '../Navigation/close-fill.svg'
 import download from './download.svg'
 
-import pdf from './ПРАЙС-ЛИСТ-от-25.05.2022-2.xlsx.pdf'
-import xlsx from './ПРАЙС-ЛИСТ-от-25.05.2022-2.xlsx'
+import pdf from './ПРАЙС-ЛИСТ от 01.01.2025.pdf'
+import xlsx from './ПРАЙС-ЛИСТ от 01.01.2025.xlsx'
 
 export default function Price() {
 	const { setShowPrice } = useContext(Context)
@@ -58,7 +58,7 @@ export default function Price() {
 						height="13900px"
 						frameBorder="0"
 						title="table"
-						src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTFUo_5Tw5nFzQVP4vDLbJCO0a2J4Y3zmEN66KoESw9VZOro48XZz96YJ8h6B_vFrUyJSHlxwRAuLTm/pubhtml?gid=555134310&amp;single=true&amp;widget=false&amp;headers=false&amp;chrome=false&amp;range=A1:G354&amp;rm=minimal"
+						src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQBkIo2rYliQjyaMaJocxZIP-I3XntG1-qt6-yIURWNCrI9pFObtw9pEOItbC_C4g/pubhtml?widget=true&amp;headers=false"
 					></iframe>
 					{/* <iframe
 						width="912"

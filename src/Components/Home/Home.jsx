@@ -30,7 +30,7 @@ export default function Home() {
 
 				<About />
 				<Calculations />
-				<Courses />
+				{/* <Courses /> */}
 				<Contacts />
 			</div>
 		</>
