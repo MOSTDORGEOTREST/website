@@ -65,6 +65,7 @@
 }
 
 .nabar__phone-sub {
+	display: none;
 	font-size: var(--small-font-size);
 }
 
@@ -198,6 +199,9 @@
 
 /* ======== БРЕЙКПОИНТЫ ДЛЯ РАЗНЫХ РАЗМЕРОВ ЭКРАНОВ ======== */
 @media screen and (max-width: 1099px) {
+	/* .nabar__phone-sub {
+		display: inline;
+	} */
 	.navbar-nav {
 		column-gap: 10px;
 	}

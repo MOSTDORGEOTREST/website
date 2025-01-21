@@ -66,6 +66,8 @@ export default function Navigation() {
 							className="nabar__phone"
 						>
 							<div className="nabar__phone-number">+7 495 656 69 10</div>
+							<div className="nabar__phone-number">+7 495 656 65 80</div>
+							<div className="nabar__phone-number">+7 495 656 68 59</div>
 							<div className="nabar__phone-sub">Позвонить нам</div>
 						</a>
 					</div>
