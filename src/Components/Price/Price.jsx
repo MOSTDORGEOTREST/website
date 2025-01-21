@@ -58,7 +58,7 @@ export default function Price() {
 						height="13900px"
 						frameBorder="0"
 						title="table"
-						src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQBkIo2rYliQjyaMaJocxZIP-I3XntG1-qt6-yIURWNCrI9pFObtw9pEOItbC_C4g/pubhtml?widget=true&amp;headers=false"
+						src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQKDuVe-nSWsWhIBhWypI5fjetKhCr-Y_cxJQKmv4Az0zhHAGJu8GwwEjie_B35cw/pubhtml?widget=true&amp;headers=false"
 					></iframe>
 					{/* <iframe
 						width="912"
