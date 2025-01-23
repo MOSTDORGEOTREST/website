@@ -64,10 +64,9 @@ export default function LabsVideo() {
       playVideo();
     }, 5000);
 
-    setTimeout(()=>{
-      aboutCard.current.click();
-    }, 10)
-    
+    // setTimeout(()=>{
+    //   aboutCard.current.click();
+    // }, 10)    
     
   }, []);
 
@@ -76,7 +75,7 @@ export default function LabsVideo() {
       <div className="home-labs">
         <div className="home-blur"></div>
         <div className="labs-content">
-        	<div className="about-docs__card-wrapper w-50">
+        	<div className="about-docs__card-wrapper w-50 show">
             <div className="about-docs__card" ref={aboutCard} onClick={showGrid}>
               <div className="docs__card-title">
                 <h3 className="docs__card-title_main">

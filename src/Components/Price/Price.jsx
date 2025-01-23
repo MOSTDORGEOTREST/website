@@ -54,8 +54,8 @@ export default function Price() {
 						</div>
 					</div>
 					<iframe
-						width="912px"
-						height="13900px"
+						width="1000px"
+						height="15000px"
 						frameBorder="0"
 						title="table"
 						src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQQGvME2qSevqiO8nSyZ3cXwa28LLQQyA63Vw7E2ysySDexk92TqvvRtv8Ej0fjBw/pubhtml?gid=164149930&amp;single=true&amp;widget=true&amp;headers=false"
