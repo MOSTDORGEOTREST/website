@@ -24,8 +24,25 @@
 
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 
 	max-width: 90%;
+}
+
+.prices__info {
+	width: 90%;
+	max-width: 1000px;
+	font-size: var(--small-font-size);
+}
+
+.prices__frame {
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	justify-content: center;
+	
+	overflow: scroll;
 }
 
 .prices__buttons {
