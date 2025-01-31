@@ -71,11 +71,11 @@ export default function Price() {
           </div>
           <div className="prices__frame">
             <iframe
-              width="1085px"
+              width="1230px"
               height="15000px"
               frameBorder="0"
               title="table"
-              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTwCTUQZgzS_fUZNz9lkxQr_C4D_mTnNAOk-tVn5T8RfBMKUmKZin17dHKnEcwAsg/pubhtml?gid=1423449276&amp;single=true&amp;widget=true&amp;headers=false"
+               src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSExZDjKN5ANsEaOXZB3XucLf-OpLW0OLTzGVULqkwYHgcSr4Ye03tywsiY1yKZOg/pubhtml?gid=733648684&amp;single=true&amp;widget=true&amp;headers=false"
             ></iframe>
           </div>
 
