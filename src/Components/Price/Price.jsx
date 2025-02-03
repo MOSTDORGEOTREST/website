@@ -58,7 +58,7 @@ export default function Price() {
 						height="15000px"
 						frameBorder="0"
 						title="table"
-						src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT2l-CNgrv70pdw24GwkBnlLnbx5ugQhNDrwNg4HgE0QAzN0BXPqrtPkthnbC_CTQ/pubhtml?gid=657216107&amp;single=true&amp;widget=true&amp;headers=false"
+						src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-u9eJdWJ5U1HISrKhL0Z5fSjvqAZxV2Vs-tsUcztaEqbWbzu0sr_KTCFgqX93sw/pubhtml?gid=1635396966&amp;single=true&amp;widget=true&amp;headers=false">
 					></iframe>
 					{/* <iframe
 						width="912"
