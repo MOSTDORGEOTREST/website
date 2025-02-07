@@ -42,10 +42,10 @@ if [ $? -eq 0 ]; then
     echo "Копирование сертификатов в целевую директорию $TARGET_DIR..."
 
     # Копирование сертификатов в целевую директорию
-    cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem $TARGET_DIR/crt.crt
-    cp /etc/letsencrypt/live/$DOMAIN/privkey.pem $TARGET_DIR/key.key
+    cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem $TARGET_DIR/crt_site.crt
+    cp /etc/letsencrypt/live/$DOMAIN/privkey.pem $TARGET_DIR/key_site.key
 
-    if [ -f "$TARGET_DIR/crt.crt" ] && [ -f "$TARGET_DIR/key.key" ]; then
+    if [ -f "$TARGET_DIR/crt_site.crt" ] && [ -f "$TARGET_DIR/key_site.key" ]; then
         echo "Сертификаты успешно скопированы в $TARGET_DIR."
     else
         echo "Ошибка при копировании сертификатов."
@@ -59,8 +59,8 @@ fi
 # Настройка автоматического обновления сертификатов
 echo "Настройка автоматического обновления сертификатов..."
 (crontab -l 2>/dev/null; echo "0 0 * * 0 sudo /usr/bin/certbot renew --quiet --deploy-hook '\
-cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem $TARGET_DIR/crt.crt && \
-cp /etc/letsencrypt/live/$DOMAIN/privkey.pem $TARGET_DIR/key.key'") | crontab -
+cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem $TARGET_DIR/crt_site.crt && \
+cp /etc/letsencrypt/live/$DOMAIN/privkey.pem $TARGET_DIR/key_site.key'") | crontab -
 
 echo "Настройка завершена."
 
