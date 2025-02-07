@@ -24,9 +24,6 @@ export default function Calculations() {
               <div className="main_title_img calculations_title_img">
                 <img src={welcome} alt="Calculations" />
               </div>
-              <button className="main-title_btn" onClick={() => {}}>
-                Посмотреть цены
-              </button>
             </div>
           </div>
         </div>
