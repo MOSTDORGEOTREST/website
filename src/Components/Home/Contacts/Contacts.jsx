@@ -73,7 +73,7 @@ export default function Contacts() {
 					</div>
 					<div className="contacts-info__adress">Пн-Пт 10:00-18:00</div>
 					<div className="contacts-info__adress">
-						г. Москва, ул. Искры 31 к.1, этаж 4
+						г. Москва, ул. Искры, д. 31, к. 1, этаж 4
 					</div>
 				</div>
 
