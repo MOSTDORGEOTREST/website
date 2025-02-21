@@ -172,7 +172,6 @@ export default function Navigation() {
 
 			<Routes>
 				<Route path="/" element={<Home />} />
-
 				{/* 404 Page */}
 				{/* <Route path="*" element={<NotFound />} /> */}
 			</Routes>
