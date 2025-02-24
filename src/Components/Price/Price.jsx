@@ -58,8 +58,8 @@ export default function Price() {
 						height="15000px"
 						frameBorder="0"
 						title="table"
-						src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTJ_UOGOUxmC9qngUJSsFSccvrVWceIpFJ-vcFgMx-fB0FSgLIuhbkfqoOrkc-NsA/pubhtml?gid=54103245&amp;single=true&amp;widget=true&amp;headers=false">
-					></iframe>
+						src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTCHhHPjzVgZ7aMbPgU64ZzmRYCSirC9ZVNgrAwbL6TiIeXI0qP0Bn5X9DlHIJntw/pubhtml?gid=456484800&amp;single=true&amp;widget=true&amp;headers=false">
+					</iframe>
 					{/* <iframe
 						width="912"
 						height="13900"
