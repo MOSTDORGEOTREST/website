@@ -11,6 +11,7 @@ import Contacts from './Contacts/Contacts'
 import Price from '../Price/Price'
 import About from './About/About'
 import Calculations from './Calculations/Calculations'
+import SEO from './SEO/seo'
 
 const LabsVideo = React.lazy(() => import('./LabsVideo/LabsVideo'))
 
@@ -30,6 +31,7 @@ export default function Home() {
 
 				<About />
 				<Calculations />
+				<SEO />
 				{/* <Courses /> */}
 				<Contacts />
 			</div>
