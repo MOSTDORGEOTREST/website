@@ -5,8 +5,8 @@ import Context from "../../context";
 import close from "../Navigation/close-fill.svg";
 import download from "./download.svg";
 
-import pdf from "./ПРАЙС-ЛИСТ от 01.01.2025.pdf";
-import xlsx from "./ПРАЙС-ЛИСТ от 01.01.2025.xlsx";
+import pdf from "./ПРАЙС-ЛИСТ от 01.02.2025.pdf";
+import xlsx from "./ПРАЙС-ЛИСТ от 01.02.2025.xlsx";
 
 export default function Price() {
   const { setShowPrice } = useContext(Context);
@@ -54,20 +54,48 @@ export default function Price() {
             </div>
           </div>
           <div className="prices__info">
-            Скидка предоставляется в случае передачи заказчиком полной ведомости
-            физических свойств грунтов с разбивкой по ИГЭ и стратиграфическим
-            индексом, заверенной печатью и подписью руководителя организации
-            заказчика, с прилагающейся поверочной ведомостью на используемое
-            оборудование и в формате испытательной лаборатории МДГТ или в
-            формате ИНЖГЕО.
-            <br />
-            Предложение действует для организаций, имеющих в своём составе
-            геологическую лабораторию и предоставляющих монолиты для определения
-            механических свойств грунтов. Предложение не распространяется на
-            опыты по определению динамических свойств грунтов. АО
-            МОСТДОРГЕОТРЕСТ оставляет за собой право выборочной проверки
-            точности определения физических свойств грунтов, предоставляемых
-            заказчиком.
+            <h1 style={{ textAlign: "center", color: "var(--first-color)" }}>
+              Cкидки по акции 2025
+            </h1>
+            <h2 style={{ textAlign: "center", color: "var(--first-color)" }}>
+              Цены на опредение механических свойств снижены с 0.45 СБЦ до 0.40
+              СБЦ
+            </h2>
+            <h2 style={{ textAlign: "left", color: "var(--first-color)" }}>
+              Дополнительная скидка 15%:
+            </h2>
+            <div className="">
+              Предоставляется в случае передачи заказчиком полной ведомости
+              физических свойств грунтов в формате испытательной лаборатории
+              МДГТ или в формате ИНЖГЕО с разбивкой по ИГЭ и стратиграфическими
+              индексами, заверенной печатью и подписью руководителя организации
+              заказчика. К ведомости физических свойств должна прилагаться
+              поверочная ведомость на используемое оборудование. Предложение
+              действует для организаций, имеющих в своём составе аккредитованную
+              геологическую лабораторию, предоставляющую образцы грунта для
+              определения механических свойств грунтов. АО «МОСТДОРГЕОТРЕСТ»
+              оставляет за собой право выборочной проверки точности определения
+              физических свойств грунтов, предоставляемых заказчиком.
+            </div>
+            <h2 style={{ textAlign: "left", color: "var(--first-color)" }}>
+              Скидка за предоплату:
+            </h2>
+            <div style={{ display: "flex", justifyContent: "space-around", columnGap: "0.25rem" }}>
+              <h3 style={{ display: "flex", columnGap: "0.35rem"}}>
+                100% - скидка <p style={{ color: "var(--first-color)" }}>20%</p>
+              </h3>
+              <h3 style={{ display: "flex", columnGap: "0.35rem"}}>
+                75% - скидка <p style={{ color: "var(--first-color)" }}>15%</p>
+              </h3>
+              <h3 style={{ display: "flex", columnGap: "0.35rem"}}>
+                50% - скидка <p style={{ color: "var(--first-color)" }}>10%</p>
+              </h3>
+            </div>
+            <div className="">
+              Примечание – Для заказчиков, впервые обращающихся в испытательную
+              лабораторию АО «МОСТДОРГЕОТРЕСТ», необходима обязательная
+              предоплата в размере не менее 50%.
+            </div>            
           </div>
           <div className="prices__frame">
             <iframe
@@ -75,7 +103,7 @@ export default function Price() {
               height="15000px"
               frameBorder="0"
               title="table"
-               src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSExZDjKN5ANsEaOXZB3XucLf-OpLW0OLTzGVULqkwYHgcSr4Ye03tywsiY1yKZOg/pubhtml?gid=733648684&amp;single=true&amp;widget=true&amp;headers=false"
+              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTER748MLke-SdJkaZl57_BkIiKOItyG-LORk4ZliN0R-sFpiIusk87wOPfadgWlA/pubhtml?gid=1413153945&amp;single=true&amp;widget=true&amp;headers=false"
             ></iframe>
           </div>
 

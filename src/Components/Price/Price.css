@@ -30,9 +30,14 @@
 }
 
 .prices__info {
-	width: 90%;
-	max-width: 1000px;
+	max-width: 1167.33px;
 	font-size: var(--small-font-size);
+
+	display: flex;
+	flex-direction: column;
+	row-gap: 0.25rem;
+
+	margin-bottom: 1rem;
 }
 
 .prices__frame {
