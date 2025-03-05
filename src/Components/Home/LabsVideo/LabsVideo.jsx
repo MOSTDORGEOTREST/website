@@ -88,7 +88,7 @@ export default function LabsVideo() {
             </div>
             <div className="labs-grid__wrapper" ref={gridWrapper}>
               <div className="labs-grid">
-                {/* <div className="labs-card">
+                <div className="labs-card">
                   <div className="labs-card__video">
                     <ReactHlsPlayer
                       src="https://dev.mdgt.ru:8443/OnlineStream/1/index.m3u8"
@@ -141,7 +141,7 @@ export default function LabsVideo() {
                   <h3 className="labs-card__title">
                     Исследование физических свойств
                   </h3>
-                </div> */}
+                </div>
                 <div className="labs-card">
                   <div className="labs-card__video">
                     <ReactHlsPlayer
