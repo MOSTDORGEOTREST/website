@@ -103,7 +103,7 @@ export default function Price() {
               height="15000px"
               frameBorder="0"
               title="table"
-              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSZrQpS2Mz2uDq1S2CF-1X9_3WeeZNXrXBCwavuY4WoqfIibPYULvnkB6fO1r11Xw/pubhtml?gid=2111838906&amp;single=true&amp;widget=true&amp;headers=false"
+              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRiyvOoE48yhpS8Jv7qYLyeGalUtSfrBilxj-PdlkHl14Hdcbr9neWpjPpzlpuWGw/pubhtml?gid=252926864&amp;single=true&amp;widget=true&amp;headers=false"
             ></iframe>
           </div>
 
