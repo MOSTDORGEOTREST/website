@@ -26,3 +26,7 @@ yarn-debug.log*
 yarn-error.log*
 
 /.idea
+*.crt
+*.key
+wget-log.1
+wget-log
