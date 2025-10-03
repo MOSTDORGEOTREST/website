@@ -13,7 +13,7 @@ import About from './About/About'
 import Calculations from './Calculations/Calculations'
 import SEO from './SEO/seo'
 
-const LabsVideo = React.lazy(() => import('./LabsVideo/LabsVideo'))
+// const LabsVideo = React.lazy(() => import('./LabsVideo/LabsVideo'))
 
 export default function Home() {
 	const { showPrice } = useContext(Context)
@@ -25,9 +25,9 @@ export default function Home() {
 				{showPrice ? <Price /> : null}
 				<Objects />
 
-				<React.Suspense fallback={'Загрузка...'}>
+				{/* <React.Suspense fallback={'Загрузка...'}>
 					<LabsVideo />
-				</React.Suspense>
+				</React.Suspense> */}
 
 				<About />
 				<Calculations />

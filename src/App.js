@@ -87,8 +87,9 @@ function App() {
 					<div className="content-wrapper">
 						<Navigation />
 						<p className="footer__copy">
-							&#169; {new Date().getFullYear()} АО «МОСТДОРГЕОТРЕСТ»{' '}
-							<a href="#">Политика конфиденциальности</a>
+							&#169; {new Date().getFullYear()} Аакционерное Общество "МОСТДОРГЕОТРЕСТ"{' '}
+							<a href="#">Политика по обработке персональных данных</a>
+							<a href="#">Согласие на обработку персональных данных</a>
 						</p>
 						{showCookie ? <Cookies /> : null}
 

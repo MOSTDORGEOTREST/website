@@ -30,6 +30,10 @@
 	padding: 0 24px 9px;
 }
 
+.cookies__info a {
+	color: var(--first-color);
+}
+
 .cookies__info p {
 	font-size: var(--small-font-size);
 
