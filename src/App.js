@@ -8,6 +8,9 @@ import Cookies from './Components/Cookies/Cookies'
 
 import truc from './truc.gif'
 
+import Politica from './Политика_на сайт.pdf'
+import Soglasie from './Согласие_на_обработку_ПД_на сайт.pdf'
+
 const Navigation = React.lazy(() =>
 	import('./Components/Navigation/Navigation')
 )
@@ -88,8 +91,8 @@ function App() {
 						<Navigation />
 						<p className="footer__copy">
 							&#169; {new Date().getFullYear()} Аакционерное Общество "МОСТДОРГЕОТРЕСТ"{' '}
-							<a href="#">Политика по обработке персональных данных</a>
-							<a href="#">Согласие на обработку персональных данных</a>
+							<a href={Politica}>Политика по обработке персональных данных</a>
+							<a href={Soglasie}>Согласие на обработку персональных данных</a>
 						</p>
 						{showCookie ? <Cookies /> : null}
 

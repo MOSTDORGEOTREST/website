@@ -4,6 +4,9 @@ import "./Cookies.css";
 
 import Context from "../../context";
 
+import Politica from '../../Политика_на сайт.pdf'
+import Soglasie from '../../Согласие_на_обработку_ПД_на сайт.pdf'
+
 export default function Cookies() {
   const { setShowCookie } = useContext(Context);
 
@@ -28,8 +31,8 @@ export default function Cookies() {
         <div className="cookies__info">
           <div>
             Мы используем Cookies в том числе с использованием сервиса веб-аналитики "Яндекс.Метрика". Продолжая использовать наш сайт, вы
-            даете <a href="">согласие</a> на обработку данных Cookies в том числе с использованием сервиса веб-аналитики "Яндекс.Метрика" в соответствии
-            с <a href="">Политикой</a>.
+            даете <a href={Soglasie}>согласие</a> на обработку данных Cookies в том числе с использованием сервиса веб-аналитики "Яндекс.Метрика" в соответствии
+            с <a href={Politica}>Политикой</a>.
           </div>
         </div>
         <div className="cookies__accept-btns">
