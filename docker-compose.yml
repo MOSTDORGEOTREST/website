@@ -9,3 +9,7 @@ services:
     volumes:
       - ./cert:/etc/nginx/cert
       - ./letsencrypt-challenges:/var/www/letsencrypt
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'  
