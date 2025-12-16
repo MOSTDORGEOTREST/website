@@ -90,7 +90,7 @@ function App() {
 					<div className="content-wrapper">
 						<Navigation />
 						<p className="footer__copy">
-							&#169; {new Date().getFullYear()} Аакционерное Общество "МОСТДОРГЕОТРЕСТ"{' '}
+							&#169; {new Date().getFullYear()} Акционерное общество "МОСТДОРГЕОТРЕСТ"{' '}
 							<a href={Politica}>Политика по обработке персональных данных</a>
 							<a href={Soglasie}>Согласие на обработку персональных данных</a>
 						</p>
