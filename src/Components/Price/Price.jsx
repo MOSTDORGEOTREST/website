@@ -5,8 +5,8 @@ import Context from "../../context";
 import close from "../Navigation/close-fill.svg";
 import download from "./download.svg";
 
-import pdf from "./ПРАЙС_ЛИСТ от 01.11.2025.pdf";
-import xlsx from "./ПРАЙС_ЛИСТ от 01.11.2025.xlsx";
+import pdf from "./ПРАЙС_ЛИСТ от 29.12.2025.pdf";
+import xlsx from "./ПРАЙС_ЛИСТ от 29.12.2025.xlsx";
 
 export default function Price() {
   const { setShowPrice } = useContext(Context);
@@ -60,23 +60,7 @@ export default function Price() {
             <h2 style={{ textAlign: "center", color: "var(--first-color)" }}>
               Цены на опредение механических свойств снижены с 0.45 СБЦ до 0.40
               СБЦ
-            </h2>
-            <h2 style={{ textAlign: "left", color: "var(--first-color)" }}>
-              Дополнительная скидка 15%:
-            </h2>
-            <div className="">
-              Предоставляется в случае передачи заказчиком полной ведомости
-              физических свойств грунтов в формате испытательной лаборатории
-              МДГТ или в формате ИНЖГЕО с разбивкой по ИГЭ и стратиграфическими
-              индексами, заверенной печатью и подписью руководителя организации
-              заказчика. К ведомости физических свойств должна прилагаться
-              поверочная ведомость на используемое оборудование. Предложение
-              действует для организаций, имеющих в своём составе аккредитованную
-              геологическую лабораторию, предоставляющую образцы грунта для
-              определения механических свойств грунтов. АО «МОСТДОРГЕОТРЕСТ»
-              оставляет за собой право выборочной проверки точности определения
-              физических свойств грунтов, предоставляемых заказчиком.
-            </div>
+            </h2>            
             <h2 style={{ textAlign: "left", color: "var(--first-color)" }}>
               Скидка за предоплату:
             </h2>
@@ -103,7 +87,7 @@ export default function Price() {
               height="15000px"
               frameBorder="0"
               title="table"
-              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRHc1hLzLDM30j4rwyORRWc-j9nvS3Za3HmSBCIJNKhYDZKMjnrmgFa5rLgDtxlEw/pubhtml?widget=true&amp;headers=false"
+              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRjtu8fkQUrgLjcxioxcC0kvugq1HtmvQmyQoK3C9wB6lUFcCHyjmVLEGdwwiwePg/pubhtml?widget=true&amp;headers=false"
             ></iframe>
           </div>
 
@@ -112,7 +96,7 @@ export default function Price() {
 						height="13900"
 						frameBorder="0"
 						scrolling="no"
-						src="https://onedrive.live.com/embed?resid=F8FDB7ADA61C95BE%2149818&amp;authkey=%21AFTlMM83_Zrl-As&amp;em=2&amp;wdAllowInteractivity=False&amp;Item='%D0%9B%D0%B8%D1%81%D1%821'!A1%3AG336&amp;wdDownloadButton=True&amp;wdInConfigurator=True&amp;wdInConfigurator=True&amp;edesNext=false&amp;ejss=false"
+						src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTa0kDSNY7BHq_Ibc30PJ0HHkp13J0VIZE--LR04E-4IGMH1x03y0R9YGMw9kcf6A/pubhtml?widget=true&amp;headers=false"
 					></iframe> */}
         </div>
       </div>
