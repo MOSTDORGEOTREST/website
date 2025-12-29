@@ -87,7 +87,7 @@ export default function Price() {
               height="15000px"
               frameBorder="0"
               title="table"
-              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRjtu8fkQUrgLjcxioxcC0kvugq1HtmvQmyQoK3C9wB6lUFcCHyjmVLEGdwwiwePg/pubhtml?widget=true&amp;headers=false"
+              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTAg81b8uLUlcGnaWoI-7tutV_RVg33OSg_htHnoZ3DigJnJXo0MK0E6YQaVsTGJA/pubhtml?gid=870626401&amp;single=true&amp;widget=true&amp;headers=false"
             ></iframe>
           </div>
 
