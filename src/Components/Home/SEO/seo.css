@@ -1,29 +1,6 @@
-/* seo.css */
 .home-seo{
     height: 0px;
     width: 0px;
     overflow: hidden;
     visibility: hidden;
-}
-
-.seo-text-content {
-  /* Оптимизация для большого текста */
-  contain: content; 
-}
-
-.seo-paragraph {
-  margin-bottom: 1em;
-  line-height: 1.6;
-  font-size: 16px;
-  text-align: justify;
-}
-
-/* Адаптив */
-@media (max-width: 768px) {
-  .home-seo {
-    padding: 15px;
-  }
-  .seo-paragraph {
-    font-size: 14px;
-  }
 }
