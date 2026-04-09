@@ -6,14 +6,14 @@ import Context from '../../context'
 import Welcome from './Welcome/Welcome'
 import Objects from './Objects/Objects'
 // import LabsVideo from './LabsVideo/LabsVideo'
-import Courses from './Courses/Courses'
+// import Courses from './Courses/Courses'
 import Contacts from './Contacts/Contacts'
 import Price from '../Price/Price'
 import About from './About/About'
 import Calculations from './Calculations/Calculations'
 import SEO from './SEO/seo'
 
-// const LabsVideo = React.lazy(() => import('./LabsVideo/LabsVideo'))
+const LabsVideo = React.lazy(() => import('./LabsVideo/LabsVideo'))
 
 export default function Home() {
 	const { showPrice } = useContext(Context)
@@ -25,9 +25,9 @@ export default function Home() {
 				{showPrice ? <Price /> : null}
 				<Objects />
 
-				{/* <React.Suspense fallback={'Загрузка...'}>
+				{<React.Suspense fallback={'Загрузка...'}>
 					<LabsVideo />
-				</React.Suspense> */}
+				</React.Suspense>}
 
 				<About />
 				<Calculations />

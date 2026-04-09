@@ -91,7 +91,7 @@ export default function LabsVideo() {
                 <div className="labs-card">
                   <div className="labs-card__video">
                     <ReactHlsPlayer
-                      src="https://dev.mdgt.ru:8443/OnlineStream/1/index.m3u8"
+                      src="https://mdgt.ru/hls/1/index.m3u8"
                       autoPlay={true}
                       controls={false}
                       width="100%"
@@ -118,7 +118,7 @@ export default function LabsVideo() {
                 <div className="labs-card">
                   <div className="labs-card__video">
                     <ReactHlsPlayer
-                      src="https://dev.mdgt.ru:8443/OnlineStream/2/index.m3u8"
+                      src="https://mdgt.ru/hls/2/index.m3u8"
                       autoPlay={true}
                       controls={false}
                       width="100%"
@@ -139,13 +139,13 @@ export default function LabsVideo() {
                     />
                   </div>
                   <h3 className="labs-card__title">
-                    Исследование физических свойств
+                    Регистрация образцов
                   </h3>
                 </div>
                 <div className="labs-card">
                   <div className="labs-card__video">
                     <ReactHlsPlayer
-                      src="https://dev.mdgt.ru:8443/OnlineStream/3/index.m3u8"
+                      src="https://mdgt.ru/hls/3/index.m3u8"
                       autoPlay={true}
                       controls={false}
                       width="100%"
@@ -172,7 +172,7 @@ export default function LabsVideo() {
                 <div className="labs-card">
                   <div className="labs-card__video">
                     <ReactHlsPlayer
-                      src="https://dev.mdgt.ru:8443/OnlineStream/4/index.m3u8"
+                      src="https://mdgt.ru/hls/4/index.m3u8"
                       autoPlay={true}
                       controls={false}
                       width="100%"
@@ -192,12 +192,12 @@ export default function LabsVideo() {
                       }}
                     />
                   </div>
-                  <h3 className="labs-card__title">Регистрация образцов</h3>
+                  <h3 className="labs-card__title">Исследование физических свойств</h3>
                 </div>
                 <div className="labs-card">
                   <div className="labs-card__video">
                     <ReactHlsPlayer
-                      src="https://dev.mdgt.ru:8443/OnlineStream/5/index.m3u8"
+                      src="https://mdgt.ru/hls/5/index.m3u8"
                       autoPlay={true}
                       controls={false}
                       width="100%"
@@ -278,7 +278,7 @@ export default function LabsVideo() {
                 <div className="labs-card">
                   <div className="labs-card__video">
                     <ReactHlsPlayer
-                      src="https://dev.mdgt.ru:8443/OnlineStream/8/index.m3u8"
+                      src="https://mdgt.ru/hls/6/index.m3u8"
                       autoPlay={true}
                       controls={false}
                       width="100%"
