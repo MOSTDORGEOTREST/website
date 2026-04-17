@@ -55,7 +55,7 @@ export default function Price() {
           </div>
           <div className="prices__info">
             <h1 style={{ textAlign: "center", color: "var(--first-color)" }}>
-              Cкидки по акции 2025
+              Cкидки по акции 2026
             </h1>
             <h2 style={{ textAlign: "center", color: "var(--first-color)" }}>
               Цены на опредение механических свойств снижены с 0.45 СБЦ до 0.40
