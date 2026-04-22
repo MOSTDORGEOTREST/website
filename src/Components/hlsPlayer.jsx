@@ -10,6 +10,7 @@ function ReactHlsPlayer({
 }) {
 	useEffect(() => {
 		let hls
+		const video = playerRef.current
 
 		function _initPlayer() {
 			if (hls != null) {
@@ -18,11 +19,14 @@ function ReactHlsPlayer({
 
 			const newHls = new Hls({
 				enableWorker: false,
+				backBufferLength: 30,
+				liveBackBufferLength: 30,
+				maxBufferLength: 30,
 				...hlsConfig,
 			})
 
-			if (playerRef.current != null) {
-				newHls.attachMedia(playerRef.current)
+			if (video != null) {
+				newHls.attachMedia(video)
 			}
 
 			newHls.on(Hls.Events.MEDIA_ATTACHED, () => {
@@ -68,6 +72,12 @@ function ReactHlsPlayer({
 		return () => {
 			if (hls != null) {
 				hls.destroy()
+			}
+
+			if (video != null) {
+				video.pause()
+				video.removeAttribute('src')
+				video.load()
 			}
 		}
 	}, [autoPlay, hlsConfig, playerRef, src])

@@ -83,7 +83,7 @@ export default function Price() {
           </div>
           <div className="prices__frame">
             <iframe
-              width="1230px"
+              width="100%"
               height="15000px"
               frameBorder="0"
               title="table"

@@ -46,8 +46,13 @@
 
 	display: flex;
 	justify-content: center;
-	
-	overflow: scroll;
+
+	overflow: hidden;
+}
+
+.prices__frame iframe {
+	display: block;
+	width: min(100%, 1230px);
 }
 
 .prices__buttons {
