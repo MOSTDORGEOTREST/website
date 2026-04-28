@@ -24,15 +24,15 @@ export default function LabsVideo() {
   const player9Ref = React.useRef();
 
   function playVideo() {
-    player1Ref.current.play();
-    player2Ref.current.play();
-    player3Ref.current.play();
-    player4Ref.current.play();
-    player5Ref.current.play();
-    player6Ref.current.play();
-    player7Ref.current.play();
-    player8Ref.current.play();
-    player9Ref.current.play();
+    player1Ref.current?.play?.();
+    player2Ref.current?.play?.();
+    player3Ref.current?.play?.();
+    player4Ref.current?.play?.();
+    player5Ref.current?.play?.();
+    player6Ref.current?.play?.();
+    player7Ref.current?.play?.();
+    player8Ref.current?.play?.();
+    player9Ref.current?.play?.();
   }
 
   function showGrid(event) {
@@ -60,14 +60,16 @@ export default function LabsVideo() {
   // }
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       playVideo();
     }, 5000);
 
     // setTimeout(()=>{
     //   aboutCard.current.click();
     // }, 10)    
-    
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
