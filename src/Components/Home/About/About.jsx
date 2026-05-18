@@ -15,13 +15,13 @@ import AO_doc_1 from './AO_docs/Мосстройсертификация до 09
 import AO_doc_2 from './AO_docs/Росаккредитация-от-23.04.2020-г.pdf'
 import AO_doc_3 from './AO_docs/РОСС RU.0001.21АГ09 от 02.04.2026.pdf'
 import AO_doc_4 from './AO_docs/Сертификат ИСО СМК - до 24.09.2026.pdf'
-import AO_doc_5 from './AO_docs/СРО - Выписка из Реестра членов от 01.04.2026.pdf'
+import AO_doc_5 from './AO_docs/СРО - Выписка из Реестра членов от 29.04.2026.pdf'
 
 // ДОКИ ООО
 import OOO_doc_1 from './OOO_docs/Аккредитация-Промышленная-безопасность-до-03.09.2026-г.pdf'
-import OOO_doc_2 from './OOO_docs/Аккредитация - Мосстройсертификация - до 05.06.2026 г.pdf'
+import OOO_doc_2 from './OOO_docs/Аккредитация - Мосстройсертификация - до 05.06.2028 г.pdf'
 import OOO_doc_3 from './OOO_docs/Сертификат ИСО - СМК до 21.06.2026.pdf'
-import OOO_doc_4 from './OOO_docs/СРО - Выписка из Реестра членов от 01.04.2026 г.pdf'
+import OOO_doc_4 from './OOO_docs/СРО - Выписка из Реестра членов от 29.04.2026 г.pdf'
 
 // Положение
 import mosgosexpert from './mosgosexpert.pdf'
