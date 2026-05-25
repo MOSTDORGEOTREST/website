@@ -54,7 +54,7 @@ export default function Price() {
             </div>
           </div>
           <div className="prices__info">
-            <h1 style={{ textAlign: "center", color: "var(--first-color)" }}>
+            {/* <h1 style={{ textAlign: "center", color: "var(--first-color)" }}>
               Cкидки по акции 2026
             </h1>
             <h2 style={{ textAlign: "center", color: "var(--first-color)" }}>
@@ -79,7 +79,7 @@ export default function Price() {
               Примечание – Для заказчиков, впервые обращающихся в испытательную
               лабораторию АО «МОСТДОРГЕОТРЕСТ», необходима обязательная
               предоплата в размере не менее 50%.
-            </div>            
+            </div>             */}
           </div>
           <div className="prices__frame">
             <iframe

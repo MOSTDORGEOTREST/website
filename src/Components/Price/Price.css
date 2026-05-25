@@ -30,7 +30,7 @@
 }
 
 .prices__info {
-	max-width: 1167.33px;
+	width: 1167.33px;
 	font-size: var(--small-font-size);
 
 	display: flex;
