@@ -53,6 +53,45 @@
 	height: fit-content;
 }
 
+.labs-card__video--stream {
+	position: relative;
+	overflow: hidden;
+	background: #1a1a1a;
+}
+
+.labs-card__poster,
+.labs-card__player {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.labs-card__poster {
+	position: relative;
+	z-index: 2;
+	opacity: 1;
+	transition: opacity 0.55s ease;
+}
+
+.labs-card__poster--hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.labs-card__player {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	opacity: 0;
+	transition: opacity 0.55s ease;
+}
+
+.labs-card__player--visible {
+	z-index: 3;
+	opacity: 1;
+}
+
 .labs-card__title {
 	padding: 8px;
 	font-size: var(--normal-font-size);
