@@ -1,3 +1,8 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   ROBOTO (самохостинг, кириллица гарантирована) — запасной шрифт
+   ============================================================ */
 /* cyrillic-ext */
 @font-face {
 	font-family: 'Roboto';
@@ -5,8 +10,7 @@
 	font-weight: 400;
 	font-display: swap;
 	src: url('./fonts/KFOmCnqEu92Fr1Mu72xKOzY.woff2') format('woff2');
-	unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
-		U+FE2E-FE2F;
+	unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 /* cyrillic */
 @font-face {
@@ -17,16 +21,6 @@
 	src: url('./fonts/KFOmCnqEu92Fr1Mu5mxKOzY.woff2') format('woff2');
 	unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
-/* latin-ext */
-@font-face {
-	font-family: 'Roboto';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: url('./fonts/KFOmCnqEu92Fr1Mu7GxKOzY.woff2') format('woff2');
-	unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
-		U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
 /* latin */
 @font-face {
 	font-family: 'Roboto';
@@ -34,21 +28,9 @@
 	font-weight: 400;
 	font-display: swap;
 	src: url('./fonts/KFOmCnqEu92Fr1Mu4mxK.woff2') format('woff2');
-	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-		U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-		U+FEFF, U+FFFD;
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-/* cyrillic-ext */
-@font-face {
-	font-family: 'Roboto';
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-	src: url('./fonts/KFOlCnqEu92Fr1MmEU9fCRc4EsA.woff2') format('woff2');
-	unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
-		U+FE2E-FE2F;
-}
-/* cyrillic */
+/* cyrillic 500 */
 @font-face {
 	font-family: 'Roboto';
 	font-style: normal;
@@ -57,38 +39,16 @@
 	src: url('./fonts/KFOlCnqEu92Fr1MmEU9fABc4EsA.woff2') format('woff2');
 	unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
-/* latin-ext */
-@font-face {
-	font-family: 'Roboto';
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-	src: url('./fonts/KFOlCnqEu92Fr1MmEU9fChc4EsA.woff2') format('woff2');
-	unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
-		U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
+/* latin 500 */
 @font-face {
 	font-family: 'Roboto';
 	font-style: normal;
 	font-weight: 500;
 	font-display: swap;
 	src: url('./fonts/KFOlCnqEu92Fr1MmEU9fBBc4.woff2') format('woff2');
-	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-		U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-		U+FEFF, U+FFFD;
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-/* cyrillic-ext */
-@font-face {
-	font-family: 'Roboto';
-	font-style: normal;
-	font-weight: 700;
-	font-display: swap;
-	src: url('./fonts/KFOlCnqEu92Fr1MmWUlfCRc4EsA.woff2') format('woff2');
-	unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
-		U+FE2E-FE2F;
-}
-/* cyrillic */
+/* cyrillic 700 */
 @font-face {
 	font-family: 'Roboto';
 	font-style: normal;
@@ -97,38 +57,16 @@
 	src: url('./fonts/KFOlCnqEu92Fr1MmWUlfABc4EsA.woff2') format('woff2');
 	unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
-/* latin-ext */
-@font-face {
-	font-family: 'Roboto';
-	font-style: normal;
-	font-weight: 700;
-	font-display: swap;
-	src: url('./fonts/KFOlCnqEu92Fr1MmWUlfChc4EsA.woff2') format('woff2');
-	unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
-		U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
+/* latin 700 */
 @font-face {
 	font-family: 'Roboto';
 	font-style: normal;
 	font-weight: 700;
 	font-display: swap;
 	src: url('./fonts/KFOlCnqEu92Fr1MmWUlfBBc4.woff2') format('woff2');
-	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-		U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-		U+FEFF, U+FFFD;
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-/* cyrillic-ext */
-@font-face {
-	font-family: 'Roboto';
-	font-style: normal;
-	font-weight: 900;
-	font-display: swap;
-	src: url('./fonts/KFOlCnqEu92Fr1MmYUtfCRc4EsA.woff2') format('woff2');
-	unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
-		U+FE2E-FE2F;
-}
-/* cyrillic */
+/* cyrillic 900 */
 @font-face {
 	font-family: 'Roboto';
 	font-style: normal;
@@ -137,200 +75,278 @@
 	src: url('./fonts/KFOlCnqEu92Fr1MmYUtfABc4EsA.woff2') format('woff2');
 	unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
-/* latin-ext */
-@font-face {
-	font-family: 'Roboto';
-	font-style: normal;
-	font-weight: 900;
-	font-display: swap;
-	src: url('./fonts/KFOlCnqEu92Fr1MmYUtfChc4EsA.woff2') format('woff2');
-	unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
-		U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
+/* latin 900 */
 @font-face {
 	font-family: 'Roboto';
 	font-style: normal;
 	font-weight: 900;
 	font-display: swap;
 	src: url('./fonts/KFOlCnqEu92Fr1MmYUtfBBc4.woff2') format('woff2');
-	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-		U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-		U+FEFF, U+FFFD;
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-:root {
-	--header-height: 4rem;
+/* ============================================================
+   ДИЗАЙН-ТОКЕНЫ (Tailwind v4 @theme) — «Градиент / стекло»
+   ============================================================ */
+@theme {
+	--font-display: 'Unbounded Variable', 'Roboto', ui-sans-serif, system-ui, sans-serif;
+	--font-sans: 'Manrope Variable', 'Roboto', ui-sans-serif, system-ui, sans-serif;
+	--font-body: 'Roboto', 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
 
-	/* ЦВЕТА */
+	/* Фирменный зелёный */
+	--color-brand-50: #eafaea;
+	--color-brand-100: #ccf0cd;
+	--color-brand-200: #a3e3a6;
+	--color-brand-300: #6fd175;
+	--color-brand-400: #38b842;
+	--color-brand-500: #16a022;
+	--color-brand-600: #0a7f0b; /* основной бренд-цвет */
+	--color-brand-700: #0a6a0d;
+	--color-brand-800: #0c530f;
+	--color-brand-900: #0c4310;
+	--color-brand-950: #042405;
 
-	--first-color: #0a7f0b;
-	--text-color: #031c03;
+	/* Акценты градиента */
+	--color-teal-400: #2dd4bf;
+	--color-teal-500: #14b8a6;
+	--color-teal-600: #0d9488;
+	--color-emerald-400: #34d399;
+	--color-emerald-500: #10b981;
+	--color-cyan-400: #22d3ee;
+	--color-lime-400: #a3e635;
 
-	--first-color-lighten: hsla(212, 11%, 50%, 0.2);
-	--title-color: hsl(210, 2%, 18%);
+	/* Нейтральные / поверхности */
+	--color-canvas: #eef5f0;
+	--color-canvas-deep: #e2ede6;
+	--color-surface: #ffffff;
+	--color-ink: #07150d;
+	--color-ink-soft: #16352440;
+	--color-muted: #4f6157;
+	--color-line: #d3e2d8;
 
-	--container-color: #fff;
-	--shadow-color: hsla(106, 23%, 14%, 0.1);
+	/* Радиусы */
+	--radius-2xl: 1.25rem;
+	--radius-3xl: 1.75rem;
+	--radius-4xl: 2.25rem;
 
-	/* ШРИФТЫ */
-	/* .5 rem = 8px; 1rem = 16px */
-	--body-font: 'Roboto', sans-serif;
-	--big-font-size: 2rem;
-	--h1-font-size: 1.5rem;
-	--h2-font-size: 1.25rem;
-	--h3-font-size: 1rem;
-	--normal-font-size: 0.875rem;
-	--small-font-size: 0.813rem;
-	--smaller-font-size: 0.75rem;
+	/* Тени (мягкая глубина + glass) */
+	--shadow-soft: 0 10px 30px -12px rgba(10, 60, 25, 0.18);
+	--shadow-glass: 0 18px 50px -20px rgba(8, 60, 35, 0.35);
+	--shadow-glow: 0 0 0 1px rgba(255, 255, 255, 0.5) inset, 0 20px 60px -22px rgba(13, 148, 136, 0.45);
 
-	--font-base: 500;
-	--font-medium: 600;
-	--font-semi-bold: 700;
-
-	/* ОТСТУПЫ */
-	--mb-0-5: 0.5rem;
-	--mb-0-75: 0.75rem;
-	--mb-1: 1rem;
-	--mb-1-5: 1.5rem;
-	--mb-2: 2rem;
-	--mb-2-5: 2.5rem;
-
-	/* ПОЛОЖЕНИЯ */
-
-	--z-tooltip: 10;
-	--z-fixed: 100;
-
-	--max-width: 1440px;
+	/* Контейнер */
+	--breakpoint-3xl: 96rem;
 }
 
-/* АДАПТИВНЫЕ РАЗМЕРЫ */
+/* ============================================================
+   БАЗА
+   ============================================================ */
+@layer base {
+	* {
+		min-width: 0;
+	}
 
-@media screen and (min-width: 1100px) {
-	:root {
-		--big-font-size: 3.5rem;
-		--h1-font-size: 2.25rem;
-		--h2-font-size: 1.5rem;
-		--h3-font-size: 1.25rem;
-		--normal-font-size: 1.125rem;
-		--small-font-size: 0.875rem;
-		--smaller-font-size: 0.813rem;
+	html {
+		-webkit-text-size-adjust: 100%;
+		scrollbar-gutter: stable;
+	}
 
-		--font-base: 400;
-		--font-medium: 500;
-		--font-semi-bold: 600;
+	body {
+		min-width: 280px;
+		margin: 0;
+		font-family: var(--font-sans);
+		font-weight: 400;
+		color: var(--color-ink);
+		background-color: var(--color-canvas);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-rendering: optimizeLegibility;
+		overflow-x: hidden;
+	}
+
+	h1, h2, h3, h4 {
+		font-family: var(--font-display);
+		font-weight: 600;
+		line-height: 1.05;
+		letter-spacing: -0.01em;
+		text-wrap: balance;
+	}
+
+	p {
+		text-wrap: pretty;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	::selection {
+		background: var(--color-brand-600);
+		color: #fff;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-teal-500);
+		outline-offset: 3px;
+		border-radius: 4px;
+	}
+
+	/* Кастомный скроллбар */
+	::-webkit-scrollbar {
+		width: 11px;
+		height: 11px;
+	}
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	::-webkit-scrollbar-thumb {
+		background: linear-gradient(180deg, var(--color-brand-500), var(--color-teal-600));
+		border-radius: 999px;
+		border: 3px solid var(--color-canvas);
+	}
+
+	/* Lenis smooth-scroll */
+	html.lenis,
+	html.lenis body {
+		height: auto;
+	}
+	.lenis.lenis-smooth {
+		scroll-behavior: auto !important;
+	}
+	.lenis.lenis-smooth [data-lenis-prevent] {
+		overscroll-behavior: contain;
+	}
+	.lenis.lenis-stopped {
+		overflow: hidden;
+	}
+	.lenis.lenis-smooth iframe {
+		pointer-events: none;
 	}
 }
 
-/* ======== ОСНОВНЫЕ ПАРАМЕТРЫ ======== */
+/* ============================================================
+   КОМПОНЕНТНЫЕ КЛАССЫ
+   ============================================================ */
+@layer components {
+	.container-site {
+		width: 100%;
+		max-width: 90rem; /* 1440px */
+		margin-inline: auto;
+		padding-inline: clamp(1.1rem, 4vw, 3.5rem);
+	}
 
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
+	/* Матовое стекло */
+	.glass {
+		background: rgba(255, 255, 255, 0.55);
+		backdrop-filter: blur(18px) saturate(140%);
+		-webkit-backdrop-filter: blur(18px) saturate(140%);
+		border: 1px solid rgba(255, 255, 255, 0.6);
+		box-shadow: var(--shadow-glass);
+	}
+	.glass-soft {
+		background: rgba(255, 255, 255, 0.4);
+		backdrop-filter: blur(14px) saturate(130%);
+		-webkit-backdrop-filter: blur(14px) saturate(130%);
+		border: 1px solid rgba(255, 255, 255, 0.5);
+	}
+	.glass-dark {
+		background: rgba(7, 21, 13, 0.55);
+		backdrop-filter: blur(20px) saturate(140%);
+		-webkit-backdrop-filter: blur(20px) saturate(140%);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+	}
+
+	/* Градиентный текст */
+	.gradient-text {
+		background: linear-gradient(100deg, var(--color-brand-600) 0%, var(--color-emerald-500) 45%, var(--color-teal-500) 100%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+
+	/* SEO-блок: присутствует в DOM, визуально скрыт (как в оригинале) */
+	.seo-block {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: normal;
+		border: 0;
+	}
 }
 
-html,
-body {
-	height: 100%;
-
-	min-width: 260px;
-
-	scroll-behavior: smooth;
-
-	/* overflow-x: hidden; */
+/* ============================================================
+   АНИМАЦИИ (с уважением к prefers-reduced-motion)
+   ============================================================ */
+@keyframes marquee {
+	from { transform: translate3d(0, 0, 0); }
+	to { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes blob-drift-1 {
+	0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+	50% { transform: translate3d(6%, 8%, 0) scale(1.12); }
+}
+@keyframes blob-drift-2 {
+	0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
+	50% { transform: translate3d(-8%, -6%, 0) scale(0.95); }
+}
+@keyframes blob-drift-3 {
+	0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+	50% { transform: translate3d(5%, -7%, 0) scale(1.1); }
+}
+@keyframes float-y {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-12px); }
+}
+@keyframes spin-slow {
+	to { transform: rotate(360deg); }
+}
+@keyframes pulse-glow {
+	0%, 100% { opacity: 0.55; }
+	50% { opacity: 1; }
+}
+@keyframes sheen {
+	0% { transform: translateX(-120%); }
+	60%, 100% { transform: translateX(220%); }
 }
 
-body,
-button,
-input,
-textarea {
-	font-family: var(--body-font);
-	font-size: var(--normal-font-size);
-	font-weight: var(--font-base);
-	line-height: inherit;
-	margin: 0;
+@layer utilities {
+	.animate-marquee {
+		animation: marquee var(--marquee-duration, 48s) linear infinite;
+	}
+	.pause-on-hover:hover .animate-marquee,
+	.animate-marquee.pause-on-hover:hover {
+		animation-play-state: paused;
+	}
+	.animate-float-y {
+		animation: float-y 8s ease-in-out infinite;
+	}
+	.animate-spin-slow {
+		animation: spin-slow 26s linear infinite;
+	}
+	.animate-pulse-glow {
+		animation: pulse-glow 5s ease-in-out infinite;
+	}
+	.blob-1 { animation: blob-drift-1 18s ease-in-out infinite; }
+	.blob-2 { animation: blob-drift-2 22s ease-in-out infinite; }
+	.blob-3 { animation: blob-drift-3 20s ease-in-out infinite; }
+	.mask-fade-x {
+		-webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+		mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+	}
 }
 
-input,
-textarea,
-submit {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-}
-
-body {
-	/* margin: var(--header-height) 0 0 0; */
-	margin: 0;
-	padding: 0;
-	/* background: linear-gradient(90deg, #f2fcee 0.01%, #b7c7b2 100%); */
-	background-image: linear-gradient(
-		to right,
-		#f2fcee,
-		#e3efdf,
-		#d4e1d0,
-		#c6d4c1,
-		#b7c7b2
-	);
-
-	color: var(--text-color);
-}
-
-.body.body-hidden {
-	touch-action: none;
-	-webkit-overflow-scrolling: none;
-
-	overflow-y: hidden;
-
-	overscroll-behavior: none;
-}
-
-button {
-	cursor: pointer;
-	border: none;
-	outline: none;
-}
-
-ul {
-	list-style: none;
-}
-
-h1,
-h2,
-h3 {
-	color: var(--title-color);
-	font-weight: var(--font-semi-bold);
-	line-height: initial;
-}
-
-h1 {
-	font-size: var(--h1-font-size);
-}
-
-h2 {
-	font-size: var(--h2-font-size);
-	list-style: none;
-}
-
-h3 {
-	font-size: var(--h3-font-size);
-}
-
-a {
-	text-decoration: none;
-	outline: none;
-}
-
-p {
-	display: block;
-	margin: 0;
-	padding: 0;
-}
-
-img {
-	/* max-width: 100%; */
-	height: auto;
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+		scroll-behavior: auto !important;
+	}
 }

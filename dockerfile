@@ -1,7 +1,7 @@
-FROM node:16 as react
+FROM node:20-alpine AS react
 WORKDIR /usr/share/react
 COPY package*.json ./
-RUN npm ci --prefer-offline --no-optional
+RUN npm ci --prefer-offline
 COPY . .
 RUN npm run build
 
