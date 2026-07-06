@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDGT.RU | 404 error</title>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+            /* Базовый цвет фона */
+            background-color: #e1e4de;
+            /* Инженерный / Математический фон-сетка */
+            background-image: 
+                /* Мелкая сетка */
+                linear-gradient(rgba(39, 59, 24, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(39, 59, 24, 0.035) 1px, transparent 1px),
+                /* Крупная сетка */
+                linear-gradient(rgba(39, 59, 24, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(39, 59, 24, 0.06) 1px, transparent 1px);
+            background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+            background-position: center center;
+            
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #273b18;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Мягкие цветовые пятна под сеткой для легкой неоднородности фона */
+        .ambient-sky-1 {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 70vw;
+            height: 70vh;
+            background: radial-gradient(circle, #d0dfc7 0%, rgba(225, 228, 222, 0) 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: heavenDriftFirst 25s infinite alternate ease-in-out;
+        }
+        .ambient-sky-2 {
+            position: absolute;
+            bottom: -15%;
+            right: -10%;
+            width: 80vw;
+            height: 80vh;
+            background: radial-gradient(circle, #e4dac2 0%, rgba(225, 228, 222, 0) 70%);
+            border-radius: 50%;
+            filter: blur(110px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: heavenDriftSecond 30s infinite alternate ease-in-out;
+        }
+
+        /* --- ТЁМНЫЕ ЧЕТКИЕ ПАРТИКЛЫ ВМЕСТО СВЕТЯЩЕЙСЯ ПЫЛИ --- */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            background-color: #273b18;
+            border-radius: 50%;
+            opacity: 0; /* Стартовая прозрачность для анимации */
+            animation: floatDarkParticle infinite linear;
+        }
+        /* Разные размеры и тайминги для естественности */
+        .p1 { width: 4px; height: 4px; top: 80%; left: 15%; animation-duration: 22s; }
+        .p2 { width: 2.5px; height: 2.5px; top: 60%; left: 75%; animation-duration: 26s; animation-delay: -5s; }
+        .p3 { width: 5px; height: 5px; top: 90%; left: 45%; animation-duration: 18s; animation-delay: -10s; }
+        .p4 { width: 3px; height: 3px; top: 40%; left: 25%; animation-duration: 28s; animation-delay: -15s; }
+        .p5 { width: 2px; height: 2px; top: 75%; left: 85%; animation-duration: 20s; animation-delay: -2s; }
+        .p6 { width: 3.5px; height: 3.5px; top: 30%; left: 60%; animation-duration: 25s; animation-delay: -8s; }
+
+        @keyframes heavenDriftFirst {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(5vw, 5vh) scale(1.1); }
+        }
+        @keyframes heavenDriftSecond {
+            0% { transform: translate(0, 0) scale(1.1); }
+            100% { transform: translate(-5vw, -5vh) scale(0.95); }
+        }
+        
+        /* Плавное всплытие тёмных точек без нагрузки на глаза */
+        @keyframes floatDarkParticle {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.25; }
+            90% { opacity: 0.25; }
+            100% { transform: translateY(-150px) translateX(20px); opacity: 0; }
+        }
+
+        .lang-checkbox {
+            display: none;
+        }
+        .main-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 680px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        /* --- ПЕРЕКЛЮЧАТЕЛЬ --- */
+        .switcher-panel {
+            background: rgba(240, 242, 238, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(39, 59, 24, 0.1);
+            padding: 4px;
+            border-radius: 30px;
+            display: flex;
+            position: relative;
+            width: 190px;
+            height: 46px;
+            box-shadow: 0 8px 24px rgba(39, 59, 24, 0.04);
+        }
+        .switcher-label {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            z-index: 5;
+            transition: color 0.3s ease, transform 0.2s ease;
+            user-select: none;
+            gap: 6px;
+            color: rgba(39, 59, 24, 0.45);
+        }
+        .switcher-label:active {
+            transform: scale(0.95);
+        }
+        .label-ru { color: #273b18; }
+        .slider-block {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 90px;
+            height: 38px;
+            background: #ffffff;
+            border: 1px solid rgba(244, 153, 26, 0.3);
+            border-radius: 25px;
+            z-index: 3;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 4px 12px rgba(39, 59, 24, 0.06);
+        }
+        
+        .lang-checkbox:checked ~ .switcher-panel .slider-block { transform: translateX(94px); }
+        .lang-checkbox:checked ~ .switcher-panel .label-ru { color: rgba(39, 59, 24, 0.45); }
+        .lang-checkbox:checked ~ .switcher-panel .label-en { color: #273b18; }
+
+        /* --- ГЛАВНЫЙ КОНТЕЙНЕР --- */
+        .container {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(25px) saturate(120%);
+            -webkit-backdrop-filter: blur(25px) saturate(120%);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 32px;
+            padding: 60px 50px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 
+                0 30px 60px rgba(39, 59, 24, 0.05),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+            position: relative;
+            animation: containerGlow 8s infinite ease-in-out;
+        }
+        @keyframes containerGlow {
+            0%, 100% { box-shadow: 0 30px 60px rgba(39, 59, 24, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.4); }
+            50% { box-shadow: 0 30px 60px rgba(244, 153, 26, 0.04), inset 0 0 15px rgba(244, 153, 26, 0.03); }
+        }
+
+        /* --- КИНЕТИЧЕСКАЯ ГРАФИКА --- */
+        .center-matrix {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .matrix-svg {
+            width: 145px;
+            height: 145px;
+        }
+        
+        .geo-ring-1 {
+            transform-origin: center;
+            animation: spinClockwise 16s infinite linear, dashMove1 4s infinite linear;
+            stroke: #f4991a;
+            stroke-width: 1.3;
+        }
+        .geo-ring-2 {
+            transform-origin: center;
+            animation: spinCounter 22s infinite linear, dashMove2 6s infinite linear;
+            stroke: #273b18;
+            stroke-width: 1.1;
+            stroke-opacity: 0.6;
+        }
+        .geo-strata {
+            transform-origin: center;
+            animation: strataPulse 5s infinite ease-in-out;
+            fill: url(#lightStrataGradient);
+            filter: drop-shadow(0 0 6px rgba(244, 153, 26, 0.1));
+        }
+        .core-node {
+            animation: coreBlink 3s infinite ease-in-out;
+        }
+
+        @keyframes spinClockwise { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spinCounter { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
+        @keyframes dashMove1 { to { stroke-dashoffset: -52; } }
+        @keyframes dashMove2 { to { stroke-dashoffset: 60; } }
+        
+        @keyframes strataPulse { 
+            0%, 100% { transform: scale(1); opacity: 0.8; } 
+            50% { transform: scale(1.05); opacity: 1; } 
+        }
+        @keyframes coreBlink {
+            0%, 100% { fill: #273b18; r: 3.5; filter: drop-shadow(0 0 0px transparent); }
+            50% { fill: #f4991a; r: 4.5; filter: drop-shadow(0 0 5px #f4991a); }
+        }
+
+        /* --- МЕРЦАЮЩИЙ РАЗДЕЛИТЕЛЬ --- */
+        .tech-divider {
+            width: 100%;
+            max-width: 380px;
+            height: 1px;
+            margin: 0 auto 35px auto;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(39, 59, 24, 0.15) 20%, 
+                #f4991a 50%, 
+                rgba(39, 59, 24, 0.15) 80%, 
+                transparent 100%
+            );
+            position: relative;
+            animation: linePulse 4s infinite ease-in-out;
+        }
+        .tech-divider::after {
+            content: '';
+            position: absolute;
+            top: -2.5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: #f4991a;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #f4991a;
+            animation: nodePulse 2s infinite ease-in-out;
+        }
+        @keyframes linePulse {
+            0%, 100% { opacity: 0.5; transform: scaleX(0.95); }
+            50% { opacity: 0.9; transform: scaleX(1); }
+        }
+        @keyframes nodePulse {
+            0%, 100% { transform: translateX(-50%) scale(0.8); box-shadow: 0 0 5px #f4991a; }
+            50% { transform: translateX(-50%) scale(1.4); box-shadow: 0 0 10px #f4991a, 0 0 15px #f4991a; }
+        }
+
+        /* --- КОНТЕНТ И ТИПОГРАФИКА --- */
+        .content-engine {
+            position: relative;
+            height: 140px;
+            width: 100%;
+        }
+        .lang-block {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px) scale(0.98);
+            transition: all 0.6s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+        .content-ru-active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        
+        .lang-checkbox:checked ~ .container .content-ru-active {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px) scale(0.98);
+        }
+        .lang-checkbox:checked ~ .container .content-en-active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        h1 {
+            letter-spacing: -0.04em;
+            font-weight: 800;
+            font-size: 2.2rem;
+            color: #273b18;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #485a3c;
+            max-width: 520px;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        /* --- ФУТЕР --- */
+        .footer-brand {
+            margin-top: 25px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: rgba(39, 59, 24, 0.35);
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .footer-brand::after {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #f4991a;
+            border-radius: 50%;
+            animation: caretBlink 1.2s infinite steps(2);
+        }
+        @keyframes caretBlink {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 50px 24px; border-radius: 24px; }
+            h1 { font-size: 1.65rem; }
+            p { font-size: 1rem; }
+            .matrix-svg { width: 115px; height: 115px; }
+            .content-engine { height: 170px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-sky-1"></div>
+    <div class="ambient-sky-2"></div>
+    
+    <!-- Контейнер с тёмными аккуратными частицами -->
+    <div class="particles-container">
+        <div class="particle p1"></div>
+        <div class="particle p2"></div>
+        <div class="particle p3"></div>
+        <div class="particle p4"></div>
+        <div class="particle p5"></div>
+        <div class="particle p6"></div>
+    </div>
+
+    <div class="main-wrapper">
+        <input type="checkbox" id="lang-trigger" class="lang-checkbox">
+        
+        <div class="switcher-panel">
+            <div class="slider-block"></div>
+            <label for="lang-trigger" class="switcher-label label-ru"><span>🇷🇺</span><span>RU</span></label>
+            <label for="lang-trigger" class="switcher-label label-en"><span>🇬🇧</span><span>EN</span></label>
+        </div>
+
+        <div class="container">
+            <div class="center-matrix">
+                <svg class="matrix-svg" viewBox="0 0 200 200">
+                    <defs>
+                        <linearGradient id="lightStrataGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#cbe0bd" stop-opacity="0.9"/>
+                            <stop offset="100%" stop-color="#f4991a" stop-opacity="0.4"/>
+                        </linearGradient>
+                    </defs>
+                    <path class="geo-strata" d="M 55,100 Q 75,65 100,100 T 145,100 Q 125,135 100,115 Z"/>
+                    <circle class="geo-ring-1" cx="100" cy="100" r="75" fill="none" stroke-dasharray="16 10 6 10"/>
+                    <circle class="geo-ring-2" cx="100" cy="100" r="55" fill="none" stroke-dasharray="40 20"/>
+                    <circle class="core-node" cx="100" cy="100" r="3.5"/>
+                </svg>
+            </div>
+
+            <div class="tech-divider"></div>
+
+			<div class="content-engine">
+				<div class="lang-block content-ru-active">
+					<h1>Страница недоступна</h1>
+					<p>Указан неверный адрес или страница была перемещена.</p>
+					<p>Пожалуйста, проверьте правильность введённой ссылки.</p>
+			</div>
+			<div class="lang-block content-en-active">
+				<h1>Page Unavailable</h1>
+				<p>The link might be broken, or the page has been moved.</p>
+				<p>Please check the URL and try again.</p>
+			</div>
+		</div>
+
+
+            <div class="footer-brand">Developed by MDGT</div>
+        </div>
+    </div>
+</body>
+</html>
