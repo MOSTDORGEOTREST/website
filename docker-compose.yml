@@ -1,5 +1,6 @@
 services:
   sitelab:
+    container_name: sitelab
     build:
       context: .
       dockerfile: dockerfile
@@ -9,8 +10,30 @@ services:
     volumes:
       - ./cert:/etc/nginx/cert
       - ./letsencrypt-challenges:/var/www/letsencrypt
+    restart: unless-stopped
     deploy:
       resources:
         limits:
           cpus: '0.50'
           memory: 1800M
+
+  acme:
+    build:
+      context: .
+      dockerfile: Dockerfile.acme
+    depends_on:
+      - sitelab
+    environment:
+      ACME_DOMAINS: mdgt.ru,www.mdgt.ru
+      CERTBOT_EMAIL: sheepdolly2023@gmail.com
+      CHECK_URL: http://mdgt.ru/
+      NGINX_CONTAINER: sitelab
+      RENEW_BEFORE_DAYS: "30"
+      RENEW_INTERVAL_SECONDS: "43200"
+      ACME_STAGING: "false"
+    volumes:
+      - ./cert:/cert-out
+      - ./letsencrypt:/etc/letsencrypt
+      - ./letsencrypt-challenges:/var/www/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
