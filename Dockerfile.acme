@@ -1,0 +1,9 @@
+FROM alpine:3.20
+
+RUN apk add --no-cache bash certbot curl docker-cli openssl
+
+COPY acme/renew.sh /usr/local/bin/acme-renew.sh
+RUN sed -i 's/\r$//' /usr/local/bin/acme-renew.sh \
+    && chmod +x /usr/local/bin/acme-renew.sh
+
+ENTRYPOINT ["/usr/local/bin/acme-renew.sh"]
