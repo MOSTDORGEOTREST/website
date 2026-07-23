@@ -20,7 +20,7 @@ import AO_doc_5 from './AO_docs/СРО - Выписка из Реестра чл
 // ДОКИ ООО
 import OOO_doc_1 from './OOO_docs/Аккредитация-Промышленная-безопасность-до-03.09.2026-г.pdf'
 import OOO_doc_2 from './OOO_docs/Аккредитация - Мосстройсертификация - до 05.06.2028 г.pdf'
-import OOO_doc_3 from './OOO_docs/Сертификат ИСО - СМК до 21.06.2029.pdf'
+import OOO_doc_3 from './OOO_docs/Сертификат ИСО - СМК до 21.06.2026.pdf'
 import OOO_doc_4 from './OOO_docs/СРО - Выписка из Реестра членов от 01.07.2026 г.pdf'
 
 // Положение
