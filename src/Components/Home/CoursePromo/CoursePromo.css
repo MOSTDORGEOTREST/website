@@ -35,7 +35,7 @@
 	isolation: isolate;
 	display: flex;
 	align-items: stretch;
-	min-height: 520px;
+	min-height: 440px;
 	overflow: hidden;
 	background: var(--course-primary);
 	color: #fff;
@@ -85,8 +85,8 @@
 	grid-template-columns: minmax(0, 1.35fr) minmax(290px, 0.65fr);
 	gap: 60px;
 	align-items: end;
-	min-height: 520px;
-	padding: 32px 0 56px;
+	min-height: 440px;
+	padding: 24px 0 32px;
 }
 
 .course-promo__hero-copy {
@@ -140,7 +140,8 @@
 
 .course-promo__hero-contact p:last-child {
 	margin-top: 20px;
-	font-size: var(--h2-font-size);
+	font-size: var(--h1-font-size);
+	line-height: 1.2;
 	font-weight: var(--font-medium);
 }
 
@@ -163,7 +164,7 @@
 }
 
 .course-promo__hero-facts {
-	padding: 18px;
+	padding: 14px;
 	border: 1px solid rgba(255, 255, 255, 0.16);
 	border-radius: 20px;
 	background: rgba(4, 48, 8, 0.8);
@@ -195,7 +196,7 @@
 	grid-template-columns: 44px 1fr;
 	gap: 13px;
 	align-items: center;
-	padding: 18px 12px;
+	padding: 12px;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.13);
 }
 
@@ -458,12 +459,22 @@
 	color: #fff;
 }
 
-.course-promo__cta h2 span {
+.course-promo__cta h2 a {
 	display: inline-block;
 	color: var(--course-accent-light);
 	text-decoration: underline;
 	text-decoration-thickness: 2px;
 	text-underline-offset: 8px;
+}
+
+.course-promo__cta-note {
+	display: block;
+	margin-top: 14px;
+	font-size: var(--normal-font-size);
+	font-weight: var(--font-base);
+	line-height: 32px;
+	letter-spacing: normal;
+	color: rgba(255, 255, 255, 0.73);
 }
 
 .course-promo__cta-panel {
@@ -574,6 +585,11 @@
 
 	.course-promo__fact:nth-child(odd) {
 		border-right: 1px solid rgba(255, 255, 255, 0.13);
+	}
+
+	.course-promo__fact:last-child {
+		grid-column: 1 / -1;
+		border-right: 0;
 	}
 
 	.course-promo__intro-grid,

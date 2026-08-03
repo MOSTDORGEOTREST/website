@@ -104,6 +104,10 @@ function CourseHero({ onDetails, detailsButtonRef, titleId }) {
 						<span className="course-promo__icon"><CourseIcon name="price" /></span>
 						<p>Стоимость обучения: 50 000</p>
 					</div>
+					<div className="course-promo__fact">
+						<span className="course-promo__icon"><CourseIcon name="certificate" /></span>
+						<p>Удостоверение о повышении квалификации государственного образца</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -203,7 +207,11 @@ function CourseDetails({ detailsRef }) {
 			<div className="course-promo__cta">
 				<div className="course-promo__container course-promo__cta-grid">
 					<h2>
-						Регистрация на курс: <span>[ссылка]</span>
+						Для записи на курсы напишите нам на почту:{' '}
+						<a href="mailto:support@mdgt.ru">support@mdgt.ru</a>
+						<span className="course-promo__cta-note">
+							Просьба указать в письме уровень владения ПК
+						</span>
 					</h2>
 					<div className="course-promo__cta-panel">
 						<div className="course-promo__cta-row">

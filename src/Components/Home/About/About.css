@@ -265,6 +265,21 @@
 	grid-area: img-2;
 }
 
+.about-props__block:nth-child(4) {
+	grid-template-areas:
+		'desc desc desc'
+		'img img-pg img-2';
+	grid-template-columns: repeat(3, auto);
+}
+
+.about-props__block-img--pg {
+	grid-area: img-pg;
+}
+
+.about-props__block:nth-child(4) .about-props__block-img {
+	height: clamp(80px, 22vw, 130px);
+}
+
 @media screen and (max-width: 375px) {
 	.about-props__block:nth-child(3) {
 		grid-template-areas:
@@ -318,6 +333,10 @@
 	.about-props__block-img {
 		height: 220px;
 		width: auto;
+	}
+
+	.about-props__block:nth-child(4) .about-props__block-img {
+		height: 180px;
 	}
 }
 

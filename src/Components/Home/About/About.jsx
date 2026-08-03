@@ -29,6 +29,7 @@ import mosgosexpert from './mosgosexpert.pdf'
 // ИЗОБРАЖЕНИЯ ПРИБОРОВ
 import fridge from './devices/Fridge.png'
 import odometr from './devices/Odometr.png'
+import pg from './devices/pg.png'
 import resonant from './devices/Resonant.png'
 import shear_rock from './devices/Shear_rock.png'
 import stamp from './devices/Stamp.png'
@@ -267,10 +268,15 @@ export default function About() {
 						<div className="about-props">
 							<div className="about-props__block">
 								<img
+									className="about-props__block-img about-props__block-img--pg"
+									src={pg}
+									alt="PG"
+								/>
+								<img
 									className="about-props__block-img"
 									src={wille}
 									alt="Wille"
-								/>
+								/>																
 								<div className="about-props__block-description">
 									<h4>Определение динамических характеристик грунтов</h4>
 									<p>
