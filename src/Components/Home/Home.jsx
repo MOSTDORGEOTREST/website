@@ -4,6 +4,7 @@ import './Home.css'
 import Context from '../../context'
 
 import Welcome from './Welcome/Welcome'
+import CoursePromo from './CoursePromo/CoursePromo'
 import Objects from './Objects/Objects'
 // import LabsVideo from './LabsVideo/LabsVideo'
 // import Courses from './Courses/Courses'
@@ -21,6 +22,7 @@ export default function Home() {
 	return (
 		<>
 			<div className="home-container">
+				<CoursePromo />
 				<Welcome />
 				{showPrice ? <Price /> : null}
 				<Objects />
