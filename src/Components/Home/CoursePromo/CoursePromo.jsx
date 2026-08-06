@@ -8,14 +8,14 @@ import CourseIcon from './CourseIcon'
 import './CoursePromo.css'
 
 const programItems = [
-	'подготовка и анализ геотехнических данных;',
-	'прогнозирование числовых характеристик;',
-	'классификация грунтов и результатов испытаний;',
-	'выявление аномалий и нетипичных наблюдений;',
-	'оценка качества и интерпретация моделей;',
-	'деревья решений и ансамблевые методы;',
-	'основы нейронных сетей;',
-	'реальные кейсы применения ИИ в АО «МОСТДОРГЕОТРЕСТ».',
+	'Подготовка и анализ геотехнических данных',
+	'Прогнозирование числовых характеристик',
+	'Классификация грунтов и результатов испытаний',
+	'Выявление аномалий и нетипичных наблюдений',
+	'Оценка качества и интерпретация моделей',
+	'Деревья решений и ансамблевые методы',
+	'Основы нейронных сетей',
+	'Реальные кейсы применения ИИ в АО «МОСТДОРГЕОТРЕСТ»',
 ]
 
 const programIcons = [
@@ -102,11 +102,7 @@ function CourseHero({ onDetails, detailsButtonRef, titleId }) {
 					</div>
 					<div className="course-promo__fact">
 						<span className="course-promo__icon"><CourseIcon name="price" /></span>
-						<p>Стоимость обучения: 50 000</p>
-					</div>
-					<div className="course-promo__fact">
-						<span className="course-promo__icon"><CourseIcon name="certificate" /></span>
-						<p>Удостоверение о повышении квалификации государственного образца</p>
+						<p>Стоимость обучения: 50 000 рублей</p>
 					</div>
 				</div>
 			</div>
@@ -207,11 +203,7 @@ function CourseDetails({ detailsRef }) {
 			<div className="course-promo__cta">
 				<div className="course-promo__container course-promo__cta-grid">
 					<h2>
-						Для записи на курсы напишите нам на почту:{' '}
-						<a href="mailto:support@mdgt.ru">support@mdgt.ru</a>
-						<span className="course-promo__cta-note">
-							Просьба указать в письме уровень владения ПК
-						</span>
+						Регистрация на курс: <span>[ссылка]</span>
 					</h2>
 					<div className="course-promo__cta-panel">
 						<div className="course-promo__cta-row">
@@ -224,8 +216,9 @@ function CourseDetails({ detailsRef }) {
 						</div>
 						<div className="course-promo__cta-row">
 							<span className="course-promo__icon"><CourseIcon name="price" /></span>
-							<p>Стоимость обучения: 50 000</p>
+							<p>Стоимость обучения: 50 000 рублей</p>
 						</div>
+
 					</div>
 				</div>
 			</div>
