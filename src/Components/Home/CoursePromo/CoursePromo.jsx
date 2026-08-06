@@ -104,6 +104,10 @@ function CourseHero({ onDetails, detailsButtonRef, titleId }) {
 						<span className="course-promo__icon"><CourseIcon name="price" /></span>
 						<p>Стоимость обучения: 50 000 рублей</p>
 					</div>
+					<div className="course-promo__fact">
+						<span className="course-promo__icon"><CourseIcon name="certificate" /></span>
+						<p>Удостоверение о повышении квалификации государственного образца</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -129,10 +133,7 @@ function CourseDetails({ detailsRef }) {
 							методов и нейронных сетей.
 						</p>
 						<p>
-							Особое внимание уделяется практике: слушатели будут работать с
-							лабораторными и инженерными данными, выполнять задания в готовых
-							программных блокнотах и разбирать реальные кейсы внедрения
-							искусственного интеллекта в компании.
+							Особое внимание уделяется знакомству с практическими возможностями искусственного интеллекта: слушатели познакомятся с примерами работы с лабораторными и инженерными данными, попробуют выполнить задания в готовых программных блокнотах и рассмотрят реальные кейсы внедрения искусственного интеллекта в компании.
 						</p>
 					</article>
 					<figure className="course-promo__visual-card">
@@ -203,7 +204,11 @@ function CourseDetails({ detailsRef }) {
 			<div className="course-promo__cta">
 				<div className="course-promo__container course-promo__cta-grid">
 					<h2>
-						Регистрация на курс: <span>[ссылка]</span>
+						Для записи на курсы напишите нам на почту:{' '}
+						<a href="mailto:support@mdgt.ru">support@mdgt.ru</a>
+						<span className="course-promo__cta-note">
+							Просьба указать в письме уровень владения ПК
+						</span>
 					</h2>
 					<div className="course-promo__cta-panel">
 						<div className="course-promo__cta-row">
@@ -218,7 +223,7 @@ function CourseDetails({ detailsRef }) {
 							<span className="course-promo__icon"><CourseIcon name="price" /></span>
 							<p>Стоимость обучения: 50 000 рублей</p>
 						</div>
-
+						
 					</div>
 				</div>
 			</div>
