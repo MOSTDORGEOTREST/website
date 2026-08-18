@@ -102,7 +102,7 @@ function CourseHero({ onDetails, detailsButtonRef, titleId }) {
 					</div>
 					<div className="course-promo__fact">
 						<span className="course-promo__icon"><CourseIcon name="price" /></span>
-						<p>Стоимость обучения: 50 000 рублей</p>
+						<p>Стоимость обучения: 30 000 рублей</p>
 					</div>
 					<div className="course-promo__fact">
 						<span className="course-promo__icon"><CourseIcon name="certificate" /></span>
@@ -221,7 +221,7 @@ function CourseDetails({ detailsRef }) {
 						</div>
 						<div className="course-promo__cta-row">
 							<span className="course-promo__icon"><CourseIcon name="price" /></span>
-							<p>Стоимость обучения: 50 000 рублей</p>
+							<p>Стоимость обучения: 30 000 рублей</p>
 						</div>
 						
 					</div>
