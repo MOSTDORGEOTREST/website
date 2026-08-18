@@ -1,0 +1,20 @@
+<div class="price-modal" id="price-modal" role="dialog" aria-modal="true" aria-label="Прайс-лист" hidden>
+  <div class="pm-scrim" data-price-close></div>
+  <div class="pm-card" id="pm-card">
+    <div class="pm-head">
+      <div class="pm-title">
+        <span class="d-eyebrow">Прайс-лист · от 27.07.2026</span>
+        <h3>Стоимость испытаний</h3>
+      </div>
+      <div class="pm-actions">
+        <a class="pm-dl" href="/assets/price.xlsx" download="ПРАЙС_ЛИСТ_МОСТДОРГЕОТРЕСТ.xlsx"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>XLS</a>
+        <a class="pm-dl" href="/assets/price.pdf" download="ПРАЙС_ЛИСТ_МОСТДОРГЕОТРЕСТ.pdf"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>PDF</a>
+        <button class="pm-close" type="button" data-price-close aria-label="Закрыть прайс-лист"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg></button>
+      </div>
+    </div>
+    <div class="pm-body">
+      <iframe id="pm-frame" title="Прайс-лист лаборатории" loading="lazy"
+        data-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTCkoICrb5eT2LMl4AvjrUEoGdm_YuXYnsEg2M0ALBlJBCVZWba9v0VtSFQAvd8Vg/pubhtml?gid=1786408555&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+    </div>
+  </div>
+</div>

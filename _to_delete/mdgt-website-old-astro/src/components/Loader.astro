@@ -1,0 +1,72 @@
+<!-- Прелоадер: критический CSS и скрипт инлайном — анимация стартует мгновенно,
+     процент отражает реальную загрузку страницы (window.load + фолбэк) -->
+<style is:inline>
+#loader{position:fixed; inset:0; z-index:3000; display:flex; flex-direction:column; justify-content:space-between; padding:clamp(20px,4vw,54px); pointer-events:none}
+#loader .curtain{position:absolute; inset:0; z-index:-1; display:flex}
+#loader .curtain i{flex:1; background:#0F1522; border-right:1px solid rgba(244,239,228,.04)}
+#loader .ld-top{font-family:var(--font-m); font-size:11px; letter-spacing:.35em; color:var(--muted); text-transform:uppercase; display:flex; justify-content:space-between}
+#loader .ld-name{font-family:var(--font-d); font-weight:800; font-size:clamp(26px,5.4vw,72px); letter-spacing:.02em; line-height:1.1}
+#loader .ld-name .dec{display:inline-block; min-width:.62em}
+#loader .ld-bottom{display:flex; justify-content:space-between; align-items:flex-end}
+#loader .ld-status{font-family:var(--font-m); font-size:11px; color:var(--muted); letter-spacing:.2em; text-transform:uppercase}
+#loader .ld-pct{font-family:var(--font-d); font-weight:300; font-size:clamp(60px,12vw,160px); line-height:.9; color:var(--amber); font-variant-numeric:tabular-nums}
+#loader .dec{display:inline-block; min-width:.62em}
+</style>
+<div id="loader" role="status" aria-label="Загрузка">
+  <div class="curtain" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="ld-top"><span>Геотехническая лаборатория</span><span>Москва · 55.87N 37.66E</span></div>
+  <div class="ld-name" id="ld-name" aria-label="МОСТДОРГЕОТРЕСТ"></div>
+  <div class="ld-bottom">
+    <div class="ld-status" id="ld-status">Инициализация зонда…</div>
+    <div class="ld-pct" id="ld-pct">00</div>
+  </div>
+
+<script is:inline>
+(function(){
+  var NAME='МОСТДОРГЕОТРЕСТ';
+  var GLYPHS='АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ0123456789#/\\|—';
+  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.__ldFinished=false;
+  function finish(){
+    if(window.__ldFinished) return;
+    window.__ldFinished=true;
+    window.dispatchEvent(new Event('mdgt:loaded'));
+  }
+  var ldName=document.getElementById('ld-name');
+  var pct=document.getElementById('ld-pct'), st=document.getElementById('ld-status');
+  if(!ldName){ finish(); return; }
+  var spans=[];
+  for(var i=0;i<NAME.length;i++){ var s=document.createElement('span'); s.className='dec'; s.textContent=NAME[i]; ldName.appendChild(s); spans.push(s); }
+  if(reduced){ pct.textContent='100'; addEventListener('load', finish); setTimeout(finish, 3000); return; }
+  var statuses=['Выход на орбиту…','Сканирование поверхности…','Расчёт точки входа…','Готово к погружению'];
+  var p=0, loaded=false, start=performance.now(), last=0, lastGl=0, ended=false;
+  addEventListener('load', function(){ loaded=true; });
+  setTimeout(function(){ loaded=true; }, 8000); /* фолбэк, если load задержался */
+  function tick(now){
+    if(ended) return;
+    var dt=Math.min(200, now-(last||now)); last=now;
+    var t=(now-start)/1000;
+    var target=loaded?100.5:Math.min(88, 18+t*46);
+    p+=(target-p)*(1-Math.exp(-dt/220));   /* независимо от fps */
+    var pr=Math.min(100,Math.round(p));
+    pct.textContent=pr>=100?'100':('0'+pr).slice(-2);
+    st.textContent=statuses[Math.min(3,Math.floor(Math.min(p,99)/26))];
+    if(now-lastGl>=46){
+      lastGl=now;
+      for(var i=0;i<spans.length;i++){
+        if(p/100*NAME.length*1.2>i){ spans[i].textContent=NAME[i]; spans[i].style.color=''; }
+        else { spans[i].textContent=GLYPHS[(Math.random()*GLYPHS.length)|0]; spans[i].style.color='rgba(232,163,61,.5)'; }
+      }
+    }
+    if(loaded&&p>=99.4){
+      ended=true;
+      for(var j=0;j<spans.length;j++){ spans[j].textContent=NAME[j]; spans[j].style.color=''; }
+      pct.textContent='100';
+      finish();
+      return;
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>

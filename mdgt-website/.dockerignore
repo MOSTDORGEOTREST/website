@@ -1,0 +1,7 @@
+node_modules
+dist
+.git
+.astro
+*.md
+docker-compose*.yml
+.DS_Store

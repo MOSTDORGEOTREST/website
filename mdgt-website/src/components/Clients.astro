@@ -1,0 +1,14 @@
+---
+import logos from '../logos.json';
+const row1 = logos.slice(0, 19);
+const row2 = logos.slice(19);
+---
+<section id="clients" class="light-sec" aria-labelledby="clients-title">
+  <div class="wrap sec-head" style="margin-bottom:0">
+    <span class="d-eyebrow">Акт 04 · Доверие</span>
+    <h2 id="clients-title">Нам доверяют</h2>
+  </div>
+  <div class="client-rows" aria-label="Наши заказчики">
+    <div class="client-row" data-row="1">{row1.map((l) => <span class="logo-chip"><img src={l.file} alt={l.alt} loading="lazy" /></span>)}</div>
+    <div class="client-row" data-row="-1">{row2.map((l) => <span class="logo-chip"><img src={l.file} alt={l.alt} loading="lazy" /></span>)}</div>
+  </div>

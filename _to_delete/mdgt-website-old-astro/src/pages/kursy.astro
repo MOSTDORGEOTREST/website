@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Edu from '../components/Edu.astro';
+import Contacts from '../components/Contacts.astro';
+---
+<Base title="Курсы повышения квалификации — МОСТДОРГЕОТРЕСТ" active="edu" light>
+  <PageHead
+    eyebrow="Знания"
+    title="Курсы повышения квалификации"
+    sub="Искусственный интеллект в геотехнике, Plaxis и Midas — от ведущих сотрудников лаборатории."
+  />
+  <Edu />
+  <Contacts subpage />
+</Base>

@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>МОСТДОРГЕОТРЕСТ — Геотехническая лаборатория. Испытания грунтов</title>
+<meta name="description" content="Геотехническая лаборатория АО «МОСТДОРГЕОТРЕСТ» — лидер в лабораторных испытаниях грунтов с 2008 года. Физико-механические, динамические и химические исследования по ГОСТ и ASTM.">
+<link rel="icon" type="image/png" href="{{LOGO}}">
+<style>{{FONTS_CSS}}</style>
+<style>
+:root{
+  --bg:#111826; --bg-2:#141B2A;
+  --ink:#F4EFE4; --ink-dim:#C9C2B2; --muted:#948E80;
+  --line:rgba(244,239,228,.13); --line-soft:rgba(244,239,228,.06);
+  --amber:#E8A33D; --amber-hi:#FFC96B; --amber-deep:#8f5a10;
+  --paper:#F2ECDF; --paper-2:#E9E1CF; --paper-card:#FBF8F1;
+  --ink-d:#221A0E; --ink-d-dim:rgba(34,26,14,.68); --mut-d:rgba(34,26,14,.52);
+  --line-d:rgba(34,26,14,.16); --line-d-soft:rgba(34,26,14,.09);
+  --amber-d:#A66A14;
+  --font-d:'Unbounded',system-ui,sans-serif;
+  --font-s:'Inter',system-ui,sans-serif;
+  --font-m:'JetBrains Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --wrap:min(1280px,92vw);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scrollbar-width:thin; scrollbar-color:var(--amber-deep) var(--bg)}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+html{overflow-x:clip}
+body{background:var(--bg); color:var(--ink); font-family:var(--font-s); font-size:16px; line-height:1.65; overflow-x:clip; -webkit-font-smoothing:antialiased}
+::selection{background:var(--amber); color:#160e02}
+a{color:inherit; text-decoration:none}
+img{display:block; max-width:100%}
+button{font:inherit; cursor:pointer}
+:focus-visible{outline:2px solid var(--amber); outline-offset:3px; border-radius:4px}
+.skip-link{position:fixed; top:-64px; left:16px; z-index:4000; background:var(--amber); color:#160e02; padding:10px 18px; border-radius:8px; font-weight:600; transition:top .2s}
+.skip-link:focus{top:12px}
+
+/* film layers */
+.grain{position:fixed; inset:-100%; z-index:1600; pointer-events:none; opacity:.05; transition:opacity .5s;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 6s steps(6) infinite}
+@keyframes grain{0%,100%{transform:translate(0,0)}25%{transform:translate(-2%,3%)}50%{transform:translate(3%,-2%)}75%{transform:translate(-3%,-3%)}}
+.vignette{position:fixed; inset:0; z-index:1590; pointer-events:none; background:radial-gradient(ellipse at center,transparent 58%,rgba(0,0,0,.5) 100%); transition:opacity .5s}
+body.on-light .grain{opacity:.028}
+body.on-light .vignette{opacity:.22}
+
+/* ---------- CURSOR ---------- */
+.cursor-dot,.cursor-ring{position:fixed; top:0; left:0; z-index:3500; pointer-events:none; border-radius:50%; will-change:transform}
+.cursor-dot{width:8px; height:8px; background:var(--amber); margin:-4px 0 0 -4px}
+.cursor-ring{width:42px; height:42px; margin:-21px 0 0 -21px; border:1px solid rgba(232,163,61,.55); display:grid; place-items:center; transition:width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease),background .3s,border-color .3s}
+.cursor-ring span{font-family:var(--font-m); font-size:9px; letter-spacing:.2em; color:#160e02; opacity:0; transition:opacity .25s; text-transform:uppercase; white-space:nowrap}
+.cursor-ring.is-link{width:64px;height:64px;margin:-32px 0 0 -32px;background:rgba(232,163,61,.16);border-color:var(--amber)}
+.cursor-ring.is-drag{width:92px;height:92px;margin:-46px 0 0 -46px;background:var(--amber);border-color:var(--amber)}
+.cursor-ring.is-drag span{opacity:1}
+@media (hover:none),(max-width:900px){.cursor-dot,.cursor-ring{display:none}}
+
+/* ---------- PRELOADER ---------- */
+#loader{position:fixed; inset:0; z-index:3000; display:flex; flex-direction:column; justify-content:space-between; padding:clamp(20px,4vw,54px); pointer-events:none}
+#loader .curtain{position:absolute; inset:0; z-index:-1; display:flex}
+#loader .curtain i{flex:1; background:#0F1522; border-right:1px solid rgba(244,239,228,.04)}
+#loader .ld-top{font-family:var(--font-m); font-size:11px; letter-spacing:.35em; color:var(--muted); text-transform:uppercase; display:flex; justify-content:space-between}
+#loader .ld-name{font-family:var(--font-d); font-weight:800; font-size:clamp(26px,5.4vw,72px); letter-spacing:.02em; line-height:1.1}
+#loader .ld-name .dec{display:inline-block; min-width:.62em}
+#loader .ld-bottom{display:flex; justify-content:space-between; align-items:flex-end}
+#loader .ld-status{font-family:var(--font-m); font-size:11px; color:var(--muted); letter-spacing:.2em; text-transform:uppercase}
+#loader .ld-pct{font-family:var(--font-d); font-weight:300; font-size:clamp(60px,12vw,160px); line-height:.9; color:var(--amber); font-variant-numeric:tabular-nums}
+
+/* ---------- NAV ---------- */
+.nav{position:fixed; top:0; left:0; right:0; z-index:2000; display:flex; align-items:center; justify-content:space-between; padding:16px clamp(16px,3.5vw,44px); mix-blend-mode:normal; transition:background .4s,backdrop-filter .4s,border-color .4s; border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(11,15,22,.66); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom-color:var(--line-soft)}
+body.on-light .nav{color:var(--ink-d)}
+body.on-light .nav.scrolled{background:rgba(242,236,223,.75); border-bottom-color:var(--line-d-soft)}
+body.on-light .nav-links a{color:var(--ink-d-dim)}
+body.on-light .nav-links a:hover{color:var(--ink-d)}
+body.on-light .nav-links a.active{color:var(--amber-d)}
+body.on-light .nav-links a::after{background:var(--amber-d)}
+body.on-light .nav-brand .nb span{color:var(--mut-d)}
+body.on-light .nav-cta{border-color:var(--line-d); color:var(--ink-d)}
+body.on-light .nav-cta:hover{border-color:var(--amber-d); color:var(--amber-d)}
+body.on-light .burger{border-color:var(--line-d)}
+body.on-light .burger i,body.on-light .burger i::before,body.on-light .burger i::after{background:var(--ink-d)}
+.nav-brand{display:flex; align-items:center; gap:12px}
+.nav-brand img{height:40px; width:40px; object-fit:contain; background:#F6F2E8; border-radius:12px; padding:5px; box-shadow:0 2px 10px rgba(0,0,0,.25)}
+body.on-light .nav-brand img{box-shadow:0 2px 8px rgba(60,42,12,.14); border:1px solid var(--line-d-soft)}
+.nav-brand .nb{line-height:1.25}
+.nav-brand .nb b{font-family:var(--font-d); font-weight:600; font-size:12px; letter-spacing:.1em; display:block}
+.nav-brand .nb span{font-family:var(--font-m); font-size:9px; color:var(--muted); letter-spacing:.28em; text-transform:uppercase}
+.nav-links{display:flex; gap:2px; list-style:none}
+.nav-links a{position:relative; padding:9px 13px; font-size:13px; font-weight:500; color:var(--ink-dim); border-radius:99px; transition:color .25s}
+.nav-links a::after{content:''; position:absolute; left:13px; right:13px; bottom:5px; height:1px; background:var(--amber); transform:scaleX(0); transform-origin:right; transition:transform .35s var(--ease)}
+.nav-links a:hover{color:var(--ink)} .nav-links a:hover::after{transform:scaleX(1); transform-origin:left}
+.nav-links a.active{color:var(--amber)}
+.nav-cta{font-family:var(--font-m); font-size:12.5px; letter-spacing:.04em; border:1px solid var(--line); border-radius:99px; padding:10px 18px; transition:border-color .3s,color .3s,background .3s}
+.nav-cta:hover{border-color:var(--amber); color:var(--amber)}
+.nav-tour{display:inline-flex; align-items:center; gap:8px; padding:10px 18px; border-radius:99px;
+  background:linear-gradient(135deg,var(--amber-hi),var(--amber)); color:#231604; font-weight:700; font-size:13px;
+  box-shadow:0 6px 22px rgba(232,163,61,.35); transition:transform .3s var(--ease),box-shadow .3s; will-change:transform}
+.nav-tour svg{width:16px; height:16px; stroke:#231604; flex:none}
+.nav-tour:hover{transform:translateY(-2px); box-shadow:0 10px 28px rgba(232,163,61,.5)}
+
+/* ---------- PRICE MODAL ---------- */
+.price-modal{position:fixed; inset:0; z-index:2600; display:grid; place-items:center; padding:clamp(0px,2vw,26px)}
+.price-modal[hidden]{display:none}
+.pm-scrim{position:absolute; inset:0; background:rgba(14,11,7,.62); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px)}
+.pm-card{position:relative; width:min(1120px,100%); height:min(880px,94vh); background:var(--paper); border-radius:24px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 44px 110px rgba(0,0,0,.45); color:var(--ink-d); will-change:transform}
+.pm-head{display:flex; justify-content:space-between; align-items:center; gap:14px; padding:16px clamp(16px,2.4vw,26px); border-bottom:1px solid var(--line-d-soft); background:var(--paper-card); flex-wrap:wrap}
+.pm-title .d-eyebrow{color:var(--amber-d); font-size:10px}
+.pm-title h3{font-family:var(--font-d); font-weight:600; font-size:clamp(16px,1.8vw,21px); margin-top:2px}
+.pm-actions{display:flex; align-items:center; gap:8px}
+.pm-dl{display:inline-flex; align-items:center; gap:8px; font-family:var(--font-m); font-size:12px; letter-spacing:.08em; border:1px solid var(--line-d); border-radius:99px; padding:9px 16px; color:var(--ink-d); transition:border-color .25s,color .25s,background .25s}
+.pm-dl svg{width:14px; height:14px; stroke:currentColor; flex:none}
+.pm-dl:hover{border-color:var(--amber-d); color:var(--amber-d)}
+.pm-close{width:42px; height:42px; border-radius:13px; border:1px solid var(--line-d); background:none; display:grid; place-items:center; transition:border-color .25s,background .25s}
+.pm-close svg{width:16px; height:16px; stroke:var(--ink-d)}
+.pm-close:hover{border-color:var(--amber-d); background:rgba(232,163,61,.1)}
+.pm-body{flex:1; background:#fff}
+.pm-body iframe{width:100%; height:100%; border:0; display:block}
+@media(max-width:640px){ .pm-card{height:100dvh; width:100vw; border-radius:0} .price-modal{padding:0} }
+body.on-light .nav-tour{box-shadow:0 6px 20px rgba(166,106,20,.3)}
+@media(max-width:600px){ .nav-tour span{display:none} .nav-tour{padding:11px 13px} }
+.burger{display:none; background:none; border:1px solid var(--line); border-radius:10px; width:44px; height:44px; position:relative; z-index:2101}
+.burger i,.burger i::before,.burger i::after{content:''; position:absolute; left:11px; right:11px; height:2px; background:var(--ink); border-radius:2px; transition:transform .35s var(--ease),opacity .2s}
+.burger i{top:50%; margin-top:-1px} .burger i::before{top:-7px} .burger i::after{top:7px}
+body.menu-open .burger i{background:transparent}
+body.menu-open .burger i::before{transform:translateY(7px) rotate(45deg)}
+body.menu-open .burger i::after{transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{position:fixed; inset:0; z-index:2050; background:rgba(242,236,223,.98); display:flex; flex-direction:column; justify-content:center; padding:0 9vw; gap:4px; opacity:0; visibility:hidden; transition:opacity .4s,visibility .4s}
+body.menu-open .mobile-menu{opacity:1; visibility:visible}
+body.menu-open .burger{background:#F6F2E8}
+body.menu-open .burger i{background:transparent}
+body.menu-open .burger i::before,body.menu-open .burger i::after{background:var(--ink-d)}
+.mobile-menu a{font-family:var(--font-d); font-size:clamp(24px,7vw,40px); font-weight:600; padding:8px 0; color:var(--ink-d); display:flex; align-items:baseline; gap:14px}
+.mobile-menu a i{font-family:var(--font-m); font-style:normal; font-size:11px; color:var(--amber-d)}
+.mobile-menu a:hover{color:var(--amber-d)}
+
+/* ---------- HUD ---------- */
+.hud{position:fixed; z-index:1500; pointer-events:none; font-family:var(--font-m)}
+.hud-depth{right:clamp(14px,2.6vw,36px); bottom:clamp(14px,3vh,32px); text-align:right}
+.hud-depth .hd-num{font-size:clamp(20px,2.4vw,30px); color:var(--amber); font-variant-numeric:tabular-nums; letter-spacing:.03em}
+.hud-depth .hd-cap{font-size:9px; letter-spacing:.34em; color:var(--muted); text-transform:uppercase}
+.hud-rail{left:clamp(14px,2.6vw,36px); top:50%; transform:translateY(-50%); display:flex; flex-direction:column; align-items:center; gap:12px}
+.hud-rail .r-track{width:1px; height:min(36vh,300px); background:var(--line-soft); position:relative}
+.hud-rail .r-fill{position:absolute; top:0; left:0; width:100%; height:0%; background:var(--amber)}
+.hud-rail .r-cap{font-size:9px; letter-spacing:.3em; color:var(--muted); writing-mode:vertical-rl; text-transform:uppercase}
+body.on-light .hud-depth .hd-num{color:var(--amber-d)}
+body.on-light .hud-depth .hd-cap{color:var(--mut-d)}
+body.on-light .hud-rail .r-track{background:var(--line-d-soft)}
+body.on-light .hud-rail .r-fill{background:var(--amber-d)}
+body.on-light .hud-rail .r-cap{color:var(--mut-d)}
+@media(max-width:640px){.hud-depth{display:none}}
+@media(max-width:900px){.hud-rail{display:none}
+  .hud-depth .hd-num{font-size:14px; text-shadow:0 2px 10px rgba(0,0,0,.8)}
+  body.on-light .hud-depth .hd-num{text-shadow:0 1px 8px rgba(242,236,223,.9)}
+  .hud-depth .hd-cap{display:none}}
+
+/* ---------- TYPO HELPERS ---------- */
+.d-eyebrow{font-family:var(--font-m); font-size:clamp(10px,1vw,12px); letter-spacing:.4em; text-transform:uppercase; color:var(--amber)}
+.word{display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.08em; margin-bottom:-.08em}
+.char{display:inline-block; will-change:transform}
+.chapter{font-family:var(--font-d); font-weight:800; letter-spacing:0; line-height:1.04}
+
+/* ---------- ACT I : HERO ---------- */
+#hero{height:100vh; position:relative; overflow:hidden}
+#gl,#gl2d{position:absolute; inset:0; width:100%; height:100%}
+.hero-content{position:relative; z-index:3; height:100%; display:flex; flex-direction:column; justify-content:center; width:var(--wrap); margin:0 auto}
+.hero-tag{display:inline-flex; align-items:center; gap:12px; margin-bottom:clamp(18px,3vh,30px)}
+.hero-tag .live{width:7px;height:7px;border-radius:50%;background:#41D97C; box-shadow:0 0 12px #41D97C; animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1.hero-h{font-family:var(--font-d); font-weight:800; font-size:clamp(34px,7vw,104px); line-height:1.02; letter-spacing:0; max-width:15ch}
+h1 .h-amber{color:var(--amber)}
+.hero-foot{position:absolute; left:max(4vw,(100vw - min(1280px,92vw))/2); right:clamp(120px,14vw,230px); bottom:clamp(20px,5vh,46px); z-index:3; display:flex; justify-content:space-between; align-items:flex-end; gap:24px}
+.hero-sub{max-width:44ch; color:var(--ink-dim); font-size:clamp(14px,1.35vw,17px); font-weight:300}
+.hf-left{display:flex; flex-direction:column; align-items:flex-start; gap:20px}
+.btn-sm{padding:12px 24px; font-size:13.5px}
+.hero-metrics{display:flex; gap:clamp(20px,3.4vw,54px)}
+.hm .hm-n{font-family:var(--font-d); font-weight:600; font-size:clamp(22px,2.6vw,38px); color:var(--amber); font-variant-numeric:tabular-nums}
+.hm .hm-c{font-family:var(--font-m); font-size:10px; letter-spacing:.18em; color:var(--muted); text-transform:uppercase; margin-top:4px; max-width:18ch}
+.hero-scroll{position:absolute; left:50%; bottom:clamp(18px,4vh,40px); transform:translateX(-50%); z-index:3; font-family:var(--font-m); font-size:9.5px; letter-spacing:.42em; color:var(--muted); text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:10px; pointer-events:none}
+.hero-scroll::after{content:''; width:1px; height:44px; background:linear-gradient(180deg,var(--amber),transparent); animation:drop 1.8s var(--ease) infinite}
+@keyframes drop{0%{transform:scaleY(0); transform-origin:top}55%{transform:scaleY(1); transform-origin:top}56%{transform-origin:bottom}100%{transform:scaleY(0); transform-origin:bottom}}
+
+/* ---------- MARQUEE STRIPS ---------- */
+.strip{overflow:hidden; padding:clamp(16px,3vh,30px) 0; background:#2F5A4A; position:relative; z-index:5}
+.strip-track{display:flex; width:max-content; will-change:transform}
+.strip-item{font-family:var(--font-d); font-weight:800; font-size:clamp(34px,6vw,84px); line-height:1; white-space:nowrap; padding:0 .45em; color:transparent; -webkit-text-stroke:1px rgba(244,239,228,.4)}
+.strip-item.fill{color:var(--amber); -webkit-text-stroke:0}
+.strip--sub{background:var(--paper-2); border-top:1px solid var(--line-d-soft); border-bottom:1px solid var(--line-d-soft)}
+.strip--sub .strip-item{font-size:clamp(22px,3.4vw,46px); -webkit-text-stroke-color:rgba(166,106,20,.45)}
+.strip--sub .strip-item.fill{color:var(--amber-d)}
+
+/* ---------- ACT II : DESCENT ---------- */
+#descent{position:relative}
+.shaft-view{height:100vh; overflow:hidden; position:relative}
+.shaft{position:absolute; inset:0; will-change:transform}
+.stratum{position:absolute; left:0; right:0; height:100vh; overflow:hidden; display:flex; align-items:center; color:var(--tx)}
+.stratum .st-band{position:absolute; inset:0; z-index:0;
+  background:
+    radial-gradient(640px 300px at 18% 28%, rgba(0,0,0,.16), transparent 70%),
+    radial-gradient(560px 280px at 78% 56%, rgba(255,255,255,.12), transparent 70%),
+    radial-gradient(720px 340px at 44% 86%, rgba(0,0,0,.13), transparent 70%),
+    radial-gradient(500px 240px at 60% 12%, rgba(255,255,255,.09), transparent 70%),
+    linear-gradient(180deg,var(--sa) 0%,var(--sb) 100%)}
+.stratum .st-band::after{content:''; position:absolute; inset:0; opacity:.3; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  background-size:220px 220px}
+.st-bound{position:absolute; top:-2px; left:0; width:100%; height:clamp(56px,10vh,100px); z-index:1; display:block}
+.st-wave{position:absolute; left:0; width:100%; top:60%; height:clamp(40px,8vh,74px); z-index:1; opacity:.85; transform-origin:center; animation:wavePulse 2s ease-in-out infinite}
+@keyframes wavePulse{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.45)}}
+.st-particles{position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden}
+.st-particles i{position:absolute; display:block}
+.stratum .st-in{position:relative; z-index:2; width:var(--wrap); margin:0 auto; display:grid; grid-template-columns:auto 1fr; gap:clamp(20px,5vw,90px); align-items:center}
+.stratum .st-idx{font-family:var(--font-d); font-weight:800; font-size:clamp(90px,16vw,230px); line-height:.9; color:transparent; -webkit-text-stroke:1.5px var(--sc); opacity:.95; will-change:transform}
+.stratum .st-depth{font-family:var(--font-m); font-size:12px; color:var(--sc); letter-spacing:.2em; margin-bottom:8px; display:flex; align-items:center; gap:12px; text-transform:uppercase}
+.stratum .st-depth::before{content:''; width:44px; height:1px; background:var(--sc); flex:none}
+.stratum .st-soil{font-family:var(--font-m); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--mut); margin-bottom:16px}
+.stratum h3{font-family:var(--font-d); font-weight:600; font-size:clamp(24px,3.4vw,50px); line-height:1.1; margin-bottom:16px; max-width:16ch}
+.stratum p{color:var(--mut); max-width:52ch; font-size:clamp(14px,1.35vw,17px); font-weight:400}
+.stratum .st-chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:22px}
+.stratum .chip{border-color:var(--mut); color:var(--mut)}
+.chip{font-family:var(--font-m); font-size:11px; letter-spacing:.06em; padding:8px 14px; border-radius:99px; border:1px solid var(--line); color:var(--muted)}
+.st-act{position:absolute; z-index:3; top:clamp(92px,13vh,140px); left:0; right:0; text-align:center; pointer-events:none; color:#F8F2E6; padding:0 4vw}
+.st-act .d-eyebrow{display:block; margin-bottom:10px; color:#EBCB9C}
+.st-act h2{font-family:var(--font-d); font-weight:800; font-size:clamp(17px,2.1vw,28px); letter-spacing:.05em}
+
+#devices{position:relative; background:var(--paper); color:var(--ink-d)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.chip-row{display:flex; gap:8px; flex-wrap:wrap}
+
+/* ---------- ACT IV : OBJECTS (horizontal dolly, light) ---------- */
+#objects{position:relative; background:var(--paper-2); color:var(--ink-d)}
+#objects .d-eyebrow{color:var(--amber-d)}
+#objects .h-head p{color:var(--ink-d-dim)}
+#objects .h-arrow{color:var(--amber-d)!important}
+#objects .h-arrow::after{background:var(--amber-d)!important}
+#objects .h-count{color:var(--mut-d)}
+#objects .h-progress{background:var(--line-d-soft)}
+#objects .h-progress i{background:var(--amber-d)}
+#objects .pan-idx{-webkit-text-stroke-color:rgba(166,106,20,.5)}
+.h-view{height:100vh; overflow:hidden; position:relative}
+.h-track{position:absolute; top:0; bottom:0; left:0; display:flex; align-items:center; will-change:transform}
+.h-head{flex:0 0 auto; width:min(46vw,640px); padding:0 clamp(24px,5vw,80px)}
+.h-head h2{font-family:var(--font-d); font-weight:800; font-size:clamp(30px,4.4vw,64px); line-height:1.05; margin:14px 0 18px}
+.h-head p{color:var(--muted); max-width:36ch; font-weight:300}
+.h-head .h-arrow{margin-top:34px; font-family:var(--font-m); font-size:11px; letter-spacing:.3em; color:var(--amber); text-transform:uppercase; display:flex; align-items:center; gap:14px}
+.h-head .h-arrow::after{content:''; width:70px; height:1px; background:var(--amber); animation:arrowx 1.6s var(--ease) infinite}
+@keyframes arrowx{0%{transform:scaleX(0); transform-origin:left}60%{transform:scaleX(1); transform-origin:left}61%{transform-origin:right}100%{transform:scaleX(0); transform-origin:right}}
+.pan{flex:0 0 auto; width:min(62vw,860px); height:72vh; margin-right:clamp(30px,4vw,70px); position:relative; will-change:transform}
+.pan-idx{position:absolute; top:-.34em; left:-24px; z-index:3; font-family:var(--font-d); font-weight:800; font-size:clamp(70px,9vw,130px); color:transparent; -webkit-text-stroke:1px rgba(232,163,61,.5); line-height:1; pointer-events:none}
+.pan-mask{position:absolute; inset:0; overflow:hidden; border-radius:18px; box-shadow:0 26px 60px rgba(60,42,12,.24)}
+.pan-img{position:absolute; inset:-12% -14%; background-size:cover; background-position:center; will-change:transform; transform:scale(1.05)}
+.pan-mask::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.28) 0%,transparent 40%,rgba(0,0,0,.72) 100%)}
+.pan-cap{position:absolute; left:clamp(18px,3vw,36px); bottom:clamp(18px,3.4vh,32px); z-index:2}
+.pan-cap{text-shadow:0 2px 18px rgba(0,0,0,.55); color:#F8F5EE}
+.pan-cap h3{color:#FDFBF6}
+.pan-cap .pc-sub{color:rgba(248,245,238,.85)}
+.pan-cap .pc-tag{font-family:var(--font-m); font-size:10.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--amber-hi)}
+.pan-cap h3{font-family:var(--font-d); font-weight:600; font-size:clamp(20px,2.6vw,38px); line-height:1.1; margin-top:8px; text-shadow:0 4px 24px rgba(0,0,0,.6)}
+.pan-cap .pc-sub{font-size:12.5px; color:var(--ink-dim); margin-top:6px}
+.h-progress{position:absolute; left:clamp(20px,5vw,80px); right:clamp(20px,5vw,80px); bottom:clamp(18px,3.4vh,30px); height:1px; background:var(--line-soft); z-index:5}
+.h-progress i{position:absolute; inset:0; background:var(--amber); transform:scaleX(0); transform-origin:left}
+.h-count{position:absolute; right:clamp(20px,5vw,80px); top:clamp(90px,13vh,130px); font-family:var(--font-m); font-size:12px; color:var(--ink-dim); font-variant-numeric:tabular-nums; z-index:5}
+
+/* ---------- TESTS (light) ---------- */
+#tests{padding:clamp(90px,14vh,150px) 0; background:var(--paper); color:var(--ink-d); position:relative}
+.wrap{width:var(--wrap); margin:0 auto}
+.sec-head{margin-bottom:clamp(34px,6vh,60px)}
+.light-sec .d-eyebrow{color:var(--amber-d)}
+.sec-head h2{font-family:var(--font-d); font-weight:800; font-size:clamp(28px,4.6vw,64px); line-height:1.05; margin-top:12px}
+.sec-sub{color:var(--ink-d-dim); max-width:62ch; font-weight:400; margin-top:16px}
+.tests-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(255px,1fr)); gap:12px}
+.test-card{border:1px solid var(--line-d-soft); border-radius:14px; padding:22px; background:var(--paper-card); position:relative; overflow:hidden; transition:transform .35s var(--ease),border-color .35s,box-shadow .35s; will-change:transform; box-shadow:0 2px 10px rgba(60,42,12,.05)}
+.test-card::before{content:''; position:absolute; inset:0; background:radial-gradient(400px 160px at var(--gx,50%) 0%,rgba(232,163,61,.16),transparent 70%); opacity:0; transition:opacity .35s}
+.test-card:hover{transform:translateY(-5px); border-color:rgba(166,106,20,.5); box-shadow:0 14px 30px rgba(60,42,12,.12)}
+.test-card:hover::before{opacity:1}
+.test-card .t-num{font-family:var(--font-m); font-size:10.5px; color:var(--amber-d); letter-spacing:.2em}
+.test-card h3{font-size:16px; font-weight:600; margin:10px 0 6px; line-height:1.35; font-family:var(--font-s)}
+.test-card p{font-size:13px; color:var(--mut-d)}
+
+/* ---------- CALC (light) ---------- */
+#calc{padding:clamp(90px,14vh,150px) 0; background:var(--paper-2); color:var(--ink-d); overflow:hidden}
+.calc-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,80px); align-items:center}
+.calc-copy p{color:var(--ink-d-dim); margin-bottom:14px; font-weight:400}
+.calc-copy .chip{border-color:var(--line-d); color:var(--mut-d)}
+#mesh-canvas{width:100%; aspect-ratio:1.2; border-radius:20px; border:1px solid var(--line-d-soft); background:#FBF8F1; box-shadow:0 14px 40px rgba(60,42,12,.1)}
+
+/* ---------- EDU (light) ---------- */
+#edu{padding:clamp(90px,14vh,150px) 0; background:var(--paper); color:var(--ink-d)}
+.edu-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:16px}
+.edu-card{border:1px solid var(--line-d-soft); border-radius:22px; padding:clamp(26px,3.4vw,46px); background:var(--paper-card); position:relative; overflow:hidden; transition:border-color .35s,transform .35s var(--ease),box-shadow .35s; box-shadow:0 2px 12px rgba(60,42,12,.06)}
+.edu-card:hover{border-color:rgba(166,106,20,.45); transform:translateY(-4px); box-shadow:0 16px 36px rgba(60,42,12,.12)}
+.edu-card.featured{background:linear-gradient(150deg,rgba(232,163,61,.2),rgba(232,163,61,.04) 60%),var(--paper-card)}
+.edu-tag{display:inline-block; font-family:var(--font-m); font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--amber-d); border:1px solid rgba(166,106,20,.45); padding:7px 14px; border-radius:99px; margin-bottom:18px}
+.edu-card h3{font-family:var(--font-d); font-weight:600; font-size:clamp(19px,2.3vw,30px); line-height:1.16; margin-bottom:12px}
+.edu-card h3 em{color:var(--amber-d); font-style:normal}
+.edu-card p{color:var(--ink-d-dim); font-size:14.5px; max-width:56ch; font-weight:400}
+.edu-facts{display:grid; grid-template-columns:repeat(2,1fr); gap:10px 20px; margin:22px 0}
+.edu-fact{display:flex; align-items:center; gap:10px; font-size:13px; color:var(--mut-d)}
+.edu-fact svg{width:16px; height:16px; stroke:var(--amber-d); flex:none}
+.edu-price{font-family:var(--font-d); font-size:24px; color:var(--amber-d); font-weight:600; margin:6px 0 20px}
+
+/* buttons */
+.btn{display:inline-flex; align-items:center; gap:10px; padding:15px 28px; border-radius:99px; font-weight:600; font-size:14.5px; border:none; will-change:transform; position:relative; overflow:hidden; transition:color .3s}
+.btn .btn-fill{position:absolute; inset:0; z-index:0; border-radius:inherit; transform:translateY(101%); transition:transform .45s var(--ease)}
+.btn>*{position:relative; z-index:1}
+.btn-primary{background:linear-gradient(135deg,var(--amber-hi),var(--amber)); color:#1d1302; box-shadow:0 10px 34px rgba(232,163,61,.3)}
+.btn-primary .btn-fill{background:#F4EFE4}
+.btn-primary:hover .btn-fill{transform:translateY(0)}
+.btn-ghost{background:transparent; color:var(--ink); border:1px solid var(--line)}
+.btn-ghost .btn-fill{background:var(--amber)}
+.btn-ghost:hover{color:#1d1302; border-color:var(--amber)}
+.btn-ghost:hover .btn-fill{transform:translateY(0)}
+.light-sec .btn-ghost{color:var(--ink-d); border-color:var(--line-d)}
+.light-sec .btn-ghost:hover{border-color:var(--amber-d)}
+
+/* ---------- CLIENTS (light) ---------- */
+#clients{padding:clamp(80px,12vh,130px) 0 clamp(50px,8vh,80px); background:var(--paper-2); color:var(--ink-d); overflow:hidden}
+.client-rows{display:flex; flex-direction:column; gap:14px; margin-top:30px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent); mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.client-row{display:flex; width:max-content; gap:12px; will-change:transform}
+.client-chip{white-space:nowrap; font-size:13.5px; font-weight:500; color:var(--ink-d-dim); padding:13px 24px; border:1px solid var(--line-d-soft); border-radius:99px; background:var(--paper-card)}
+
+/* ---------- FINALE (light) ---------- */
+#contacts{padding:clamp(110px,17vh,190px) 0 40px; background:radial-gradient(1100px 620px at 50% 0%,rgba(232,163,61,.22),transparent 62%),var(--paper); color:var(--ink-d); position:relative; overflow:hidden}
+.fin-watermark{position:absolute; left:50%; top:6%; transform:translateX(-50%); font-family:var(--font-d); font-weight:800; font-size:clamp(120px,22vw,340px); color:transparent; -webkit-text-stroke:1px rgba(166,106,20,.14); pointer-events:none; user-select:none; white-space:nowrap}
+.fin{position:relative; z-index:2; text-align:center}
+.fin .d-eyebrow{color:var(--amber-d)}
+.fin h2{font-family:var(--font-d); font-weight:800; font-size:clamp(34px,6.4vw,92px); line-height:1.04; margin:18px auto 22px; max-width:16ch;
+  background:linear-gradient(180deg,var(--ink-d) 35%,var(--amber-d) 125%); -webkit-background-clip:text; background-clip:text; color:transparent}
+.fin p{color:var(--ink-d-dim); max-width:52ch; margin:0 auto; font-weight:400}
+.fin-head{text-align:center}
+.fin-grid{display:grid; grid-template-columns:1.15fr 1fr; gap:14px; margin-top:clamp(40px,7vh,70px); text-align:left}
+/* тёмная «грунтовая» CTA-карточка */
+.fin-main{position:relative; overflow:hidden; border-radius:26px; padding:clamp(28px,3.4vw,50px); padding-right:clamp(40px,4.5vw,66px);
+  background:#2C2218; color:#F6EFE3; display:flex; flex-direction:column; align-items:flex-start; gap:16px;
+  box-shadow:0 30px 70px rgba(60,42,12,.28)}
+.fin-main::before{content:''; position:absolute; inset:0; opacity:.22; mix-blend-mode:overlay; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  background-size:220px 220px}
+.fm-glow{position:absolute; right:-24%; top:-34%; width:75%; aspect-ratio:1; border-radius:50%; pointer-events:none;
+  background:radial-gradient(circle, rgba(232,163,61,.4), transparent 65%); filter:blur(12px)}
+.fm-strat{position:absolute; right:0; top:0; bottom:0; width:12px;
+  background:linear-gradient(180deg,#6F563C 0 16.6%,#A26A35 0 33.3%,#DDB56A 0 50%,#B9D4E4 0 66.6%,#8E9198 0 83.3%,#47836E 0 100%)}
+.fm-label{font-family:var(--font-m); font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--amber-hi)}
+.fm-phone{font-family:var(--font-d); font-weight:600; font-size:clamp(26px,2.9vw,44px); color:#F8F2E6; line-height:1.1; transition:color .3s}
+.fm-phone:hover{color:var(--amber-hi)}
+.fin-main .fm-note{color:rgba(246,239,227,.75); font-size:14.5px; max-width:44ch; margin:0}
+.fin-main .btn-ghost{color:#F6EFE3; border-color:rgba(246,239,227,.3)}
+.fin-main .btn-ghost:hover{border-color:var(--amber)}
+.fm-row{display:flex; gap:10px; flex-wrap:wrap}
+/* инфо-карточки */
+.fin-side{display:flex; flex-direction:column; gap:14px}
+.contact-card{border:1px solid var(--line-d-soft); border-radius:20px; background:var(--paper-card); padding:22px 24px; transition:border-color .3s,transform .3s var(--ease),box-shadow .3s; box-shadow:0 2px 12px rgba(60,42,12,.06)}
+.contact-card:hover{border-color:rgba(166,106,20,.45); transform:translateY(-3px); box-shadow:0 14px 30px rgba(60,42,12,.12)}
+.contact-card .cc-label{font-family:var(--font-m); font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--mut-d); margin-bottom:8px}
+.cc-row{display:flex; align-items:center; gap:11px; font-family:var(--font-m); font-size:14px; color:var(--ink-d); padding:9px 0; border-bottom:1px dashed var(--line-d-soft); transition:color .2s}
+.cc-row:last-of-type{border-bottom:0}
+.cc-row svg{width:15px; height:15px; stroke:var(--amber-d); flex:none}
+a.cc-row:hover{color:var(--amber-d)}
+.cc-row--static{font-family:var(--font-s); color:var(--ink-d-dim)}
+.cc-map{display:inline-flex; align-items:center; margin-top:10px; font-size:13px; font-weight:500; color:var(--amber-d); transition:color .2s}
+.cc-map:hover{color:var(--ink-d)}
+/* фирменная полоса-разрез + футер */
+.strat-strip{height:6px; border-radius:3px; margin-top:clamp(50px,9vh,80px);
+  background:linear-gradient(90deg,#6F563C 0 16.6%,#A26A35 0 33.3%,#DDB56A 0 50%,#B9D4E4 0 66.6%,#8E9198 0 83.3%,#47836E 0 100%)}
+footer{margin-top:18px; padding:20px 0 26px; font-size:12px; color:var(--mut-d)}
+.foot-row{display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; padding-right:clamp(90px,10vw,150px)}
+.foot-row .mono{font-family:var(--font-m); font-size:11px}
+.foot-nav{display:flex; gap:20px; font-size:12.5px}
+.foot-nav a{transition:color .25s}
+.foot-nav a:hover{color:var(--amber-d)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:1080px){ .nav-links,.nav-cta{display:none} .burger{display:block} }
+/* ---------- EQUIPMENT PARK ---------- */
+#devices{padding:clamp(90px,14vh,150px) 0; background:var(--paper); color:var(--ink-d)}
+.eq-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(245px,1fr)); gap:14px}
+.eq-card{background:var(--paper-card); border:1px solid var(--line-d-soft); border-radius:18px; padding:16px 18px 20px; box-shadow:0 2px 10px rgba(60,42,12,.05); transition:transform .35s var(--ease),border-color .35s,box-shadow .35s; will-change:transform}
+.eq-card:hover{transform:translateY(-5px); border-color:rgba(166,106,20,.5); box-shadow:0 16px 32px rgba(60,42,12,.13)}
+.eq-thumb{height:150px; display:grid; place-items:center; background:#FFFFFF; border:1px solid var(--line-d-soft); border-radius:12px; margin-bottom:14px; overflow:hidden}
+.eq-thumb img{max-height:124px; max-width:80%; width:auto; transition:transform .45s var(--ease)}
+.eq-card:hover .eq-thumb img{transform:scale(1.06)}
+.eq-thumb--icon{background:linear-gradient(145deg,rgba(232,163,61,.16),rgba(232,163,61,.03))}
+.eq-thumb--icon svg{width:44px; height:44px; stroke:var(--amber-d)}
+.eq-tag{font-family:var(--font-m); font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--amber-d)}
+.eq-card h3{font-family:var(--font-s); font-size:15.5px; font-weight:600; line-height:1.3; margin:8px 0 5px}
+.eq-card p{font-size:12.5px; color:var(--mut-d); line-height:1.5}
+
+/* ---------- CLIENT LOGOS ---------- */
+.logo-chip{width:176px; height:92px; flex:none; display:grid; place-items:center; background:#FFFFFF; border:1px solid var(--line-d-soft); border-radius:14px; padding:14px 18px; transition:border-color .3s,transform .3s var(--ease)}
+.logo-chip:hover{border-color:rgba(166,106,20,.45); transform:translateY(-3px)}
+.logo-chip img{max-width:100%; max-height:62px; width:auto; height:auto; object-fit:contain}
+
+/* ---------- 3D TOUR LINK ---------- */
+
+@media(max-width:560px){ .edu-facts{grid-template-columns:1fr} }
+@media(max-width:640px){ .strip-item{font-size:clamp(24px,8vw,40px)} .strip--sub .strip-item{font-size:clamp(17px,5vw,26px)} }
+@media(max-width:900px){
+  #hero{height:auto; min-height:100dvh; padding-bottom:60px}
+  #gl{height:100%}
+  .hero-content{height:auto; padding-top:48vh}
+  @media(orientation:portrait){ .hero-content{padding-top:min(calc(84vw + 118px), 64vh)} }
+  .hero-foot{position:static; width:92vw; margin:30px auto 0; flex-direction:column; align-items:flex-start; gap:22px}
+  .hero-metrics{flex-wrap:wrap; row-gap:18px}
+  .hero-scroll{position:static; transform:none; margin:38px auto 0; width:max-content}
+  .calc-grid,.edu-grid{grid-template-columns:1fr}
+  .fin-grid{grid-template-columns:1fr}
+  .fm-strat{width:8px}
+  .foot-row{padding-right:0}
+  .stratum{flex-direction:column; justify-content:center; align-items:stretch}
+  .st-act{position:static; text-align:left; width:92vw; margin:0 auto 30px; padding:0}
+  .stratum .st-in{grid-template-columns:1fr; gap:10px}
+  .stratum .st-idx{font-size:clamp(70px,20vw,120px); position:absolute; right:0; top:6%; opacity:.35}
+  .hero-foot{flex-direction:column; align-items:flex-start; gap:20px}
+  .h-head{width:86vw}
+  .pan{width:80vw; height:60vh}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important}
+  .grain{display:none}
+  .st-act{position:static; text-align:left; width:92vw; margin:0 auto 30px; padding:0}
+  .stratum{flex-direction:column; align-items:stretch}
+  .h-track{position:relative; flex-wrap:wrap; height:auto}
+  .h-view{height:auto; padding:60px 0}
+  .pan{width:92vw; height:56vh; margin:0 auto 30px}
+  .stratum{position:relative; height:auto; padding:60px 0}
+  .shaft{position:relative}
+  .shaft-view{height:auto}
+}
+</style>
+</head>
+<body id="body">
+<a class="skip-link" href="#descent">Перейти к содержанию</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span>Дальше</span></div>
+
+<!--SEC:LOADER-->
+<!-- PRELOADER -->
+<div id="loader" role="status" aria-label="Загрузка">
+  <div class="curtain" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="ld-top"><span>Геотехническая лаборатория</span><span>Москва · 55.87N 37.66E</span></div>
+  <div class="ld-name" id="ld-name" aria-label="МОСТДОРГЕОТРЕСТ"></div>
+  <div class="ld-bottom">
+    <div class="ld-status" id="ld-status">Инициализация зонда…</div>
+    <div class="ld-pct" id="ld-pct">00</div>
+  </div>
+
+<!--/SEC:LOADER--></div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <a class="nav-brand" href="#hero" data-scroll>
+    <img src="{{LOGO}}" alt="Логотип МОСТДОРГЕОТРЕСТ" width="36" height="36">
+    <span class="nb"><b>МОСТДОРГЕОТРЕСТ</b><span>lab · since 2008</span></span>
+  </a>
+  <nav aria-label="Основная навигация">
+    <ul class="nav-links">
+      <li><a href="{{HOME}}#descent" data-scroll data-nav>Лаборатории</a></li>
+      <li><a href="{{HOME}}#objects" data-scroll data-nav>Объекты</a></li>
+      <li><a href="oborudovanie.html" {{ACT_EQ}}>Оборудование</a></li>
+      <li><a href="kursy.html" {{ACT_EDU}}>Курсы</a></li>
+      <li><a href="soft.html" {{ACT_SOFT}}>Софты</a></li>
+      <li><a href="{{HOME}}#contacts" data-scroll data-nav>Контакты</a></li>
+    </ul>
+  </nav>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a class="nav-tour" href="https://mdgt.ru/3d/output-3/index.html" target="_blank" rel="noopener" title="Онлайн-тур по лаборатории">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 5.7 4 9s-1.5 6.4-4 9c-2.5-2.6-4-5.7-4-9s1.5-6.4 4-9z"/></svg>
+      <span>3D-тур</span>
+    </a>
+    <a class="nav-cta" href="{{HOME}}#contacts" data-scroll>+7 495 656-69-10</a>
+    <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false"><i></i></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="{{HOME}}#descent" data-scroll><i>01</i>Лаборатории</a>
+  <a href="{{HOME}}#objects" data-scroll><i>02</i>Объекты</a>
+  <a href="oborudovanie.html"><i>03</i>Оборудование</a>
+  <a href="kursy.html"><i>04</i>Курсы</a>
+  <a href="soft.html"><i>05</i>Софты</a>
+  <a href="{{HOME}}#contacts" data-scroll><i>06</i>Контакты</a>
+  <a href="https://mdgt.ru/3d/output-3/index.html" target="_blank" rel="noopener"><i>3D</i>Онлайн-тур</a>
+</div>
+
+<!--SEC:HUD-->
+<!-- HUD -->
+<div class="hud hud-rail" aria-hidden="true">
+  <span class="r-cap">Скважина</span>
+  <div class="r-track"><i class="r-fill" id="r-fill"></i></div>
+</div>
+<div class="hud hud-depth" aria-hidden="true">
+  <div class="hd-num" id="hd-num">−0.0 м</div>
+  <div class="hd-cap">Глубина погружения</div>
+</div>
+
+
+<!--/SEC:HUD--><main>
+<!--SEC:HERO-->
+<!-- ============ ACT I : HERO ============ -->
+<section id="hero" aria-label="Главный экран">
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="hero-content" id="hero-content">
+    <span class="hero-tag"><span class="live"></span><span class="d-eyebrow">ГОСТ ISO/IEC 17025 · Аккредитована · с 2008</span></span>
+    <h1 class="hero-h" id="hero-h">Мы знаем, что́ земля скрывает <span class="h-amber">внутри</span></h1>
+  </div>
+  <div class="hero-foot">
+    <div class="hf-left">
+      <p class="hero-sub" id="hero-sub">Геотехническая лаборатория АО «МОСТДОРГЕОТРЕСТ». Лидер в лабораторных испытаниях грунтов: физика, механика, динамика, мерзлота, скала, химия — по ГОСТ и ASTM.</p>
+      <button class="btn btn-primary btn-sm" type="button" data-price-open><span class="btn-fill" aria-hidden="true"></span><span>Прайс-лист</span></button>
+    </div>
+    <div class="hero-metrics" id="hero-metrics">
+      <div class="hm"><div class="hm-n" data-count="18">0</div><div class="hm-c">лет испытываем грунты</div></div>
+      <div class="hm"><div class="hm-n" data-count="6">0</div><div class="hm-c">специализированных лабораторий</div></div>
+      <div class="hm"><div class="hm-n" data-count="48" data-suffix=" м">0</div><div class="hm-c">глубина этой страницы</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">Начать погружение</div>
+
+<!--/SEC:HERO--></section>
+
+<!--SEC:DESCENT-->
+<!-- ============ ACT II : DESCENT ============ -->
+<section id="descent" aria-label="Шесть лабораторий">
+  <div class="shaft-view" id="shaft-view">
+    <div class="shaft" id="shaft">
+      <article class="stratum" data-soil="humus" style="--sa:#6F563C; --sb:#5B4630; --tx:#F8F2E6; --mut:rgba(248,242,230,.8); --sc:#EBCB9C; top:0">
+        <div class="st-band" aria-hidden="true"></div>
+        <svg class="st-bound" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path transform="translate(0,14)" fill="rgba(0,0,0,.18)" d="M0,0 L1440,0 L1440,38 C1300,62 1220,24 1080,48 C940,72 880,30 720,54 C560,78 470,34 360,56 C250,78 120,40 0,62 Z"/><path fill="#4A3A28" d="M0,0 L1440,0 L1440,38 C1300,62 1220,24 1080,48 C940,72 880,30 720,54 C560,78 470,34 360,56 C250,78 120,40 0,62 Z"/></svg>
+        <div class="st-particles" aria-hidden="true"></div>
+        <div class="st-act">
+          <span class="d-eyebrow">Акт 02 · Погружение</span>
+          <h2>Шесть лабораторий — шесть горизонтов</h2>
+        </div>
+        <div class="st-in">
+          <div class="st-idx" aria-hidden="true">01</div>
+          <div class="st-body">
+            <div class="st-depth">Горизонт 0.0 — 2.0 м</div>
+            <div class="st-soil">Тип грунта: почвенно-растительный слой</div>
+            <h3>Физические свойства грунтов</h3>
+            <p>Плотность, влажность, просадочность, гранулометрический состав — с высокой точностью, различными методами.</p>
+            <div class="st-chips"><span class="chip">ГОСТ</span><span class="chip">ASTM</span><span class="chip">Классификация</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="stratum" data-soil="loam" style="--sa:#A26A35; --sb:#8B5A2C; --tx:#FFF7EA; --mut:rgba(255,247,234,.82); --sc:#F7D398; top:100vh">
+        <div class="st-band" aria-hidden="true"></div>
+        <svg class="st-bound" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path transform="translate(0,14)" fill="rgba(0,0,0,.18)" d="M0,0 L1440,0 L1440,46 C1290,24 1180,66 1040,42 C900,18 800,64 660,46 C520,28 430,70 300,50 C180,32 90,62 0,44 Z"/><path fill="#5B4630" d="M0,0 L1440,0 L1440,46 C1290,24 1180,66 1040,42 C900,18 800,64 660,46 C520,28 430,70 300,50 C180,32 90,62 0,44 Z"/></svg>
+        <div class="st-particles" aria-hidden="true"></div>
+        <div class="st-in">
+          <div class="st-idx" aria-hidden="true">02</div>
+          <div class="st-body">
+            <div class="st-depth">Горизонт 2.0 — 8.0 м</div>
+            <div class="st-soil">Тип грунта: суглинок тугопластичный</div>
+            <h3>Механические свойства грунтов</h3>
+            <p>Установки трёхосного сжатия и одометры. Обеспечение входными параметрами моделей HS, SS, SSC, MC.</p>
+            <div class="st-chips"><span class="chip">F · C · E</span><span class="chip">HS / SS / SSC</span><span class="chip">OCR</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="stratum" data-soil="sand" style="--sa:#DDB56A; --sb:#CBA455; --tx:#241806; --mut:rgba(36,24,6,.75); --sc:#6E4A0E; top:200vh">
+        <div class="st-band" aria-hidden="true"></div>
+        <svg class="st-bound" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path transform="translate(0,14)" fill="rgba(0,0,0,.18)" d="M0,0 L1440,0 L1440,38 C1300,62 1220,24 1080,48 C940,72 880,30 720,54 C560,78 470,34 360,56 C250,78 120,40 0,62 Z"/><path fill="#8B5A2C" d="M0,0 L1440,0 L1440,38 C1300,62 1220,24 1080,48 C940,72 880,30 720,54 C560,78 470,34 360,56 C250,78 120,40 0,62 Z"/></svg>
+        <svg class="st-wave" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C25,10 50,10 75,40 S125,70 150,40 S200,10 225,40 S275,70 300,40 S350,10 375,40 S425,70 450,40 S500,10 525,40 S575,70 600,40 S650,10 675,40 S725,70 750,40 S800,10 825,40 S875,70 900,40 S950,10 975,40 S1025,70 1050,40 S1100,10 1125,40 S1175,70 1200,40" fill="none" stroke="rgba(110,74,14,.45)" stroke-width="2"/></svg>
+        <div class="st-particles" aria-hidden="true"></div>
+        <div class="st-in">
+          <div class="st-idx" aria-hidden="true">03</div>
+          <div class="st-body">
+            <div class="st-depth">Горизонт 8.0 — 16.0 м</div>
+            <div class="st-soil">Тип грунта: песок водонасыщенный</div>
+            <h3>Динамическая лаборатория</h3>
+            <p>Вибростабилометр Wille Geotechnik и резонансная колонка: параметры HSS, демпфирование, сейсморазжижение, виброползучесть.</p>
+            <div class="st-chips"><span class="chip">HSS</span><span class="chip">Демпфирование</span><span class="chip">k(вибро)</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="stratum" data-soil="frost" style="--sa:#B9D4E4; --sb:#9FC0D3; --tx:#0F2938; --mut:rgba(15,41,56,.75); --sc:#23506C; top:300vh">
+        <div class="st-band" aria-hidden="true"></div>
+        <svg class="st-bound" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path transform="translate(0,14)" fill="rgba(0,0,0,.18)" d="M0,0 L1440,0 L1440,46 C1290,24 1180,66 1040,42 C900,18 800,64 660,46 C520,28 430,70 300,50 C180,32 90,62 0,44 Z"/><path fill="#CBA455" d="M0,0 L1440,0 L1440,46 C1290,24 1180,66 1040,42 C900,18 800,64 660,46 C520,28 430,70 300,50 C180,32 90,62 0,44 Z"/></svg>
+        <div class="st-particles" aria-hidden="true"></div>
+        <div class="st-in">
+          <div class="st-idx" aria-hidden="true">04</div>
+          <div class="st-body">
+            <div class="st-depth">Горизонт 16.0 — 24.0 м</div>
+            <div class="st-soil">Тип грунта: мерзлый грунт</div>
+            <h3>Мерзлотная лаборатория</h3>
+            <p>Три морозильные камеры с калибровкой «Ростест» и широким диапазоном отрицательных температур — все характеристики мерзлых грунтов по ГОСТ 12248.</p>
+            <div class="st-chips"><span class="chip">3 камеры</span><span class="chip">Ростест</span><span class="chip">ГОСТ 12248</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="stratum" data-soil="rock" style="--sa:#8E9198; --sb:#797D85; --tx:#F5F6F8; --mut:rgba(245,246,248,.82); --sc:#EDEFF2; top:400vh">
+        <div class="st-band" aria-hidden="true"></div>
+        <svg class="st-bound" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path transform="translate(0,14)" fill="rgba(0,0,0,.18)" d="M0,0 L1440,0 L1440,38 C1300,62 1220,24 1080,48 C940,72 880,30 720,54 C560,78 470,34 360,56 C250,78 120,40 0,62 Z"/><path fill="#9FC0D3" d="M0,0 L1440,0 L1440,38 C1300,62 1220,24 1080,48 C940,72 880,30 720,54 C560,78 470,34 360,56 C250,78 120,40 0,62 Z"/></svg>
+        <div class="st-particles" aria-hidden="true"></div>
+        <div class="st-in">
+          <div class="st-idx" aria-hidden="true">05</div>
+          <div class="st-body">
+            <div class="st-depth">Горизонт 24.0 — 36.0 м</div>
+            <div class="st-soil">Тип грунта: скальный грунт</div>
+            <h3>Скальная лаборатория</h3>
+            <p>Прибор трёхосного сжатия Wille Geotechnik, срезной прибор НПП «Геотек», прессы ПСН-0.16.10 для испытаний скальных грунтов.</p>
+            <div class="st-chips"><span class="chip">Высокие давления</span><span class="chip">Прочность</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="stratum" data-soil="aqua" style="--sa:#47836E; --sb:#3A6E5C; --tx:#EFF9F2; --mut:rgba(239,249,242,.82); --sc:#A9E2C6; top:500vh">
+        <div class="st-band" aria-hidden="true"></div>
+        <svg class="st-bound" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path transform="translate(0,14)" fill="rgba(0,0,0,.18)" d="M0,0 L1440,0 L1440,46 C1290,24 1180,66 1040,42 C900,18 800,64 660,46 C520,28 430,70 300,50 C180,32 90,62 0,44 Z"/><path fill="#797D85" d="M0,0 L1440,0 L1440,46 C1290,24 1180,66 1040,42 C900,18 800,64 660,46 C520,28 430,70 300,50 C180,32 90,62 0,44 Z"/></svg>
+        <div class="st-particles" aria-hidden="true"></div>
+        <div class="st-in">
+          <div class="st-idx" aria-hidden="true">06</div>
+          <div class="st-body">
+            <div class="st-depth">Горизонт 36.0 — 48.0 м</div>
+            <div class="st-soil">Тип грунта: водоносный горизонт</div>
+            <h3>Химическая лаборатория</h3>
+            <p>pH-метры и системы капиллярного электрофореза: коррозионная активность грунтов и вод к бетону и стали, водная вытяжка, определение гипса.</p>
+            <div class="st-chips"><span class="chip">Коррозия</span><span class="chip">Вытяжка</span><span class="chip">Электрофорез</span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+<!--/SEC:DESCENT--></section>
+
+<!--SEC:STRIP1-->
+<!-- STRIP -->
+<div class="strip" aria-hidden="true">
+  <div class="strip-track" data-marquee="1">
+    <span class="strip-item">Испытания грунтов</span><span class="strip-item fill">·</span>
+    <span class="strip-item">Трёхосное сжатие</span><span class="strip-item fill">·</span>
+    <span class="strip-item">Сейсморазжижение</span><span class="strip-item fill">·</span>
+    <span class="strip-item">Резонансная колонка</span><span class="strip-item fill">·</span>
+  </div>
+
+<!--/SEC:STRIP1--></div>
+
+<!--SEC:EQUIP-->
+<!-- ============ ACT III : EQUIPMENT PARK ============ -->
+<section id="devices" class="light-sec" aria-labelledby="eq-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="d-eyebrow">Акт 03 · Инструменты</span>
+      <h2 id="eq-title">Парк оборудования</h2>
+      <p class="sec-sub">Полный штат современного оборудования отечественных и зарубежных производителей — непрерывно обновляется и дополняется новейшими исследовательскими приборами.</p>
+    </div>
+    <div class="eq-grid">
+      <article class="eq-card"><div class="eq-thumb"><img src="{{DEV_WILLE}}" alt="Динамический стабилометр Wille Geotechnik" loading="lazy"></div><span class="eq-tag">Динамика</span><h3>Стабилометр Wille Geotechnik</h3><p>Входные параметры HSS, коэффициенты демпфирования</p></article>
+      <article class="eq-card"><div class="eq-thumb"><img src="{{DEV_RESONANT}}" alt="Резонансная колонка НПП Геотек" loading="lazy"></div><span class="eq-tag">Динамика</span><h3>Резонансная колонка НПП «Геотек»</h3><p>Модуль сдвига G₀, кривые затухания</p></article>
+      <article class="eq-card"><div class="eq-thumb"><img src="{{DEV_TRIXAL}}" alt="Установка трёхосного сжатия" loading="lazy"></div><span class="eq-tag">Механика</span><h3>Установки трёхосного сжатия</h3><p>F, C, E · параметры моделей HS, SS, SSC, MC</p></article>
+      <article class="eq-card"><div class="eq-thumb"><img src="{{DEV_ODO}}" alt="Одометр — компрессионный прибор" loading="lazy"></div><span class="eq-tag">Механика</span><h3>Одометры</h3><p>Компрессия, консолидация, кривые Ohde, K₀</p></article>
+      <article class="eq-card"><div class="eq-thumb"><img src="{{DEV_WILLE_ROCK}}" alt="Прибор трёхосного сжатия Wille для скальных грунтов" loading="lazy"></div><span class="eq-tag">Скала</span><h3>Трёхосное сжатие Wille · Rock</h3><p>Скальные грунты при высоких давлениях</p></article>
+      <article class="eq-card"><div class="eq-thumb"><img src="{{DEV_SHEAR}}" alt="Срезной прибор НПП Геотек" loading="lazy"></div><span class="eq-tag">Скала</span><h3>Срезной прибор НПП «Геотек»</h3><p>Сдвиговые характеристики скальных грунтов</p></article>
+      <article class="eq-card"><div class="eq-thumb"><img src="{{DEV_STAMP}}" alt="Пресс ПСН-0.16.10" loading="lazy"></div><span class="eq-tag">Скала</span><h3>Прессы ПСН-0.16.10</h3><p>Прочность на одноосное сжатие</p></article>
+      <article class="eq-card"><div class="eq-thumb"><img src="{{DEV_FRIDGE}}" alt="Морозильная камера" loading="lazy"></div><span class="eq-tag">Мерзлота</span><h3>Морозильные камеры ×3</h3><p>Калибровка «Ростест», испытания по ГОСТ 12248</p></article>
+      <article class="eq-card"><div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7L4.5 19a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3L14 9V2M8 2h8M7 15h10"/></svg></div><span class="eq-tag">Химия</span><h3>pH-метры</h3><p>Химический состав грунтов и грунтовых вод</p></article>
+      <article class="eq-card"><div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-6 3 12 3-9 2 3h7M4 20h16"/></svg></div><span class="eq-tag">Химия</span><h3>Капиллярный электрофорез</h3><p>Анализ водной вытяжки, коррозионная активность</p></article>
+      <article class="eq-card"><div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l3-8 4 16 3-8h7M8 20h8"/></svg></div><span class="eq-tag">Динамика</span><h3>Вибростабилометры</h3><p>Виброползучесть, коэффициент k(вибро)</p></article>
+      <article class="eq-card"><div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4 6l16 12M20 6 4 18M12 2l-2 3h4zM12 22l-2-3h4z"/></svg></div><span class="eq-tag">Мерзлота</span><h3>Комплекс пробоподготовки</h3><p>Хранение и распиловка мерзлых кернов</p></article>
+    </div>
+  </div>
+
+<!--/SEC:EQUIP--></section>
+
+<!--SEC:STRIP2-->
+<!-- STRIP 2 -->
+<div class="strip strip--sub" aria-hidden="true">
+  <div class="strip-track" data-marquee="-1">
+    <span class="strip-item">Крымский мост</span><span class="strip-item fill">·</span>
+    <span class="strip-item">Шереметьево</span><span class="strip-item fill">·</span>
+    <span class="strip-item">Волжская ГЭС</span><span class="strip-item fill">·</span>
+    <span class="strip-item">Ахмат-Тауэр</span><span class="strip-item fill">·</span>
+    <span class="strip-item">Сколково</span><span class="strip-item fill">·</span>
+  </div>
+
+<!--/SEC:STRIP2--></div>
+
+<!--SEC:OBJECTS-->
+<!-- ============ ACT IV : OBJECTS ============ -->
+<section id="objects" aria-label="Знаковые объекты">
+  <div class="h-view" id="h-view">
+    <div class="h-track" id="h-track">
+      <div class="h-head">
+        <span class="d-eyebrow">Акт 04 · Наверху</span>
+        <h2>Наши испытания — в основании страны</h2>
+        <p>Каждый из этих объектов начинался у нас — с образца грунта на предметном столике.</p>
+        <div class="h-arrow">Двигаемся вдоль</div>
+      </div>
+      <div class="pan" data-i="01"><span class="pan-idx" aria-hidden="true">01</span>
+        <div class="pan-mask"><div class="pan-img" style="background-image:url('{{OBJ_KRYM}}')" role="img" aria-label="Крымский мост"></div></div>
+        <div class="pan-cap"><span class="pc-tag">Мост · 19 км</span><h3>Крымский мост</h3><div class="pc-sub">Самый протяжённый мост России</div></div></div>
+      <div class="pan" data-i="02"><span class="pan-idx" aria-hidden="true">02</span>
+        <div class="pan-mask"><div class="pan-img" style="background-image:url('{{OBJ_SHER}}')" role="img" aria-label="Аэропорт Шереметьево"></div></div>
+        <div class="pan-cap"><span class="pc-tag">Аэропорт</span><h3>Шереметьево</h3><div class="pc-sub">Крупнейший аэропорт страны</div></div></div>
+      <div class="pan" data-i="03"><span class="pan-idx" aria-hidden="true">03</span>
+        <div class="pan-mask"><div class="pan-img" style="background-image:url('{{OBJ_ZHIV}}')" role="img" aria-label="Живописный мост"></div></div>
+        <div class="pan-cap"><span class="pc-tag">Мост · Москва</span><h3>Живописный мост</h3><div class="pc-sub">Фото: М. Денисова, Mos.ru</div></div></div>
+      <div class="pan" data-i="04"><span class="pan-idx" aria-hidden="true">04</span>
+        <div class="pan-mask"><div class="pan-img" style="background-image:url('{{OBJ_SOCHI}}')" role="img" aria-label="Ледовый дворец Большой"></div></div>
+        <div class="pan-cap"><span class="pc-tag">Арена · Сочи</span><h3>Ледовый дворец «Большой»</h3><div class="pc-sub">Олимпийский парк</div></div></div>
+      <div class="pan" data-i="05"><span class="pan-idx" aria-hidden="true">05</span>
+        <div class="pan-mask"><div class="pan-img" style="background-image:url('{{OBJ_GES}}')" role="img" aria-label="Волжская ГЭС"></div></div>
+        <div class="pan-cap"><span class="pc-tag">Энергетика</span><h3>Волжская ГЭС</h3><div class="pc-sub">Крупнейшая ГЭС европейской части России</div></div></div>
+      <div class="pan" data-i="06"><span class="pan-idx" aria-hidden="true">06</span>
+        <div class="pan-mask"><div class="pan-img" style="background-image:url('{{OBJ_AHMAT}}')" role="img" aria-label="Ахмат-Тауэр"></div></div>
+        <div class="pan-cap"><span class="pc-tag">Небоскрёб</span><h3>«Ахмат-Тауэр»</h3><div class="pc-sub">Высотное строительство</div></div></div>
+      <div class="pan" data-i="07"><span class="pan-idx" aria-hidden="true">07</span>
+        <div class="pan-mask"><div class="pan-img" style="background-image:url('{{OBJ_SKOLK}}')" role="img" aria-label="Бизнес-центр Сколково"></div></div>
+        <div class="pan-cap"><span class="pc-tag">Кампус</span><h3>Бизнес-центр Сколково</h3><div class="pc-sub">Фото: Школа управления «Сколково»</div></div></div>
+      <div class="pan" data-i="08"><span class="pan-idx" aria-hidden="true">08</span>
+        <div class="pan-mask"><div class="pan-img" style="background-image:url('{{OBJ_KAMA}}')" role="img" aria-label="Мост через Каму"></div></div>
+        <div class="pan-cap"><span class="pc-tag">Мост · Татарстан</span><h3>Мост через Каму</h3><div class="pc-sub">Переход через Каму у с. Сорочьи Горы</div></div></div>
+    </div>
+    <div class="h-progress" aria-hidden="true"><i id="h-fill"></i></div>
+    <div class="h-count" id="h-count" aria-hidden="true">01 / 08</div>
+  </div>
+
+<!--/SEC:OBJECTS--></section>
+
+<!--SEC:TESTS-->
+<!-- ============ TESTS ============ -->
+<section id="tests" class="light-sec" aria-labelledby="tests-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="d-eyebrow">Акт 05 · Методы</span>
+      <h2 id="tests-title">Испытания грунтов</h2>
+      <p class="sec-sub">Полный спектр лабораторных исследований в инженерно-геологических изысканиях — включая работы повышенной сложности. По каждому испытанию выдаём подробный протокол.</p>
+    </div>
+    <div class="tests-grid" id="tests-grid">
+      <article class="test-card"><span class="t-num">ГОСТ 12248</span><h3>Трёхосное сжатие (F, C и E)</h3><p>Прочностные и деформационные характеристики</p></article>
+      <article class="test-card"><span class="t-num">ГОСТ 12248</span><h3>Компрессионное сжатие</h3><p>Модуль деформации, структурная прочность</p></article>
+      <article class="test-card"><span class="t-num">ГОСТ 12248</span><h3>Одноплоскостной срез</h3><p>Сцепление и угол внутреннего трения</p></article>
+      <article class="test-card"><span class="t-num">ДИНАМИКА</span><h3>Трёхосное сжатие вибро — k<sub>d</sub></h3><p>Снижение прочности при вибрации</p></article>
+      <article class="test-card"><span class="t-num">ДИНАМИКА</span><h3>Сейсморазжижение</h3><p>Оценка разжижаемости при сейсмике</p></article>
+      <article class="test-card"><span class="t-num">ДИНАМИКА</span><h3>Резонансная колонка</h3><p>G₀ и демпфирование при малых деформациях</p></article>
+      <article class="test-card"><span class="t-num">КОНСОЛИДАЦИЯ</span><h3>Первичная и вторичная консолидация</h3><p>Прогноз осадок во времени</p></article>
+      <article class="test-card"><span class="t-num">PLAXIS</span><h3>OCR · Ohde · Дилатансия · Разгрузка</h3><p>Параметры для численного моделирования</p></article>
+      <article class="test-card"><span class="t-num">K₀</span><h3>Коэффициент бокового давления</h3><p>Природное напряжённое состояние массива</p></article>
+      <article class="test-card"><span class="t-num">ХИМИЯ</span><h3>Коррозионная активность</h3><p>К бетону, стали и другим материалам</p></article>
+      <article class="test-card"><span class="t-num">ХИМИЯ</span><h3>Водная вытяжка · гипс</h3><p>Химический состав грунтов и вод</p></article>
+      <article class="test-card"><span class="t-num">ASTM</span><h3>Классификация по ASTM и ГОСТ</h3><p>Для международных и отечественных проектов</p></article>
+    </div>
+  </div>
+
+<!--/SEC:TESTS--></section>
+
+<!--SEC:CALC-->
+<!-- ============ CALC ============ -->
+<section id="calc" class="light-sec" aria-labelledby="calc-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="d-eyebrow">Акт 06 · Модель</span>
+      <h2 id="calc-title">Расчёты</h2>
+    </div>
+    <div class="calc-grid">
+      <div class="calc-copy">
+        <p>Проводим геотехнические расчёты грунтовых сооружений — насыпей, откосов, грунтовых дамб — методом конечных элементов с использованием нелинейных моделей грунтов и аналитическими методами.</p>
+        <p>Проектируем средства инженерной защиты: грунтовые стенки, анкерные системы, геосинтетические конструкции.</p>
+        <div class="chip-row" style="margin-top:22px"><span class="chip">МКЭ</span><span class="chip">Нелинейные модели</span><span class="chip">Plaxis</span><span class="chip">Midas GTS NX</span></div>
+      </div>
+      <canvas id="mesh-canvas" aria-label="Анимация конечно-элементной сетки" role="img"></canvas>
+    </div>
+  </div>
+
+<!--/SEC:CALC--></section>
+
+<!--SEC:EDU-->
+<!-- ============ EDU ============ -->
+<section id="edu" class="light-sec" aria-labelledby="edu-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="d-eyebrow">Акт 07 · Знания</span>
+      <h2 id="edu-title">Курсы повышения квалификации</h2>
+    </div>
+    <div class="edu-grid">
+      <article class="edu-card featured">
+        <span class="edu-tag">Новый курс · старт 05.10.2026</span>
+        <h3>Введение в <em>искусственный интеллект</em> в геотехнике</h3>
+        <p>Подготовка геотехнических данных, прогнозирование характеристик, классификация грунтов, поиск аномалий, деревья решений и нейронные сети — на реальных кейсах АО «МОСТДОРГЕОТРЕСТ». Углублённые навыки программирования не требуются.</p>
+        <div class="edu-facts">
+          <span class="edu-fact"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>36 академических часов</span>
+          <span class="edu-fact"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Онлайн: лекции и практика</span>
+          <span class="edu-fact"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M4 19V5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-2zm0 0a2 2 0 0 1 2-2h13"/></svg>Удостоверение гособразца</span>
+          <span class="edu-fact"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M17 8a5 5 0 1 0-10 0c0 5-3 6-3 6h16s-3-1-3-6M10 20a2.5 2.5 0 0 0 4 0"/></svg>Преподают сотрудники R&D</span>
+        </div>
+        <div class="edu-price">30 000 ₽</div>
+        <a class="btn btn-primary" href="mailto:support@mdgt.ru?subject=Запись на курс «Введение в ИИ в геотехнике»"><span class="btn-fill" aria-hidden="true"></span><span>Записаться: support@mdgt.ru</span></a>
+      </article>
+      <div style="display:flex; flex-direction:column; gap:16px">
+        <article class="edu-card">
+          <span class="edu-tag">Численное моделирование</span>
+          <h3>Курсы Plaxis</h3>
+          <p>Лабораторные испытания грунтов для целей численного моделирования. Программа курса — на mdgt.ru.</p>
+          <div class="edu-price">35 000 ₽</div>
+          <a class="btn btn-ghost" href="mailto:education@mdgt.ru"><span class="btn-fill" aria-hidden="true"></span><span>education@mdgt.ru</span></a>
+        </article>
+        <article class="edu-card">
+          <span class="edu-tag">Партнёрская программа</span>
+          <h3>Курсы Midas</h3>
+          <p>Входят в стоимость лицензии Midas GTS NX. Заявки — через технический отдел ООО «МИДАС».</p>
+          <a class="btn btn-ghost" href="mailto:rusupport@midasit.com"><span class="btn-fill" aria-hidden="true"></span><span>rusupport@midasit.com</span></a>
+        </article>
+      </div>
+    </div>
+  </div>
+
+<!--/SEC:EDU--></section>
+
+<!--SEC:CLIENTS-->
+<!-- ============ CLIENTS ============ -->
+<section id="clients" class="light-sec" aria-labelledby="clients-title">
+  <div class="wrap sec-head" style="margin-bottom:0">
+    <span class="d-eyebrow">Акт 08 · Доверие</span>
+    <h2 id="clients-title">Нам доверяют</h2>
+  </div>
+  <div class="client-rows" aria-label="Наши заказчики">
+    <div class="client-row" data-row="1">{{LOGOS_ROW_1}}</div>
+    <div class="client-row" data-row="-1">{{LOGOS_ROW_2}}</div>
+  </div>
+
+<!--/SEC:CLIENTS--></section>
+
+<!-- ============ FINALE ============ -->
+<section id="contacts" class="light-sec" aria-labelledby="contacts-title">
+  <div class="fin-watermark" aria-hidden="true">−48 м</div>
+  <div class="wrap fin">
+    <div class="fin-head">
+      <span class="d-eyebrow">Финал · Забой достигнут</span>
+      <h2 id="contacts-title">Дальше — вместе с нами</h2>
+      <p>Пришлите задачу — подберём программу испытаний, сроки и стоимость. Отвечаем в рабочие дни с 10:00 до 18:00.</p>
+    </div>
+    <div class="fin-grid">
+      <div class="fin-main">
+        <div class="fm-glow" aria-hidden="true"></div>
+        <div class="fm-strat" aria-hidden="true" title="Разрез: 6 лабораторий"></div>
+        <span class="fm-label">Напишите или позвоните</span>
+        <a class="fm-phone" href="tel:+74956566910">+7 495 656-69-10</a>
+        <p class="fm-note">Опишите объект и задачу — вернёмся с программой испытаний и сроками в течение рабочего дня.</p>
+        <a class="btn btn-primary" href="mailto:mail@mdgt.ru"><span class="btn-fill" aria-hidden="true"></span><span>Написать: mail@mdgt.ru</span></a>
+        <div class="fm-row">
+          <button class="btn btn-ghost" type="button" data-price-open><span class="btn-fill" aria-hidden="true"></span><span>Прайс-лист</span></button>
+          <a class="btn btn-ghost" href="https://mdgt.ru/3d/output-3/index.html" target="_blank" rel="noopener"><span class="btn-fill" aria-hidden="true"></span><span>3D-тур по лаборатории</span></a>
+        </div>
+      </div>
+      <div class="fin-side">
+        <div class="contact-card">
+          <div class="cc-label">Телефоны</div>
+          <a class="cc-row" href="tel:+74956566910"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-1 1-2 2-2h2l2 5-2 1.5a13 13 0 0 0 6.5 6.5L16 14l5 2v2c0 1-1 2-2 2A16 16 0 0 1 4 5z"/></svg><span>+7 495 656-69-10</span></a>
+          <a class="cc-row" href="tel:+74956566580"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-1 1-2 2-2h2l2 5-2 1.5a13 13 0 0 0 6.5 6.5L16 14l5 2v2c0 1-1 2-2 2A16 16 0 0 1 4 5z"/></svg><span>+7 495 656-65-80</span></a>
+          <a class="cc-row" href="tel:+74956566859"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-1 1-2 2-2h2l2 5-2 1.5a13 13 0 0 0 6.5 6.5L16 14l5 2v2c0 1-1 2-2 2A16 16 0 0 1 4 5z"/></svg><span>+7 495 656-68-59</span></a>
+        </div>
+        <div class="contact-card">
+          <div class="cc-label">Почта</div>
+          <a class="cc-row" href="mailto:mail@mdgt.ru"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>mail@mdgt.ru</span></a>
+          <a class="cc-row" href="mailto:mostdorgeotrest@mail.ru"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>mostdorgeotrest@mail.ru</span></a>
+          <a class="cc-row" href="mailto:education@mdgt.ru"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>education@mdgt.ru</span></a>
+        </div>
+        <div class="contact-card">
+          <div class="cc-label">Адрес и режим</div>
+          <div class="cc-row cc-row--static"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg><span>г. Москва, ул. Искры, д. 31, к. 1, этаж 4</span></div>
+          <div class="cc-row cc-row--static"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span>Пн–Пт 10:00–18:00</span></div>
+          <a class="cc-map" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%98%D1%81%D0%BA%D1%80%D1%8B%2C%2031%D0%BA1" target="_blank" rel="noopener">Открыть в Яндекс.Картах&nbsp;&rarr;</a>
+        </div>
+      </div>
+    </div>
+    <div class="strat-strip" aria-hidden="true"></div>
+    <footer>
+      <div class="foot-row">
+        <span>© АО «МОСТДОРГЕОТРЕСТ», 2008–2026</span>
+        <nav class="foot-nav" aria-label="Разделы">
+          <a href="oborudovanie.html">Оборудование</a>
+          <a href="kursy.html">Курсы</a>
+          <a href="soft.html">Софты</a>
+        </nav>
+        <span class="mono">ИНН 7716750744 · ОГРН 1137746653021 · 55.87N 37.66E · z = −48.0 м</span>
+      </div>
+    </footer>
+  </div>
+</section>
+</main>
+
+<!-- PRICE MODAL -->
+<div class="price-modal" id="price-modal" role="dialog" aria-modal="true" aria-label="Прайс-лист" hidden>
+  <div class="pm-scrim" data-price-close></div>
+  <div class="pm-card" id="pm-card">
+    <div class="pm-head">
+      <div class="pm-title">
+        <span class="d-eyebrow">Прайс-лист · от 27.07.2026</span>
+        <h3>Стоимость испытаний</h3>
+      </div>
+      <div class="pm-actions">
+        <a class="pm-dl" href="assets/price.xlsx" download="ПРАЙС_ЛИСТ_МОСТДОРГЕОТРЕСТ.xlsx"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>XLS</a>
+        <a class="pm-dl" href="assets/price.pdf" download="ПРАЙС_ЛИСТ_МОСТДОРГЕОТРЕСТ.pdf"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>PDF</a>
+        <button class="pm-close" type="button" data-price-close aria-label="Закрыть прайс-лист"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg></button>
+      </div>
+    </div>
+    <div class="pm-body">
+      <iframe id="pm-frame" title="Прайс-лист лаборатории" loading="lazy"
+        data-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTCkoICrb5eT2LMl4AvjrUEoGdm_YuXYnsEg2M0ALBlJBCVZWba9v0VtSFQAvd8Vg/pubhtml?gid=1786408555&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>{{GSAP_CORE}}</script>
+<script>{{GSAP_ST}}</script>
+<script>{{LENIS}}</script>
+<script>
+(function(){
+"use strict";
+var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+var hasGsap = typeof gsap !== 'undefined';
+var isTouch = matchMedia('(hover: none)').matches;
+var isDesktop = innerWidth > 900;
+if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+
+/* ================= LENIS SMOOTH SCROLL ================= */
+var lenis = null;
+if (!reduced && typeof Lenis !== 'undefined'){
+  lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 1, smoothWheel: true });
+  lenis.on('scroll', function(){ if (hasGsap) ScrollTrigger.update(); });
+  if (hasGsap){
+    gsap.ticker.add(function(t){ lenis.raf(t*1000); });
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    (function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(0);
+  }
+}
+document.querySelectorAll('[data-scroll]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var id = a.getAttribute('href');
+    if (!id || id[0] !== '#') return;
+    var el = document.querySelector(id);
+    if (!el) return;
+    e.preventDefault();
+    document.body.classList.remove('menu-open');
+    var b = document.getElementById('burger'); b.setAttribute('aria-expanded','false');
+    if (lenis) lenis.scrollTo(el, { offset: 0, duration: 1.6, easing: function(t){ return 1 - Math.pow(1-t, 4); } });
+    else el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+  });
+});
+
+/* ================= HELPERS ================= */
+function splitChars(el){
+  var out = [];
+  el.setAttribute('aria-label', el.textContent.replace(/\s+/g,' ').trim());
+  function doNode(node, amber){
+    var words = node.textContent.split(/(\s+)/);
+    words.forEach(function(w){
+      if (/^\s+$/.test(w)) { out.push(document.createTextNode(' ')); return; }
+      if (!w) return;
+      var word = document.createElement('span'); word.className='word'; word.setAttribute('aria-hidden','true');
+      for (var i=0;i<w.length;i++){
+        var c = document.createElement('span'); c.className = 'char' + (amber?' h-amber':'');
+        c.textContent = w[i]; word.appendChild(c);
+      }
+      out.push(word);
+    });
+  }
+  Array.prototype.slice.call(el.childNodes).forEach(function(n){
+    if (n.nodeType===3) doNode(n,false);
+    else doNode(n, n.classList && n.classList.contains('h-amber'));
+  });
+  el.innerHTML=''; out.forEach(function(n){ el.appendChild(n); });
+  return el.querySelectorAll('.char');
+}
+function pad(n){ return ('0'+n).slice(-2); }
+
+/* ================= CURSOR ================= */
+if (!isTouch && !reduced && hasGsap){
+  var dot = document.querySelector('.cursor-dot'), ring = document.querySelector('.cursor-ring');
+  var dx = gsap.quickTo(dot,'x',{duration:.08,ease:'power2.out'}), dy = gsap.quickTo(dot,'y',{duration:.08,ease:'power2.out'});
+  var rx = gsap.quickTo(ring,'x',{duration:.35,ease:'power3.out'}), ry = gsap.quickTo(ring,'y',{duration:.35,ease:'power3.out'});
+  addEventListener('pointermove', function(e){ dx(e.clientX); dy(e.clientY); rx(e.clientX); ry(e.clientY); }, {passive:true});
+  document.addEventListener('pointerover', function(e){
+    if (e.target.closest('#h-view')) { ring.classList.add('is-drag'); ring.classList.remove('is-link'); }
+    else if (e.target.closest('a,button,.test-card')) { ring.classList.add('is-link'); ring.classList.remove('is-drag'); }
+    else { ring.classList.remove('is-link','is-drag'); }
+  }, {passive:true});
+}
+
+/* ================= WEBGL PLANET → DIVE SHADER ================= */
+(function(){
+  var cv = document.getElementById('gl'); if (!cv) return;
+  var gl = cv.getContext('webgl', { antialias:false, alpha:false });
+  var uScroll = { v: 0 }; window.__setEarthScroll = function(v){ uScroll.v = v; };
+  if (!gl || reduced){ cv.style.background = 'radial-gradient(1000px 600px at 60% 40%, #0d1a2a, #0A0908 70%)'; return; }
+  var vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+  var fs = [
+  'precision highp float;',
+  'uniform vec2 uRes;uniform float uT;uniform vec2 uM;uniform float uS;',
+  'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+  'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);',
+  ' return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),f.x),f.y);}',
+  'float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p*=2.03;a*=.5;}return v;}',
+  'void main(){',
+  ' vec2 frag=gl_FragCoord.xy/uRes;',
+  ' vec2 uv=(gl_FragCoord.xy-.5*uRes)/uRes.y;',
+  ' float zoom=clamp(uS,0.,1.);',
+  ' vec2 par=(uM-.5)*vec2(.05,.04);',
+  /* --- star field (lighter dawn sky) --- */
+  ' vec2 sp=floor((uv+par*.4)*160.);',
+  ' float st=step(.998,h(sp));',
+  ' float tw=.55+.45*sin(uT*2.4+h(sp)*44.);',
+  ' vec3 col=mix(vec3(.055,.07,.10),vec3(.03,.04,.065),clamp(uv.y+.5,0.,1.));',
+  ' col+=st*tw*vec3(.85,.88,.95)*(1.-zoom);',
+  /* --- planet --- */
+  ' float aspect=uRes.x/uRes.y;',
+  ' float portrait=step(aspect,.9);',
+  ' float Rp=.42*aspect;',
+  ' float R0=mix(.36,Rp,portrait);',
+  ' vec2 base=mix(vec2(.36,-.02),vec2(0.,.5-.105-Rp),portrait);',
+  ' vec2 c=mix(base,vec2(0.),smoothstep(0.,.65,zoom))+par;',
+  ' float R=mix(R0,3.4,pow(zoom,1.7));',
+  ' vec2 d=uv-c;',
+  ' float r=length(d);',
+  ' if(r<R){',
+  '  vec2 q=d/R;',
+  '  float z=sqrt(max(0.,1.-dot(q,q)));',
+  '  vec3 nn=vec3(q,z);',
+  '  float lon=atan(nn.x,nn.z)+uT*.085;',
+  '  float lat=asin(clamp(nn.y,-1.,1.));',
+  '  vec2 s=vec2(lon*1.15,lat*1.55);',
+  '  float sc=mix(2.1,7.5,pow(zoom,1.4));',
+  '  float f=fbm(s*sc+7.3);',
+  '  float f2=fbm(s*sc*2.6+3.1);',
+  '  float land=smoothstep(.505,.545,f);',
+  '  vec3 ocean=mix(vec3(.025,.09,.17),vec3(.05,.17,.29),f2);',
+  '  vec3 terra=mix(vec3(.12,.16,.07),vec3(.34,.26,.14),f2);',
+  '  terra=mix(terra,vec3(.5,.46,.4),smoothstep(.72,.88,f));',
+  '  vec3 surf=mix(ocean,terra,land);',
+  '  surf=mix(surf,vec3(.78,.84,.9),smoothstep(.72,.92,abs(lat)/1.5708));',
+  '  vec3 L=normalize(vec3(-.5,.38,.76));',
+  '  float dif=max(dot(nn,L),0.);',
+  '  float spec=pow(max(dot(reflect(-L,nn),vec3(0.,0.,1.)),0.),26.)*(1.-land)*.55;',
+  '  float cl=smoothstep(.56,.76,fbm(s*sc*1.35+vec2(uT*.02,0.)+31.7))*(1.-zoom*.9);',
+  '  surf=mix(surf,vec3(.92),cl*.7);',
+  '  vec3 pc=surf*(.13+.95*dif)+spec;',
+  '  pc+=vec3(.9,.6,.22)*pow(1.-abs(dot(nn,L)),3.5)*.14;',
+  '  pc=mix(pc,vec3(.3,.5,.85),pow(1.-z,3.)*.4*(1.-zoom));',
+  '  col=mix(col,pc,smoothstep(0.,.012,R-r));',
+  ' }',
+  /* --- atmosphere halo --- */
+  ' float halo=exp(-max(r-R,0.)*9./max(R,.4));',
+  ' col+=vec3(.22,.42,.8)*halo*.4*(1.-zoom*.92)*step(R,r);',
+  ' col+=vec3(.9,.62,.25)*exp(-max(r-R,0.)*30./max(R,.4))*.18*(1.-zoom)*step(R,r);',
+  /* --- dive: punch through the surface and fly down through soil --- */
+  ' float g=smoothstep(.56,.74,zoom);',
+  ' if(g>0.){',
+  '  float off=pow(smoothstep(.56,1.,zoom),1.6)*24.;',
+  '  float settle=smoothstep(.86,1.,zoom);',
+  '  float fly=fbm(vec2(frag.x*4.5+fbm(frag*2.3)*.7,(frag.y+off)*.5));',
+  '  float fine=fbm(vec2(frag.x*2.6,(frag.y+off*.12)*3.2));',
+  '  float mt=mix(fly,fine,settle);',
+  '  vec3 c1=vec3(.44,.34,.24); vec3 c2=vec3(.33,.25,.17);',
+  '  vec3 soil=mix(c2,c1,mt);',
+  '  float band=sin((frag.y+off)*8.+mt*5.);',
+  '  soil=mix(soil,vec3(.55,.42,.27),smoothstep(.7,.95,band)*(1.-settle)*.55);',
+  '  soil=mix(soil,vec3(.24,.18,.12),smoothstep(.75,.98,sin((frag.y+off)*13.+3.))*(1.-settle)*.4);',
+  '  float speck=step(.94,h(floor(frag*vec2(170.,95.)+vec2(0.,off*9.))));',
+  '  soil=mix(soil,vec3(.2,.15,.09),speck*.45*settle);',
+  '  float sl=off-frag.y*1.04;',
+  '  float edge=smoothstep(0.,.14,sl);',
+  '  col=mix(col,soil,g*edge);',
+  '  col=mix(col,vec3(.2,.24,.13),smoothstep(.05,.0,abs(sl))*.85*(1.-settle));',
+  ' }',
+  ' if(false){',
+  ' }',
+  ' float grain=h(gl_FragCoord.xy+uT)*.05;',
+  ' col+=grain-.024;',
+  ' float vig=smoothstep(1.3,.35,length(uv));',
+  ' col*=vig*.9+.14;',
+  ' gl_FragColor=vec4(col,1.);}'
+  ].join('\n');
+  function sh(type,src){ var s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){ return null; } return s; }
+  var v=sh(gl.VERTEX_SHADER,vs), f=sh(gl.FRAGMENT_SHADER,fs);
+  if(!v||!f){ cv.style.background='#0A0908'; return; }
+  var pr=gl.createProgram(); gl.attachShader(pr,v); gl.attachShader(pr,f); gl.linkProgram(pr); gl.useProgram(pr);
+  var buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  var loc=gl.getAttribLocation(pr,'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  var uRes=gl.getUniformLocation(pr,'uRes'), uT=gl.getUniformLocation(pr,'uT'), uM=gl.getUniformLocation(pr,'uM'), uS=gl.getUniformLocation(pr,'uS');
+  var mx=.5,my=.5,tmx=.5,tmy=.5;
+  addEventListener('pointermove',function(e){ tmx=e.clientX/innerWidth; tmy=1-e.clientY/innerHeight; },{passive:true});
+  function resize(){ var d=Math.min(devicePixelRatio||1,1.6);
+    cv.width=cv.clientWidth*d; cv.height=cv.clientHeight*d; gl.viewport(0,0,cv.width,cv.height); }
+  resize(); addEventListener('resize',resize);
+  var t0=performance.now();
+  (function frame(){
+    requestAnimationFrame(frame);
+    /* рендерим, пока герой в кадре (пин ~3.3 экрана + запас) */
+    if(scrollY > innerHeight*4.6) return;
+    mx+=(tmx-mx)*.05; my+=(tmy-my)*.05;
+    gl.uniform2f(uRes,cv.width,cv.height);
+    gl.uniform1f(uT,(performance.now()-t0)/1000);
+    gl.uniform2f(uM,mx,my);
+    gl.uniform1f(uS,uScroll.v);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+  })();
+})();
+
+/* ================= FEM MESH CANVAS ================= */
+(function(){
+  var cv=document.getElementById('mesh-canvas'); if(!cv)return;
+  var ctx=cv.getContext('2d'); var W,H,t=0,run=true;
+  function rs(){ var d=Math.min(devicePixelRatio||1,2); W=cv.clientWidth; H=cv.clientHeight; cv.width=W*d; cv.height=H*d; ctx.setTransform(d,0,0,d,0,0); }
+  rs(); addEventListener('resize',rs);
+  new IntersectionObserver(function(en){ run=en[0].isIntersecting; }).observe(cv);
+  var C=13,R=11;
+  (function fr(){
+    requestAnimationFrame(fr); if(!run)return; if(!reduced)t+=.012;
+    ctx.clearRect(0,0,W,H);
+    var pad=26,gw=(W-pad*2)/(C-1),gh=(H-pad*2)/(R-1),pts=[];
+    for(var r=0;r<R;r++){pts[r]=[];for(var c=0;c<C;c++){
+      var d=r/(R-1),load=Math.sin(t+c*.55)*Math.cos(t*.7+r*.4);
+      pts[r][c]={x:pad+c*gw+Math.sin(t*.8+r*.6)*3*(1-d),y:pad+r*gh+load*7*(1-d),s:Math.abs(load)*(1-d)};}}
+    function ln(a,b,s){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+      ctx.strokeStyle=s>.45?'rgba(166,106,20,'+(.35+s*.5)+')':'rgba(34,26,14,'+(.1+s*.22)+')';ctx.lineWidth=1;ctx.stroke();}
+    for(var r=0;r<R;r++)for(var c=0;c<C;c++){var p=pts[r][c];
+      if(c<C-1)ln(p,pts[r][c+1],p.s); if(r<R-1)ln(p,pts[r+1][c],p.s); if(c<C-1&&r<R-1)ln(p,pts[r+1][c+1],p.s*.7);}
+    for(var r=0;r<R;r++)for(var c=0;c<C;c++){var p=pts[r][c];
+      if(p.s>.5){ctx.beginPath();ctx.arc(p.x,p.y,1.8,0,6.283);ctx.fillStyle='rgba(166,106,20,.95)';ctx.fill();}}
+  })();
+})();
+
+/* ================= SOIL PARTICLES ================= */
+(function(){
+  function rnd(a,b){ return a+Math.random()*(b-a); }
+  var makers={
+    humus:function(el){ var r=Math.random();
+      if(r<.6){ el.dataset.k='clump'; st(el,{width:rnd(7,18)+'px',height:rnd(5,12)+'px',borderRadius:'54% 46% 48% 52%',background:'radial-gradient(circle at 35% 30%, rgba(90,64,38,.55), rgba(30,20,10,.5))',transform:'rotate('+rnd(0,180)+'deg)'}); }
+      else if(r<.85){ el.dataset.k='root'; st(el,{width:'1.5px',height:rnd(34,100)+'px',background:'linear-gradient(180deg,rgba(38,26,12,.6),transparent)',transform:'rotate('+rnd(-22,22)+'deg)',borderRadius:'2px',transformOrigin:'top center'}); }
+      else { st(el,{width:rnd(3,5)+'px',height:rnd(3,5)+'px',borderRadius:'50%',background:'rgba(235,203,156,'+rnd(.25,.45)+')'}); } },
+    loam:function(el){ el.dataset.k='pebble'; st(el,{width:rnd(9,30)+'px',height:rnd(7,20)+'px',borderRadius:'46% 54% 52% 48%',
+      background:'radial-gradient(circle at 34% 28%, rgba(190,140,80,.6), rgba(80,50,20,.55))',
+      boxShadow:'inset 0 -2px 4px rgba(0,0,0,.25)',transform:'rotate('+rnd(0,180)+'deg)'}); },
+    sand:function(el){ var s=rnd(2.5,6);
+      st(el,{width:s+'px',height:s+'px',borderRadius:'50%',
+      background:'radial-gradient(circle at 35% 30%, rgba(255,248,214,'+rnd(.6,.9)+'), rgba(170,128,60,'+rnd(.25,.45)+'))'}); },
+    frost:function(el){ var r=Math.random();
+      if(r<.42){ /* ледяные шлиры — горизонтальные линзы */
+        el.dataset.k='lens';
+        st(el,{width:rnd(46,170)+'px',height:rnd(3,7)+'px',borderRadius:'99px',
+        background:'linear-gradient(90deg, transparent, rgba(255,255,255,'+rnd(.5,.75)+'), transparent)'}); }
+      else if(r<.72){ /* кристаллы */
+        el.dataset.k='crystal';
+        st(el,{width:rnd(10,26)+'px',height:rnd(12,30)+'px',
+        clipPath:'polygon(50% 0%, 100% '+rnd(30,45)+'%, '+rnd(60,85)+'% 100%, '+rnd(15,40)+'% 100%, 0% '+rnd(30,45)+'%)',
+        background:'linear-gradient(180deg, rgba(255,255,255,.8), rgba(190,226,255,.25))',transform:'rotate('+rnd(-30,30)+'deg)'}); }
+      else { /* иней */
+        el.dataset.k='sparkle';
+        st(el,{width:rnd(1.5,3.5)+'px',height:rnd(1.5,3.5)+'px',borderRadius:'50%',
+        background:'rgba(255,255,255,'+rnd(.55,.9)+')',boxShadow:'0 0 '+rnd(4,9)+'px rgba(255,255,255,.75)'}); } },
+    rock:function(el){ var r=Math.random();
+      if(r<.5){ /* крупные гранёные блоки */
+        st(el,{width:rnd(36,130)+'px',height:rnd(26,86)+'px',
+        clipPath:'polygon('+rnd(0,14)+'% '+rnd(24,44)+'%, '+rnd(32,56)+'% 0%, 100% '+rnd(14,38)+'%, '+rnd(82,96)+'% '+rnd(78,96)+'%, '+rnd(16,36)+'% 100%)',
+        background:'linear-gradient('+rnd(100,160)+'deg, rgba(255,255,255,.2), rgba(40,42,48,.3) 65%)',
+        transform:'rotate('+rnd(0,180)+'deg)'}); }
+      else if(r<.8){ /* трещины */
+        el.dataset.k='crack';
+        st(el,{width:rnd(50,150)+'px',height:'1.5px',background:'linear-gradient(90deg, transparent, rgba(28,30,36,'+rnd(.4,.6)+'), transparent)',transform:'rotate('+rnd(-45,45)+'deg)',transformOrigin:'left center'}); }
+      else { st(el,{width:rnd(8,18)+'px',height:rnd(6,14)+'px',
+        clipPath:'polygon(20% 40%, 55% 0%, 100% 30%, 80% 100%, 10% 88%)',
+        background:'rgba(240,242,246,.28)',transform:'rotate('+rnd(0,180)+'deg)'}); } },
+    aqua:function(el){ var r=Math.random();
+      if(r<.62){ el.dataset.k='bubble'; var s=rnd(5,16); st(el,{width:s+'px',height:s+'px',borderRadius:'50%',
+        border:'1px solid rgba(210,255,232,.4)',
+        background:'radial-gradient(circle at 32% 26%, rgba(255,255,255,.55), rgba(255,255,255,.05) 48%, transparent 72%)'}); }
+      else { el.dataset.k='flow'; st(el,{width:rnd(60,190)+'px',height:'1.5px',borderRadius:'99px',
+        background:'linear-gradient(90deg, transparent, rgba(200,255,230,.32), transparent)'}); } }
+  };
+  function st(el,obj){ for(var k in obj) el.style[k]=obj[k]; }
+  document.querySelectorAll('.stratum').forEach(function(strat){
+    var type=strat.getAttribute('data-soil'), box=strat.querySelector('.st-particles');
+    if(!type||!box||!makers[type]) return;
+    var n = type==='sand' ? 110 : (type==='frost' ? 52 : 38);
+    for(var i=0;i<n;i++){
+      var el=document.createElement('i');
+      el.style.left=(Math.random()*100)+'%';
+      el.style.top=(9+Math.random()*89)+'%';
+      makers[type](el);
+      box.appendChild(el);
+    }
+  });
+  /* ---- живые анимации слоёв: у каждой лаборатории своя ---- */
+  if(typeof gsap!=='undefined' && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var q=function(soil,k){ return gsap.utils.toArray('.stratum[data-soil="'+soil+'"] [data-k="'+k+'"]'); };
+
+    /* 01 Физика · почва: корни медленно прорастают, комки едва дышат */
+    q('humus','root').forEach(function(el){
+      gsap.fromTo(el,{scaleY:.25,opacity:.4},{scaleY:1,opacity:1,duration:rnd(5,9),ease:'power1.inOut',
+        repeat:-1,yoyo:true,repeatDelay:rnd(1,4),delay:rnd(0,6)});
+    });
+
+    /* 02 Механика · суглинок: консолидация — галька медленно оседает и приподнимается */
+    q('loam','pebble').forEach(function(el,i){
+      if(i%2) return;
+      gsap.to(el,{y:'+='+rnd(3,7),duration:rnd(4,8),ease:'power1.inOut',repeat:-1,yoyo:true,delay:rnd(0,5)});
+    });
+
+    /* 03 Динамика · песок: сейсмо-дрожь 0.5 Гц (период 2 с) */
+    var dyn=document.querySelector('.stratum[data-soil="sand"]');
+    if(dyn){
+      gsap.to(dyn.querySelector('.st-band'),{x:5,duration:1,ease:'sine.inOut',yoyo:true,repeat:-1});
+      gsap.to(dyn.querySelector('.st-particles'),{x:-6,y:2.5,duration:1,ease:'sine.inOut',yoyo:true,repeat:-1});
+      gsap.to(dyn.querySelector('.st-in'),{x:2.5,duration:1,ease:'sine.inOut',yoyo:true,repeat:-1});
+    }
+
+    /* 04 Мерзлота: лёд мерцает, иней искрится, с линз капает оттаивание */
+    q('frost','lens').forEach(function(el){
+      gsap.to(el,{opacity:rnd(.45,.65),scaleX:rnd(1.04,1.1),duration:rnd(2.5,5),ease:'sine.inOut',repeat:-1,yoyo:true,delay:rnd(0,3)});
+    });
+    q('frost','sparkle').forEach(function(el){
+      gsap.to(el,{opacity:rnd(.15,.4),duration:rnd(1.2,2.8),ease:'sine.inOut',repeat:-1,yoyo:true,delay:rnd(0,3)});
+    });
+    var frostBox=document.querySelector('.stratum[data-soil="frost"] .st-particles');
+    if(frostBox){
+      q('frost','lens').slice(0,7).forEach(function(lens){
+        var d=document.createElement('i');
+        d.style.cssText='position:absolute;width:3px;height:5px;border-radius:50% 50% 60% 60%;background:rgba(215,240,255,.85);left:'+(parseFloat(lens.style.left)+rnd(0,3))+'%;top:'+lens.style.top+';opacity:0';
+        frostBox.appendChild(d);
+        gsap.timeline({repeat:-1,repeatDelay:rnd(2.5,7),delay:rnd(0,6)})
+          .set(d,{y:0,opacity:0})
+          .to(d,{opacity:.9,duration:.3})
+          .to(d,{y:rnd(70,150),duration:rnd(.9,1.5),ease:'power2.in'},'<')
+          .to(d,{opacity:0,duration:.3},'-=.25');
+      });
+    }
+
+    /* 05 Скала: трещины прорастают и затягиваются */
+    q('rock','crack').forEach(function(el){
+      gsap.timeline({repeat:-1,repeatDelay:rnd(3,9),delay:rnd(0,8)})
+        .fromTo(el,{scaleX:0,opacity:1},{scaleX:1,duration:rnd(.9,1.8),ease:'power2.out'})
+        .to(el,{opacity:0,duration:1.2,ease:'power1.in'},'+='+rnd(2,5))
+        .set(el,{scaleX:0,opacity:1});
+    });
+
+    /* 06 Химия · водоносный: пузырьки всплывают, течение дрейфует */
+    q('aqua','bubble').forEach(function(el){
+      gsap.timeline({repeat:-1,repeatDelay:rnd(.5,3),delay:rnd(0,5)})
+        .fromTo(el,{y:rnd(10,30),opacity:0},{opacity:.9,duration:.6})
+        .to(el,{y:'-='+rnd(50,130),x:'+='+rnd(-14,14),duration:rnd(4,8),ease:'sine.inOut'},'<')
+        .to(el,{opacity:0,duration:.8},'-=.8');
+    });
+    q('aqua','flow').forEach(function(el){
+      gsap.to(el,{x:'+='+rnd(20,50),duration:rnd(4,7),ease:'sine.inOut',repeat:-1,yoyo:true,delay:rnd(0,4)});
+    });
+  }
+})();
+
+/* ================= NAV / MENU ================= */
+var nav=document.getElementById('nav');
+addEventListener('scroll',function(){ nav.classList.toggle('scrolled', scrollY>40); },{passive:true});
+var burger=document.getElementById('burger');
+burger.addEventListener('click',function(){
+  var open=document.body.classList.toggle('menu-open');
+  burger.setAttribute('aria-expanded',open);
+});
+
+/* ================= PRICE MODAL ================= */
+(function(){
+  var modal=document.getElementById('price-modal'); if(!modal) return;
+  var card=document.getElementById('pm-card'), frame=document.getElementById('pm-frame');
+  var scrim=modal.querySelector('.pm-scrim');
+  var lastFocus=null, isOpen=false;
+  function openM(e){
+    if(e) e.preventDefault();
+    if(isOpen) return; isOpen=true;
+    lastFocus=document.activeElement;
+    if(frame && !frame.src) frame.src=frame.getAttribute('data-src');
+    modal.hidden=false;
+    document.body.style.overflow='hidden';
+    if(lenis) lenis.stop();
+    if(hasGsap && !reduced){
+      gsap.fromTo(scrim,{opacity:0},{opacity:1,duration:.35,ease:'power2.out'});
+      gsap.fromTo(card,{y:46,scale:.96,opacity:0},{y:0,scale:1,opacity:1,duration:.55,ease:'expo.out'});
+    }
+    var cb=modal.querySelector('.pm-close'); if(cb) cb.focus();
+  }
+  function closeM(){
+    if(!isOpen) return; isOpen=false;
+    function done(){ modal.hidden=true; document.body.style.overflow=''; if(lenis) lenis.start(); if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+    if(hasGsap && !reduced){
+      gsap.to(scrim,{opacity:0,duration:.28,ease:'power1.in'});
+      gsap.to(card,{y:30,scale:.97,opacity:0,duration:.3,ease:'power2.in',onComplete:done});
+    } else done();
+  }
+  document.querySelectorAll('[data-price-open]').forEach(function(b){ b.addEventListener('click', openM); });
+  modal.querySelectorAll('[data-price-close]').forEach(function(b){ b.addEventListener('click', closeM); });
+  addEventListener('keydown', function(e){ if(e.key==='Escape') closeM(); });
+})();
+
+/* ================= PRELOADER (decode) ================= */
+var NAME='МОСТДОРГЕОТРЕСТ';
+var GLYPHS='АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ0123456789#/\\|—';
+var ldName=document.getElementById('ld-name');
+if(ldName) NAME.split('').forEach(function(ch){ var s=document.createElement('span'); s.className='dec'; s.textContent=ch; ldName.appendChild(s); });
+var decEls=ldName?ldName.querySelectorAll('.dec'):[];
+var pctEl=document.getElementById('ld-pct'), stEl=document.getElementById('ld-status');
+var statuses=['Выход на орбиту…','Сканирование поверхности…','Расчёт точки входа…','Готово к погружению'];
+var introDone=false;
+function startFilm(){
+  if(introDone)return; introDone=true;
+  var loader=document.getElementById('loader');
+  if(!loader){ heroIn(true); return; }
+  if(!hasGsap||reduced){ loader.style.display='none'; heroIn(true); return; }
+  var tl=gsap.timeline();
+  tl.to('#loader .ld-top, #loader .ld-name, #loader .ld-bottom',{opacity:0,y:-16,duration:.4,ease:'power2.in',stagger:.05})
+    .to('#loader .curtain i',{yPercent:-101,duration:.85,ease:'expo.inOut',stagger:.06},'-=.1')
+    .set(loader,{display:'none'})
+    .add(function(){ heroIn(false); },'-=.75');
+}
+if(hasGsap&&!reduced&&ldName){
+  var prog={v:0}; var decodeT=0;
+  var decInt=setInterval(function(){
+    decodeT++;
+    decEls.forEach(function(el,i){
+      if(prog.v/100*NAME.length*1.35>i){ el.textContent=NAME[i]; el.style.color=''; }
+      else { el.textContent=GLYPHS[Math.floor(Math.random()*GLYPHS.length)]; el.style.color='rgba(232,163,61,.5)'; }
+    });
+  },46);
+  gsap.to(prog,{v:100,duration:1.7,ease:'power2.inOut',onUpdate:function(){
+    pctEl.textContent=pad(Math.round(prog.v));
+    stEl.textContent=statuses[Math.min(statuses.length-1,Math.floor(prog.v/100*statuses.length))];
+  },onComplete:function(){ clearInterval(decInt);
+    decEls.forEach(function(el,i){el.textContent=NAME[i];el.style.color='';});
+    setTimeout(startFilm,160); }});
+  setTimeout(startFilm,3400);
+}else{ startFilm(); }
+
+/* ================= HERO ENTRANCE + PIN ================= */
+var counted=false;
+function counters(){
+  if(counted)return; counted=true;
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var t=parseFloat(el.getAttribute('data-count')), suf=el.getAttribute('data-suffix')||'';
+    if(!hasGsap||reduced){ el.textContent=t+suf; return; }
+    var o={v:0};
+    gsap.to(o,{v:t,duration:1.8,ease:'power2.out',onUpdate:function(){ el.textContent=Math.round(o.v)+suf; }});
+  });
+}
+function heroIn(instant){
+  var titleEl=document.getElementById('hero-h');
+  if(instant||!titleEl){ counters(); return; }
+  var chars=splitChars(titleEl);
+  gsap.timeline()
+    .from('.nav',{y:-28,opacity:0,duration:.7,ease:'power3.out'},0)
+    .from('.hero-tag',{y:16,opacity:0,duration:.5,ease:'power3.out'},.1)
+    .from(chars,{yPercent:118,rotateX:-45,duration:.85,stagger:.018,ease:'expo.out'},.15)
+    .from('.hero-sub',{y:20,opacity:0,duration:.6,ease:'power3.out'},.55)
+    .from('.hf-left .btn',{y:18,opacity:0,duration:.5,ease:'power3.out'},.62)
+    .from('.hero-metrics .hm',{y:22,opacity:0,duration:.55,stagger:.09,ease:'power3.out',onComplete:counters},.65)
+    .from('.hero-scroll',{opacity:0,duration:.5},.9);
+}
+
+if(hasGsap && !reduced){
+
+/* depth state (объявлено до пина — его onUpdate зовёт renderDepth) */
+var hd=document.getElementById('hd-num'), rf=document.getElementById('r-fill');
+var depthState={surface:0,descent:0,after:false};
+function renderDepth(){
+  if(!hd)return;
+  var d = depthState.after ? 48 : (depthState.descent>0 ? 2+depthState.descent*46 : depthState.surface*2);
+  hd.textContent='−'+d.toFixed(1)+' м';
+}
+
+/* hero pin: camera starts descending */
+ScrollTrigger.matchMedia({
+  '(min-width: 901px)': function(){
+    if(!document.getElementById('hero')) return;
+    var heroTl=gsap.timeline({
+      scrollTrigger:{ trigger:'#hero', start:'top top', end:'+=230%', scrub:.6, pin:true,
+        onUpdate:function(self){
+          if(window.__setEarthScroll) window.__setEarthScroll(self.progress);
+          /* глубина тикает только после касания грунта (~56% пина) */
+          depthState.surface=Math.max(0,(self.progress-.56)/.44); renderDepth();
+        } }
+    });
+    heroTl.to('#hero-content',{yPercent:-40,opacity:0,ease:'power1.in',duration:.4},0)
+      .to('.hero-foot',{yPercent:60,opacity:0,ease:'power1.in',duration:.35},0)
+      .to('.hero-scroll',{opacity:0,duration:.2},0);
+  }
+});
+
+/* ================= GLOBAL RAIL ================= */
+if(rf) ScrollTrigger.create({ trigger:document.body, start:'top top', end:'max',
+  onUpdate:function(self){ rf.style.height=(self.progress*100)+'%'; }});
+
+/* ================= MARQUEES (velocity-reactive) ================= */
+document.querySelectorAll('.strip-track').forEach(function(track){
+  var dir=parseFloat(track.getAttribute('data-marquee'))||1;
+  track.innerHTML+=track.innerHTML;
+  var tween=gsap.to(track,{xPercent:-50*dir,duration:26,ease:'none',repeat:-1});
+  if (dir<0) gsap.set(track,{xPercent:-50}); /* start shifted so reverse dir loops seamlessly */
+  ScrollTrigger.create({ trigger:track, start:'top bottom', end:'bottom top',
+    onUpdate:function(self){
+      var v=Math.abs(self.getVelocity())/900;
+      gsap.to(tween,{timeScale:1+Math.min(v,3),duration:.3,overwrite:true});
+    }});
+});
+document.querySelectorAll('.client-row').forEach(function(row){
+  var dir=parseFloat(row.getAttribute('data-row'))||1;
+  row.innerHTML+=row.innerHTML;
+  gsap.to(row,{xPercent:-50*dir,duration:52,ease:'none',repeat:-1});
+  if(dir<0) gsap.set(row,{xPercent:-50});
+});
+
+/* ================= ACT II : DESCENT ================= */
+ScrollTrigger.matchMedia({
+  '(min-width: 641px)': function(){
+    if(!document.getElementById('shaft-view')) return;
+    var strata=gsap.utils.toArray('#shaft .stratum');
+    var N=strata.length;
+    var master=gsap.timeline({
+      scrollTrigger:{ trigger:'#shaft-view', start:'top top', end:'+='+(N*85)+'%', scrub:.7, pin:true, anticipatePin:1,
+        onUpdate:function(self){ depthState.descent=self.progress; depthState.after=false; renderDepth(); },
+        onLeave:function(){ depthState.after=true; renderDepth(); },
+        onEnterBack:function(){ depthState.after=false; renderDepth(); } }
+    });
+    master.to('#shaft',{yPercent:-100*(N-1), ease:'none', duration:N-1},0);
+    strata.forEach(function(st,i){
+      var body=st.querySelector('.st-body'), idx=st.querySelector('.st-idx');
+      if(i===0){
+        /* первый горизонт виден сразу; шапка акта уходит при движении дальше */
+        master.to('.st-act',{opacity:0,y:-30,duration:.3,ease:'power1.in'},.22);
+        master.to(body.children,{y:-40,opacity:0,duration:.25,stagger:.03,ease:'power1.in'},.6);
+      } else {
+        master.fromTo(idx,{yPercent:36,opacity:0},{yPercent:-16,opacity:1,duration:.9,ease:'none'},Math.max(0,i-.48));
+        master.fromTo(body.children,{y:54,opacity:0},{y:0,opacity:1,duration:.4,stagger:.05,ease:'power2.out'},i-.44);
+        if(i<N-1) master.to(body.children,{y:-40,opacity:0,duration:.25,stagger:.03,ease:'power1.in'},i+.6);
+      }
+    });
+  },
+  '(max-width: 640px)': function(){
+    var sv=document.getElementById('shaft-view'), sh=document.getElementById('shaft');
+    if(!sv) return;
+    sv.style.height='auto'; sv.style.overflow='visible'; sh.style.position='relative';
+    document.querySelectorAll('#shaft .stratum').forEach(function(st){
+      st.style.position='relative'; st.style.top='auto'; st.style.height='auto'; st.style.padding='84px 0 90px';
+      gsap.utils.toArray(st.querySelector('.st-body').children).forEach(function(el,k){
+        gsap.fromTo(el,{y:26,opacity:0},{y:0,opacity:1,duration:.55,delay:k*.06,ease:'power2.out',clearProps:'transform,opacity',
+          scrollTrigger:{trigger:st,start:'top 82%',once:true}});
+      });
+    });
+  }
+});
+
+/* ================= ACT IV : HORIZONTAL DOLLY ================= */
+ScrollTrigger.matchMedia({
+  '(min-width: 901px)': function(){
+    var track=document.getElementById('h-track');
+    if(!track) return;
+    var pans=gsap.utils.toArray('.pan');
+    var fill=document.getElementById('h-fill'), count=document.getElementById('h-count');
+    var getDist=function(){ return track.scrollWidth - innerWidth; };
+    var scrollTween=gsap.to(track,{
+      x:function(){ return -getDist(); },
+      ease:'none',
+      scrollTrigger:{
+        trigger:'#h-view', start:'top top',
+        end:function(){ return '+='+getDist(); },
+        scrub:.7, pin:true, anticipatePin:1, invalidateOnRefresh:true,
+        onUpdate:function(self){
+          fill.style.transform='scaleX('+self.progress+')';
+          var i=Math.min(pans.length,Math.max(1,Math.round(self.progress*pans.length+.4)));
+          count.textContent=pad(i)+' / '+pad(pans.length);
+          /* velocity skew — Spielberg dolly shake */
+          var v=gsap.utils.clamp(-9,9,self.getVelocity()/-260);
+          gsap.to(pans,{skewX:v*.5,rotate:v*.06,duration:.5,ease:'power2.out',overwrite:'auto'});
+        },
+        onLeave:function(){ gsap.to(pans,{skewX:0,rotate:0,duration:.5}); },
+        onLeaveBack:function(){ gsap.to(pans,{skewX:0,rotate:0,duration:.5}); }
+      }
+    });
+    /* internal image parallax against dolly */
+    pans.forEach(function(pan){
+      var img=pan.querySelector('.pan-img');
+      gsap.fromTo(img,{xPercent:-7},{xPercent:7,ease:'none',
+        scrollTrigger:{ trigger:pan, containerAnimation:scrollTween, start:'left right', end:'right left', scrub:true }});
+      gsap.from(pan.querySelector('.pan-cap').children,{y:26,opacity:0,duration:.6,stagger:.07,ease:'power2.out',
+        scrollTrigger:{ trigger:pan, containerAnimation:scrollTween, start:'left 78%' }});
+      gsap.from(pan.querySelector('.pan-idx'),{x:60,opacity:0,duration:.7,ease:'power3.out',
+        scrollTrigger:{ trigger:pan, containerAnimation:scrollTween, start:'left 85%' }});
+    });
+    gsap.from('.h-head > *',{y:30,opacity:0,duration:.7,stagger:.09,ease:'power3.out',
+      scrollTrigger:{trigger:'#objects',start:'top 70%'}});
+  },
+  '(max-width: 900px)': function(){
+    var hv=document.getElementById('h-view'), tr=document.getElementById('h-track');
+    if(!hv) return;
+    hv.style.height='auto'; hv.style.overflow='visible';
+    tr.style.position='relative'; tr.style.flexDirection='column'; tr.style.alignItems='stretch'; tr.style.padding='70px 4vw';
+    document.querySelectorAll('.pan').forEach(function(p){
+      p.style.width='100%'; p.style.height='54vh'; p.style.margin='0 0 46px';
+      gsap.from(p,{y:40,opacity:0,duration:.7,ease:'power2.out',scrollTrigger:{trigger:p,start:'top 85%'}});
+    });
+    document.querySelector('.h-progress').style.display='none';
+    document.getElementById('h-count').style.display='none';
+  }
+});
+
+/* ================= GENERIC REVEALS ================= */
+gsap.utils.toArray('.sec-head').forEach(function(head){
+  gsap.from(head.children,{y:40,opacity:0,duration:.75,stagger:.1,ease:'power3.out',
+    scrollTrigger:{trigger:head,start:'top 85%'}});
+});
+/* надёжные one-shot появления карточек: без «застрявших» промежуточных состояний */
+gsap.utils.toArray('.test-card,.edu-card,.contact-card,.eq-card,.fin-main').forEach(function(card,k){
+  gsap.fromTo(card,{y:34,opacity:0},{y:0,opacity:1,duration:.6,ease:'power2.out',
+    delay:(k%4)*.06, immediateRender:true, clearProps:'transform,opacity',
+    scrollTrigger:{trigger:card,start:'top 94%',once:true}});
+});
+if(document.querySelector('.calc-copy')){
+  gsap.from('.calc-copy > *',{y:26,opacity:0,duration:.7,stagger:.1,ease:'power2.out',
+    scrollTrigger:{trigger:'#calc .calc-grid',start:'top 82%'}});
+  gsap.from('#mesh-canvas',{opacity:0,scale:.97,duration:.9,ease:'power2.out',
+    scrollTrigger:{trigger:'#mesh-canvas',start:'top 86%'}});
+}
+gsap.from('.fin-head > *, .strat-strip',{y:36,opacity:0,duration:.8,stagger:.09,ease:'power3.out',
+  scrollTrigger:{trigger:'.fin',start:'top 80%'}});
+gsap.fromTo('.fin-watermark',{yPercent:30},{yPercent:-10,ease:'none',
+  scrollTrigger:{trigger:'#contacts',start:'top bottom',end:'bottom top',scrub:true}});
+gsap.from('.client-rows',{opacity:0,y:24,duration:.8,ease:'power2.out',
+  scrollTrigger:{trigger:'#clients',start:'top 80%'}});
+
+/* ================= LIGHT ZONE (только на главной, свет после разреза) ================= */
+if(document.getElementById('hero') && document.getElementById('objects')){
+  ScrollTrigger.create({ trigger:'#objects', start:'top 70%',
+    onEnter:function(){ document.body.classList.add('on-light'); },
+    onLeaveBack:function(){ document.body.classList.remove('on-light'); }});
+}
+
+/* ================= NAV ACTIVE ================= */
+['descent','objects','contacts'].forEach(function(id){
+  if(!document.getElementById(id)) return;
+  ScrollTrigger.create({ trigger:'#'+id, start:'top 40%', end:'bottom 40%',
+    onToggle:function(self){
+      if(self.isActive) document.querySelectorAll('[data-nav]').forEach(function(a){
+        var h=a.getAttribute('href')||'';
+        a.classList.toggle('active', h.indexOf('#'+id)>=0);
+      });
+    }});
+});
+
+/* ================= MAGNETIC BUTTONS ================= */
+if(!isTouch){
+  document.querySelectorAll('.btn,.nav-cta,.fin-phone').forEach(function(btn){
+    btn.style.willChange='transform';
+    btn.addEventListener('pointermove',function(e){
+      var r=btn.getBoundingClientRect();
+      gsap.to(btn,{x:(e.clientX-r.left-r.width/2)*.18,y:(e.clientY-r.top-r.height/2)*.32,duration:.4,ease:'power2.out'});
+    });
+    btn.addEventListener('pointerleave',function(){
+      gsap.to(btn,{x:0,y:0,duration:.7,ease:'elastic.out(1,.4)'});
+    });
+  });
+}
+
+/* hover glow position on test cards */
+document.querySelectorAll('.test-card').forEach(function(c){
+  c.addEventListener('pointermove',function(e){
+    var r=c.getBoundingClientRect();
+    c.style.setProperty('--gx',((e.clientX-r.left)/r.width*100)+'%');
+  },{passive:true});
+});
+
+addEventListener('load',function(){ ScrollTrigger.refresh(); });
+setTimeout(function(){ ScrollTrigger.refresh(); }, 800);
+
+} /* end gsap && !reduced */
+
+/* ================= REDUCED / NO-JS FALLBACK ================= */
+if(!hasGsap||reduced){
+  document.querySelectorAll('[data-count]').forEach(function(el){ el.textContent=el.getAttribute('data-count')+(el.getAttribute('data-suffix')||''); });
+  var sv=document.getElementById('shaft-view'); if(sv){ sv.style.height='auto'; sv.style.overflow='visible'; }
+  var sh=document.getElementById('shaft'); if(sh) sh.style.position='relative';
+  document.querySelectorAll('#shaft .stratum').forEach(function(st){ st.style.position='relative'; st.style.top='auto'; st.style.height='auto'; st.style.padding='70px 0 84px'; st.style.flexDirection='column'; });
+  var l=document.getElementById('loader'); if(l) l.style.display='none';
+  var ldn=document.getElementById('ld-name'); if (ldn && !ldn.textContent) ldn.textContent='МОСТДОРГЕОТРЕСТ';
+  var lightSec=document.getElementById('objects');
+  if(lightSec && document.getElementById('hero')){
+    addEventListener('scroll',function(){
+      document.body.classList.toggle('on-light', scrollY > lightSec.offsetTop - innerHeight*.7);
+    },{passive:true});
+  }
+}
+})();
+</script>
+</body>
+</html>
