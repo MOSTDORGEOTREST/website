@@ -434,13 +434,28 @@ function heroIn(instant){
 
 if(hasGsap && !reduced){
 
-/* depth state (объявлено до пина — его onUpdate зовёт renderDepth) */
+/* ---- глубиномер: откалиброван по реальным горизонтам разреза ----
+   0–2 / 2–8 / 8–16 / 16–24 / 24–36 / 36–48 м. Цель задаётся пинами,
+   отображение сглаживается в rAF (dt-нормированный lerp) — без скачков
+   и мёртвых зон между пином героя и пином разреза. */
 var hd=document.getElementById('hd-num'), rf=document.getElementById('r-fill');
-var depthState={surface:0,descent:0,after:false};
-function renderDepth(){
-  if(!hd)return;
-  var d = depthState.after ? 48 : (depthState.descent>0 ? 2+depthState.descent*46 : depthState.surface*2);
-  hd.textContent='−'+d.toFixed(1)+' м';
+var D_TOPS=[0,2,8,16,24,36], D_BOTS=[2,8,16,24,36,48];
+var D_MIDS=D_TOPS.map(function(t,i){ return (t+D_BOTS[i])/2; }); /* 1,5,12,20,30,42 */
+var depthTarget=0;
+function setDepth(v){ depthTarget=v; }
+if(hd){
+  (function(){
+    var shown=0, last=-1, t0=performance.now();
+    (function loop(now){
+      requestAnimationFrame(loop);
+      var dt=Math.min(Math.max(now-t0,1),120); t0=now;
+      shown+=(depthTarget-shown)*(1-Math.exp(-dt/150));
+      if(Math.abs(shown-depthTarget)<.02) shown=depthTarget;
+      if(Math.abs(shown-last)<.01) return;
+      last=shown;
+      hd.textContent='−'+shown.toFixed(1)+' м';
+    })(t0);
+  })();
 }
 
 /* hero pin: camera starts descending */
@@ -451,8 +466,9 @@ ScrollTrigger.matchMedia({
       scrollTrigger:{ trigger:'#hero', start:'top top', end:'+=230%', scrub:.6, pin:true,
         onUpdate:function(self){
           if(window.__setEarthScroll) window.__setEarthScroll(self.progress);
-          /* глубина тикает только после касания грунта (~56% пина) */
-          depthState.surface=Math.max(0,(self.progress-.56)/.44); renderDepth();
+          /* глубина тикает только после касания грунта (~56% пина):
+             к концу пролёта камера — в толще первого горизонта (~1 м) */
+          setDepth(Math.max(0,(self.progress-.56)/.44)*D_MIDS[0]);
         } }
     });
     heroTl.to('#hero-content',{yPercent:-40,opacity:0,ease:'power1.in',duration:.4},0)
@@ -490,11 +506,25 @@ ScrollTrigger.matchMedia({
     if(!document.getElementById('shaft-view')) return;
     var strata=gsap.utils.toArray('#shaft .stratum');
     var N=strata.length;
+    /* прогресс разреза → метры: кусочно-линейно через середины горизонтов,
+       границы слоёв проходятся ровно на отметках 2 / 8 / 16 / 24 / 36 м */
+    var descentDepth=function(p){
+      var TD=master.duration(), SH=N-1;
+      var tt=p*TD;
+      if(tt>=SH){ /* последний горизонт: доезжаем до забоя 48 м */
+        var q=TD>SH ? Math.min(1,(tt-SH)/(TD-SH)) : 1;
+        return D_MIDS[N-1]+(D_BOTS[N-1]-D_MIDS[N-1])*q;
+      }
+      var k=Math.min(N-2,Math.floor(tt)), f=tt-k;
+      return f<.5
+        ? D_MIDS[k]+(D_BOTS[k]-D_MIDS[k])*(f/.5)
+        : D_BOTS[k]+(D_MIDS[k+1]-D_BOTS[k])*((f-.5)/.5);
+    };
     var master=gsap.timeline({
       scrollTrigger:{ trigger:'#shaft-view', start:'top top', end:'+='+(N*85)+'%', scrub:.7, pin:true, anticipatePin:1,
-        onUpdate:function(self){ depthState.descent=self.progress; depthState.after=false; renderDepth(); },
-        onLeave:function(){ depthState.after=true; renderDepth(); },
-        onEnterBack:function(){ depthState.after=false; renderDepth(); } }
+        onUpdate:function(self){ setDepth(descentDepth(self.progress)); },
+        onLeave:function(){ setDepth(D_BOTS[N-1]); },
+        onEnterBack:function(){ setDepth(descentDepth(1)); } }
     });
     master.to('#shaft',{yPercent:-100*(N-1), ease:'none', duration:N-1},0);
     strata.forEach(function(st,i){
@@ -584,11 +614,22 @@ gsap.utils.toArray('.sec-head').forEach(function(head){
     scrollTrigger:{trigger:head,start:'top 85%'}});
 });
 /* надёжные one-shot появления карточек: без «застрявших» промежуточных состояний */
-gsap.utils.toArray('.test-card,.edu-card,.contact-card,.eq-card,.fin-main').forEach(function(card,k){
+gsap.utils.toArray('.test-card,.edu-card,.contact-card,.eq-card,.fin-main,.live-card').forEach(function(card,k){
   gsap.fromTo(card,{y:34,opacity:0},{y:0,opacity:1,duration:.6,ease:'power2.out',
     delay:(k%4)*.06, immediateRender:true, clearProps:'transform,opacity',
+    onComplete:function(){ card.classList.add('is-in'); }, /* запускает отрисовку графиков в карточках */
     scrollTrigger:{trigger:card,start:'top 94%',once:true}});
 });
+/* витрина оснащения: 100+ стабилометров — набегающий счётчик */
+var ehn=document.getElementById('eq-hero-n');
+if(ehn){
+  gsap.from('.eq-hero > *',{y:28,opacity:0,duration:.7,stagger:.12,ease:'power3.out',
+    scrollTrigger:{trigger:'.eq-hero',start:'top 86%',once:true}});
+  ScrollTrigger.create({trigger:'.eq-hero',start:'top 80%',once:true,onEnter:function(){
+    var o={v:0};
+    gsap.to(o,{v:100,duration:1.6,ease:'power2.out',onUpdate:function(){ ehn.textContent=Math.round(o.v); }});
+  }});
+}
 if(document.querySelector('.calc-copy')){
   gsap.from('.calc-copy > *',{y:26,opacity:0,duration:.7,stagger:.1,ease:'power2.out',
     scrollTrigger:{trigger:'#calc .calc-grid',start:'top 82%'}});
@@ -655,6 +696,7 @@ if(!hasGsap||reduced){
   var sh=document.getElementById('shaft'); if(sh) sh.style.position='relative';
   document.querySelectorAll('#shaft .stratum').forEach(function(st){ st.style.position='relative'; st.style.top='auto'; st.style.height='auto'; st.style.padding='70px 0 84px'; st.style.flexDirection='column'; });
   var l=document.getElementById('loader'); if(l) l.style.display='none';
+  document.querySelectorAll('.test-card,.live-card').forEach(function(c){ c.classList.add('is-in'); });
   var ldn=document.getElementById('ld-name'); if (ldn && !ldn.textContent) ldn.textContent='МОСТДОРГЕОТРЕСТ';
   var lightSec=document.getElementById('objects');
   if(lightSec && document.getElementById('hero')){

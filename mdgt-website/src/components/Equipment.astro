@@ -1,22 +1,176 @@
 <section id="devices" class="light-sec" aria-labelledby="eq-title">
   <div class="wrap">
-    <div class="sec-head">
-      
-      <h2 id="eq-title" style="position:absolute;left:-9999px">Парк оборудования</h2>
-      
+    <h2 id="eq-title" class="sr-only">Оснащение лаборатории</h2>
+
+    <div class="eq-hero">
+      <div class="eq-hero-num" role="img" aria-label="Более ста стабилометров в лаборатории">
+        <b aria-hidden="true"><span id="eq-hero-n">100</span><i>+</i></b>
+        <span aria-hidden="true">стабилометров<br>в лаборатории</span>
+      </div>
+      <p class="eq-hero-copy">Сотня установок трёхосного сжатия работает параллельно: большие партии образцов испытываются одновременно — без очередей и растянутых сроков. Ниже — ключевые приборы парка.</p>
     </div>
-    <div class="eq-grid">
-      <article class="eq-card"><div class="eq-thumb"><img src="/img/devices/wille.png" alt="Динамический стабилометр Wille Geotechnik" loading="lazy"></div><span class="eq-tag">Динамика</span><h3>Стабилометр Wille Geotechnik</h3><p>Входные параметры HSS, коэффициенты демпфирования</p></article>
-      <article class="eq-card"><div class="eq-thumb"><img src="/img/devices/resonant.png" alt="Резонансная колонка НПП Геотек" loading="lazy"></div><span class="eq-tag">Динамика</span><h3>Резонансная колонка НПП «Геотек»</h3><p>Модуль сдвига G₀, кривые затухания</p></article>
-      <article class="eq-card"><div class="eq-thumb"><img src="/img/devices/trixal.png" alt="Установка трёхосного сжатия" loading="lazy"></div><span class="eq-tag">Механика</span><h3>Установки трёхосного сжатия</h3><p>F, C, E · параметры моделей HS, SS, SSC, MC</p></article>
-      <article class="eq-card"><div class="eq-thumb"><img src="/img/devices/odometr.png" alt="Одометр — компрессионный прибор" loading="lazy"></div><span class="eq-tag">Механика</span><h3>Одометры</h3><p>Компрессия, консолидация, кривые Ohde, K₀</p></article>
-      <article class="eq-card"><div class="eq-thumb"><img src="/img/devices/wille-rock.png" alt="Прибор трёхосного сжатия Wille для скальных грунтов" loading="lazy"></div><span class="eq-tag">Скала</span><h3>Трёхосное сжатие Wille · Rock</h3><p>Скальные грунты при высоких давлениях</p></article>
-      <article class="eq-card"><div class="eq-thumb"><img src="/img/devices/shear-rock.png" alt="Срезной прибор НПП Геотек" loading="lazy"></div><span class="eq-tag">Скала</span><h3>Срезной прибор НПП «Геотек»</h3><p>Сдвиговые характеристики скальных грунтов</p></article>
-      <article class="eq-card"><div class="eq-thumb"><img src="/img/devices/stamp.png" alt="Пресс ПСН-0.16.10" loading="lazy"></div><span class="eq-tag">Скала</span><h3>Прессы ПСН-0.16.10</h3><p>Прочность на одноосное сжатие</p></article>
-      <article class="eq-card"><div class="eq-thumb"><img src="/img/devices/fridge.png" alt="Морозильная камера" loading="lazy"></div><span class="eq-tag">Мерзлота</span><h3>Морозильные камеры ×3</h3><p>Калибровка «Ростест», испытания по ГОСТ 12248</p></article>
-      <article class="eq-card"><div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7L4.5 19a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3L14 9V2M8 2h8M7 15h10"/></svg></div><span class="eq-tag">Химия</span><h3>pH-метры</h3><p>Химический состав грунтов и грунтовых вод</p></article>
-      <article class="eq-card"><div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-6 3 12 3-9 2 3h7M4 20h16"/></svg></div><span class="eq-tag">Химия</span><h3>Капиллярный электрофорез</h3><p>Анализ водной вытяжки, коррозионная активность</p></article>
-      <article class="eq-card"><div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l3-8 4 16 3-8h7M8 20h8"/></svg></div><span class="eq-tag">Динамика</span><h3>Вибростабилометры</h3><p>Виброползучесть, коэффициент k(вибро)</p></article>
-      <article class="eq-card"><div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4 6l16 12M20 6 4 18M12 2l-2 3h4zM12 22l-2-3h4z"/></svg></div><span class="eq-tag">Мерзлота</span><h3>Комплекс пробоподготовки</h3><p>Хранение и распиловка мерзлых кернов</p></article>
+
+    <div class="eq-bar">
+      <div class="eq-tabs" role="group" aria-label="Фильтр оборудования по направлениям">
+        <button type="button" class="eq-tab on" data-eqf="all" aria-pressed="true">Все <em>12</em></button>
+        <button type="button" class="eq-tab" data-eqf="dyn" aria-pressed="false">Динамика <em>3</em></button>
+        <button type="button" class="eq-tab" data-eqf="mech" aria-pressed="false">Механика <em>2</em></button>
+        <button type="button" class="eq-tab" data-eqf="rock" aria-pressed="false">Скала <em>3</em></button>
+        <button type="button" class="eq-tab" data-eqf="frost" aria-pressed="false">Мерзлота <em>2</em></button>
+        <button type="button" class="eq-tab" data-eqf="chem" aria-pressed="false">Химия <em>2</em></button>
+      </div>
+      <div class="eq-total" aria-hidden="true"><b id="eq-count">12</b> установок · парк в работе</div>
+    </div>
+
+    <div class="eq-grid" id="eq-grid">
+
+      <!-- флагман · динамика -->
+      <article class="eq-card eq-card--xl" data-cat="dyn">
+        <span class="eq-idx" aria-hidden="true">01</span>
+        <div class="eq-thumb"><img src="/img/devices/wille.png" alt="Динамический стабилометр Wille Geotechnik" loading="lazy"></div>
+        <div class="eq-body">
+          <span class="eq-tag">Динамика · флагман</span>
+          <h3>Стабилометр Wille Geotechnik</h3>
+          <p>Динамическое трёхосное сжатие: входные параметры HSS-модели, коэффициенты демпфирования, циклические режимы нагружения.</p>
+          <dl class="eq-spec">
+            <div><dt>Производитель</dt><dd>Wille Geotechnik · Германия</dd></div>
+            <div><dt>Даёт для расчёта</dt><dd>HSS · демпфирование · k<sub>d</sub></dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="eq-card" data-cat="dyn">
+        <span class="eq-idx" aria-hidden="true">02</span>
+        <div class="eq-thumb"><img src="/img/devices/resonant.png" alt="Резонансная колонка НПП Геотек" loading="lazy"></div>
+        <span class="eq-tag">Динамика</span>
+        <h3>Резонансная колонка НПП «Геотек»</h3>
+        <p>Модуль сдвига G₀, кривые затухания</p>
+      </article>
+
+      <article class="eq-card" data-cat="mech">
+        <span class="eq-idx" aria-hidden="true">03</span>
+        <div class="eq-thumb"><img src="/img/devices/trixal.png" alt="Установка трёхосного сжатия" loading="lazy"></div>
+        <span class="eq-tag">Механика</span>
+        <h3>Установки трёхосного сжатия</h3>
+        <p>F, C, E · параметры моделей HS, SS, SSC, MC</p>
+      </article>
+
+      <article class="eq-card" data-cat="mech">
+        <span class="eq-idx" aria-hidden="true">04</span>
+        <div class="eq-thumb"><img src="/img/devices/odometr.png" alt="Одометр — компрессионный прибор" loading="lazy"></div>
+        <span class="eq-tag">Механика</span>
+        <h3>Одометры</h3>
+        <p>Компрессия, консолидация, кривые Ohde, K₀</p>
+      </article>
+
+      <!-- флагман · скала -->
+      <article class="eq-card eq-card--xl" data-cat="rock">
+        <span class="eq-idx" aria-hidden="true">05</span>
+        <div class="eq-thumb"><img src="/img/devices/wille-rock.png" alt="Прибор трёхосного сжатия Wille для скальных грунтов" loading="lazy"></div>
+        <div class="eq-body">
+          <span class="eq-tag">Скала · флагман</span>
+          <h3>Трёхосное сжатие Wille · Rock</h3>
+          <p>Испытания скальных грунтов при высоких давлениях — прочность и деформируемость керна для тоннелей и оснований высотных объектов.</p>
+          <dl class="eq-spec">
+            <div><dt>Производитель</dt><dd>Wille Geotechnik · Германия</dd></div>
+            <div><dt>Специализация</dt><dd>скальные керны · высокие давления</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="eq-card" data-cat="rock">
+        <span class="eq-idx" aria-hidden="true">06</span>
+        <div class="eq-thumb"><img src="/img/devices/shear-rock.png" alt="Срезной прибор НПП Геотек" loading="lazy"></div>
+        <span class="eq-tag">Скала</span>
+        <h3>Срезной прибор НПП «Геотек»</h3>
+        <p>Сдвиговые характеристики скальных грунтов</p>
+      </article>
+
+      <article class="eq-card" data-cat="rock">
+        <span class="eq-idx" aria-hidden="true">07</span>
+        <div class="eq-thumb"><img src="/img/devices/stamp.png" alt="Пресс ПСН-0.16.10" loading="lazy"></div>
+        <span class="eq-tag">Скала</span>
+        <h3>Прессы ПСН-0.16.10</h3>
+        <p>Прочность на одноосное сжатие</p>
+      </article>
+
+      <article class="eq-card" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">08</span>
+        <div class="eq-thumb"><img src="/img/devices/fridge.png" alt="Морозильная камера" loading="lazy"></div>
+        <span class="eq-tag">Мерзлота</span>
+        <h3>Морозильные камеры ×3</h3>
+        <p>Калибровка «Ростест», испытания по ГОСТ 12248</p>
+      </article>
+
+      <article class="eq-card" data-cat="dyn">
+        <span class="eq-idx" aria-hidden="true">09</span>
+        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l3-8 4 16 3-8h7M8 20h8"/></svg></div>
+        <span class="eq-tag">Динамика</span>
+        <h3>Вибростабилометры</h3>
+        <p>Виброползучесть, коэффициент k(вибро)</p>
+      </article>
+
+      <article class="eq-card" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">10</span>
+        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4 6l16 12M20 6 4 18M12 2l-2 3h4zM12 22l-2-3h4z"/></svg></div>
+        <span class="eq-tag">Мерзлота</span>
+        <h3>Комплекс пробоподготовки</h3>
+        <p>Хранение и распиловка мерзлых кернов</p>
+      </article>
+
+      <article class="eq-card" data-cat="chem">
+        <span class="eq-idx" aria-hidden="true">11</span>
+        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7L4.5 19a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3L14 9V2M8 2h8M7 15h10"/></svg></div>
+        <span class="eq-tag">Химия</span>
+        <h3>pH-метры</h3>
+        <p>Химический состав грунтов и грунтовых вод</p>
+      </article>
+
+      <article class="eq-card" data-cat="chem">
+        <span class="eq-idx" aria-hidden="true">12</span>
+        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-6 3 12 3-9 2 3h7M4 20h16"/></svg></div>
+        <span class="eq-tag">Химия</span>
+        <h3>Капиллярный электрофорез</h3>
+        <p>Анализ водной вытяжки, коррозионная активность</p>
+      </article>
+
+      <a class="eq-card eq-card--cta" href="https://mdgt.ru/3d/output-3/index.html" target="_blank" rel="noopener" data-cta>
+        <span class="eq-tag">Весь парк вживую</span>
+        <h3>Пройдитесь по залам в 3D-туре</h3>
+        <p>Каждая установка — на своём месте: панорамная съёмка испытательных залов лаборатории.</p>
+        <span class="eq-cta-go">Открыть тур<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>
+      </a>
+
+    </div>
+
+    <div class="eq-facts" aria-label="Факты о парке оборудования">
+      <div class="eq-fact"><b>ISO/IEC 17025</b><span>аккредитованная лаборатория — протокол по каждому испытанию</span></div>
+      <div class="eq-fact"><b>«Ростест»</b><span>метрологическая калибровка приборов и камер</span></div>
+      <div class="eq-fact"><b>Wille · «Геотек»</b><span>немецкие и российские установки в одном парке</span></div>
     </div>
   </div>
+</section>
+
+<script>
+  /* фильтр парка по направлениям */
+  const grid = document.getElementById('eq-grid');
+  if (grid) {
+    const tabs = Array.from(document.querySelectorAll('.eq-tab'));
+    const cards = Array.from(grid.querySelectorAll('.eq-card'));
+    const count = document.getElementById('eq-count');
+    tabs.forEach((tab) => tab.addEventListener('click', () => {
+      const f = (tab as HTMLElement).dataset.eqf;
+      tabs.forEach((t) => { t.classList.toggle('on', t === tab); t.setAttribute('aria-pressed', String(t === tab)); });
+      let n = 0;
+      cards.forEach((card) => {
+        const isCta = card.hasAttribute('data-cta');
+        const show = isCta || f === 'all' || (card as HTMLElement).dataset.cat === f;
+        card.classList.toggle('eq-hide', !show);
+        if (show) { if (!isCta) n++; card.classList.remove('eq-pop'); void (card as HTMLElement).offsetWidth; card.classList.add('eq-pop'); }
+      });
+      if (count) count.textContent = String(n);
+      /* высота секции меняется — пусть ScrollTrigger пересчитает пины */
+      window.dispatchEvent(new Event('resize'));
+    }));
+  }
+</script>
