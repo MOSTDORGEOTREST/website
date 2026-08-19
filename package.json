@@ -1,42 +1,17 @@
 {
-	"name": "mdgt-mew",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@testing-library/jest-dom": "^5.16.4",
-		"@testing-library/react": "^13.3.0",
-		"@testing-library/user-event": "^13.5.0",
-		"hls.js": "^1.2.0",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"react-responsive-carousel": "3.2.21",
-		"react-router-dom": "^6.3.0",
-		"react-router-hash-link": "^2.4.3",
-		"react-scripts": "^5.0.1",
-		"web-vitals": "^2.1.4"
-	},
-	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject"
-	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	}
+  "name": "mdgt-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.1.0",
+    "gsap": "^3.12.5",
+    "hls.js": "^1.6.19",
+    "lenis": "^1.1.14"
+  }
 }

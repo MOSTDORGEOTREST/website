@@ -1,0 +1,31 @@
+# syntax=docker/dockerfile:1
+
+FROM node:22-alpine AS build
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY astro.config.mjs ./
+COPY src ./src
+COPY public ./public
+RUN npm run build
+
+FROM nginx:1.27-alpine
+
+RUN apk add --no-cache openssl
+
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY server/init.d/app.conf /etc/nginx/conf.d/app.conf
+COPY server/docker-entrypoint.d/ /docker-entrypoint.d/
+RUN sed -i 's/\r$//' /docker-entrypoint.d/*.sh \
+    && chmod +x /docker-entrypoint.d/*.sh
+
+COPY --from=build /app/dist /usr/share/nginx/html
+RUN chown -R nginx:nginx /usr/share/nginx/html
+
+EXPOSE 80 443
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s \
+  CMD wget --no-check-certificate -qO- https://127.0.0.1/ >/dev/null || exit 1
+
+CMD ["nginx", "-g", "daemon off;"]
