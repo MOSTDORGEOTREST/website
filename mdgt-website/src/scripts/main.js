@@ -304,32 +304,73 @@ if (!isTouch && !reduced && hasGsap){
       gsap.to(dyn.querySelector('.st-in'),{x:2.5,duration:1,ease:'sine.inOut',yoyo:true,repeat:-1});
     }
 
-    /* 04 Мерзлота: лёд мерцает, иней искрится, с линз капает оттаивание */
+    /* 04 Мерзлота: линзы льда вспыхивают холодным глинтом, кристаллы дышат,
+       иней искрится, вдоль слоя плывёт позёмка, с линз капает оттаивание */
     q('frost','lens').forEach(function(el){
-      gsap.to(el,{opacity:rnd(.45,.65),scaleX:rnd(1.04,1.1),duration:rnd(2.5,5),ease:'sine.inOut',repeat:-1,yoyo:true,delay:rnd(0,3)});
+      gsap.to(el,{opacity:rnd(.5,.78),scaleX:rnd(1.05,1.14),duration:rnd(2,4),ease:'sine.inOut',repeat:-1,yoyo:true,delay:rnd(0,3)});
+      /* редкий яркий глинт по льду */
+      gsap.timeline({repeat:-1,repeatDelay:rnd(3,8),delay:rnd(0,7)})
+        .to(el,{filter:'brightness(2.3)',duration:.22,ease:'power2.in'})
+        .to(el,{filter:'brightness(1)',duration:.65,ease:'power2.out'});
     });
-    q('frost','sparkle').forEach(function(el){
+    q('frost','crystal').forEach(function(el){
+      gsap.to(el,{scale:rnd(1.08,1.2),rotation:'+='+rnd(-9,9),duration:rnd(2.5,5),ease:'sine.inOut',repeat:-1,yoyo:true,delay:rnd(0,4)});
+    });
+    q('frost','sparkle').forEach(function(el,i){
       gsap.to(el,{opacity:rnd(.15,.4),duration:rnd(1.2,2.8),ease:'sine.inOut',repeat:-1,yoyo:true,delay:rnd(0,3)});
+      /* каждый третий — редкая яркая вспышка */
+      if(i%3===0) gsap.timeline({repeat:-1,repeatDelay:rnd(3,9),delay:rnd(0,8)})
+        .to(el,{scale:rnd(1.8,2.6),opacity:1,duration:.22,ease:'power2.out'})
+        .to(el,{scale:1,duration:.55,ease:'power2.in'});
     });
     var frostBox=document.querySelector('.stratum[data-soil="frost"] .st-particles');
     if(frostBox){
-      q('frost','lens').slice(0,7).forEach(function(lens){
+      /* позёмка: холодная дымка медленно плывёт вдоль горизонта */
+      for(var fi=0;fi<4;fi++){
+        var mist=document.createElement('i');
+        mist.style.cssText='position:absolute;left:'+rnd(0,75)+'%;top:'+rnd(15,80)+'%;width:'+rnd(160,320)+'px;height:'+rnd(26,54)+'px;border-radius:50%;background:radial-gradient(closest-side,rgba(235,248,255,.17),transparent 70%);filter:blur(10px);pointer-events:none';
+        frostBox.appendChild(mist);
+        gsap.to(mist,{x:'+='+rnd(70,150),duration:rnd(7,13),ease:'sine.inOut',repeat:-1,yoyo:true,delay:rnd(0,5)});
+        gsap.to(mist,{opacity:rnd(.35,.7),duration:rnd(3,6),ease:'sine.inOut',repeat:-1,yoyo:true});
+      }
+      q('frost','lens').slice(0,10).forEach(function(lens){
         var d=document.createElement('i');
-        d.style.cssText='position:absolute;width:3px;height:5px;border-radius:50% 50% 60% 60%;background:rgba(215,240,255,.85);left:'+(parseFloat(lens.style.left)+rnd(0,3))+'%;top:'+lens.style.top+';opacity:0';
+        d.style.cssText='position:absolute;width:3px;height:5px;border-radius:50% 50% 60% 60%;background:rgba(215,240,255,.9);left:'+(parseFloat(lens.style.left)+rnd(0,3))+'%;top:'+lens.style.top+';opacity:0';
         frostBox.appendChild(d);
-        gsap.timeline({repeat:-1,repeatDelay:rnd(2.5,7),delay:rnd(0,6)})
+        gsap.timeline({repeat:-1,repeatDelay:rnd(1.5,5),delay:rnd(0,5)})
           .set(d,{y:0,opacity:0})
-          .to(d,{opacity:.9,duration:.3})
-          .to(d,{y:rnd(70,150),duration:rnd(.9,1.5),ease:'power2.in'},'<')
-          .to(d,{opacity:0,duration:.3},'-=.25');
+          .to(d,{opacity:.95,duration:.25})
+          .to(d,{y:rnd(80,170),duration:rnd(.7,1.2),ease:'power2.in'},'<')
+          .to(d,{opacity:0,duration:.25},'-=.2');
       });
     }
 
-    /* 05 Скала: трещины прорастают и затягиваются */
+    /* 05 Скала: трещины прорастают рывками; на разрыве — микротолчок слоя
+       и осыпь мелких обломков, затем трещина затягивается */
+    var rockBox=document.querySelector('.stratum[data-soil="rock"] .st-particles');
+    var tremorBusy=false;
+    function rockTremor(){
+      if(tremorBusy||!rockBox)return; tremorBusy=true;
+      gsap.fromTo(rockBox,{x:0},{x:3,duration:.05,repeat:5,yoyo:true,ease:'sine.inOut',
+        onComplete:function(){ gsap.set(rockBox,{x:0}); tremorBusy=false; }});
+    }
+    function rockDebris(src){
+      if(!rockBox)return;
+      var n=2+Math.floor(Math.random()*2);
+      for(var di=0;di<n;di++){
+        var d=document.createElement('i');
+        var s=rnd(3,7);
+        d.style.cssText='position:absolute;left:'+(parseFloat(src.style.left)+rnd(-2,5))+'%;top:'+src.style.top+';width:'+s+'px;height:'+(s*.8)+'px;clip-path:polygon(20% 40%,55% 0%,100% 30%,80% 100%,10% 88%);background:rgba(226,229,236,.55);pointer-events:none';
+        rockBox.appendChild(d);
+        gsap.to(d,{y:rnd(60,150),x:rnd(-16,16),rotation:rnd(-170,170),opacity:0,duration:rnd(.9,1.6),ease:'power2.in',
+          onComplete:(function(el){ return function(){ el.remove(); }; })(d)});
+      }
+    }
     q('rock','crack').forEach(function(el){
-      gsap.timeline({repeat:-1,repeatDelay:rnd(3,9),delay:rnd(0,8)})
-        .fromTo(el,{scaleX:0,opacity:1},{scaleX:1,duration:rnd(.9,1.8),ease:'power2.out'})
-        .to(el,{opacity:0,duration:1.2,ease:'power1.in'},'+='+rnd(2,5))
+      gsap.timeline({repeat:-1,repeatDelay:rnd(3,8),delay:rnd(0,8)})
+        .fromTo(el,{scaleX:0,opacity:1},{scaleX:1,duration:rnd(.5,.9),ease:'steps(6)'}) /* рывками, как настоящий разрыв */
+        .add(function(){ rockTremor(); rockDebris(el); })
+        .to(el,{opacity:0,duration:1.3,ease:'power1.in'},'+='+rnd(2,5))
         .set(el,{scaleX:0,opacity:1});
     });
 

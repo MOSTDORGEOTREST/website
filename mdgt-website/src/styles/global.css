@@ -76,7 +76,7 @@ body.on-light .burger i,body.on-light .burger i::before,body.on-light .burger i:
 body.on-light .nav-brand img{box-shadow:0 2px 8px rgba(60,42,12,.14); border:1px solid var(--line-d-soft)}
 .nav-brand .nb{line-height:1.25}
 .nav-brand .nb b{font-family:var(--font-d); font-weight:600; font-size:12px; letter-spacing:.1em; display:block}
-.nav-brand .nb span{font-family:var(--font-m); font-size:9px; color:var(--muted); letter-spacing:.28em; text-transform:uppercase}
+.nav-brand .nb span{font-family:var(--font-m); font-size:9px; color:var(--muted); letter-spacing:.18em; text-transform:uppercase; white-space:nowrap}
 .nav-links{display:flex; gap:2px; list-style:none}
 .nav-links a{position:relative; padding:9px 13px; font-size:13px; font-weight:500; color:var(--ink-dim); border-radius:99px; transition:color .25s}
 .nav-links a::after{content:''; position:absolute; left:13px; right:13px; bottom:5px; height:1px; background:var(--amber); transform:scaleX(0); transform-origin:right; transition:transform .35s var(--ease)}
