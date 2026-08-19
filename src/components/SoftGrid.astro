@@ -1,3 +1,125 @@
+---
+const papers = [
+  {
+    rank: "04",
+    year: "2026",
+    kind: "Журнальная статья",
+    title: "Реконструкция c, φ и E₅₀ по лабораторным данным: интерпретируемый ансамбль и сравнение моделей",
+    authors: "Тишин Н.Р.",
+    source: "Моделирование, оптимизация и информационные технологии · 14(5)",
+    summary: "Ансамбль CatBoost, FT-Transformer и многозадачной сети восстанавливает параметры грунта по стандартным лабораторным данным; вклад признаков объясняется через SHAP.",
+    tags: ["Tabular AI", "SHAP", "R² ≈ 0,88"],
+    href: "https://moitvivt.ru/ru/journal/article?id=2249",
+  },
+  {
+    rank: "05",
+    year: "2025",
+    kind: "Журнальная статья",
+    title: "Математическое моделирование роста порового давления в грунтах при приложении динамической нагрузки",
+    authors: "Тишин Н.Р., Пролетарский А.В., Озмидов О.Р.",
+    source: "Математическое моделирование и численные методы · № 2 · с. 50–67",
+    summary: "Сопоставление CPT-, расширенной CPT- и логарифмической моделей на лабораторных испытаниях штормового разжижения — для прогноза длительных циклических процессов.",
+    tags: ["Поровое давление", "Циклическая нагрузка", "DOI"],
+    href: "https://mmcm.bmstu.ru/articles/374/",
+  },
+  {
+    rank: "06",
+    year: "2025",
+    kind: "Журнальная статья",
+    title: "Анализ устойчивости водонасыщенных грунтов при циклическом воздействии: математические модели и прогнозы",
+    authors: "Тишин Н.Р., Озмидов О.Р., Пролетарский А.В.",
+    source: "Моделирование, оптимизация и информационные технологии · 13(1)",
+    summary: "Математические функции разжижения сопоставлены по точности аппроксимации, чтобы оценивать потерю прочности грунта при сейсмических и вибрационных воздействиях.",
+    tags: ["Разжижение", "Динамика грунтов", "Прогноз"],
+    href: "https://moitvivt.ru/ru/journal/article?id=1765",
+  },
+  {
+    rank: "07",
+    year: "2024",
+    kind: "Журнальная статья",
+    title: "Система комплексного хранения данных геологических лабораторных испытаний",
+    authors: "Тишин Н.Р., Озмидов О.Р., Пролетарский А.В.",
+    source: "Моделирование, оптимизация и информационные технологии · 12(1)",
+    summary: "Архитектура хранения структурированных и неструктурированных результатов испытаний: реляционная модель, BJSON и защищённый программный доступ.",
+    tags: ["Data platform", "Лабораторные данные", "API"],
+    href: "https://moitvivt.ru/ru/journal/article?id=1495",
+  },
+  {
+    rank: "08",
+    year: "2023",
+    kind: "Материалы международной конференции",
+    title: "Применение искусственного интеллекта для экспертизы материалов инженерных изысканий",
+    authors: "Озмидов О.Р., Тишин Н.Р., Фролова Н.А., Селиванова О.С.",
+    source: "Российский форум изыскателей · V Международная научно-практическая конференция · с. 127–130",
+    summary: "Подход к использованию ИИ как инструмента проверки и экспертного анализа материалов инженерных изысканий.",
+    tags: ["Искусственный интеллект", "Экспертиза", "Изыскания"],
+  },
+  {
+    rank: "09",
+    year: "2023",
+    kind: "Материалы международной конференции",
+    title: "Разработка программного обеспечения для усовершенствования процедуры калибровки входных параметров расчётных моделей грунтов в программных комплексах численного моделирования грунтовых оснований зданий и сооружений",
+    authors: "Озмидов О.Р., Тишин Н.Р., Фролова Н.А., Селиванова О.С.",
+    source: "Российский форум изыскателей · V Международная научно-практическая конференция · с. 130–133",
+    summary: "Программный подход к калибровке параметров расчётных моделей грунта для повышения воспроизводимости численного моделирования оснований.",
+    tags: ["Калибровка", "Численное моделирование", "ПО"],
+  },
+  {
+    rank: "10",
+    year: "2023",
+    kind: "Материалы международной конференции",
+    title: "Цифровое визирование и подход к выдаче протоколов лабораторных испытаний",
+    authors: "Селиванова О.С., Тишин Н.Р., Озмидов О.Р., Фролова Н.А.",
+    source: "Российский форум изыскателей · V Международная научно-практическая конференция · с. 156–160",
+    summary: "Цифровой процесс согласования и выдачи лабораторных протоколов — с фокусом на прослеживаемость результатов испытаний.",
+    tags: ["Цифровой протокол", "Лаборатория", "Прослеживаемость"],
+  },
+  {
+    rank: "11",
+    year: "2020",
+    kind: "Труды научной конференции",
+    title: "Учёт виброползучести в процессе оттаивания грунтовых оснований при проектировании и эксплуатации зданий и сооружений",
+    authors: "Озмидов О.Р., Жмылёв Д.А., Чипеев С.С., Тишин Н.Р., Ратникова Е.В.",
+    source: "Механика композиционных материалов и конструкций, сложных и гетерогенных сред · 10-я конференция · с. 481–487",
+    summary: "Работа о совместном учёте виброползучести и оттаивания грунтовых оснований в расчётах зданий и сооружений.",
+    tags: ["Виброползучесть", "Оттаивание", "Основания"],
+  },
+  {
+    rank: "12",
+    year: "2020",
+    kind: "Труды научной конференции",
+    title: "Сопоставление различных методик определения входных параметров модели HSS",
+    authors: "Тишин Н.Р., Озмидов О.Р., Чипеев С.С., Христенко О.С.",
+    source: "Механика композиционных материалов и конструкций, сложных и гетерогенных сред · 10-я конференция · с. 502–506",
+    summary: "Сравнение лабораторных методик определения G₀ и γ₀.₇ для Hardening Soil Small и оценка их применимости в инженерных расчётах.",
+    tags: ["Hardening Soil Small", "G₀ и γ₀.₇", "Испытания"],
+    href: "https://geoinfo.ru/product/geotekhnicheskaya-laboratoriya-ao-mostdorgeotrest/sopostavlenie-razlichnyh-metodik-opredeleniya-vhodnyh-parametrov-modeli-hss-43773.shtml",
+  },
+  {
+    rank: "13",
+    year: "2019",
+    kind: "Тезисы научной конференции",
+    title: "Сопоставление результатов определения параметров модели Hardening Soil Small с помощью резонансной колонки и циклического стабилометра",
+    authors: "Тишин Н.Р., Чепеев С.С., Озмидов О.Р.",
+    source: "Механика композиционных материалов и конструкций, сложных и гетерогенных сред · 9-я конференция · с. 174",
+    summary: "Сопоставление двух лабораторных способов получения параметров HSS: резонансной колонки и циклического трёхосного испытания.",
+    tags: ["Резонансная колонка", "HSS", "Стабилометр"],
+  },
+  {
+    rank: "14",
+    year: "2019",
+    kind: "Тезисы научной конференции",
+    title: "Конечно-элементное моделирование динамического воздействия на грунтовое основание зданий и сооружений",
+    authors: "Чепеев С.С., Тишин Н.Р., Озмидов О.Р.",
+    source: "Механика композиционных материалов и конструкций, сложных и гетерогенных сред · 9-я конференция · с. 177",
+    summary: "Применение метода конечных элементов для оценки реакции грунтового основания на динамические воздействия.",
+    tags: ["МКЭ", "Динамическое воздействие", "Грунтовое основание"],
+  },
+];
+
+const elibraryIds = ["89023171", "86762169", "82561108", "80264286", "77078709"];
+---
+
 <!-- ═══════════ ЭКОСИСТЕМА ГЕОНЕКСА ═══════════ -->
 <section id="geonexa" class="light-sec" aria-labelledby="gx-title">
   <div class="wrap">
@@ -119,94 +241,102 @@
 <!-- ═══════════ НАШИ СТАТЬИ ═══════════ -->
 <section id="papers" class="light-sec" aria-labelledby="papers-title">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="d-eyebrow">Наука</span>
-      <h2 id="papers-title">Наши статьи</h2>
-      <p class="sec-sub">Команда лаборатории публикуется в рецензируемых журналах — от математических моделей поведения грунтов до машинного обучения и инфраструктуры данных.</p>
+    <div class="papers-head">
+      <div class="sec-head">
+        <span class="d-eyebrow">Исследования · 2020—2026</span>
+        <h2 id="papers-title">Наука, которая<br>работает в грунте</h2>
+      </div>
+      <p class="papers-intro">Мы соединяем механику грунтов, лабораторный эксперимент и объяснимый ИИ. Здесь — главные публикации команды, ранжированные по научной значимости площадки и масштабу результата.</p>
     </div>
-    <div class="pub-list">
 
-      <a class="pub-row" href="https://moitvivt.ru/ru/journal/article?id=2249" target="_blank" rel="noopener">
-        <span class="pub-num">01</span>
-        <span class="pub-body">
-          <span class="pub-title">Восстановление c, φ и E₅₀ по лабораторным данным: интерпретируемый ансамбль и сравнение моделей</span>
-          <span class="pub-meta">«Моделирование, оптимизация и информационные технологии» · 2026 · Тишин Н.Р.</span>
+    <div class="papers-featured">
+      <a class="paper-lead" href="https://ieeexplore.ieee.org/abstract/document/10986011" target="_blank" rel="noopener">
+        <span class="paper-rank">01 · IEEE</span>
+        <span class="paper-visual" aria-hidden="true">
+          <svg viewBox="0 0 460 230">
+            <g class="pv-grid"><path d="M0 45h460M0 91h460M0 137h460M0 183h460M92 0v230M184 0v230M276 0v230M368 0v230"/></g>
+            <g class="pv-links"><path d="M32 178 96 126 158 145 216 72 284 105 352 48 428 78"/><path d="M96 126 116 52 216 72M284 105 324 172 428 78"/></g>
+            <g class="pv-points"><circle cx="32" cy="178" r="5"/><circle cx="96" cy="126" r="7"/><circle cx="116" cy="52" r="4"/><circle cx="158" cy="145" r="5"/><circle cx="216" cy="72" r="8"/><circle cx="284" cy="105" r="6"/><circle cx="324" cy="172" r="4"/><circle cx="352" cy="48" r="7"/><circle cx="428" cy="78" r="5"/></g>
+          </svg>
+          <span class="paper-metric"><b>0,635</b><small>silhouette score · k-means</small></span>
         </span>
-        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+        <span class="paper-lead-content">
+          <span class="paper-kicker">SmartIndustryCon · IEEE · 2025</span>
+          <span class="paper-lead-title">Autoencoders and Multidimensional Clustering Algorithms in the Identification of Engineering-Geological Elements</span>
+          <span class="paper-copy">Автоэнкодер сжимает параметры 90 образцов грунта в латентное пространство, алгоритмы кластеризации выделяют ИГЭ, а индикаторный кригинг собирает из них пространственный разрез.</span>
+          <span class="paper-authors">Nikita Tishin · Andrey Proletarsky · Oleg Ozmidov</span>
+          <span class="paper-link">DOI 10.1109/SmartIndustryCon65166.2025.10986011 <svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span>
+        </span>
       </a>
 
-      <a class="pub-row" href="https://mmcm.bmstu.ru/articles/374/" target="_blank" rel="noopener">
-        <span class="pub-num">02</span>
-        <span class="pub-body">
-          <span class="pub-title">Математическое моделирование роста порового давления в грунтах при приложении динамической нагрузки</span>
-          <span class="pub-meta">«Математическое моделирование и численные методы» (МГТУ им. Н.Э. Баумана) · 2025 · Тишин Н.Р., Пролетарский А.В., Озмидов О.Р.</span>
-        </span>
-        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
-      </a>
+      <div class="paper-side">
+        <a class="paper-card paper-card--amber" href="https://www.geomark.ru/articles/primenenie-avtoenkoderov-i-algoritmov-mnogomernoj-klasterizaczii-pri-provedenii-geotehnicheskoj-shematizaczii/" target="_blank" rel="noopener">
+          <span class="paper-rank">02 · Геотехника</span>
+          <span class="paper-kicker">Том XVII · № 2 · 2025 · с. 44–64</span>
+          <span class="paper-card-title">Применение автоэнкодеров и алгоритмов многомерной кластеризации при проведении геотехнической схематизации</span>
+          <span class="paper-copy">Сравнение k-means, fuzzy c-means, DBSCAN, GMM и SOM с экспертным выделением ИГЭ. Лучшее совпадение классической схемы показала SOM: ARI = 0,9.</span>
+          <span class="paper-authors">Озмидов О.Р. · Тишин Н.Р. · Селиванова О.С. · Гаврилович А.С.</span>
+          <span class="paper-link">DOI 10.25296/2221-5514-2025-17-2-44-64 <svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span>
+        </a>
 
-      <a class="pub-row" href="https://moitvivt.ru/ru/journal/article?id=1765" target="_blank" rel="noopener">
-        <span class="pub-num">03</span>
-        <span class="pub-body">
-          <span class="pub-title">Анализ устойчивости водонасыщенных грунтов при циклическом воздействии: математические модели и прогнозы</span>
-          <span class="pub-meta">«Моделирование, оптимизация и информационные технологии» · 2025 · Тишин Н.Р., Озмидов О.Р., Пролетарский А.В.</span>
-        </span>
-        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
-      </a>
+        <article class="paper-card paper-card--pending">
+          <span class="paper-rank">03 · Международный доклад</span>
+          <span class="paper-kicker">ICASA 2026 · University of East London</span>
+          <h3 class="paper-card-title">Data-Centric Geotechnics: Explainable Tabular AI to Reconstruct Soil Parameters for Digital Ground Models</h3>
+          <p class="paper-copy">Объяснимый табличный ИИ для восстановления параметров грунта и построения цифровых моделей основания — от лабораторных данных к инженерно интерпретируемому результату.</p>
+          <p class="paper-authors">Nikita Tishin · Sergei Chipeev · Oleg Ozmidov · Andrey Proletarskii</p>
+          <span class="paper-status"><i></i> Доклад представлен · ссылка ожидается</span>
+        </article>
+      </div>
+    </div>
 
-      <a class="pub-row" href="https://moitvivt.ru/ru/journal/article?id=1495" target="_blank" rel="noopener">
-        <span class="pub-num">04</span>
-        <span class="pub-body">
-          <span class="pub-title">Система комплексного хранения данных геологических лабораторных испытаний</span>
-          <span class="pub-meta">«Моделирование, оптимизация и информационные технологии» · 2024 · Тишин Н.Р., Озмидов О.Р., Пролетарский А.В.</span>
-        </span>
-        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
-      </a>
+    <div class="papers-subhead">
+      <span>Публикации и прикладные исследования</span>
+      <span>{String(papers.length).padStart(2, "0")} материалов</span>
+    </div>
+    <div class="papers-grid">
+      {papers.map((paper) => (
+        <a
+          class:list={["paper-item", { "paper-item--static": !paper.href }]}
+          href={paper.href}
+          target={paper.href ? "_blank" : undefined}
+          rel={paper.href ? "noopener" : undefined}
+        >
+          <span class="paper-item-top"><span>{paper.rank}</span><span>{paper.year}</span></span>
+          <span class="paper-kicker">{paper.kind}</span>
+          <span class="paper-item-title">{paper.title}</span>
+          <span class="paper-copy">{paper.summary}</span>
+          <span class="paper-source">{paper.source}</span>
+          <span class="paper-authors">{paper.authors}</span>
+          <span class="paper-tags">{paper.tags.map((tag) => <span>{tag}</span>)}</span>
+          {paper.href ? (
+            <svg class="paper-item-arrow" viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg>
+          ) : (
+            <span class="paper-no-link">Архивная запись</span>
+          )}
+        </a>
+      ))}
+    </div>
 
-      <a class="pub-row" href="https://www.elibrary.ru/item.asp?id=89023171" target="_blank" rel="noopener">
-        <span class="pub-num">05</span>
-        <span class="pub-body">
-          <span class="pub-title">Научная публикация в РИНЦ</span>
-          <span class="pub-meta">eLIBRARY.RU · ID 89023171 · открыть карточку публикации</span>
-        </span>
-        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
-      </a>
-
-      <a class="pub-row" href="https://www.elibrary.ru/item.asp?id=86762169" target="_blank" rel="noopener">
-        <span class="pub-num">06</span>
-        <span class="pub-body">
-          <span class="pub-title">Научная публикация в РИНЦ</span>
-          <span class="pub-meta">eLIBRARY.RU · ID 86762169 · открыть карточку публикации</span>
-        </span>
-        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
-      </a>
-
-      <a class="pub-row" href="https://www.elibrary.ru/item.asp?id=82561108" target="_blank" rel="noopener">
-        <span class="pub-num">07</span>
-        <span class="pub-body">
-          <span class="pub-title">Научная публикация в РИНЦ</span>
-          <span class="pub-meta">eLIBRARY.RU · ID 82561108 · открыть карточку публикации</span>
-        </span>
-        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
-      </a>
-
-      <a class="pub-row" href="https://www.elibrary.ru/item.asp?id=80264286" target="_blank" rel="noopener">
-        <span class="pub-num">08</span>
-        <span class="pub-body">
-          <span class="pub-title">Научная публикация в РИНЦ</span>
-          <span class="pub-meta">eLIBRARY.RU · ID 80264286 · открыть карточку публикации</span>
-        </span>
-        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
-      </a>
-
-      <a class="pub-row" href="https://www.elibrary.ru/item.asp?id=77078709" target="_blank" rel="noopener">
-        <span class="pub-num">09</span>
-        <span class="pub-body">
-          <span class="pub-title">Научная публикация в РИНЦ</span>
-          <span class="pub-meta">eLIBRARY.RU · ID 77078709 · открыть карточку публикации</span>
-        </span>
-        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
-      </a>
-
+    <div class="rinz-block">
+      <div class="rinz-head">
+        <div>
+          <span class="d-eyebrow">Научный архив</span>
+          <h3>Публикации в РИНЦ</h3>
+        </div>
+        <p>Полные библиографические карточки и показатели цитирования в национальной научной электронной библиотеке.</p>
+      </div>
+      <div class="rinz-list">
+        {elibraryIds.map((id, index) => (
+          <a class="rinz-row" href={`https://www.elibrary.ru/item.asp?id=${id}`} target="_blank" rel="noopener">
+            <span class="rinz-index">{String(index + 1).padStart(2, "0")}</span>
+            <span class="rinz-mark">РИНЦ</span>
+            <span class="rinz-name">Библиографическая карточка публикации</span>
+            <span class="rinz-id">eLIBRARY ID {id}</span>
+            <svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg>
+          </a>
+        ))}
+      </div>
     </div>
   </div>
 </section>
