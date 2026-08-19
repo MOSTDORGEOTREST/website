@@ -655,7 +655,7 @@ gsap.utils.toArray('.sec-head').forEach(function(head){
     scrollTrigger:{trigger:head,start:'top 85%'}});
 });
 /* надёжные one-shot появления карточек: без «застрявших» промежуточных состояний */
-gsap.utils.toArray('.test-card,.edu-card,.contact-card,.eq-card,.fin-main,.live-card').forEach(function(card,k){
+gsap.utils.toArray('.test-card,.edu-card,.contact-card,.eq-card,.fin-main,.live-card,.gx-panel,.svc-card,.pub-row').forEach(function(card,k){
   gsap.fromTo(card,{y:34,opacity:0},{y:0,opacity:1,duration:.6,ease:'power2.out',
     delay:(k%4)*.06, immediateRender:true, clearProps:'transform,opacity',
     onComplete:function(){ card.classList.add('is-in'); }, /* запускает отрисовку графиков в карточках */

@@ -1,24 +1,212 @@
-<section id="soft" class="light-sec" style="padding:clamp(30px,6vh,60px) 0 clamp(90px,14vh,150px); background:var(--paper); color:var(--ink-d)">
+<!-- ═══════════ ЭКОСИСТЕМА ГЕОНЕКСА ═══════════ -->
+<section id="geonexa" class="light-sec" aria-labelledby="gx-title">
   <div class="wrap">
-    <div class="soft-grid">
-      <article class="soft-card">
-        <span class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg></span>
-        <h3>Обработка испытаний</h3>
-        <p>Программные инструменты лаборатории для обработки результатов испытаний грунтов.</p>
-        <span class="soft-badge">Скоро</span>
+    <div class="gx-panel">
+      <div class="gx-head">
+        <img class="gx-emblem" src="/img/products/gx-emblem-inv.svg" alt="" width="84" height="92" loading="eager">
+        <div>
+          <div class="gx-name" id="gx-title">ГЕОНЕКСА</div>
+          <div class="gx-sub">Глобальная база геотехнических знаний</div>
+        </div>
+      </div>
+      <svg class="gx-net" viewBox="0 0 320 200" aria-hidden="true">
+        <g stroke="rgba(232,163,61,.4)" stroke-width="1" fill="none">
+          <path d="M20 160 90 110 170 140 250 70 300 90"/>
+          <path d="M90 110 120 40 170 140M250 70 220 18M120 40 220 18"/>
+        </g>
+        <g fill="#E8A33D">
+          <circle cx="20" cy="160" r="2.5"/><circle cx="90" cy="110" r="3"/><circle cx="120" cy="40" r="2.5"/>
+          <circle cx="170" cy="140" r="3"/><circle cx="250" cy="70" r="3"/><circle cx="220" cy="18" r="2"/><circle cx="300" cy="90" r="2.5"/>
+        </g>
+      </svg>
+      <p class="gx-copy">Испытания, разрезы и научный поток — в одном контуре данных. Серия продуктов ГЕОНЕКСА работает на общей базе: она растёт с каждым опытом, продукты — вместе с ней.</p>
+
+      <div class="gx-grid">
+
+        <article class="gx-card">
+          <div class="gx-crow">
+            <span class="gx-ico gx-ico--strata" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            <span class="gx-tag">Геонекса · 01</span>
+          </div>
+          <h3>Страта</h3>
+          <p>Автоматизированная предсхематизация и камеральная обработка: из сырых лабораторных данных — цифровой двойник разреза.</p>
+          <div class="gx-chips">
+            <span>Предсхематизация ИГЭ</span><span>Камеральная обработка</span><span>Цифровой двойник разреза</span>
+          </div>
+          <p class="gx-note">Под капотом — ансамбль ML-моделей (CatBoost + FT-Transformer + мультизадачная сеть): восстанавливает c, φ и E₅₀ по стандартным лабораторным данным с R² ≈ 0,88.</p>
+        </article>
+
+        <article class="gx-card">
+          <div class="gx-crow">
+            <span class="gx-ico gx-ico--amber" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8A33D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 8 9l4 5 3-8 6 11M3 21h18"/></svg>
+            </span>
+            <span class="gx-tag">Геонекса · 02</span>
+          </div>
+          <h3>Обработка опытов</h3>
+          <p>Программные инструменты обработки результатов испытаний грунтов: от сырых кривых прибора — к готовым характеристикам и графикам протокола.</p>
+          <div class="gx-chips">
+            <span>Кривые испытаний</span><span>Автообработка</span><span class="gx-chip-soon">Скоро</span>
+          </div>
+        </article>
+
+        <article class="gx-card">
+          <div class="gx-crow">
+            <span class="gx-ico gx-ico--tg" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#7CC7EE" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M21 3.5 3 10.8l5.6 1.9L10.4 19l2.9-3.4 4.7 3.6zM8.6 12.7 21 3.5"/></svg>
+            </span>
+            <span class="gx-tag">Геонекса · 03 · Telegram</span>
+          </div>
+          <h3>Геонекса Исследователь</h3>
+          <p>Telegram-бот, который следит за наукой вместо вас: читает новые статьи, превращает их в эмбеддинги и ранжирует под ваш профиль интересов.</p>
+          <div class="gx-chips">
+            <span>Эмбеддинги статей</span><span>Ранкер по профилю</span><span>LLM-дайджест недели</span><span>Тренды области</span>
+          </div>
+          <p class="gx-note">Нерелевантное отсеивается ранкером, LLM собирает подборку лучшего за неделю и строит общую картину трендов в области.</p>
+        </article>
+
+        <article class="gx-card">
+          <div class="gx-crow">
+            <span class="gx-ico gx-ico--amber" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8A33D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 3-2 4.5-2 7H7c0-2.5-2-4-2-7a7 7 0 0 1 7-7zM9 20h6M10 23h4"/></svg>
+            </span>
+            <span class="gx-tag">Геонекса · 04</span>
+          </div>
+          <h3>ИИ-помощник геолога</h3>
+          <p>Обучен на нормативной базе и данных лаборатории, работает на собственном RAG, разработанном в МДГТ: помогает писать отчёты и оценивать инженерно-геологические условия.</p>
+          <div class="gx-chips">
+            <span>Собственный RAG</span><span>Нормативы + данные МДГТ</span><span>Отчёты и оценки</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ СЕРВИСЫ ЛАБОРАТОРИИ ═══════════ -->
+<section id="svc" class="light-sec" aria-labelledby="svc-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="d-eyebrow">Сервисы</span>
+      <h2 id="svc-title">Цифровые сервисы лаборатории</h2>
+      <p class="sec-sub">Самостоятельные инструменты производственного контура МДГТ — хранение результатов и защита протоколов.</p>
+    </div>
+    <div class="svc-grid">
+
+      <article class="svc-card">
+        <span class="sc-icon sc-icon--img">
+          <img src="/img/products/storage.png" alt="Логотип сервиса Laboratory Tests Storage" loading="lazy">
+        </span>
+        <h3>Хранилище испытаний</h3>
+        <p>Сервис хранения результатов лабораторных испытаний: реляционная база — для данных опытов, S3 — для файлов, доступ по API с JWT-авторизацией.</p>
+        <span class="soft-badge">FastAPI · PostgreSQL · S3</span>
       </article>
-      <article class="soft-card">
-        <span class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 3-2 4.5-2 7H7c0-2.5-2-4-2-7a7 7 0 0 1 7-7zM9 20h6M10 23h4"/></svg></span>
-        <h3>ИИ-сервисы для геотехники</h3>
-        <p>Прогнозирование характеристик грунтов и поиск аномалий на базе методов машинного обучения.</p>
-        <span class="soft-badge">Скоро</span>
-      </article>
-      <article class="soft-card">
-        <span class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></span>
-        <h3>Личный кабинет заказчика</h3>
-        <p>Статусы испытаний и протоколы онлайн — раздел готовится к публикации.</p>
-        <span class="soft-badge">Скоро</span>
-      </article>
+
+      <a class="svc-card svc-card--link" href="https://georeport.ru" target="_blank" rel="noopener">
+        <span class="sc-icon sc-icon--img">
+          <img src="/img/products/georeport.png" alt="Логотип ГеоРепорт" loading="lazy">
+        </span>
+        <h3>ГеоРепорт</h3>
+        <p>Аутентификация протоколов испытаний: данные дублируются на защищённом сервере, на протокол ставится QR-код — подделать или «поправить руками» не выйдет.</p>
+        <span class="soft-badge soft-badge--go">georeport.ru<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ НАШИ СТАТЬИ ═══════════ -->
+<section id="papers" class="light-sec" aria-labelledby="papers-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="d-eyebrow">Наука</span>
+      <h2 id="papers-title">Наши статьи</h2>
+      <p class="sec-sub">Команда лаборатории публикуется в рецензируемых журналах — от математических моделей поведения грунтов до машинного обучения и инфраструктуры данных.</p>
+    </div>
+    <div class="pub-list">
+
+      <a class="pub-row" href="https://moitvivt.ru/ru/journal/article?id=2249" target="_blank" rel="noopener">
+        <span class="pub-num">01</span>
+        <span class="pub-body">
+          <span class="pub-title">Восстановление c, φ и E₅₀ по лабораторным данным: интерпретируемый ансамбль и сравнение моделей</span>
+          <span class="pub-meta">«Моделирование, оптимизация и информационные технологии» · 2026 · Тишин Н.Р.</span>
+        </span>
+        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+
+      <a class="pub-row" href="https://mmcm.bmstu.ru/articles/374/" target="_blank" rel="noopener">
+        <span class="pub-num">02</span>
+        <span class="pub-body">
+          <span class="pub-title">Математическое моделирование роста порового давления в грунтах при приложении динамической нагрузки</span>
+          <span class="pub-meta">«Математическое моделирование и численные методы» (МГТУ им. Н.Э. Баумана) · 2025 · Тишин Н.Р., Пролетарский А.В., Озмидов О.Р.</span>
+        </span>
+        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+
+      <a class="pub-row" href="https://moitvivt.ru/ru/journal/article?id=1765" target="_blank" rel="noopener">
+        <span class="pub-num">03</span>
+        <span class="pub-body">
+          <span class="pub-title">Анализ устойчивости водонасыщенных грунтов при циклическом воздействии: математические модели и прогнозы</span>
+          <span class="pub-meta">«Моделирование, оптимизация и информационные технологии» · 2025 · Тишин Н.Р., Озмидов О.Р., Пролетарский А.В.</span>
+        </span>
+        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+
+      <a class="pub-row" href="https://moitvivt.ru/ru/journal/article?id=1495" target="_blank" rel="noopener">
+        <span class="pub-num">04</span>
+        <span class="pub-body">
+          <span class="pub-title">Система комплексного хранения данных геологических лабораторных испытаний</span>
+          <span class="pub-meta">«Моделирование, оптимизация и информационные технологии» · 2024 · Тишин Н.Р., Озмидов О.Р., Пролетарский А.В.</span>
+        </span>
+        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+
+      <a class="pub-row" href="https://www.elibrary.ru/item.asp?id=89023171" target="_blank" rel="noopener">
+        <span class="pub-num">05</span>
+        <span class="pub-body">
+          <span class="pub-title">Научная публикация в РИНЦ</span>
+          <span class="pub-meta">eLIBRARY.RU · ID 89023171 · открыть карточку публикации</span>
+        </span>
+        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+
+      <a class="pub-row" href="https://www.elibrary.ru/item.asp?id=86762169" target="_blank" rel="noopener">
+        <span class="pub-num">06</span>
+        <span class="pub-body">
+          <span class="pub-title">Научная публикация в РИНЦ</span>
+          <span class="pub-meta">eLIBRARY.RU · ID 86762169 · открыть карточку публикации</span>
+        </span>
+        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+
+      <a class="pub-row" href="https://www.elibrary.ru/item.asp?id=82561108" target="_blank" rel="noopener">
+        <span class="pub-num">07</span>
+        <span class="pub-body">
+          <span class="pub-title">Научная публикация в РИНЦ</span>
+          <span class="pub-meta">eLIBRARY.RU · ID 82561108 · открыть карточку публикации</span>
+        </span>
+        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+
+      <a class="pub-row" href="https://www.elibrary.ru/item.asp?id=80264286" target="_blank" rel="noopener">
+        <span class="pub-num">08</span>
+        <span class="pub-body">
+          <span class="pub-title">Научная публикация в РИНЦ</span>
+          <span class="pub-meta">eLIBRARY.RU · ID 80264286 · открыть карточку публикации</span>
+        </span>
+        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+
+      <a class="pub-row" href="https://www.elibrary.ru/item.asp?id=77078709" target="_blank" rel="noopener">
+        <span class="pub-num">09</span>
+        <span class="pub-body">
+          <span class="pub-title">Научная публикация в РИНЦ</span>
+          <span class="pub-meta">eLIBRARY.RU · ID 77078709 · открыть карточку публикации</span>
+        </span>
+        <svg class="pub-arrow" viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>
+      </a>
+
     </div>
   </div>
 </section>

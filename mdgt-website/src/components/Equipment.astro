@@ -12,19 +12,19 @@
 
     <div class="eq-bar">
       <div class="eq-tabs" role="group" aria-label="Фильтр оборудования по направлениям">
-        <button type="button" class="eq-tab on" data-eqf="all" aria-pressed="true">Все <em>12</em></button>
-        <button type="button" class="eq-tab" data-eqf="dyn" aria-pressed="false">Динамика <em>3</em></button>
-        <button type="button" class="eq-tab" data-eqf="mech" aria-pressed="false">Механика <em>2</em></button>
+        <button type="button" class="eq-tab on" data-eqf="all" aria-pressed="true">Все <em>15</em></button>
+        <button type="button" class="eq-tab" data-eqf="dyn" aria-pressed="false">Динамика <em>4</em></button>
+        <button type="button" class="eq-tab" data-eqf="mech" aria-pressed="false">Механика <em>4</em></button>
         <button type="button" class="eq-tab" data-eqf="rock" aria-pressed="false">Скала <em>3</em></button>
         <button type="button" class="eq-tab" data-eqf="frost" aria-pressed="false">Мерзлота <em>2</em></button>
         <button type="button" class="eq-tab" data-eqf="chem" aria-pressed="false">Химия <em>2</em></button>
       </div>
-      <div class="eq-total" aria-hidden="true"><b id="eq-count">12</b> установок · парк в работе</div>
+      <div class="eq-total" aria-hidden="true"><b id="eq-count">15</b> установок · парк в работе</div>
     </div>
 
     <div class="eq-grid" id="eq-grid">
 
-      <!-- флагман · динамика -->
+      <!-- флагман · динамика · импорт -->
       <article class="eq-card eq-card--xl" data-cat="dyn">
         <span class="eq-idx" aria-hidden="true">01</span>
         <div class="eq-thumb"><img src="/img/devices/wille.png" alt="Динамический стабилометр Wille Geotechnik" loading="lazy"></div>
@@ -41,31 +41,70 @@
 
       <article class="eq-card" data-cat="dyn">
         <span class="eq-idx" aria-hidden="true">02</span>
-        <div class="eq-thumb"><img src="/img/devices/resonant.png" alt="Резонансная колонка НПП Геотек" loading="lazy"></div>
-        <span class="eq-tag">Динамика</span>
-        <h3>Резонансная колонка НПП «Геотек»</h3>
-        <p>Модуль сдвига G₀, кривые затухания</p>
+        <div class="eq-thumb"><img src="/img/devices/geotek-resonant.jpg" alt="Резонансная колонка НПП Геотек" loading="lazy"></div>
+        <span class="eq-tag">Динамика · ×2</span>
+        <h3>Резонансные колонки «Геотек»</h3>
+        <p>Модуль сдвига G₀ и затухание при малых деформациях — две колонки работают параллельно</p>
+      </article>
+
+      <article class="eq-card" data-cat="dyn">
+        <span class="eq-idx" aria-hidden="true">03</span>
+        <div class="eq-thumb"><img src="/img/devices/geotek-dyn.jpg" alt="Динамический стабилометр НПП Геотек" loading="lazy"></div>
+        <span class="eq-tag">Динамика · ×2</span>
+        <h3>Динамические стабилометры «Геотек»</h3>
+        <p>Сейсморазжижение, виброползучесть, коэффициент k<sub>d</sub> — две установки в работе</p>
+      </article>
+
+      <!-- флагман · динамика · высокие частоты -->
+      <article class="eq-card eq-card--xl" data-cat="dyn">
+        <span class="eq-idx" aria-hidden="true">04</span>
+        <div class="eq-thumb"><img src="/img/devices/progressgeo-hf.jpg" alt="Высокочастотный динамический стабилометр ПрогрессГео" loading="lazy"></div>
+        <div class="eq-body">
+          <span class="eq-tag">Динамика · флагман</span>
+          <h3>Высокочастотный стабилометр «ПрогрессГео»</h3>
+          <p>Циклическое нагружение на высоких частотах — моделируем сейсмику, вибрации транспорта и промышленного оборудования: динамическая прочность и устойчивость к разжижению.</p>
+          <dl class="eq-spec">
+            <div><dt>Производитель</dt><dd>«ПрогрессГео» · Россия</dd></div>
+            <div><dt>Режим</dt><dd>высокочастотная циклика</dd></div>
+          </dl>
+        </div>
       </article>
 
       <article class="eq-card" data-cat="mech">
-        <span class="eq-idx" aria-hidden="true">03</span>
+        <span class="eq-idx" aria-hidden="true">05</span>
         <div class="eq-thumb"><img src="/img/devices/trixal.png" alt="Установка трёхосного сжатия" loading="lazy"></div>
         <span class="eq-tag">Механика</span>
-        <h3>Установки трёхосного сжатия</h3>
+        <h3>Стабилометры «ПрогрессГео»</h3>
         <p>F, C, E · параметры моделей HS, SS, SSC, MC</p>
       </article>
 
       <article class="eq-card" data-cat="mech">
-        <span class="eq-idx" aria-hidden="true">04</span>
+        <span class="eq-idx" aria-hidden="true">06</span>
         <div class="eq-thumb"><img src="/img/devices/odometr.png" alt="Одометр — компрессионный прибор" loading="lazy"></div>
         <span class="eq-tag">Механика</span>
         <h3>Одометры</h3>
         <p>Компрессия, консолидация, кривые Ohde, K₀</p>
       </article>
 
+      <article class="eq-card" data-cat="mech">
+        <span class="eq-idx" aria-hidden="true">07</span>
+        <div class="eq-thumb"><img src="/img/devices/geotek-triaxial.jpg" alt="Стабилометр НПП Геотек" loading="lazy"></div>
+        <span class="eq-tag">Механика</span>
+        <h3>Стабилометры «Геотек»</h3>
+        <p>Статическое трёхосное сжатие по ГОСТ 12248: прочность c, φ и деформируемость E</p>
+      </article>
+
+      <article class="eq-card" data-cat="mech">
+        <span class="eq-idx" aria-hidden="true">08</span>
+        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v5M8 4h8M7 7h10v12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2zM7 12h10M7 16h10"/></svg></div>
+        <span class="eq-tag">Механика</span>
+        <h3>Стабилометры GIESA</h3>
+        <p>Немецкая классика трёхосного сжатия — прецизионная механика для статических испытаний</p>
+      </article>
+
       <!-- флагман · скала -->
       <article class="eq-card eq-card--xl" data-cat="rock">
-        <span class="eq-idx" aria-hidden="true">05</span>
+        <span class="eq-idx" aria-hidden="true">09</span>
         <div class="eq-thumb"><img src="/img/devices/wille-rock.png" alt="Прибор трёхосного сжатия Wille для скальных грунтов" loading="lazy"></div>
         <div class="eq-body">
           <span class="eq-tag">Скала · флагман</span>
@@ -79,39 +118,31 @@
       </article>
 
       <article class="eq-card" data-cat="rock">
-        <span class="eq-idx" aria-hidden="true">06</span>
+        <span class="eq-idx" aria-hidden="true">10</span>
         <div class="eq-thumb"><img src="/img/devices/shear-rock.png" alt="Срезной прибор НПП Геотек" loading="lazy"></div>
         <span class="eq-tag">Скала</span>
-        <h3>Срезной прибор НПП «Геотек»</h3>
+        <h3>Срезной прибор «Геотек»</h3>
         <p>Сдвиговые характеристики скальных грунтов</p>
       </article>
 
       <article class="eq-card" data-cat="rock">
-        <span class="eq-idx" aria-hidden="true">07</span>
-        <div class="eq-thumb"><img src="/img/devices/stamp.png" alt="Пресс ПСН-0.16.10" loading="lazy"></div>
+        <span class="eq-idx" aria-hidden="true">11</span>
+        <div class="eq-thumb"><img src="/img/devices/psn-progressgeo.jpg" alt="Пресс ПСН-0.16.10 ПрогрессГео для скальных грунтов" loading="lazy"></div>
         <span class="eq-tag">Скала</span>
-        <h3>Прессы ПСН-0.16.10</h3>
-        <p>Прочность на одноосное сжатие</p>
+        <h3>Прессы ПСН-0.16.10 «ПрогрессГео»</h3>
+        <p>Одноосное сжатие скальных грунтов — усилие до 100 кН, в том числе образцы неправильной формы</p>
       </article>
 
       <article class="eq-card" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">08</span>
+        <span class="eq-idx" aria-hidden="true">12</span>
         <div class="eq-thumb"><img src="/img/devices/fridge.png" alt="Морозильная камера" loading="lazy"></div>
         <span class="eq-tag">Мерзлота</span>
         <h3>Морозильные камеры ×3</h3>
         <p>Калибровка «Ростест», испытания по ГОСТ 12248</p>
       </article>
 
-      <article class="eq-card" data-cat="dyn">
-        <span class="eq-idx" aria-hidden="true">09</span>
-        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l3-8 4 16 3-8h7M8 20h8"/></svg></div>
-        <span class="eq-tag">Динамика</span>
-        <h3>Вибростабилометры</h3>
-        <p>Виброползучесть, коэффициент k(вибро)</p>
-      </article>
-
       <article class="eq-card" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">10</span>
+        <span class="eq-idx" aria-hidden="true">13</span>
         <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4 6l16 12M20 6 4 18M12 2l-2 3h4zM12 22l-2-3h4z"/></svg></div>
         <span class="eq-tag">Мерзлота</span>
         <h3>Комплекс пробоподготовки</h3>
@@ -119,7 +150,7 @@
       </article>
 
       <article class="eq-card" data-cat="chem">
-        <span class="eq-idx" aria-hidden="true">11</span>
+        <span class="eq-idx" aria-hidden="true">14</span>
         <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7L4.5 19a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3L14 9V2M8 2h8M7 15h10"/></svg></div>
         <span class="eq-tag">Химия</span>
         <h3>pH-метры</h3>
@@ -127,7 +158,7 @@
       </article>
 
       <article class="eq-card" data-cat="chem">
-        <span class="eq-idx" aria-hidden="true">12</span>
+        <span class="eq-idx" aria-hidden="true">15</span>
         <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-6 3 12 3-9 2 3h7M4 20h16"/></svg></div>
         <span class="eq-tag">Химия</span>
         <h3>Капиллярный электрофорез</h3>
@@ -146,7 +177,7 @@
     <div class="eq-facts" aria-label="Факты о парке оборудования">
       <div class="eq-fact"><b>ISO/IEC 17025</b><span>аккредитованная лаборатория — протокол по каждому испытанию</span></div>
       <div class="eq-fact"><b>«Ростест»</b><span>метрологическая калибровка приборов и камер</span></div>
-      <div class="eq-fact"><b>Wille · «Геотек»</b><span>немецкие и российские установки в одном парке</span></div>
+      <div class="eq-fact"><b>Wille · GIESA · «Геотек» · «ПрогрессГео»</b><span>немецкие и российские установки в одном парке</span></div>
     </div>
   </div>
 </section>
