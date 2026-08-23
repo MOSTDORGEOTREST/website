@@ -515,6 +515,15 @@ ScrollTrigger.matchMedia({
     heroTl.to('#hero-content',{yPercent:-40,opacity:0,ease:'power1.in',duration:.4},0)
       .to('.hero-foot',{yPercent:60,opacity:0,ease:'power1.in',duration:.35},0)
       .to('.hero-scroll',{opacity:0,duration:.2},0);
+  },
+  '(max-width: 900px)': function(){
+    /* мобильное «ныряние»: без пина — глобус зумится, пока герой уходит из кадра */
+    if(!document.getElementById('hero')) return;
+    ScrollTrigger.create({ trigger:'#hero', start:'top top', end:'bottom 30%', scrub:.5,
+      onUpdate:function(self){
+        if(window.__setEarthScroll) window.__setEarthScroll(self.progress*.9);
+        setDepth(Math.max(0,(self.progress-.62)/.38)*D_MIDS[0]);
+      } });
   }
 });
 
@@ -585,12 +594,16 @@ ScrollTrigger.matchMedia({
     var sv=document.getElementById('shaft-view'), sh=document.getElementById('shaft');
     if(!sv) return;
     sv.style.height='auto'; sv.style.overflow='visible'; sh.style.position='relative';
-    document.querySelectorAll('#shaft .stratum').forEach(function(st){
+    document.querySelectorAll('#shaft .stratum').forEach(function(st,i){
       st.style.position='relative'; st.style.top='auto'; st.style.height='auto'; st.style.padding='84px 0 90px';
       gsap.utils.toArray(st.querySelector('.st-body').children).forEach(function(el,k){
         gsap.fromTo(el,{y:26,opacity:0},{y:0,opacity:1,duration:.55,delay:k*.06,ease:'power2.out',clearProps:'transform,opacity',
           scrollTrigger:{trigger:st,start:'top 82%',once:true}});
       });
+      /* мобильный глубиномер: метры идут по мере прохода горизонта */
+      ScrollTrigger.create({ trigger:st, start:'top 68%', end:'bottom 68%',
+        onUpdate:function(self){ setDepth(D_TOPS[i]+(D_BOTS[i]-D_TOPS[i])*self.progress); },
+        onLeave:function(){ setDepth(D_BOTS[i]); } });
     });
   }
 });

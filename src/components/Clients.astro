@@ -9,6 +9,6 @@ const row2 = logos.slice(19);
     <h2 id="clients-title">Нам доверяют</h2>
   </div>
   <div class="client-rows" aria-label="Наши заказчики">
-    <div class="client-row" data-row="1">{row1.map((l) => <span class="logo-chip"><img src={l.file} alt={l.alt} loading="lazy" /></span>)}</div>
-    <div class="client-row" data-row="-1">{row2.map((l) => <span class="logo-chip"><img src={l.file} alt={l.alt} loading="lazy" /></span>)}</div>
+    <div class="client-row" data-row="1">{row1.map((l) => <span class="logo-chip"><img src={l.file} alt={l.alt} loading="eager" decoding="async" /></span>)}</div>
+    <div class="client-row" data-row="-1">{row2.map((l) => <span class="logo-chip"><img src={l.file} alt={l.alt} loading="eager" decoding="async" /></span>)}</div>
   </div>
