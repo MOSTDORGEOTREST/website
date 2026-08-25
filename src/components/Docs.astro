@@ -1,0 +1,250 @@
+---
+/* Разрешительные документы: PDF в public/assets/docs/, превью первой страницы в public/assets/docs/prev/ */
+type Doc = {
+  id: string;            // имя файла без расширения
+  org: 'ao' | 'ooo' | 'mge';
+  kind: string;          // тип документа (кикер)
+  title: string;
+  issuer: string;
+  num?: string;
+  issued?: string;       // дд.мм.гггг — выдан / сформирован
+  until?: string;        // гггг-мм-дд — срок действия; пусто = бессрочно / выписка
+  untilLabel?: string;   // подпись срока, если until пуст
+  pages: number;
+  size: string;
+  landscape?: boolean;
+};
+
+const docs: Doc[] = [
+  { id: 'ao-fsa-attestat', org: 'ao', kind: 'Аттестат аккредитации', title: 'Аттестат аккредитации испытательной лаборатории', issuer: 'Федеральная служба по аккредитации (Росаккредитация)', num: 'РОСС RU.0001.21АГ09', issued: '23.04.2020', untilLabel: 'Бессрочно · ISO/IEC 17025', pages: 4, size: '0,7 МБ', landscape: true },
+  { id: 'ao-fsa-vypiska', org: 'ao', kind: 'Выписка из реестра', title: 'Выписка из реестра аккредитованных лиц', issuer: 'Росаккредитация · fsa.gov.ru', num: 'РОСС RU.0001.21АГ09', issued: '03.08.2026', untilLabel: 'Актуальная выписка', pages: 2, size: '0,1 МБ', landscape: true },
+  { id: 'ao-mosstroysert', org: 'ao', kind: 'Аттестат аккредитации', title: 'Аттестат аккредитации испытательной лаборатории', issuer: 'АО «МОССТРОЙСЕРТИФИКАЦИЯ»', num: '№ RU.MCC.АЛ.988', issued: '09.01.2020', until: '2028-01-09', pages: 14, size: '12,9 МБ', landscape: true },
+  { id: 'ao-sro-vypiska', org: 'ao', kind: 'Членство в СРО', title: 'Выписка из реестра членов СРО', issuer: 'Ассоциация «Инженерные изыскания в строительстве» · СРО-И-001-28042009', num: '7716750744-20260803-0957', issued: '03.08.2026', untilLabel: 'Член СРО с 04.09.2013', pages: 2, size: '0,1 МБ' },
+  { id: 'ao-iso-9001', org: 'ao', kind: 'Сертификат СМК', title: 'Сертификат соответствия ГОСТ Р ИСО 9001-2015', issuer: 'Система сертификации «Евро-Регистр»', num: 'РОСС RU.31968.04ЕР01/ОС.СМК.03248-23', issued: '25.09.2023', until: '2026-09-24', pages: 2, size: '0,4 МБ' },
+
+  { id: 'ooo-sro-vypiska', org: 'ooo', kind: 'Членство в СРО', title: 'Выписка из реестра членов СРО', issuer: 'Ассоциация «Центризыскания» · СРО-И-003-14092009', num: '7734191376-20260803-0956', issued: '03.08.2026', untilLabel: 'Член СРО с 14.10.2009', pages: 2, size: '0,1 МБ' },
+  { id: 'ooo-prombez', org: 'ooo', kind: 'Свидетельство об аккредитации', title: 'Свидетельство об аккредитации испытательной лаборатории', issuer: 'АО «НТЦ „Промышленная безопасность“»', num: '№ ИЛ/ЛАЛ-0102', issued: '24.09.2021', until: '2026-09-03', pages: 19, size: '6,3 МБ' },
+  { id: 'ooo-mosstroysert', org: 'ooo', kind: 'Аттестат аккредитации', title: 'Аттестат аккредитации испытательной лаборатории', issuer: 'АО «МОССТРОЙСЕРТИФИКАЦИЯ»', num: '№ RU.MCC.АЛ.1251', issued: '25.12.2023', until: '2028-06-05', pages: 14, size: '14,1 МБ', landscape: true },
+  { id: 'ooo-iso-9001', org: 'ooo', kind: 'Сертификат СМК', title: 'Сертификат соответствия ГОСТ Р ИСО 9001-2015', issuer: 'Система сертификации «Евро-Регистр»', num: 'РОСС RU.31968.04ЕР01/СМК.03296-26', issued: '22.06.2026', until: '2029-06-21', pages: 1, size: '0,5 МБ' },
+
+  { id: 'mosgosexpertiza-polozhenie', org: 'mge', kind: 'Положение', title: 'Положение об Экспертном Совете Московской государственной экспертизы', issuer: 'Мосгосэкспертиза · согласовано и утверждено', issued: '2011', untilLabel: 'Действующий регламент', pages: 5, size: '0,6 МБ' },
+];
+
+const ORG: Record<Doc['org'], { short: string; full: string }> = {
+  ao:  { short: 'АО',  full: 'АО «МОСТДОРГЕОТРЕСТ»' },
+  ooo: { short: 'ООО', full: 'ООО «МостДорГеоТрест»' },
+  mge: { short: 'МГЭ', full: 'Мосгосэкспертиза' },
+};
+const count = (o: Doc['org']) => docs.filter(d => d.org === o).length;
+---
+
+<section id="docs" class="light-sec" aria-labelledby="docs-title">
+  <div class="wrap">
+    <div class="docs-head">
+      <div class="sec-head">
+        <span class="d-eyebrow">Акт 06 · Досье</span>
+        <h2 id="docs-title">Право работать&nbsp;— подтверждено документами</h2>
+        <p class="sec-sub">Аккредитации, членство в СРО и сертификаты менеджмента качества обоих юридических лиц. Оригиналы — в один клик: смотрите, листайте, скачивайте.</p>
+      </div>
+      <ul class="docs-ledger" aria-label="Кратко о досье">
+        <li><b data-docs-total>{docs.length}</b><span>документов<br>в досье</span></li>
+        <li><b>17025</b><span>ISO/IEC · аккредитация<br>лаборатории</span></li>
+        <li><b>9001</b><span>ISO · система<br>менеджмента качества</span></li>
+        <li><b data-docs-active>—</b><span>действуют<br>сегодня</span></li>
+      </ul>
+    </div>
+
+    <div class="docs-bar">
+      <div class="eq-tabs docs-tabs" role="group" aria-label="Фильтр документов по юридическому лицу">
+        <button type="button" class="eq-tab on" data-docf="all" aria-pressed="true">Все <em>{docs.length}</em></button>
+        <button type="button" class="eq-tab" data-docf="ao" aria-pressed="false">АО «МОСТДОРГЕОТРЕСТ» <em>{count('ao')}</em></button>
+        <button type="button" class="eq-tab" data-docf="ooo" aria-pressed="false">ООО «МостДорГеоТрест» <em>{count('ooo')}</em></button>
+        <button type="button" class="eq-tab" data-docf="mge" aria-pressed="false">Мосгосэкспертиза <em>{count('mge')}</em></button>
+      </div>
+      <div class="docs-legend" aria-hidden="true">
+        <span><i class="dl-ok"></i>действует</span>
+        <span><i class="dl-soon"></i>истекает &lt; 90 дней</span>
+        <span><i class="dl-inf"></i>бессрочно / выписка</span>
+      </div>
+    </div>
+
+    <div class="docs-grid" id="docs-grid">
+      {docs.map((d, i) => (
+        <article class="doc-card" data-org={d.org} data-idx={i} data-until={d.until || ''} tabindex="0" role="button" aria-label={`Открыть: ${d.title} — ${ORG[d.org].full}`}>
+          <div class:list={['doc-thumb', d.landscape && 'is-land']}>
+            <span class="doc-org">{ORG[d.org].short}</span>
+            <span class="doc-pages">{d.pages} стр.</span>
+            <img src={`/assets/docs/prev/${d.id}-t.webp`} alt={`${d.title}, первая страница`} loading="lazy" decoding="async" width={d.landscape ? 560 : 396} height={d.landscape ? 405 : 560} />
+            <span class="doc-sheen" aria-hidden="true"></span>
+          </div>
+          <div class="doc-body">
+            <span class="doc-kicker">{d.kind}</span>
+            <h3 class="doc-title">{d.title}</h3>
+            <p class="doc-issuer">{d.issuer}</p>
+            <div class="doc-meta">
+              {d.num && <span class="doc-num">{d.num}</span>}
+              {d.issued && <span class="doc-date">{d.num ? '· ' : ''}{d.issued}</span>}
+            </div>
+            <div class="doc-foot">
+              <span class="doc-status" data-label={d.untilLabel || ''}><i></i><span>{d.untilLabel || `до ${d.until!.split('-').reverse().join('.')}`}</span></span>
+              <span class="doc-actions">
+                <span class="doc-open"><span>Смотреть</span><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span>
+                <a class="doc-dl" href={`/assets/docs/${d.id}.pdf`} download title={`Скачать PDF · ${d.size}`} aria-label={`Скачать PDF (${d.size})`} data-stop>
+                  <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg><span>{d.size}</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="docs-note">Оригиналы документов открываются в формате PDF. Актуальный статус аккредитации всегда можно сверить в реестре Росаккредитации по номеру <b>РОСС RU.0001.21АГ09</b>.</p>
+  </div>
+</section>
+
+<!-- Просмотрщик документа -->
+<div class="dv" id="doc-viewer" hidden role="dialog" aria-modal="true" aria-labelledby="dv-title">
+  <div class="dv-scrim" data-dv-close></div>
+  <div class="dv-card" id="dv-card">
+    <button type="button" class="dv-close" data-dv-close aria-label="Закрыть"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="dv-stage">
+      <img id="dv-img" alt="" decoding="async" />
+      <div class="dv-loading" id="dv-loading" aria-hidden="true"><i></i></div>
+      <button type="button" class="dv-nav dv-prev" data-dv-prev aria-label="Предыдущий документ"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" class="dv-nav dv-next" data-dv-next aria-label="Следующий документ"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <aside class="dv-side">
+      <span class="dv-count" id="dv-count">01 / {docs.length}</span>
+      <span class="dv-org" id="dv-org"></span>
+      <span class="dv-kicker" id="dv-kicker"></span>
+      <h3 id="dv-title"></h3>
+      <p class="dv-issuer" id="dv-issuer"></p>
+      <dl class="dv-facts">
+        <div id="dv-num-row"><dt>Номер</dt><dd id="dv-num"></dd></div>
+        <div><dt>Выдан</dt><dd id="dv-issued"></dd></div>
+        <div><dt>Срок</dt><dd id="dv-until"></dd></div>
+        <div><dt>Объём</dt><dd id="dv-pages"></dd></div>
+      </dl>
+      <div class="dv-actions">
+        <a class="btn btn-primary btn-sm" id="dv-open" href="#" target="_blank" rel="noopener"><span class="btn-fill"></span><span>Открыть PDF</span></a>
+        <a class="btn btn-ghost btn-sm" id="dv-dl" href="#" download><span class="btn-fill"></span><span>Скачать</span></a>
+      </div>
+      <p class="dv-hint">Стрелки ← → листают досье, Esc закрывает</p>
+    </aside>
+  </div>
+</div>
+
+<script define:vars={{ docs, ORG }}>
+(function(){
+  var grid=document.getElementById('docs-grid'); if(!grid) return;
+  var cards=Array.prototype.slice.call(grid.querySelectorAll('.doc-card'));
+  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isTouch=matchMedia('(hover: none)').matches;
+  var DAY=864e5, today=new Date(); today.setHours(0,0,0,0);
+
+  /* статусы сроков действия считаются на клиенте */
+  function fmt(iso){ var p=iso.split('-'); return p[2]+'.'+p[1]+'.'+p[0]; }
+  var active=0;
+  cards.forEach(function(c){
+    var st=c.querySelector('.doc-status'), txt=st.querySelector('span'), until=c.getAttribute('data-until');
+    if(!until){ st.classList.add('is-inf'); active++; return; }
+    var d=new Date(until+'T00:00:00'), days=Math.round((d-today)/DAY);
+    if(days<0){ st.classList.add('is-exp'); txt.textContent='истёк '+fmt(until); c.setAttribute('data-exp','1'); }
+    else if(days<=90){ st.classList.add('is-soon'); txt.textContent='до '+fmt(until)+' · '+days+' дн.'; active++; }
+    else { st.classList.add('is-ok'); txt.textContent='до '+fmt(until); active++; }
+  });
+  var an=document.querySelector('[data-docs-active]'); if(an) an.textContent=active;
+
+  /* фильтр по юрлицу */
+  var tabs=document.querySelectorAll('[data-docf]');
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      var f=t.getAttribute('data-docf');
+      tabs.forEach(function(x){ var on=x===t; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); });
+      var k=0;
+      cards.forEach(function(c){
+        var show=f==='all'||c.getAttribute('data-org')===f;
+        c.classList.toggle('is-hidden',!show);
+        if(show){ c.style.setProperty('--k',k++); c.classList.remove('is-pop'); void c.offsetWidth; c.classList.add('is-pop'); }
+      });
+    });
+  });
+
+  /* наклон превью за курсором */
+  if(!isTouch && !reduced){
+    cards.forEach(function(c){
+      var th=c.querySelector('.doc-thumb');
+      c.addEventListener('pointermove',function(e){
+        var r=th.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+        th.style.setProperty('--rx',(-y*7)+'deg'); th.style.setProperty('--ry',(x*9)+'deg');
+        th.style.setProperty('--sx',(x*100+50)+'%'); th.style.setProperty('--sy',(y*100+50)+'%');
+      },{passive:true});
+      c.addEventListener('pointerleave',function(){ th.style.setProperty('--rx','0deg'); th.style.setProperty('--ry','0deg'); });
+    });
+  }
+
+  /* просмотрщик */
+  var dv=document.getElementById('doc-viewer'), dvCard=document.getElementById('dv-card');
+  var img=document.getElementById('dv-img'), loading=document.getElementById('dv-loading');
+  var el=function(id){ return document.getElementById(id); };
+  var cur=-1, isOpen=false, lastFocus=null, lenis=window.__lenis||null;
+  var pre={};
+  function preload(i){ var d=docs[i]; if(!d||pre[d.id]) return; var im=new Image(); im.src='/assets/docs/prev/'+d.id+'.webp'; pre[d.id]=im; }
+  function pad(n){ return (n<10?'0':'')+n; }
+  function show(i, dir){
+    cur=(i+docs.length)%docs.length; var d=docs[cur];
+    el('dv-count').textContent=pad(cur+1)+' / '+pad(docs.length);
+    el('dv-org').textContent=ORG[d.org].full;
+    el('dv-kicker').textContent=d.kind;
+    el('dv-title').textContent=d.title;
+    el('dv-issuer').textContent=d.issuer;
+    el('dv-num-row').style.display=d.num?'':'none'; el('dv-num').textContent=d.num||'';
+    el('dv-issued').textContent=d.issued||'—';
+    var untilTxt=d.untilLabel||('до '+fmt(d.until));
+    if(d.until){ var days=Math.round((new Date(d.until+'T00:00:00')-today)/DAY); if(days<0) untilTxt='истёк '+fmt(d.until); else if(days<=90) untilTxt+=' · осталось '+days+' дн.'; }
+    el('dv-until').textContent=untilTxt;
+    el('dv-pages').textContent=d.pages+' стр. · PDF · '+d.size;
+    el('dv-open').href='/assets/docs/'+d.id+'.pdf'; el('dv-dl').href='/assets/docs/'+d.id+'.pdf';
+    dvCard.classList.toggle('is-land',!!d.landscape);
+    loading.classList.add('on'); img.classList.remove('in');
+    var src='/assets/docs/prev/'+d.id+'.webp';
+    var tmp=new Image(); tmp.onload=function(){ if(docs[cur].id!==d.id) return; img.src=src; img.alt=d.title+', первая страница'; loading.classList.remove('on'); requestAnimationFrame(function(){ img.classList.add('in'); }); };
+    tmp.src=src;
+    if(window.gsap && !reduced && dir){ gsap.fromTo(img,{x:dir*26,opacity:0},{x:0,opacity:1,duration:.45,ease:'power3.out',clearProps:'transform'}); }
+    preload(cur+1); preload(cur-1);
+  }
+  function open(i){
+    if(isOpen) return; isOpen=true; lastFocus=document.activeElement;
+    dv.hidden=false; document.body.style.overflow='hidden'; if(lenis) lenis.stop();
+    show(i,0);
+    if(window.gsap && !reduced){
+      gsap.fromTo(dv.querySelector('.dv-scrim'),{opacity:0},{opacity:1,duration:.35,ease:'power2.out'});
+      gsap.fromTo(dvCard,{y:40,scale:.965,opacity:0},{y:0,scale:1,opacity:1,duration:.55,ease:'expo.out'});
+    }
+    dv.querySelector('.dv-close').focus();
+  }
+  function close(){
+    if(!isOpen) return; isOpen=false;
+    function done(){ dv.hidden=true; document.body.style.overflow=''; if(lenis) lenis.start(); if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+    if(window.gsap && !reduced){ gsap.to(dv.querySelector('.dv-scrim'),{opacity:0,duration:.25}); gsap.to(dvCard,{y:24,scale:.97,opacity:0,duration:.28,ease:'power2.in',onComplete:done}); }
+    else done();
+  }
+  cards.forEach(function(c,i){
+    c.addEventListener('click',function(e){ if(e.target.closest('[data-stop]')) return; open(i); });
+    c.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(i); } });
+  });
+  dv.querySelectorAll('[data-dv-close]').forEach(function(b){ b.addEventListener('click',close); });
+  dv.querySelector('[data-dv-prev]').addEventListener('click',function(){ show(cur-1,-1); });
+  dv.querySelector('[data-dv-next]').addEventListener('click',function(){ show(cur+1,1); });
+  document.addEventListener('keydown',function(e){
+    if(!isOpen) return;
+    if(e.key==='Escape') close();
+    else if(e.key==='ArrowRight') show(cur+1,1);
+    else if(e.key==='ArrowLeft') show(cur-1,-1);
+  });
+  /* свайп на тач */
+  var sx=null;
+  dv.querySelector('.dv-stage').addEventListener('touchstart',function(e){ sx=e.touches[0].clientX; },{passive:true});
+  dv.querySelector('.dv-stage').addEventListener('touchend',function(e){ if(sx===null) return; var dx=e.changedTouches[0].clientX-sx; sx=null; if(Math.abs(dx)>48) show(cur+(dx<0?1:-1),dx<0?1:-1); },{passive:true});
+})();
+</script>

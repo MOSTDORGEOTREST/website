@@ -9,11 +9,13 @@ var hasGsap = typeof gsap !== 'undefined';
 var isTouch = matchMedia('(hover: none)').matches;
 var isDesktop = innerWidth > 900;
 if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+if (hasGsap) ScrollTrigger.config({ ignoreMobileResize:true });
 
 /* ================= LENIS SMOOTH SCROLL ================= */
 var lenis = null;
 if (!reduced && typeof Lenis !== 'undefined'){
   lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 1, smoothWheel: true });
+  window.__lenis = lenis;
   lenis.on('scroll', function(){ if (hasGsap) ScrollTrigger.update(); });
   if (hasGsap){
     gsap.ticker.add(function(t){ lenis.raf(t*1000); });
@@ -406,7 +408,12 @@ burger.addEventListener('click',function(){
     if(e) e.preventDefault();
     if(isOpen) return; isOpen=true;
     lastFocus=document.activeElement;
-    if(frame && !frame.src) frame.src=frame.getAttribute('data-src');
+    if(frame && !frame.src){
+      frame.src=frame.getAttribute('data-src');
+      var w=document.getElementById('pm-wait');
+      frame.addEventListener('load',function(){ if(w) w.classList.add('off'); },{once:true});
+      setTimeout(function(){ if(w) w.classList.add('off'); },12000);
+    }
     modal.hidden=false;
     document.body.style.overflow='hidden';
     if(lenis) lenis.stop();
@@ -663,17 +670,33 @@ ScrollTrigger.matchMedia({
 });
 
 /* ================= GENERIC REVEALS ================= */
-gsap.utils.toArray('.sec-head').forEach(function(head){
-  gsap.from(head.children,{y:40,opacity:0,duration:.75,stagger:.1,ease:'power3.out',
-    scrollTrigger:{trigger:head,start:'top 85%'}});
-});
-/* надёжные one-shot появления карточек: без «застрявших» промежуточных состояний */
-gsap.utils.toArray('.test-card,.edu-card,.contact-card,.eq-card,.fin-main,.live-card,.gx-panel,.svc-card,.pub-row').forEach(function(card,k){
-  gsap.fromTo(card,{y:34,opacity:0},{y:0,opacity:1,duration:.6,ease:'power2.out',
-    delay:(k%4)*.06, immediateRender:true, clearProps:'transform,opacity',
-    onComplete:function(){ card.classList.add('is-in'); }, /* запускает отрисовку графиков в карточках */
-    scrollTrigger:{trigger:card,start:'top 94%',once:true}});
-});
+var REVEAL_SEL='.test-card,.edu-card,.contact-card,.eq-card,.fin-main,.live-card,.gx-panel,.svc-card,.pub-row,.doc-card,.docs-ledger li';
+if(!isTouch){
+  gsap.utils.toArray('.sec-head').forEach(function(head){
+    gsap.from(head.children,{y:40,opacity:0,duration:.75,stagger:.1,ease:'power3.out',
+      scrollTrigger:{trigger:head,start:'top 85%'}});
+  });
+  gsap.utils.toArray(REVEAL_SEL).forEach(function(card,k){
+    gsap.fromTo(card,{y:34,opacity:0},{y:0,opacity:1,duration:.6,ease:'power2.out',
+      delay:(k%4)*.06, immediateRender:true, clearProps:'transform,opacity',
+      onComplete:function(){ card.classList.add('is-in'); }, /* запускает отрисовку графиков в карточках */
+      scrollTrigger:{trigger:card,start:'top 94%',once:true}});
+  });
+} else {
+  /* touch: появления через IntersectionObserver + CSS (.rv / .rv-in) с принудительным показом всего, что в кадре */
+  var rvEls=gsap.utils.toArray(REVEAL_SEL);
+  rvEls.forEach(function(el){ el.classList.add('rv'); });
+  function rvShow(el){ if(el.classList.contains('rv-in')) return; el.classList.add('rv-in'); el.classList.add('is-in'); }
+  function rvSweep(){ var vh=innerHeight; rvEls.forEach(function(el){ if(el.classList.contains('rv-in')) return; var r=el.getBoundingClientRect(); if(r.top<vh*1.05 && r.bottom>-40) rvShow(el); }); }
+  if('IntersectionObserver' in window){
+    var rvIO=new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ rvShow(e.target); rvIO.unobserve(e.target); } }); },{rootMargin:'0px 0px -4% 0px',threshold:.01});
+    rvEls.forEach(function(el){ rvIO.observe(el); });
+  } else { rvEls.forEach(rvShow); }
+  addEventListener('scroll',rvSweep,{passive:true});
+  addEventListener('load',rvSweep); addEventListener('pageshow',rvSweep); addEventListener('orientationchange',function(){ setTimeout(rvSweep,300); });
+  setTimeout(rvSweep,1200); setTimeout(rvSweep,3500);
+  setTimeout(function(){ rvEls.forEach(function(el){ if(el.getBoundingClientRect().bottom<innerHeight) rvShow(el); }); },8000);
+}
 /* витрина оснащения: 100+ стабилометров — набегающий счётчик */
 var ehn=document.getElementById('eq-hero-n');
 if(ehn){
@@ -705,7 +728,7 @@ if(document.getElementById('hero') && document.getElementById('objects')){
 }
 
 /* ================= NAV ACTIVE ================= */
-['descent','objects','contacts'].forEach(function(id){
+['contacts'].forEach(function(id){
   if(!document.getElementById(id)) return;
   ScrollTrigger.create({ trigger:'#'+id, start:'top 40%', end:'bottom 40%',
     onToggle:function(self){

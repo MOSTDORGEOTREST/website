@@ -1,67 +1,55 @@
 # МОСТДОРГЕОТРЕСТ — сайт геотехнической лаборатории
 
-Основной сайт проекта на Astro. Он статически собирается в `dist/`, а в
-production раздаётся через nginx с HTTPS, автоматическим обновлением
-сертификатов и проксированием HLS-трансляций.
+Статический сайт на Astro 5. Собирается в `dist/`, в production раздаётся nginx
+с HTTPS, автоматическим обновлением сертификатов и проксированием HLS-трансляций.
+Дизайн-система описана в `DESIGN-SYSTEM.md`.
 
 ## Структура проекта
 
 ```text
 .
 ├── src/
-│   ├── pages/             # страницы: главная, оборудование, курсы, ПО
-│   ├── layouts/           # общий каркас страниц
-│   ├── components/        # секции и интерфейс сайта
-│   ├── scripts/           # анимации, WebGL, Lenis и GSAP
-│   └── styles/            # глобальные стили и шрифты
+│   ├── pages/             # /, /oborudovanie/, /kursy/, /soft/
+│   ├── layouts/Base.astro # каркас: head, nav, прайс-модалка, скрипты
+│   ├── components/        # секции-«акты» главной и модули подстраниц
+│   ├── scripts/main.js    # GSAP + ScrollTrigger, Lenis, WebGL-планета, reveal
+│   └── styles/            # global.css (токены и все стили), fonts.css
 ├── public/
-│   ├── img/               # изображения оборудования, объектов и логотипы
-│   ├── fonts/             # локальные WOFF2-шрифты
-│   └── assets/            # прайс-листы и протоколы
+│   ├── img/               # оборудование, объекты, логотипы, продукты
+│   ├── fonts/             # локальные WOFF2
+│   └── assets/
+│       ├── docs/          # разрешительные документы (PDF) + prev/ (превью WebP)
+│       ├── edu/           # программы курсов (PDF)
+│       ├── protocols/     # образцы протоколов испытаний (PDF)
+│       └── price.pdf/xlsx # прайс-лист
 ├── Dockerfile.web         # production-сборка Astro + nginx
 ├── docker-compose.yml     # production + ACME
 ├── docker-compose.dev.yml # dev-сервер Astro с HMR
-├── nginx.conf             # общая конфигурация nginx
-├── server/                # HTTPS, кэш, HLS и nginx entrypoint
-├── acme/                  # автоматическое обновление сертификатов
-└── cert/                  # сертификаты и служебные SSL-скрипты
+├── nginx.conf, server/    # nginx, HTTPS, кэш, HLS
+├── acme/, cert/           # сертификаты
+└── DESIGN-SYSTEM.md       # дизайн-система
 ```
+
+## Страницы и секции
+
+| Страница | Секции (`src/components`) |
+|---|---|
+| `/` | Loader · Hud · Hero · Descent · StripTests · Objects · Clients · Live · Docs · Contacts |
+| `/oborudovanie/` | PageHead · Equipment · StripObjects · Tests · Calc · Contacts |
+| `/kursy/` | PageHead · Edu · Contacts |
+| `/soft/` | PageHead · SoftGrid · Contacts |
 
 ## Локальная разработка
 
-Нужен Node.js 18 или новее.
+Нужен Node.js 18+.
 
 ```bash
 npm ci
-npm run dev
+npm run dev        # http://localhost:4321
+npm run build && npm run preview
 ```
 
-Сайт откроется на [http://localhost:4321](http://localhost:4321). Изменения в
-`src/` и `public/` применяются через HMR без production-пересборки.
-
-Проверка production-сборки локально:
-
-```bash
-npm run build
-npm run preview
-```
-
-## Разработка через Docker
-
-```bash
-docker compose -f docker-compose.dev.yml up
-```
-
-Dev-сайт также доступен на [http://localhost:4321](http://localhost:4321).
-
-Полная очистка всего Docker на машине с последующим запуском dev-окружения:
-
-```bash
-./docker-clean-and-dev.sh
-```
-
-Скрипт удаляет все Docker-контейнеры, образы, volumes, пользовательские сети и
-build-кэш, поэтому перед очисткой требует вручную ввести `YES`.
+Через Docker: `docker compose -f docker-compose.dev.yml up`.
 
 ## Production
 
@@ -69,34 +57,24 @@ build-кэш, поэтому перед очисткой требует вруч
 docker compose up -d --build
 ```
 
-По умолчанию nginx занимает порты 80 и 443. При необходимости порты можно
-переопределить:
+Порты по умолчанию 80/443 (`HTTP_PORT=8080 HTTPS_PORT=8443 docker compose up -d --build` — чтобы переопределить).
+Конфигурация сохраняет HTTPS для `mdgt.ru`/`www.mdgt.ru`, ACME webroot, прокси `/hls/` на
+`172.17.0.1:6767`, долгий кэш `/_astro/`, недельный кэш `/assets/`, `/img/`, `/fonts/` и HTML без кэша.
 
-```bash
-HTTP_PORT=8080 HTTPS_PORT=8443 docker compose up -d --build
-```
-
-Production-конфигурация сохраняет:
-
-- HTTPS для `mdgt.ru` и `www.mdgt.ru`;
-- ACME webroot и автоматическое обновление сертификатов;
-- временный self-signed сертификат при первом запуске;
-- прокси `/hls/` на `172.17.0.1:6767` для лабораторных трансляций;
-- долгий кэш хэшированных Astro-бандлов и недельный кэш статики;
-- свежую выдачу HTML без кэширования.
-
-Логи и остановка:
-
-```bash
-docker compose logs -f
-docker compose down
-```
+Логи и остановка: `docker compose logs -f`, `docker compose down`.
 
 ## Где менять контент
 
-- тексты и секции — `src/components/`;
-- страницы — `src/pages/`;
-- оборудование — `src/components/Equipment.astro`;
-- логотипы — `public/img/logos/` и `src/logos.json`;
-- прайс — `public/assets/price.pdf` и `public/assets/price.xlsx`;
-- цвета и типографика — `src/styles/global.css`.
+- тексты секций — `src/components/*.astro`;
+- оборудование — `src/components/Equipment.astro`, фото — `public/img/devices/`;
+- логотипы клиентов — `public/img/logos/` и `src/logos.json`;
+- разрешительные документы — массив `docs` в `src/components/Docs.astro`, файлы — `public/assets/docs/`;
+  превью первой страницы: `pdftoppm -f 1 -l 1 -r 110 -png файл.pdf` → WebP 1200px (`{id}.webp`) и 560px (`{id}-t.webp`) в `public/assets/docs/prev/`;
+- курсы — `src/components/Edu.astro`, программа — `public/assets/edu/`;
+- публикации и продукты — `src/components/SoftGrid.astro`;
+- прайс — `public/assets/price.pdf`, `public/assets/price.xlsx` и ссылка на Google-таблицу в `src/components/PriceModal.astro`;
+- цвета и типографика — переменные в начале `src/styles/global.css`;
+- анимации — `src/scripts/main.js`.
+
+Сроки действия документов считаются в браузере по полю `until`: за 90 дней до истечения карточка
+подсвечивается янтарным, после — красным. При замене документа обновите PDF, превью и дату.
