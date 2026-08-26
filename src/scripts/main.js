@@ -180,7 +180,7 @@ if (!isTouch && !reduced && hasGsap){
   var loc=gl.getAttribLocation(pr,'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
   var uRes=gl.getUniformLocation(pr,'uRes'), uT=gl.getUniformLocation(pr,'uT'), uM=gl.getUniformLocation(pr,'uM'), uS=gl.getUniformLocation(pr,'uS');
   var mx=.5,my=.5,tmx=.5,tmy=.5;
-  addEventListener('pointermove',function(e){ tmx=e.clientX/innerWidth; tmy=1-e.clientY/innerHeight; },{passive:true});
+  if(!isTouch) addEventListener('pointermove',function(e){ tmx=e.clientX/innerWidth; tmy=1-e.clientY/innerHeight; },{passive:true});
   function resize(){ var d=Math.min(devicePixelRatio||1,1.6);
     cv.width=cv.clientWidth*d; cv.height=cv.clientHeight*d; gl.viewport(0,0,cv.width,cv.height); }
   resize(); addEventListener('resize',resize);
@@ -526,9 +526,10 @@ ScrollTrigger.matchMedia({
   '(max-width: 900px)': function(){
     /* мобильное «ныряние»: без пина — глобус зумится, пока герой уходит из кадра */
     if(!document.getElementById('hero')) return;
-    ScrollTrigger.create({ trigger:'#hero', start:'top top', end:'bottom 30%', scrub:.5,
+    ScrollTrigger.create({ trigger:'#hero', start:'top top', end:'bottom 30%', scrub:1.2,
       onUpdate:function(self){
-        if(window.__setEarthScroll) window.__setEarthScroll(self.progress*.9);
+        /* без пина глобус лишь мягко приближается — «ныряния» на телефоне нет */
+        if(window.__setEarthScroll) window.__setEarthScroll(Math.min(.22,self.progress*.3));
         setDepth(Math.max(0,(self.progress-.62)/.38)*D_MIDS[0]);
       } });
   }
@@ -602,7 +603,7 @@ ScrollTrigger.matchMedia({
     if(!sv) return;
     sv.style.height='auto'; sv.style.overflow='visible'; sh.style.position='relative';
     document.querySelectorAll('#shaft .stratum').forEach(function(st,i){
-      st.style.position='relative'; st.style.top='auto'; st.style.height='auto'; st.style.padding='84px 0 90px';
+      st.style.position='relative'; st.style.top='auto'; st.style.height='auto'; st.style.padding='calc(clamp(56px,10vh,100px) + 90px) 0 96px';
       gsap.utils.toArray(st.querySelector('.st-body').children).forEach(function(el,k){
         gsap.fromTo(el,{y:26,opacity:0},{y:0,opacity:1,duration:.55,delay:k*.06,ease:'power2.out',clearProps:'transform,opacity',
           scrollTrigger:{trigger:st,start:'top 82%',once:true}});
@@ -771,7 +772,7 @@ if(!hasGsap||reduced){
   document.querySelectorAll('[data-count]').forEach(function(el){ el.textContent=el.getAttribute('data-count')+(el.getAttribute('data-suffix')||''); });
   var sv=document.getElementById('shaft-view'); if(sv){ sv.style.height='auto'; sv.style.overflow='visible'; }
   var sh=document.getElementById('shaft'); if(sh) sh.style.position='relative';
-  document.querySelectorAll('#shaft .stratum').forEach(function(st){ st.style.position='relative'; st.style.top='auto'; st.style.height='auto'; st.style.padding='70px 0 84px'; st.style.flexDirection='column'; });
+  document.querySelectorAll('#shaft .stratum').forEach(function(st){ st.style.position='relative'; st.style.top='auto'; st.style.height='auto'; st.style.padding='calc(clamp(56px,10vh,100px) + 84px) 0 90px'; st.style.flexDirection='column'; });
   var l=document.getElementById('loader'); if(l) l.style.display='none';
   document.querySelectorAll('.test-card,.live-card').forEach(function(c){ c.classList.add('is-in'); });
   var ldn=document.getElementById('ld-name'); if (ldn && !ldn.textContent) ldn.textContent='МОСТДОРГЕОТРЕСТ';
