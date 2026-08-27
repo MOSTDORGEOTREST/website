@@ -12,14 +12,14 @@
 
     <div class="eq-bar">
       <div class="eq-tabs" role="group" aria-label="Фильтр оборудования по направлениям">
-        <button type="button" class="eq-tab on" data-eqf="all" aria-pressed="true">Все <em>15</em></button>
+        <button type="button" class="eq-tab on" data-eqf="all" aria-pressed="true">Все <em>17</em></button>
         <button type="button" class="eq-tab" data-eqf="dyn" aria-pressed="false">Динамика <em>4</em></button>
         <button type="button" class="eq-tab" data-eqf="mech" aria-pressed="false">Механика <em>4</em></button>
         <button type="button" class="eq-tab" data-eqf="rock" aria-pressed="false">Скала <em>3</em></button>
         <button type="button" class="eq-tab" data-eqf="frost" aria-pressed="false">Мерзлота <em>2</em></button>
-        <button type="button" class="eq-tab" data-eqf="chem" aria-pressed="false">Химия <em>2</em></button>
+        <button type="button" class="eq-tab" data-eqf="chem" aria-pressed="false">Химия <em>4</em></button>
       </div>
-      <div class="eq-total" aria-hidden="true"><b id="eq-count">15</b> установок · парк в работе</div>
+      <div class="eq-total" aria-hidden="true"><b id="eq-count">17</b> установок · парк в работе</div>
     </div>
 
     <div class="eq-grid" id="eq-grid">
@@ -149,20 +149,44 @@
         <p>Хранение и распиловка мерзлых кернов</p>
       </article>
 
-      <article class="eq-card" data-cat="chem">
+      <!-- флагман · химия · ICP-OES -->
+      <article class="eq-card eq-card--xl" data-cat="chem">
         <span class="eq-idx" aria-hidden="true">14</span>
-        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7L4.5 19a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3L14 9V2M8 2h8M7 15h10"/></svg></div>
-        <span class="eq-tag">Химия</span>
-        <h3>pH-метры</h3>
-        <p>Химический состав грунтов и грунтовых вод</p>
+        <div class="eq-thumb"><img src="/img/devices/shimadzu-icpe-9000.jpg" alt="Атомно-эмиссионный спектрометр с индуктивно связанной плазмой Shimadzu ICPE-9000" loading="lazy"></div>
+        <div class="eq-body">
+          <span class="eq-tag">Химия · флагман · ICP-OES</span>
+          <h3>Спектрометр Shimadzu ICPE-9000</h3>
+          <p>Атомно-эмиссионная спектрометрия с индуктивно связанной плазмой: полный элементный состав грунтов, грунтовых вод и водных вытяжек за одно измерение — от макрокомпонентов до следовых концентраций.</p>
+          <dl class="eq-spec">
+            <div><dt>Производитель</dt><dd>Shimadzu · Япония</dd></div>
+            <div><dt>Метод</dt><dd>ICP-OES · 167–800 нм · CCD</dd></div>
+            <div><dt>Чувствительность</dt><dd>уровень ppb (мкг/л)</dd></div>
+          </dl>
+        </div>
       </article>
 
       <article class="eq-card" data-cat="chem">
         <span class="eq-idx" aria-hidden="true">15</span>
-        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-6 3 12 3-9 2 3h7M4 20h16"/></svg></div>
+        <div class="eq-thumb"><img src="/img/devices/kapel-104t.jpg" alt="Система капиллярного электрофореза Капель-104Т" loading="lazy"></div>
+        <span class="eq-tag">Химия · ×2</span>
+        <h3>Капиллярный электрофорез «Капель-104Т»</h3>
+        <p>Анионы и катионы водной вытяжки — Cl⁻, SO₄²⁻, NO₃⁻, Na⁺, K⁺, Ca²⁺, Mg²⁺: засолённость и коррозионная агрессивность к бетону и стали. Две системы «Люмэкс» работают параллельно</p>
+      </article>
+
+      <article class="eq-card" data-cat="chem">
+        <span class="eq-idx" aria-hidden="true">16</span>
+        <div class="eq-thumb"><img src="/img/devices/fritsch-analysette-22.jpg" alt="Лазерный анализатор размера частиц Fritsch Analysette 22" loading="lazy"></div>
+        <span class="eq-tag">Химия · лазерная дифракция</span>
+        <h3>Лазерный гранулометр Fritsch Analysette 22</h3>
+        <p>Гранулометрический состав по ISO 13320: распределение частиц от долей микрона до 2 мм за минуту — пылеватые и глинистые фракции, недоступные ситам</p>
+      </article>
+
+      <article class="eq-card" data-cat="chem">
+        <span class="eq-idx" aria-hidden="true">17</span>
+        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7L4.5 19a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3L14 9V2M8 2h8M7 15h10"/></svg></div>
         <span class="eq-tag">Химия</span>
-        <h3>Капиллярный электрофорез</h3>
-        <p>Анализ водной вытяжки, коррозионная активность</p>
+        <h3>pH-метры</h3>
+        <p>Кислотность грунтов и грунтовых вод — водородный показатель водной вытяжки</p>
       </article>
 
       <a class="eq-card eq-card--cta" href="https://mdgt.ru/3d/output-3/index.html" target="_blank" rel="noopener" data-cta>
@@ -177,7 +201,7 @@
     <div class="eq-facts" aria-label="Факты о парке оборудования">
       <div class="eq-fact"><b>ISO/IEC 17025</b><span>аккредитованная лаборатория — протокол по каждому испытанию</span></div>
       <div class="eq-fact"><b>«Ростест»</b><span>метрологическая калибровка приборов и камер</span></div>
-      <div class="eq-fact"><b>Wille · GIESA · «Геотек» · «ПрогрессГео»</b><span>немецкие и российские установки в одном парке</span></div>
+      <div class="eq-fact"><b>Wille · GIESA · Fritsch · Shimadzu · «Геотек» · «ПрогрессГео» · «Люмэкс»</b><span>немецкие, японские и российские установки в одном парке</span></div>
     </div>
   </div>
 </section>

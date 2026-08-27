@@ -32,8 +32,15 @@ document.querySelectorAll('[data-scroll]').forEach(function(a){
     if (!el) return;
     e.preventDefault();
     document.body.classList.remove('menu-open');
-    var b = document.getElementById('burger'); b.setAttribute('aria-expanded','false');
-    if (lenis) lenis.scrollTo(el, { offset: 0, duration: 1.6, easing: function(t){ return 1 - Math.pow(1-t, 4); } });
+    var b = document.getElementById('burger'); if (b) b.setAttribute('aria-expanded','false');
+    var ease = function(t){ return 1 - Math.pow(1-t, 4); };
+    /* «Главная» = самый верх страницы: герой запинен ScrollTrigger'ом, поэтому целимся в 0, а не в элемент */
+    if (id === '#hero') {
+      if (lenis) lenis.scrollTo(0, { duration: 1.8, easing: ease });
+      else window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+      return;
+    }
+    if (lenis) lenis.scrollTo(el, { offset: 0, duration: 1.6, easing: ease });
     else el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
   });
 });
