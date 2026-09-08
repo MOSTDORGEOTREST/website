@@ -32,3 +32,4 @@ pnpm-debug.log*
 *.key
 wget-log.1
 wget-log
+Claude outputs/*

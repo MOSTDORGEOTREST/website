@@ -731,8 +731,10 @@ gsap.from('.client-rows',{opacity:0,y:24,duration:.8,ease:'power2.out',
 /* ================= LIGHT ZONE (только на главной, свет после разреза) ================= */
 if(document.getElementById('hero') && document.getElementById('objects')){
   ScrollTrigger.create({ trigger:'#objects', start:'top 70%',
-    onEnter:function(){ document.body.classList.add('on-light'); },
-    onLeaveBack:function(){ document.body.classList.remove('on-light'); }});
+    /* глубиномер меряет погружение — после разреза он не нужен и налезал бы
+       на карточки объектов, досье и контактов, поэтому гасим его вместе с уходом в свет */
+    onEnter:function(){ document.body.classList.add('on-light','hud-off'); },
+    onLeaveBack:function(){ document.body.classList.remove('on-light','hud-off'); }});
 }
 
 /* ================= NAV ACTIVE ================= */

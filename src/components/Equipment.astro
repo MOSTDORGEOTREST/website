@@ -12,14 +12,14 @@
 
     <div class="eq-bar">
       <div class="eq-tabs" role="group" aria-label="Фильтр оборудования по направлениям">
-        <button type="button" class="eq-tab on" data-eqf="all" aria-pressed="true">Все <em>17</em></button>
+        <button type="button" class="eq-tab on" data-eqf="all" aria-pressed="true">Все <em>31</em></button>
         <button type="button" class="eq-tab" data-eqf="dyn" aria-pressed="false">Динамика <em>4</em></button>
         <button type="button" class="eq-tab" data-eqf="mech" aria-pressed="false">Механика <em>4</em></button>
-        <button type="button" class="eq-tab" data-eqf="rock" aria-pressed="false">Скала <em>3</em></button>
-        <button type="button" class="eq-tab" data-eqf="frost" aria-pressed="false">Мерзлота <em>2</em></button>
+        <button type="button" class="eq-tab" data-eqf="rock" aria-pressed="false">Скала <em>8</em></button>
+        <button type="button" class="eq-tab" data-eqf="frost" aria-pressed="false">Мерзлота <em>11</em></button>
         <button type="button" class="eq-tab" data-eqf="chem" aria-pressed="false">Химия <em>4</em></button>
       </div>
-      <div class="eq-total" aria-hidden="true"><b id="eq-count">17</b> установок · парк в работе</div>
+      <div class="eq-total" aria-hidden="true"><b id="eq-count">31</b> установок · парк в работе</div>
     </div>
 
     <div class="eq-grid" id="eq-grid">
@@ -102,56 +102,203 @@
         <p>Немецкая классика трёхосного сжатия — прецизионная механика для статических испытаний</p>
       </article>
 
-      <!-- флагман · скала -->
+      <!-- флагман · скала · трёхосное сжатие -->
       <article class="eq-card eq-card--xl" data-cat="rock">
         <span class="eq-idx" aria-hidden="true">09</span>
-        <div class="eq-thumb"><img src="/img/devices/wille-rock.png" alt="Прибор трёхосного сжатия Wille для скальных грунтов" loading="lazy"></div>
+        <div class="eq-thumb"><img src="/img/devices/wille-rock.png" alt="Установка трёхосного сжатия скальных грунтов Wille Geotechnik с измерительной системой АСИС" loading="lazy"></div>
         <div class="eq-body">
-          <span class="eq-tag">Скала · флагман</span>
-          <h3>Трёхосное сжатие Wille · Rock</h3>
-          <p>Испытания скальных грунтов при высоких давлениях — прочность и деформируемость керна для тоннелей и оснований высотных объектов.</p>
+          <span class="eq-tag">Скала · флагман · до 30 МПа</span>
+          <h3>Трёхосное сжатие скальных грунтов Wille · «АСИС»</h3>
+          <p>Модернизированная измерительная система «АСИС» на базе установки Wille Geotechnik: прочностные и деформационные характеристики скального керна при высоких боковых давлениях — для тоннелей, откосов и оснований высотных объектов.</p>
           <dl class="eq-spec">
-            <div><dt>Производитель</dt><dd>Wille Geotechnik · Германия</dd></div>
-            <div><dt>Специализация</dt><dd>скальные керны · высокие давления</dd></div>
+            <div><dt>Осевая нагрузка</dt><dd>0–500 кН</dd></div>
+            <div><dt>Боковое давление</dt><dd>0–30 МПа</dd></div>
+            <div><dt>Образец</dt><dd>Ø42 × 84 мм · ход 0–100 мм</dd></div>
           </dl>
+          <div class="eq-rig" aria-label="Оснастка"><span>ГТЯН.441171.001ПС</span><span>нагнетатель ГТ 2.0.17</span><span>камера LT60042</span><span>камера ГТ 2.3.18</span></div>
         </div>
       </article>
 
       <article class="eq-card" data-cat="rock">
         <span class="eq-idx" aria-hidden="true">10</span>
-        <div class="eq-thumb"><img src="/img/devices/shear-rock.png" alt="Срезовой прибор НПП Геотек" loading="lazy"></div>
-        <span class="eq-tag">Скала</span>
-        <h3>Срезовой прибор «Геотек»</h3>
-        <p>Сдвиговые характеристики скальных грунтов</p>
+        <div class="eq-thumb"><img src="/img/devices/shear-rock.png" alt="Срезовой прибор НПП Геотек для скальных грунтов" loading="lazy"></div>
+        <span class="eq-tag">Скала · до 500 кН</span>
+        <h3>Срез скальных и крупнообломочных грунтов «АСИС 2017»</h3>
+        <p>Прочность на срез при нормальном и сдвигающем нагружении — в том числе по трещине, поверхности или зоне ослабления. Образец 150 × 150 мм, перемещение до 140 мм</p>
+        <div class="eq-rig" aria-label="Оснастка"><span>осевое ГТ 2.0.18</span><span>сдвиговое ГТ 2.2.6</span><span>0–500 кН</span></div>
       </article>
 
       <article class="eq-card" data-cat="rock">
         <span class="eq-idx" aria-hidden="true">11</span>
-        <div class="eq-thumb"><img src="/img/devices/psn-progressgeo.jpg" alt="Пресс ПСН-0.16.10 ПрогрессГео для скальных грунтов" loading="lazy"></div>
-        <span class="eq-tag">Скала</span>
-        <h3>Прессы ПСН-0.16.10 «ПрогрессГео»</h3>
-        <p>Одноосное сжатие скальных грунтов — усилие до 100 кН, в том числе образцы неправильной формы</p>
+        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15h16M4 15l3-4h10l3 4M8 19v2M16 19v2M12 3v5M9.5 6 12 8.5 14.5 6"/></svg></div>
+        <span class="eq-tag">Скала · срез со сжатием</span>
+        <h3>Оснастка для среза со сжатием «Геотек»</h3>
+        <p>Специализированная установка к системе «АСИС»: срез со сжатием с учётом ориентировки образца — прочность по заданной плоскости ослабления</p>
+        <div class="eq-rig" aria-label="Оснастка"><span>30 × 30 и 42 × 42 мм</span><span>углы 25° · 35° · 45°</span><span>до 500 кН</span></div>
       </article>
 
-      <article class="eq-card" data-cat="frost">
+      <!-- флагман · скала · одноосное нагружение -->
+      <article class="eq-card eq-card--xl" data-cat="rock">
         <span class="eq-idx" aria-hidden="true">12</span>
-        <div class="eq-thumb"><img src="/img/devices/fridge.png" alt="Морозильная камера" loading="lazy"></div>
-        <span class="eq-tag">Мерзлота</span>
-        <h3>Морозильные камеры ×3</h3>
-        <p>Калибровка «Ростест», испытания по ГОСТ 12248</p>
+        <div class="eq-thumb"><img src="/img/devices/pvn-10r.jpg" alt="Пресс ПВН-10R производства ООО «Каменика» для испытаний скальных грунтов" loading="lazy"></div>
+        <div class="eq-body">
+          <span class="eq-tag">Скала · флагман · одноосное нагружение</span>
+          <h3>Пресс ПВН-10R «Каменика»</h3>
+          <p>Одноосное сжатие и растяжение скальных, полускальных и мёрзлых грунтов, а также испытания образцов неправильной формы нагружением сферическими инденторами.</p>
+          <dl class="eq-spec">
+            <div><dt>Производитель</dt><dd>ООО «Каменика» · Россия</dd></div>
+            <div><dt>Усилие · давление</dt><dd>до 100 кН · до 350 бар</dd></div>
+            <div><dt>Ход поршня</dt><dd>130 мм</dd></div>
+          </dl>
+          <div class="eq-rig" aria-label="Стандарты"><span>ГОСТ 24941-81</span><span>ГОСТ 21153.3-85</span><span>ГОСТ 21153.0-75</span></div>
+        </div>
+      </article>
+
+      <article class="eq-card" data-cat="rock">
+        <span class="eq-idx" aria-hidden="true">13</span>
+        <div class="eq-thumb"><img src="/img/devices/psn-progressgeo.jpg" alt="Пресс ПСН для испытаний скальных грунтов" loading="lazy"></div>
+        <span class="eq-tag">Скала · «МДГТ-пресс»</span>
+        <h3>Прессы ПСН «МДГТ-пресс»</h3>
+        <p>Сжатие цилиндрических и призматических образцов, растяжение цилиндрических образцов, нагружение индентором образцов неправильной формы — прессы собственной разработки</p>
+        <div class="eq-rig" aria-label="Модели"><span>ПСН-1.16.10</span><span>ПСН-1.14.10</span><span>ПСН-0.16.10</span><span>до 100 кН · 380 бар · ход 115 мм</span></div>
+      </article>
+
+      <article class="eq-card" data-cat="rock">
+        <span class="eq-idx" aria-hidden="true">14</span>
+        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zM6 7 12 3l6 4M9 12h6M9 16h6"/></svg></div>
+        <span class="eq-tag">Скала · крупнообломочные</span>
+        <h3>Трёхосное сжатие крупнообломочных грунтов ГТ 1.3.7</h3>
+        <p>Крупноразмерные образцы Ø300 × 600 мм: насыпи, каменная наброска и щебенистые грунты испытываются целиком, без переупаковки на малый диаметр</p>
+        <div class="eq-rig" aria-label="Оснастка"><span>нагрузочное ГТ 2.0.34</span><span>нагнетатель ГТ 2.0.19</span><span>камера ГТ 2.3.13</span><span>0–500 кН · 0–2,0 МПа</span></div>
+      </article>
+
+      <article class="eq-card" data-cat="rock">
+        <span class="eq-idx" aria-hidden="true">15</span>
+        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2.5-7 4 14 3-10 2 3h5.5"/></svg></div>
+        <span class="eq-tag">Скала · ультразвук</span>
+        <h3>Дефектоскоп А1220 MONOLITH</h3>
+        <p>Скорость прохождения ультразвуковой волны через образец: однородность и дефектность породы. Сухой точечный контакт — без контактной жидкости</p>
+        <div class="eq-rig" aria-label="Характеристики"><span>ООО «АКС» · Россия</span><span>500–15 000 м/с</span></div>
+      </article>
+
+      <article class="eq-card" data-cat="rock">
+        <span class="eq-idx" aria-hidden="true">16</span>
+        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3"/></svg></div>
+        <span class="eq-tag">Скала · пробоподготовка</span>
+        <h3>Резка, выбуривание и шлифование керна</h3>
+        <p>Образец доводится до геометрии, требуемой методикой испытания; отдельно определяется содержание кальцита и доломита</p>
+        <div class="eq-rig" aria-label="Оборудование"><span>BATTIPAV</span><span>ООО «ЭкогеосПром»</span><span>A1220 MONOLITH</span></div>
+      </article>
+
+      <!-- флагман · мерзлота · камеры -->
+      <article class="eq-card eq-card--xl" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">17</span>
+        <div class="eq-thumb"><img src="/img/devices/freezer-chamber.jpg" alt="Морозильная камера мерзлотной лаборатории" loading="lazy"></div>
+        <div class="eq-body">
+          <span class="eq-tag">Мерзлота · флагман · ×4</span>
+          <h3>Морозильные камеры</h3>
+          <p>Четыре камеры с широким диапазоном отрицательных температур: образец выдерживается и испытывается при проектной температуре мерзлого основания — весь цикл по ГОСТ 12248 внутри камеры.</p>
+          <dl class="eq-spec">
+            <div><dt>Режим</dt><dd>отрицательные температуры</dd></div>
+            <div><dt>Калибровка</dt><dd>«Ростест»</dd></div>
+            <div><dt>Стандарт</dt><dd>ГОСТ 12248</dd></div>
+          </dl>
+        </div>
       </article>
 
       <article class="eq-card" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">13</span>
-        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4 6l16 12M20 6 4 18M12 2l-2 3h4zM12 22l-2-3h4z"/></svg></div>
-        <span class="eq-tag">Мерзлота</span>
-        <h3>Комплекс пробоподготовки</h3>
-        <p>Хранение и распиловка мерзлых кернов</p>
+        <span class="eq-idx" aria-hidden="true">18</span>
+        <div class="eq-thumb"><img src="/img/devices/upg-mg4-grunt.jpg" alt="Измеритель степени пучинистости грунта УПГ-МГ4.01/Н «Грунт»" loading="lazy"></div>
+        <span class="eq-tag">Мерзлота · пучинистость</span>
+        <h3>УПГ-МГ4.01/Н «Грунт»</h3>
+        <p>Степень пучинистости грунта по ГОСТ 28622: промораживание образца с непрерывной фиксацией деформации пучения</p>
+        <div class="eq-rig" aria-label="Характеристики"><span>−9,5…+2 °C · ±0,2 °C</span><span>до 6 образцов</span><span>деформация 0–15 мм</span></div>
+      </article>
+
+      <article class="eq-card" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">19</span>
+        <div class="eq-thumb"><img src="/img/devices/geotek-triaxial.jpg" alt="Измерительный комплекс АСИС НПП Геотек для мерзлых грунтов" loading="lazy"></div>
+        <span class="eq-tag">Мерзлота · ×19</span>
+        <h3>Комплексы «АСИС» ГТ.2.0.5</h3>
+        <p>Шариковый штамп, срез по поверхности оттаивания, компрессия мерзлого грунта и компрессия при оттаивании — комплексы НПП «Геотек»</p>
+        <div class="eq-rig" aria-label="Методы"><span>шариковый штамп</span><span>срез по поверхности оттаивания</span><span>ГОСТ 12248</span></div>
+      </article>
+
+      <article class="eq-card" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">20</span>
+        <div class="eq-thumb"><img src="/img/devices/trixal.png" alt="Комплекс ЛИГА КЛ-1С ПрогрессГео" loading="lazy"></div>
+        <span class="eq-tag">Мерзлота · ×14</span>
+        <h3>Комплексы «ЛИГА КЛ-1С»</h3>
+        <p>Одноосное и трёхосное сжатие мерзлых грунтов: предел прочности и деформируемость при отрицательных температурах — установки «ПрогрессГео»</p>
+        <div class="eq-rig" aria-label="Методы"><span>одноосное сжатие</span><span>трёхосное сжатие</span></div>
+      </article>
+
+      <article class="eq-card" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">21</span>
+        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M12 6v5M9 11h6l1 9H8zM8 3h8"/></svg></div>
+        <span class="eq-tag">Мерзлота · ×21</span>
+        <h3>Компрессионные приборы GIG</h3>
+        <p>Компрессия мерзлого грунта и компрессия при оттаивании: коэффициент оттаивания и коэффициент сжимаемости оттаивающего основания</p>
+        <div class="eq-rig" aria-label="Методы"><span>компрессия мерзлая</span><span>компрессия при оттаивании</span></div>
+      </article>
+
+      <article class="eq-card" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">22</span>
+        <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4v10.5a4 4 0 1 1-4 0zM10 8h4"/><circle cx="12" cy="17" r="1.6"/></svg></div>
+        <span class="eq-tag">Мерзлота · ×2</span>
+        <h3>Установки Kriolab Tbf</h3>
+        <p>Температура начала замерзания и оттаивания грунта — по записи и обработке температурной кривой фазового перехода</p>
+        <div class="eq-rig" aria-label="Производитель"><span>KrioLab · Россия</span></div>
+      </article>
+
+      <article class="eq-card" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">23</span>
+        <div class="eq-thumb"><img src="/img/devices/battipav-expert-500s.jpg" alt="Камнерезный станок Nuova Battipav Expert 500S" loading="lazy"></div>
+        <span class="eq-tag">Мерзлота · распил</span>
+        <h3>Камнерезный станок Battipav Expert 500S</h3>
+        <p>Распил мерзлых и скальных образцов: диск 500 мм, глубина реза до 170 мм за проход и до 235 мм в два прохода</p>
+        <div class="eq-rig" aria-label="Характеристики"><span>Nuova Battipav · Италия</span><span>4 кВт</span><span>длина реза 750 мм</span></div>
+      </article>
+
+      <article class="eq-card" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">24</span>
+        <div class="eq-thumb"><img src="/img/devices/cedima-cts-81l.jpg" alt="Камнерезный станок Cedima CTS-81 L" loading="lazy"></div>
+        <span class="eq-tag">Мерзлота · распил</span>
+        <h3>Камнерезный станок Cedima CTS-81 L</h3>
+        <p>Длинный точный рез кернов и монолитов: диск 400 мм, глубина 130 мм, длина реза 1250 мм, наклон рамы 0–45°</p>
+        <div class="eq-rig" aria-label="Характеристики"><span>CEDIMA · Германия</span><span>2,2 кВт</span></div>
+      </article>
+
+      <article class="eq-card" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">25</span>
+        <div class="eq-thumb"><img src="/img/devices/kd2-pro.jpg" alt="Анализатор тепловых свойств KD2 Pro" loading="lazy"></div>
+        <span class="eq-tag">Мерзлота · теплофизика</span>
+        <h3>Анализатор KD2 Pro</h3>
+        <p>Теплопроводность, тепловое сопротивление, температуропроводность и объёмная теплоёмкость — иглы TR-1, KS-1, SH-1 и RK-1 под грунт, породу и жидкости</p>
+        <div class="eq-rig" aria-label="Характеристики"><span>Decagon / METER · США</span><span>ASTM D5334</span><span>IEEE 442</span></div>
+      </article>
+
+      <article class="eq-card" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">26</span>
+        <div class="eq-thumb"><img src="/img/devices/tempos.jpg" alt="Анализатор тепловых свойств TEMPOS METER Group" loading="lazy"></div>
+        <span class="eq-tag">Мерзлота · теплофизика</span>
+        <h3>Анализатор TEMPOS</h3>
+        <p>Полный набор тепловых свойств за минуту: иглы TR-3, KS-3 и двойная SH-3 — теплопроводность от 0,02 до 6,00 Вт/(м·К)</p>
+        <div class="eq-rig" aria-label="Характеристики"><span>METER Group · США</span><span>ASTM D5334</span><span>IEEE 442</span></div>
+      </article>
+
+      <article class="eq-card" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">27</span>
+        <div class="eq-thumb"><img src="/img/devices/mit-1.jpg" alt="Измеритель теплопроводности МИТ-1" loading="lazy"></div>
+        <span class="eq-tag">Мерзлота · теплофизика</span>
+        <h3>Измеритель теплопроводности МИТ-1</h3>
+        <p>Теплопроводность зондовым методом по ГОСТ 30256: диапазон 0,03–2,0 Вт/(м·К), погрешность ±7 %, измерение за 1–7 минут</p>
+        <div class="eq-rig" aria-label="Характеристики"><span>«Интерприбор» · Россия</span><span>ГОСТ 30256</span></div>
       </article>
 
       <!-- флагман · химия · ICP-OES -->
       <article class="eq-card eq-card--xl" data-cat="chem">
-        <span class="eq-idx" aria-hidden="true">14</span>
+        <span class="eq-idx" aria-hidden="true">28</span>
         <div class="eq-thumb"><img src="/img/devices/shimadzu-icpe-9000.jpg" alt="Атомно-эмиссионный спектрометр с индуктивно связанной плазмой Shimadzu ICPE-9000" loading="lazy"></div>
         <div class="eq-body">
           <span class="eq-tag">Химия · флагман · ICP-OES</span>
@@ -166,7 +313,7 @@
       </article>
 
       <article class="eq-card" data-cat="chem">
-        <span class="eq-idx" aria-hidden="true">15</span>
+        <span class="eq-idx" aria-hidden="true">29</span>
         <div class="eq-thumb"><img src="/img/devices/kapel-104t.jpg" alt="Система капиллярного электрофореза Капель-104Т" loading="lazy"></div>
         <span class="eq-tag">Химия · ×2</span>
         <h3>Капиллярный электрофорез «Капель-104Т»</h3>
@@ -174,7 +321,7 @@
       </article>
 
       <article class="eq-card" data-cat="chem">
-        <span class="eq-idx" aria-hidden="true">16</span>
+        <span class="eq-idx" aria-hidden="true">30</span>
         <div class="eq-thumb"><img src="/img/devices/fritsch-analysette-22.jpg" alt="Лазерный анализатор размера частиц Fritsch Analysette 22" loading="lazy"></div>
         <span class="eq-tag">Химия · лазерная дифракция</span>
         <h3>Лазерный гранулометр Fritsch Analysette 22</h3>
@@ -182,7 +329,7 @@
       </article>
 
       <article class="eq-card" data-cat="chem">
-        <span class="eq-idx" aria-hidden="true">17</span>
+        <span class="eq-idx" aria-hidden="true">31</span>
         <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7L4.5 19a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3L14 9V2M8 2h8M7 15h10"/></svg></div>
         <span class="eq-tag">Химия</span>
         <h3>pH-метры</h3>
@@ -201,7 +348,7 @@
     <div class="eq-facts" aria-label="Факты о парке оборудования">
       <div class="eq-fact"><b>ISO/IEC 17025</b><span>аккредитованная лаборатория — протокол по каждому испытанию</span></div>
       <div class="eq-fact"><b>«Ростест»</b><span>метрологическая калибровка приборов и камер</span></div>
-      <div class="eq-fact"><b>Wille · GIESA · Fritsch · Shimadzu · «Геотек» · «ПрогрессГео» · «Люмэкс»</b><span>немецкие, японские и российские установки в одном парке</span></div>
+      <div class="eq-fact"><b>Wille · GIESA · Shimadzu · Fritsch · METER · Battipav · Cedima · «Геотек» · «ПрогрессГео» · «Каменика» · «Люмэкс»</b><span>немецкие, японские, итальянские, американские и российские установки в одном парке</span></div>
     </div>
   </div>
 </section>
