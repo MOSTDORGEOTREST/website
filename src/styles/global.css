@@ -72,9 +72,13 @@ body.on-light .nav-cta{border-color:var(--line-d); color:var(--ink-d)}
 body.on-light .nav-cta:hover{border-color:var(--amber-d); color:var(--amber-d)}
 body.on-light .burger{border-color:var(--line-d)}
 body.on-light .burger i,body.on-light .burger i::before,body.on-light .burger i::after{background:var(--ink-d)}
-.nav-brand{display:flex; align-items:center; gap:12px}
-.nav-brand img{height:40px; width:40px; object-fit:contain; background:#F6F2E8; border-radius:12px; padding:5px; box-shadow:0 2px 10px rgba(0,0,0,.25)}
-body.on-light .nav-brand img{box-shadow:0 2px 8px rgba(60,42,12,.14); border:1px solid var(--line-d-soft)}
+.nav-brand{display:flex; align-items:center; gap:13px}
+.nav-brand .nb-mark{position:relative; flex:none; display:block; width:54px; height:54px}
+.nav-brand .nb-mark img{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; transition:opacity .4s}
+/* тёмный фон — светлая версия знака, светлый — оригинальная */
+.nav-brand .nb-mark-d{opacity:0}
+body.on-light .nav-brand .nb-mark-d{opacity:1}
+body.on-light .nav-brand .nb-mark-l{opacity:0}
 .nav-brand .nb{line-height:1.25}
 .nav-brand .nb b{font-family:var(--font-d); font-weight:600; font-size:12px; letter-spacing:.1em; display:block}
 .nav-brand .nb span{font-family:var(--font-m); font-size:9px; color:var(--muted); letter-spacing:.18em; text-transform:uppercase; white-space:nowrap}
@@ -116,7 +120,7 @@ body.on-light .nav-brand img{box-shadow:0 2px 8px rgba(60,42,12,.14); border:1px
 @media(min-width:641px){ .pm-foot span{display:none} }
 @media(max-width:640px){ .pm-card{height:100dvh; width:100vw; border-radius:0} .price-modal{padding:0} }
 body.on-light .nav-tour{box-shadow:0 6px 20px rgba(166,106,20,.3)}
-@media(max-width:600px){ .nav-tour span{display:none} .nav-tour{padding:11px 13px} }
+@media(max-width:600px){ .nav-tour span{display:none} .nav-tour{padding:11px 13px} .nav-brand .nb-mark{width:44px; height:44px} .nav-brand{gap:10px} }
 .burger{display:none; background:none; border:1px solid var(--line); border-radius:10px; width:44px; height:44px; position:relative; z-index:2101}
 .burger i,.burger i::before,.burger i::after{content:''; position:absolute; left:11px; right:11px; height:2px; background:var(--ink); border-radius:2px; transition:transform .35s var(--ease),opacity .2s}
 .burger i{top:50%; margin-top:-1px} .burger i::before,.burger i::after{left:0; right:0} .burger i::before{top:-7px} .burger i::after{top:7px}

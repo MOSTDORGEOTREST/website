@@ -4,8 +4,11 @@ const { active = '', home = false } = Astro.props;
 ---
 <header class="nav" id="nav">
   <a class="nav-brand" href={home ? "#hero" : "/"} data-scroll>
-    <img src="/img/mdgt.png" alt="Логотип МОСТДОРГЕОТРЕСТ" width="36" height="36" />
-    <span class="nb"><b>МОСТДОРГЕОТРЕСТ</b><span>испытания грунтов · с&nbsp;2008</span></span>
+    <span class="nb-mark">
+      <img class="nb-mark-d" src="/img/mdgt.png" alt="Логотип МОСТДОРГЕОТРЕСТ" width="54" height="54" />
+      <img class="nb-mark-l" src="/img/mdgt-inv.png" alt="" aria-hidden="true" width="54" height="54" />
+    </span>
+    <span class="nb"><b>МОСТДОРГЕОТРЕСТ</b><span>геотехническая&nbsp;лаборатория</span></span>
   </a>
   <nav aria-label="Основная навигация">
     <ul class="nav-links">
