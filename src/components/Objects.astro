@@ -1,37 +1,69 @@
+---
+/* Знаковые объекты. Порядок задан заказчиком; подпись у каждой панели
+   собрана по одной схеме: тип · место — название — один точный факт.
+   Кадры лежат в /img/objects/*.webp, подготовлены под кроп 1.45 (десктоп)
+   и 0.76 (телефон): сюжет в каждом снимке выведен в центр. */
+const OBJECTS = [
+  { img: 'krymsky-most',        tag: 'Мост · Керченский пролив',      name: 'Крымский мост',
+    sub: '19 километров над проливом — самый длинный мост России',
+    alt: 'Крымский мост через Керченский пролив' },
+  { img: 'aes-akkuyu',          tag: 'Атомная станция · Турция',      name: 'АЭС «Аккую»',
+    sub: 'Первая АЭС Турции: четыре блока ВВЭР-1200, 4800 МВт',
+    alt: 'Строительство АЭС «Аккую» на средиземноморском побережье Турции' },
+  { img: 'kosmodrom-vostochny', tag: 'Космодром · Амурская область',  name: 'Космодром Восточный',
+    sub: 'Первый гражданский космодром России',
+    alt: 'Стартовый комплекс космодрома Восточный с ракетой на пусковом столе' },
+  { img: 'badaevsky',           tag: 'Жилой комплекс · Москва',       name: '«Бадаевский»',
+    sub: 'Корпуса Herzog & de Meuron, поднятые на опорах над парком',
+    alt: 'Жилой комплекс «Бадаевский» на Кутузовском проспекте в Москве' },
+  { img: 'dom-pravitelstva',    tag: 'Общественное здание · Москва',  name: 'Дом Правительства России',
+    sub: 'Белый дом на Краснопресненской набережной',
+    alt: 'Дом Правительства Российской Федерации в Москве' },
+  { img: 'lakhta-center',       tag: 'Небоскрёб · Санкт-Петербург',   name: '«Лахта Центр»',
+    sub: '462 метра — самое высокое здание Европы',
+    alt: 'Небоскрёб «Лахта Центр» в Санкт-Петербурге' },
+  { img: 'novy-khersones',      tag: 'Музейный комплекс · Севастополь', name: '«Новый Херсонес»',
+    sub: 'Музеи и парк у древнего Херсонеса Таврического',
+    alt: 'Музейный комплекс «Новый Херсонес» в Севастополе' },
+  { img: 'sheremetyevo',        tag: 'Аэропорт · Москва',             name: 'Шереметьево',
+    sub: 'Крупнейший аэропорт России по пассажиропотоку',
+    alt: 'Аэропорт Шереметьево, вид на терминал и перрон' },
+];
+const total = String(OBJECTS.length).padStart(2, '0');
+---
 <section id="objects" aria-label="Знаковые объекты">
   <div class="h-view" id="h-view">
     <div class="h-track" id="h-track">
       <div class="h-head">
         <span class="d-eyebrow">Акт 03 · Наверху</span>
         <h2>Наши испытания — в основании страны</h2>
-        <p>Каждый из этих объектов начинался у нас — с образца грунта на предметном столике.</p>
+        <div class="h-stat">
+          <b>1000<i>+</i></b>
+          <span><i>объектов</i><i>за 18 лет работы</i></span>
+        </div>
+        <p>Каждый из этих объектов начинался у нас — с образца грунта на предметном столике.
+           Энергоблоки АЭС и плотины ГЭС, мосты и аэропорты, жилые кварталы и заводские цеха —
+           от Балтики до Сахалина, от Сочи до Заполярья.</p>
         <div class="h-arrow">Двигаемся вдоль</div>
       </div>
-      <div class="pan" data-i="01"><span class="pan-idx" aria-hidden="true">01</span>
-        <div class="pan-mask"><div class="pan-img" style="background-image:url('/img/objects/krymsky-most.jpg')" role="img" aria-label="Крымский мост"></div></div>
-        <div class="pan-cap"><span class="pc-tag">Мост · 19 км</span><h3>Крымский мост</h3><div class="pc-sub">Самый протяжённый мост России</div></div></div>
-      <div class="pan" data-i="02"><span class="pan-idx" aria-hidden="true">02</span>
-        <div class="pan-mask"><div class="pan-img" style="background-image:url('/img/objects/sheremetyevo.jpg')" role="img" aria-label="Аэропорт Шереметьево"></div></div>
-        <div class="pan-cap"><span class="pc-tag">Аэропорт</span><h3>Шереметьево</h3><div class="pc-sub">Крупнейший аэропорт страны</div></div></div>
-      <div class="pan" data-i="03"><span class="pan-idx" aria-hidden="true">03</span>
-        <div class="pan-mask"><div class="pan-img" style="background-image:url('/img/objects/zhivopisny-most.jpg')" role="img" aria-label="Живописный мост"></div></div>
-        <div class="pan-cap"><span class="pc-tag">Мост · Москва</span><h3>Живописный мост</h3><div class="pc-sub">Фото: М. Денисова, Mos.ru</div></div></div>
-      <div class="pan" data-i="04"><span class="pan-idx" aria-hidden="true">04</span>
-        <div class="pan-mask"><div class="pan-img" style="background-image:url('/img/objects/ledovy-dvorets.jpg')" role="img" aria-label="Ледовый дворец Большой"></div></div>
-        <div class="pan-cap"><span class="pc-tag">Арена · Сочи</span><h3>Ледовый дворец «Большой»</h3><div class="pc-sub">Олимпийский парк</div></div></div>
-      <div class="pan" data-i="05"><span class="pan-idx" aria-hidden="true">05</span>
-        <div class="pan-mask"><div class="pan-img" style="background-image:url('/img/objects/volzhskaya-ges.jpg')" role="img" aria-label="Волжская ГЭС"></div></div>
-        <div class="pan-cap"><span class="pc-tag">Энергетика</span><h3>Волжская ГЭС</h3><div class="pc-sub">Крупнейшая ГЭС европейской части России</div></div></div>
-      <div class="pan" data-i="06"><span class="pan-idx" aria-hidden="true">06</span>
-        <div class="pan-mask"><div class="pan-img" style="background-image:url('/img/objects/akhmat-tower.jpg')" role="img" aria-label="Ахмат-Тауэр"></div></div>
-        <div class="pan-cap"><span class="pc-tag">Небоскрёб</span><h3>«Ахмат-Тауэр»</h3><div class="pc-sub">Высотное строительство</div></div></div>
-      <div class="pan" data-i="07"><span class="pan-idx" aria-hidden="true">07</span>
-        <div class="pan-mask"><div class="pan-img" style="background-image:url('/img/objects/skolkovo.jpg')" role="img" aria-label="Бизнес-центр Сколково"></div></div>
-        <div class="pan-cap"><span class="pc-tag">Кампус</span><h3>Бизнес-центр Сколково</h3><div class="pc-sub">Фото: Школа управления «Сколково»</div></div></div>
-      <div class="pan" data-i="08"><span class="pan-idx" aria-hidden="true">08</span>
-        <div class="pan-mask"><div class="pan-img" style="background-image:url('/img/objects/most-kama.jpg')" role="img" aria-label="Мост через Каму"></div></div>
-        <div class="pan-cap"><span class="pc-tag">Мост · Татарстан</span><h3>Мост через Каму</h3><div class="pc-sub">Переход через Каму у с. Сорочьи Горы</div></div></div>
+      {OBJECTS.map((o, i) => (
+        <div class="pan" data-i={String(i + 1).padStart(2, '0')}>
+          <span class="pan-idx" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <div class="pan-mask">
+            {/* первые две панели грузим сразу, остальные — по приближении секции */}
+            {i < 2
+              ? <div class="pan-img" style={`background-image:url('/img/objects/${o.img}.webp')`} role="img" aria-label={o.alt}></div>
+              : <div class="pan-img" data-bg={`/img/objects/${o.img}.webp`} role="img" aria-label={o.alt}></div>}
+          </div>
+          <div class="pan-cap">
+            <span class="pc-tag">{o.tag}</span>
+            <h3>{o.name}</h3>
+            <div class="pc-sub">{o.sub}</div>
+          </div>
+        </div>
+      ))}
     </div>
     <div class="h-progress" aria-hidden="true"><i id="h-fill"></i></div>
-    <div class="h-count" id="h-count" aria-hidden="true">01 / 08</div>
+    <div class="h-count" id="h-count" aria-hidden="true">01 / {total}</div>
   </div>
+</section>

@@ -129,7 +129,10 @@ body.on-light .nav-tour{box-shadow:0 6px 20px rgba(166,106,20,.3)}
 @media(max-width:600px){ .nav-tour span{display:none} .nav-tour{padding:11px 13px} .nav-brand .nb-mark{width:44px; height:44px} .nav-brand{gap:10px} }
 /* на телефонах подпись бренда чуть уже, а на самых узких экранах кнопка
    3D-тура убирается из шапки — она есть в бургер-меню, иначе бургер вылезает */
-@media(max-width:420px){ .nav-brand .nb span{font-size:8px; letter-spacing:.12em} }
+/* на телефонах лок-ап чуть у́же: подпись выключается по ширине названия,
+   поэтому именно название задаёт габарит блока и должно оставить место бургеру */
+@media(max-width:420px){ .nav-brand .nb b{font-size:11px}
+  .nav-brand .nb span{font-size:8px} }
 @media(max-width:370px){ .nav-tour{display:none} }
 .burger{display:none; background:none; border:1px solid var(--line); border-radius:10px; width:44px; height:44px; position:relative; z-index:2101}
 .burger i,.burger i::before,.burger i::after{content:''; position:absolute; left:11px; right:11px; height:2px; background:var(--ink); border-radius:2px; transition:transform .35s var(--ease),opacity .2s}
@@ -306,6 +309,20 @@ h1 .h-amber{color:var(--amber)}
 .h-head{flex:0 0 auto; width:min(46vw,640px); padding:0 clamp(24px,5vw,80px)}
 .h-head h2{font-family:var(--font-d); font-weight:800; font-size:clamp(30px,4.4vw,64px); line-height:1.05; margin:14px 0 18px}
 .h-head p{color:var(--muted); max-width:36ch; font-weight:300}
+/* число в шапке секции объектов: тот же приём, что у «100+ стабилометров»
+   в оснащении — крупная цифра янтарём и моноподпись рядом */
+.h-stat{display:flex; align-items:baseline; gap:14px; margin:0 0 18px}
+.h-stat b{font-family:var(--font-d); font-weight:800; font-size:clamp(46px,5.6vw,80px); line-height:.92;
+  letter-spacing:-.01em; color:var(--amber); font-variant-numeric:tabular-nums}
+.h-stat b i{font-style:normal; color:var(--amber-hi)}
+.h-stat > span{font-family:var(--font-m); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--muted); line-height:1.75; padding-bottom:5px}
+.h-stat > span i{display:block; font-style:normal; white-space:nowrap}
+#objects .h-stat b{color:var(--amber-d)}
+#objects .h-stat b i{color:var(--amber)}
+#objects .h-stat > span{color:var(--mut-d)}
+@media(max-width:900px){ .h-stat{margin-bottom:14px; gap:12px} .h-stat b{font-size:clamp(42px,12vw,60px)}
+  .h-stat > span{font-size:9.5px; letter-spacing:.16em} }
 .h-head .h-arrow{margin-top:34px; font-family:var(--font-m); font-size:11px; letter-spacing:.3em; color:var(--amber); text-transform:uppercase; display:flex; align-items:center; gap:14px}
 .h-head .h-arrow::after{content:''; width:70px; height:1px; background:var(--amber); animation:arrowx 1.6s var(--ease) infinite}
 @keyframes arrowx{0%{transform:scaleX(0); transform-origin:left}60%{transform:scaleX(1); transform-origin:left}61%{transform-origin:right}100%{transform:scaleX(0); transform-origin:right}}

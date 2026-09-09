@@ -611,6 +611,34 @@ if (!isTouch && !reduced && hasGsap){
 /* ================= NAV / MENU ================= */
 var nav=document.getElementById('nav');
 addEventListener('scroll',function(){ nav.classList.toggle('scrolled', scrollY>40); },{passive:true});
+
+/* ================= ВЫКЛЮЧКА ПОДПИСИ БРЕНДА =================
+   «геотехническая лаборатория» набирается разрядкой так, чтобы её правый край
+   встал ровно под правым краем «МОСТДОРГЕОТРЕСТ». Кегли и гарнитуры у строк
+   разные, поэтому трекинг считается по факту, а не подбирается в CSS. */
+(function(){
+  var ttl=document.querySelector('.nav-brand .nb b');
+  var sub=document.querySelector('.nav-brand .nb > span');
+  if(!ttl||!sub) return;
+  function textW(el){
+    var r=document.createRange(); r.selectNodeContents(el);
+    return r.getBoundingClientRect().width;
+  }
+  function fit(){
+    sub.style.letterSpacing='0px';
+    var w0=textW(sub), target=textW(ttl);
+    if(!w0||!target) return;
+    sub.style.letterSpacing='10px';
+    var n=(textW(sub)-w0)/10;          /* сколько раз браузер добавит трекинг */
+    if(!(n>1)){ sub.style.letterSpacing=''; return; }
+    /* последняя добавка висит за последней буквой и в выключку не входит */
+    var ls=(target-w0)/(n-1);
+    sub.style.letterSpacing=(ls>0?Math.round(ls*1000)/1000:0)+'px';
+  }
+  fit();
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit).catch(function(){});
+  var t; addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(fit,120); },{passive:true});
+})();
 var burger=document.getElementById('burger');
 burger.addEventListener('click',function(){
   var open=document.body.classList.toggle('menu-open');
@@ -850,6 +878,30 @@ ScrollTrigger.matchMedia({
     });
   }
 });
+
+/* ================= ОТЛОЖЕННАЯ ЗАГРУЗКА КАДРОВ ОБЪЕКТОВ =================
+   Восемь снимков — это ~1,6 МБ, и все они лежат ниже двух экранов разреза.
+   Подставляем их не в первый заход, а когда до секции остаётся полтора экрана:
+   к моменту, когда лента поедет, картинки уже на месте. Работает и без
+   IntersectionObserver — тогда просто грузим сразу. */
+(function(){
+  var lazy=document.querySelectorAll('.pan-img[data-bg]');
+  if(!lazy.length) return;
+  var load=function(){
+    lazy.forEach(function(el){
+      var u=el.getAttribute('data-bg');
+      if(!u) return;
+      el.style.backgroundImage="url('"+u+"')";
+      el.removeAttribute('data-bg');
+    });
+  };
+  var host=document.getElementById('objects');
+  if(!host || !('IntersectionObserver' in window)){ load(); return; }
+  var io=new IntersectionObserver(function(en){
+    if(en[0].isIntersecting){ load(); io.disconnect(); }
+  },{rootMargin:'150% 0px'});
+  io.observe(host);
+})();
 
 /* ================= ACT IV : HORIZONTAL DOLLY ================= */
 ScrollTrigger.matchMedia({
