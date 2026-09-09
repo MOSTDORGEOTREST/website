@@ -89,36 +89,87 @@ if (!isTouch && !reduced && hasGsap){
   var cv = document.getElementById('gl'); if (!cv) return;
   var gl = cv.getContext('webgl', { antialias:false, alpha:false });
   var uScroll = { v: 0 }; window.__setEarthScroll = function(v){ uScroll.v = v; };
+  window.__earthState = { mx:.5, my:.5, zoom:0 };
   if (!gl || reduced){ cv.style.background = 'radial-gradient(1000px 600px at 60% 40%, #0d1a2a, #0A0908 70%)'; return; }
   var vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
   var fs = [
   'precision highp float;',
-  'uniform vec2 uRes;uniform float uT;uniform vec2 uM;uniform float uS;',
+  'uniform vec2 uRes;uniform float uT;uniform vec2 uM;uniform float uS;uniform float uDpr;',
   'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
   'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);',
   ' return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),f.x),f.y);}',
   'float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p*=2.03;a*=.5;}return v;}',
+  /* быстрый хеш: четыре значения за один sin */
+  'vec4 h4(vec2 p){vec4 q=vec4(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)),dot(p,vec2(419.2,371.9)),dot(p,vec2(113.5,271.9)));return fract(sin(q)*43758.5453);}',
+  /* одна звезда на ячейку: круглое ядро с гало, своя величина, цвет,
+     фаза мерцания; при погружении вытягивается вдоль радиуса (rd) */
+  'vec3 star(vec2 uv,vec2 rd,float dens,float thr,float radPx,float amp,float resY,float t,float stre,float twk){',
+  ' vec2 p=uv*dens,id=floor(p),fq=fract(p);',
+  ' vec4 a=h4(id),b=h4(id+17.3);',
+  ' float occ=step(1.-thr,a.z);',
+  ' vec2 e=fq-(vec2(.5)+(a.xy-.5)*.66);',
+  ' vec2 ee=vec2(dot(e,rd)/stre,dot(e,vec2(-rd.y,rd.x)));',
+  ' float dd=length(ee);',
+  ' float mg=b.x;',
+  ' float rad=radPx*uDpr*dens/resY*(.45+.55*mg);',
+  ' float core=smoothstep(rad,0.,dd);',
+  ' float halo=exp(-dd*dd/(rad*rad*10.))*.34;',
+  ' float ph=b.y*6.2831,spd=.55+.45*b.z;',
+  ' float tw=1.-twk*mg*(.5+.5*sin(t*spd*1.9+ph))*(.5+.5*sin(t*spd*.73+ph*2.3));',
+  ' vec3 tint=mix(vec3(.78,.86,1.),vec3(1.,.85,.66),pow(b.w,3.));',
+  ' return tint*(core+halo)*amp*(.16+.84*mg*mg)*tw*occ/pow(stre,.35);}',
   'void main(){',
   ' vec2 frag=gl_FragCoord.xy/uRes;',
   ' vec2 uv=(gl_FragCoord.xy-.5*uRes)/uRes.y;',
   ' float zoom=clamp(uS,0.,1.);',
   ' vec2 par=(uM-.5)*vec2(.05,.04);',
-  /* --- star field (lighter dawn sky) --- */
-  ' vec2 sp=floor((uv+par*.4)*160.);',
-  ' float st=step(.998,h(sp));',
-  ' float tw=.55+.45*sin(uT*2.4+h(sp)*44.);',
-  ' vec3 col=mix(vec3(.055,.07,.10),vec3(.03,.04,.065),clamp(uv.y+.5,0.,1.));',
-  ' col+=st*tw*vec3(.85,.88,.95)*(1.-zoom);',
-  /* --- planet --- */
+  /* --- геометрия планеты считается первой: небу нужен её радиус --- */
   ' float aspect=uRes.x/uRes.y;',
   ' float portrait=step(aspect,.9);',
-  ' float Rp=.42*aspect;',
+  /* в портрете планета делит экран с текстом: считаем полосу, которая
+     остаётся над текстовым блоком, и вписываем шар в неё — иначе на
+     коротких телефонах он наезжает на заголовок */
+  ' float Hc=uRes.y/max(uDpr,.001);',
+  ' float cUv=440./Hc;',
+  /* пробуем зарезервировать полосу под надпись над планетой; если шар от
+     этого становится мельче 95 px — надпись не показываем и место отдаём ему */
+  ' float Wc=uRes.x/max(uDpr,.001);',
+  ' float navPx=mix(86.,76.,step(Wc,600.));',
+  ' float t1=(navPx+46.)/Hc;',
+  ' float r1=min(.395*aspect,max(1.-cUv-t1,.14)*.5);',
+  ' float tUv=mix(84./Hc,t1,step(95.,r1*Hc));',
+  ' float band=max(1.-cUv-tUv,.14);',
+  ' float Rp=min(.395*aspect,band*.5);',
   ' float R0=mix(.36,Rp,portrait);',
-  ' vec2 base=mix(vec2(.36,-.02),vec2(0.,.5-.105-Rp),portrait);',
+  ' vec2 base=mix(vec2(.36,-.02),vec2(0.,.5-(tUv+band*.5)),portrait);',
   ' vec2 c=mix(base,vec2(0.),smoothstep(0.,.65,zoom))+par;',
   ' float R=mix(R0,3.4,pow(zoom,1.7));',
   ' vec2 d=uv-c;',
   ' float r=length(d);',
+  /* --- предрассветное небо: градиент плюс очень мягкая неоднородность --- */
+  ' vec3 col=mix(vec3(.055,.07,.10),vec3(.027,.037,.061),clamp(uv.y+.5,0.,1.));',
+  ' col+=vec3(.045,.062,.105)*(n(uv*2.2+7.7)-.5)*.5*(1.-zoom);',
+  /* --- звёзды: три плана глубины; при погружении поле разлетается
+         от центра планеты и вытягивается в штрихи --- */
+  ' float warp=smoothstep(.02,.52,zoom);',
+  ' float stre=1.+warp*14.;',
+  ' float dl=max(r,1e-4); vec2 rdir=d/dl;',
+  ' vec2 sw=c+d/(1.+warp*1.9);',
+  ' float sfade=mix(.42,1.,smoothstep(-.52,.06,uv.y))*smoothstep(R+.015,R+.28,r)*(1.-smoothstep(.10,.56,zoom));',
+  ' vec3 sky=star(sw+par*.22,rdir,122.,.042,.75,.62,uRes.y,uT,stre,.40)',
+  '  +star(sw+par*.58,rdir,78.,.030,1.05,1.10,uRes.y,uT,stre,.50)',
+  '  +star(sw+par*1.05,rdir,40.,.026,1.6,1.85,uRes.y,uT,stre,.58);',
+  ' col+=sky*sfade;',
+  /* --- редкий метеор: примерно раз в полминуты, живёт около двух секунд --- */
+  ' vec4 mh=h4(vec2(floor(uT/9.),7.3));',
+  ' float mtp=fract(uT/9.);',
+  ' float mlife=smoothstep(0.,.04,mtp)*(1.-smoothstep(.05,.26,mtp));',
+  ' vec2 mdir=normalize(vec2(mix(-.9,.9,mh.z),-.85));',
+  ' vec2 mP=vec2(mix(-.75,.75,mh.x),mix(.18,.46,mh.y))+mdir*(mtp/.26)*.95;',
+  ' vec2 mba=-mdir*.13,mpa=uv-mP;',
+  ' float mhh=clamp(dot(mpa,mba)/dot(mba,mba),0.,1.);',
+  ' float mdd=length(mpa-mba*mhh);',
+  ' col+=vec3(1.,.95,.85)*exp(-mdd*mdd/2.2e-6)*(1.-mhh)*mlife*step(.62,mh.w)*(1.-zoom);',
   ' if(r<R){',
   '  vec2 q=d/R;',
   '  float z=sqrt(max(0.,1.-dot(q,q)));',
@@ -141,6 +192,19 @@ if (!isTouch && !reduced && hasGsap){
   '  float cl=smoothstep(.56,.76,fbm(s*sc*1.35+vec2(uT*.02,0.)+31.7))*(1.-zoom*.9);',
   '  surf=mix(surf,vec3(.92),cl*.7);',
   '  vec3 pc=surf*(.13+.95*dif)+spec;',
+  /* --- градусная сетка знака: меридианы и параллели через 30 градусов --- */
+  '  float gz=max(z,.02);',
+  '  float qpx=1./max(R*uRes.y,1.);',
+  '  float cl2=max(cos(lat),.02);',
+  '  float gstep=.5235988;',
+  '  float dLat=abs(fract(lat/gstep+.5)-.5)*gstep;',
+  '  float gLon=sqrt(1.+(q.x*q.x*q.y*q.y)/(cl2*cl2*cl2*cl2))/gz;',
+  '  float dLon=abs(fract(lon/gstep+.5)-.5)*gstep;',
+  '  float lw=.9*uDpr*qpx;',
+  '  float gA=(1.-smoothstep(0.,lw,dLat*cl2))*smoothstep(2.5,7.5,gstep*cl2/qpx/uDpr);',
+  '  float gB=(1.-smoothstep(0.,lw,dLon/gLon))*smoothstep(2.5,7.5,gstep/gLon/qpx/uDpr);',
+  '  float grid=max(gA,gB)*smoothstep(0.,.30,z)*(1.-smoothstep(0.,.34,zoom));',
+  '  pc+=vec3(.365,.71,.522)*grid*(.05+.27*dif);',
   '  pc+=vec3(.9,.6,.22)*pow(1.-abs(dot(nn,L)),3.5)*.14;',
   '  pc=mix(pc,vec3(.3,.5,.85),pow(1.-z,3.)*.4*(1.-zoom));',
   '  col=mix(col,pc,smoothstep(0.,.012,R-r));',
@@ -182,13 +246,15 @@ if (!isTouch && !reduced && hasGsap){
   var v=sh(gl.VERTEX_SHADER,vs), f=sh(gl.FRAGMENT_SHADER,fs);
   if(!v||!f){ cv.style.background='#0A0908'; return; }
   var pr=gl.createProgram(); gl.attachShader(pr,v); gl.attachShader(pr,f); gl.linkProgram(pr); gl.useProgram(pr);
+  window.__earthOK = true;
   var buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf);
   gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
   var loc=gl.getAttribLocation(pr,'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
-  var uRes=gl.getUniformLocation(pr,'uRes'), uT=gl.getUniformLocation(pr,'uT'), uM=gl.getUniformLocation(pr,'uM'), uS=gl.getUniformLocation(pr,'uS');
+  var uRes=gl.getUniformLocation(pr,'uRes'), uT=gl.getUniformLocation(pr,'uT'), uM=gl.getUniformLocation(pr,'uM'), uS=gl.getUniformLocation(pr,'uS'), uDpr=gl.getUniformLocation(pr,'uDpr');
+  var DPR=1;
   var mx=.5,my=.5,tmx=.5,tmy=.5;
   if(!isTouch) addEventListener('pointermove',function(e){ tmx=e.clientX/innerWidth; tmy=1-e.clientY/innerHeight; },{passive:true});
-  function resize(){ var d=Math.min(devicePixelRatio||1,1.6);
+  function resize(){ var d=Math.min(devicePixelRatio||1,1.6); DPR=d;
     cv.width=cv.clientWidth*d; cv.height=cv.clientHeight*d; gl.viewport(0,0,cv.width,cv.height); }
   resize(); addEventListener('resize',resize);
   var t0=performance.now();
@@ -197,11 +263,157 @@ if (!isTouch && !reduced && hasGsap){
     /* рендерим, пока герой в кадре (пин ~3.3 экрана + запас) */
     if(scrollY > innerHeight*4.6) return;
     mx+=(tmx-mx)*.05; my+=(tmy-my)*.05;
+    window.__earthState.mx=mx; window.__earthState.my=my; window.__earthState.zoom=uScroll.v;
     gl.uniform2f(uRes,cv.width,cv.height);
     gl.uniform1f(uT,(performance.now()-t0)/1000);
     gl.uniform2f(uM,mx,my);
     gl.uniform1f(uS,uScroll.v);
+    gl.uniform1f(uDpr,DPR);
     gl.drawArrays(gl.TRIANGLES,0,3);
+  })();
+})();
+
+/* ================= GLOBE MARK — приборный слой знака на планете =================
+   Кольцо с азимутальной шкалой, надпись МОСТДОРГЕОТРЕСТ по дуге и скрещённые
+   молотки-печать. Слой привязан к спроецированной окружности планеты: центр,
+   радиус, параллакс мыши и зум при погружении считаются по той же формуле,
+   что и в шейдере, поэтому знак «сидит» на планете при любом ресайзе.        */
+(function(){
+  var svg = document.getElementById('globe-mark');
+  var cv  = document.getElementById('gl');
+  if(!svg || !cv) return;
+  /* без WebGL планеты нет — знаку не на чем сидеть */
+  if(reduced || !window.__earthOK){ if(svg.parentNode) svg.parentNode.removeChild(svg); return; }
+
+  var A0 = -30, A1 = 120;        /* окно дуги: от «11 часов» вправо и вниз */
+  var TXT = 46;                  /* центр надписи по дуге */
+  var G = null, fitG = null;
+
+  function pt(r,a){ var t=a*Math.PI/180; return [r*Math.sin(t), -r*Math.cos(t)]; }
+  function f(n){ return (Math.round(n*100)/100); }
+  function arc(r,a0,a1){
+    var p0=pt(r,a0), p1=pt(r,a1);
+    return 'M'+f(p0[0])+' '+f(p0[1])+'A'+f(r)+' '+f(r)+' 0 '+((a1-a0)>180?1:0)+' 1 '+f(p1[0])+' '+f(p1[1]);
+  }
+  function smooth(a,b,x){ x=(x-a)/(b-a); x=x<0?0:(x>1?1:x); return x*x*(3-2*x); }
+
+  /* геометрия планеты — зеркало формул фрагментного шейдера */
+  function geom(){
+    var W=cv.clientWidth, H=cv.clientHeight;
+    if(!W||!H) return null;
+    var aspect=W/H, portrait=aspect<=0.9;
+    var navPx=W<=600?76:86;                 /* высота шапки: логотип 44 или 54 + 2x16 */
+    var cUv=440/H, t1=(navPx+46)/H;
+    var r1=Math.min(0.395*aspect, Math.max(1-cUv-t1,0.14)*0.5);
+    var cap=r1*H>=95;                       /* хватает ли места на надпись */
+    var tUv=cap?t1:84/H;
+    var band=Math.max(1-cUv-tUv,0.14);
+    var Rp=Math.min(0.395*aspect, band*0.5);
+    var R0=portrait?Rp:0.36;
+    var bx=portrait?0:0.36, by=portrait?(0.5-(tUv+band*0.5)):-0.02;
+    return { W:W, H:H, portrait:portrait, cap:cap, R0uv:R0, R0:R0*H, cx:W/2+bx*H, cy:H/2-by*H };
+  }
+
+  /* Портрет: дуге со шкалой места нет, поэтому знак сплющивается в подпись
+     над планетой — тот же моношрифт с широким трекингом, что и на дуге,
+     с двумя волосяными линиями, растворяющимися к краям, и северным штрихом. */
+  function buildPortrait(g){
+    var Rl=g.R0;
+    if(!g.cap) return false;
+    var fs=Math.max(9.5, Math.min(12.5, Rl*0.072));
+    var base=-(Rl+14);
+    svg.setAttribute('viewBox','0 0 '+g.W+' '+g.H);
+    svg.innerHTML=
+      '<g id="gm-fit">'+
+        '<text class="gm-word gm-word--flat" x="0" y="'+f(base)+'" text-anchor="middle" '+
+          'style="font-size:'+f(fs)+'px;letter-spacing:'+f(fs*0.42)+'px">МОСТДОРГЕОТРЕСТ</text>'+
+        '<path class="gm-tick gm-north" d="M0 '+f(base+7)+'L0 '+f(base+15)+'"/>'+
+      '</g>';
+    fitG=svg.querySelector('#gm-fit');
+    var tx=fitG.querySelector('text');
+    var half=(tx.getComputedTextLength?tx.getComputedTextLength():fs*9)/2;
+    var len=Math.min(46, Rl-half-18);
+    if(len>=14){
+      var y=f(base-fs*0.32), x1=f(-(half+12)), x2=f(-(half+12+len));
+      var NS='http://www.w3.org/2000/svg';
+      var gr=document.createElementNS(NS,'linearGradient');
+      gr.setAttribute('id','gm-fade'); gr.setAttribute('gradientUnits','userSpaceOnUse');
+      gr.setAttribute('x1',x2); gr.setAttribute('x2',x1); gr.setAttribute('y1',y); gr.setAttribute('y2',y);
+      gr.innerHTML='<stop offset="0" stop-color="rgb(93,181,133)" stop-opacity="0"/>'+
+                   '<stop offset="1" stop-color="rgb(93,181,133)" stop-opacity=".55"/>';
+      var defs=document.createElementNS(NS,'defs'); defs.appendChild(gr);
+      svg.insertBefore(defs,fitG);
+      var d='M'+x2+' '+y+'L'+x1+' '+y;
+      fitG.insertAdjacentHTML('afterbegin',
+        '<path class="gm-cap-line" d="'+d+'"/>'+
+        '<g transform="scale(-1,1)"><path class="gm-cap-line" d="'+d+'"/></g>');
+    }
+    return true;
+  }
+
+  function build(g){
+    var Rl=g.R0, rRing=Rl*1.13, rText=Rl*1.04;
+    var fs=Math.max(12, Math.min(17, Rl*0.048));
+    /* на узких экранах планета уходит за правый край — укорачиваем дугу,
+       чтобы надпись и печать не обрезались окном */
+    var fit=(g.W-34-g.cx)/rRing;
+    var A1e=fit>=1 ? A1 : Math.asin(Math.max(-1,Math.min(1,fit)))*180/Math.PI;
+    A1e=Math.min(A1, A1e);
+    if(A1e<55) return false;
+    var TXTe=Math.min(TXT, A1e-26);
+    var ticks='', majors='';
+    for(var a=A0; a<=A1e+0.01; a+=5){
+      var major=Math.abs(a%30)<0.01, len=major?10:5;
+      var p1=pt(rRing,a), p2=pt(rRing-len,a);
+      var d='M'+f(p1[0])+' '+f(p1[1])+'L'+f(p2[0])+' '+f(p2[1]);
+      if(major) majors+=d; else ticks+=d;
+    }
+    svg.setAttribute('viewBox','0 0 '+g.W+' '+g.H);
+    svg.innerHTML=
+      '<defs><path id="gm-arc" fill="none" d="'+arc(rText,TXTe-42,TXTe+42)+'"/></defs>'+
+      '<g id="gm-fit">'+
+        '<path class="gm-ring gm-glow" d="'+arc(rRing,A0,A1e)+'"/>'+
+        '<path class="gm-ring" d="'+arc(rRing,A0,A1e)+'"/>'+
+        '<path class="gm-tick" d="'+ticks+'"/>'+
+        '<path class="gm-tick gm-tick--maj" d="'+majors+'"/>'+
+        '<text class="gm-word" style="font-size:'+f(fs)+'px;letter-spacing:'+f(fs*0.55)+'px">'+
+          '<textPath href="#gm-arc" startOffset="50%" text-anchor="middle">МОСТДОРГЕОТРЕСТ</textPath>'+
+        '</text>'+
+      '</g>';
+    fitG=svg.querySelector('#gm-fit');
+    return true;
+  }
+
+  function layout(){
+    var g=geom();
+    if(!g){ svg.style.display='none'; return; }
+    /* портрет — плоская подпись над планетой; ландшафт узкого экрана
+       не тянет ни то, ни другое: там роль знака берёт сетка на сфере */
+    var ok = g.portrait ? buildPortrait(g) : (g.W>900 && build(g));
+    if(!ok){ svg.style.display='none'; G=null; return; }
+    svg.style.display='';
+    G=g;
+  }
+
+  layout();
+  addEventListener('resize',layout);
+
+  var lastT='';
+  (function frame(){
+    requestAnimationFrame(frame);
+    if(!G||!fitG) return;
+    if(scrollY > innerHeight*4.6) return;
+    var st=window.__earthState;
+    var zoom=Math.max(0,Math.min(1,st.zoom));
+    /* портретная подпись стоит вплотную к шапке: при зуме она уезжает вверх,
+       поэтому гаснет раньше, чем успевает дойти до логотипа */
+    var op=G.portrait ? 1-smooth(0.008,0.055,zoom) : 1-smooth(0.015,0.13,zoom);
+    var Ruv=G.R0uv+(3.4-G.R0uv)*Math.pow(zoom,1.7);
+    var x=G.cx+(st.mx-0.5)*0.05*G.H;
+    var y=G.cy-(st.my-0.5)*0.04*G.H;
+    var t='translate('+f(x)+' '+f(y)+') scale('+(Math.round(Ruv/G.R0uv*1000)/1000)+')';
+    if(t!==lastT){ fitG.setAttribute('transform',t); lastT=t; }
+    fitG.style.opacity=op<0.002?0:(Math.round(op*1000)/1000);
   })();
 })();
 
@@ -474,6 +686,7 @@ function counters(){
   });
 }
 function heroIn(instant){
+  document.body.classList.add('is-ready');
   var titleEl=document.getElementById('hero-h');
   if(instant||!titleEl){ counters(); return; }
   var chars=splitChars(titleEl);
@@ -530,12 +743,27 @@ ScrollTrigger.matchMedia({
       .to('.hero-foot',{yPercent:60,opacity:0,ease:'power1.in',duration:.35},0)
       .to('.hero-scroll',{opacity:0,duration:.2},0);
   },
-  '(max-width: 900px)': function(){
-    /* мобильное «ныряние»: без пина — глобус зумится, пока герой уходит из кадра */
+  '(max-width: 900px) and (orientation: portrait)': function(){
+    /* та же хореография, что на десктопе: герой пинится с самого верха,
+       планета приближается ровно по прокрутке и уходит в грунт. Ход короче —
+       на телефоне это большой палец, а не колесо мыши */
+    if(!document.getElementById('hero')) return;
+    var mTl=gsap.timeline({
+      scrollTrigger:{ trigger:'#hero', start:'top top', end:'+=170%', scrub:.5, pin:true, anticipatePin:1,
+        onUpdate:function(self){
+          if(window.__setEarthScroll) window.__setEarthScroll(self.progress);
+          setDepth(Math.max(0,(self.progress-.56)/.44)*D_MIDS[0]);
+        } }
+    });
+    mTl.to('#hero-content',{yPercent:-36,opacity:0,ease:'power1.in',duration:.4},0)
+      .to('.hero-foot',{yPercent:55,opacity:0,ease:'power1.in',duration:.35},0)
+      .to('.hero-scroll',{opacity:0,duration:.2},0);
+  },
+  '(max-width: 900px) and (orientation: landscape)': function(){
+    /* в ландшафте герой выше экрана и пинить его нечестно — мягкий зум без пина */
     if(!document.getElementById('hero')) return;
     ScrollTrigger.create({ trigger:'#hero', start:'top top', end:'bottom 30%', scrub:1.2,
       onUpdate:function(self){
-        /* без пина глобус лишь мягко приближается — «ныряния» на телефоне нет */
         if(window.__setEarthScroll) window.__setEarthScroll(Math.min(.22,self.progress*.3));
         setDepth(Math.max(0,(self.progress-.62)/.38)*D_MIDS[0]);
       } });
