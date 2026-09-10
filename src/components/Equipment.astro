@@ -12,14 +12,14 @@
 
     <div class="eq-bar">
       <div class="eq-tabs" role="group" aria-label="Фильтр оборудования по направлениям">
-        <button type="button" class="eq-tab on" data-eqf="all" aria-pressed="true">Все <em>30</em></button>
-        <button type="button" class="eq-tab" data-eqf="dyn" aria-pressed="false">Динамика <em>4</em></button>
+        <button type="button" class="eq-tab on" data-eqf="flag" aria-pressed="true">Флагманы <em>7</em></button>
+        <button type="button" class="eq-tab" data-eqf="dyn" aria-pressed="false">Динамика <em>5</em></button>
         <button type="button" class="eq-tab" data-eqf="mech" aria-pressed="false">Механика <em>4</em></button>
         <button type="button" class="eq-tab" data-eqf="rock" aria-pressed="false">Скала <em>7</em></button>
         <button type="button" class="eq-tab" data-eqf="frost" aria-pressed="false">Мерзлота <em>11</em></button>
         <button type="button" class="eq-tab" data-eqf="chem" aria-pressed="false">Химия <em>4</em></button>
       </div>
-      <div class="eq-total" aria-hidden="true"><b id="eq-count">30</b> установок · парк в работе</div>
+      <div class="eq-total" aria-hidden="true"><b id="eq-count">31</b> установка · парк в работе</div>
     </div>
 
     <div class="eq-grid" id="eq-grid">
@@ -39,7 +39,7 @@
         </div>
       </article>
 
-      <article class="eq-card" data-cat="dyn">
+      <article class="eq-card eq-hide" data-cat="dyn">
         <span class="eq-idx" aria-hidden="true">02</span>
         <div class="eq-thumb"><img src="/img/devices/geotek-resonant.jpg" alt="Резонансная колонка НПП Геотек" loading="lazy"></div>
         <span class="eq-tag">Динамика · ×2</span>
@@ -47,7 +47,7 @@
         <p>Модуль сдвига G₀ и затухание при малых деформациях — две колонки работают параллельно</p>
       </article>
 
-      <article class="eq-card" data-cat="dyn">
+      <article class="eq-card eq-hide" data-cat="dyn">
         <span class="eq-idx" aria-hidden="true">03</span>
         <div class="eq-thumb"><img src="/img/devices/geotek-dyn.jpg" alt="Динамический стабилометр НПП Геотек" loading="lazy"></div>
         <span class="eq-tag">Динамика · ×2</span>
@@ -70,32 +70,41 @@
         </div>
       </article>
 
-      <article class="eq-card" data-cat="mech">
+      <article class="eq-card eq-hide" data-cat="dyn">
         <span class="eq-idx" aria-hidden="true">05</span>
+        <div class="eq-thumb"><img src="/img/devices/wykeham-shearmatic-27-wf2180.jpg" alt="Автоматическая сдвиговая установка Wykeham Farrance SHEARMATIC 27-WF2180" loading="lazy"></div>
+        <span class="eq-tag">Динамика · циклический срез</span>
+        <h3>Сдвиговая установка SHEARMATIC 27-WF2180</h3>
+        <p>Прямой и остаточный срез с пневматическим нагружением: сопротивление сдвигу при знакопеременной нагрузке и остаточная прочность по поверхности скольжения</p>
+        <div class="eq-rig" aria-label="Характеристики"><span>Wykeham Farrance · Великобритания</span><span>срез 5 кН · нормальная 8 кН</span><span>до 10 циклов реверса</span><span>ASTM D3080</span></div>
+      </article>
+
+      <article class="eq-card eq-hide" data-cat="mech">
+        <span class="eq-idx" aria-hidden="true">06</span>
         <div class="eq-thumb"><img src="/img/devices/trixal.png" alt="Установка трёхосного сжатия" loading="lazy"></div>
         <span class="eq-tag">Механика · ×50</span>
         <h3>Стабилометры «ПрогрессГео»</h3>
         <p>F, C, E · параметры моделей HS, SS, SSC, MC</p>
       </article>
 
-      <article class="eq-card" data-cat="mech">
-        <span class="eq-idx" aria-hidden="true">06</span>
+      <article class="eq-card eq-hide" data-cat="mech">
+        <span class="eq-idx" aria-hidden="true">07</span>
         <div class="eq-thumb"><img src="/img/devices/odometr.png" alt="Одометр — компрессионный прибор" loading="lazy"></div>
         <span class="eq-tag">Механика · ×41</span>
         <h3>Одометры</h3>
         <p>Компрессия, консолидация, кривые Ohde, K₀</p>
       </article>
 
-      <article class="eq-card" data-cat="mech">
-        <span class="eq-idx" aria-hidden="true">07</span>
+      <article class="eq-card eq-hide" data-cat="mech">
+        <span class="eq-idx" aria-hidden="true">08</span>
         <div class="eq-thumb"><img src="/img/devices/geotek-triaxial.jpg" alt="Стабилометр НПП Геотек" loading="lazy"></div>
         <span class="eq-tag">Механика · ×45</span>
         <h3>Стабилометры «Геотек»</h3>
         <p>Статическое трёхосное сжатие по ГОСТ 12248: прочность c, φ и деформируемость E</p>
       </article>
 
-      <article class="eq-card" data-cat="mech">
-        <span class="eq-idx" aria-hidden="true">08</span>
+      <article class="eq-card eq-hide" data-cat="mech">
+        <span class="eq-idx" aria-hidden="true">09</span>
         <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v5M8 4h8M7 7h10v12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2zM7 12h10M7 16h10"/></svg></div>
         <span class="eq-tag">Механика · ×7</span>
         <h3>Стабилометры GIESA</h3>
@@ -104,7 +113,7 @@
 
       <!-- флагман · скала -->
       <article class="eq-card eq-card--xl" data-cat="rock">
-        <span class="eq-idx" aria-hidden="true">09</span>
+        <span class="eq-idx" aria-hidden="true">10</span>
         <div class="eq-thumb"><img src="/img/devices/wille-rock.png" alt="Прибор трёхосного сжатия Wille для скальных грунтов" loading="lazy"></div>
         <div class="eq-body">
           <span class="eq-tag">Скала · флагман</span>
@@ -119,7 +128,7 @@
 
       <!-- флагман · скала · срез -->
       <article class="eq-card eq-card--xl" data-cat="rock">
-        <span class="eq-idx" aria-hidden="true">10</span>
+        <span class="eq-idx" aria-hidden="true">11</span>
         <div class="eq-thumb"><img src="/img/devices/shear-rock.png" alt="Срезовой прибор АСИС 2017 НПП Геотек для скальных и крупнообломочных грунтов" loading="lazy"></div>
         <div class="eq-body">
           <span class="eq-tag">Скала · флагман · до 500 кН</span>
@@ -134,8 +143,8 @@
         </div>
       </article>
 
-      <article class="eq-card" data-cat="rock">
-        <span class="eq-idx" aria-hidden="true">11</span>
+      <article class="eq-card eq-hide" data-cat="rock">
+        <span class="eq-idx" aria-hidden="true">12</span>
         <div class="eq-thumb"><img src="/img/devices/pvn-10r.jpg" alt="Пресс ПВН-10R производства ООО «Каменика» для испытаний скальных грунтов" loading="lazy"></div>
         <span class="eq-tag">Скала · одноосное нагружение</span>
         <h3>Пресс ПВН-10R «Каменика»</h3>
@@ -143,8 +152,8 @@
         <div class="eq-rig" aria-label="Стандарты"><span>ООО «Каменика» · Россия</span><span>ГОСТ 24941-81</span><span>ГОСТ 21153.3-85</span></div>
       </article>
 
-      <article class="eq-card" data-cat="rock">
-        <span class="eq-idx" aria-hidden="true">12</span>
+      <article class="eq-card eq-hide" data-cat="rock">
+        <span class="eq-idx" aria-hidden="true">13</span>
         <div class="eq-thumb"><img src="/img/devices/psn-progressgeo.jpg" alt="Пресс ПСН «ПрогрессГео» для испытаний скальных грунтов" loading="lazy"></div>
         <span class="eq-tag">Скала · «ПрогрессГео»</span>
         <h3>Прессы ПСН «ПрогрессГео»</h3>
@@ -152,17 +161,25 @@
         <div class="eq-rig" aria-label="Модели"><span>ПСН-1.16.10</span><span>ПСН-1.14.10</span><span>ПСН-0.16.10</span><span>до 100 кН · 380 бар · ход 115 мм</span></div>
       </article>
 
-      <article class="eq-card" data-cat="rock">
-        <span class="eq-idx" aria-hidden="true">13</span>
+      <!-- флагман · скала · крупнообломочные -->
+      <article class="eq-card eq-card--xl" data-cat="rock">
+        <span class="eq-idx" aria-hidden="true">14</span>
         <div class="eq-thumb"><img src="/img/devices/gt-1-3-7.jpg" alt="Установка трёхосного сжатия крупнообломочных грунтов ГТ 1.3.7 НПП «Геотек»" loading="lazy"></div>
-        <span class="eq-tag">Скала · крупнообломочные</span>
-        <h3>Трёхосное сжатие крупнообломочных грунтов ГТ 1.3.7</h3>
-        <p>Крупноразмерные образцы Ø300 × 600 мм: насыпи, каменная наброска и щебенистые грунты испытываются целиком, без переупаковки на малый диаметр</p>
-        <div class="eq-rig" aria-label="Оснастка"><span>нагрузочное ГТ 2.0.34</span><span>нагнетатель ГТ 2.0.19</span><span>камера ГТ 2.3.13</span><span>0–500 кН · 0–2,0 МПа</span></div>
+        <div class="eq-body">
+          <span class="eq-tag">Скала · флагман · Ø300 × 600</span>
+          <h3>Трёхосное сжатие крупнообломочных грунтов ГТ 1.3.7</h3>
+          <p>Гравийные, гравийно-песчаные и крупнообломочные грунты испытываются целиком, без переупаковки на малый диаметр: режимы НН, КН и КД, изотропная и анизотропная консолидация, произвольные траектории напряжений, водонасыщение с контролем коэффициента Скемптона и управлением обратным давлением.</p>
+          <dl class="eq-spec">
+            <div><dt>Осевая нагрузка</dt><dd>до 500 кН · до 7000 кПа</dd></div>
+            <div><dt>Камера и поровое</dt><dd>до 2 МПа · сжатие 0,001–120 мм/мин</dd></div>
+            <div><dt>Даёт для расчёта</dt><dd>E · G · ν · MC · HS · HSS</dd></div>
+          </dl>
+          <div class="eq-rig" aria-label="Оснастка"><span>нагрузочное ГТ 2.0.34</span><span>нагнетатели ГТ 2.0.19 ×2</span><span>камера ГТ 2.3.13</span><span>АСИС · GeotekStudio</span></div>
+        </div>
       </article>
 
-      <article class="eq-card" data-cat="rock">
-        <span class="eq-idx" aria-hidden="true">14</span>
+      <article class="eq-card eq-hide" data-cat="rock">
+        <span class="eq-idx" aria-hidden="true">15</span>
         <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2.5-7 4 14 3-10 2 3h5.5"/></svg></div>
         <span class="eq-tag">Скала · ультразвук</span>
         <h3>Дефектоскоп А1220 MONOLITH</h3>
@@ -170,8 +187,8 @@
         <div class="eq-rig" aria-label="Характеристики"><span>ООО «АКС» · Россия</span><span>500–15 000 м/с</span></div>
       </article>
 
-      <article class="eq-card" data-cat="rock">
-        <span class="eq-idx" aria-hidden="true">15</span>
+      <article class="eq-card eq-hide" data-cat="rock">
+        <span class="eq-idx" aria-hidden="true">16</span>
         <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3"/></svg></div>
         <span class="eq-tag">Скала · пробоподготовка</span>
         <h3>Резка, выбуривание и шлифование керна</h3>
@@ -181,7 +198,7 @@
 
       <!-- флагман · мерзлота · камеры -->
       <article class="eq-card eq-card--xl" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">16</span>
+        <span class="eq-idx" aria-hidden="true">17</span>
         <div class="eq-thumb"><img src="/img/devices/freezer-chamber.jpg" alt="Морозильная камера мерзлотной лаборатории" loading="lazy"></div>
         <div class="eq-body">
           <span class="eq-tag">Мерзлота · флагман · ×4</span>
@@ -195,8 +212,8 @@
         </div>
       </article>
 
-      <article class="eq-card" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">17</span>
+      <article class="eq-card eq-hide" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">18</span>
         <div class="eq-thumb"><img src="/img/devices/upg-mg4-grunt.jpg" alt="Измеритель степени пучинистости грунта УПГ-МГ4.01/Н «Грунт»" loading="lazy"></div>
         <span class="eq-tag">Мерзлота · пучинистость</span>
         <h3>УПГ-МГ4.01/Н «Грунт»</h3>
@@ -204,8 +221,8 @@
         <div class="eq-rig" aria-label="Характеристики"><span>−9,5…+2 °C · ±0,2 °C</span><span>до 6 образцов</span><span>деформация 0–15 мм</span></div>
       </article>
 
-      <article class="eq-card" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">18</span>
+      <article class="eq-card eq-hide" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">19</span>
         <div class="eq-thumb"><img src="/img/devices/geotek-triaxial.jpg" alt="Измерительный комплекс АСИС НПП Геотек для мерзлых грунтов" loading="lazy"></div>
         <span class="eq-tag">Мерзлота · ×19</span>
         <h3>Комплексы «АСИС» ГТ.2.0.5</h3>
@@ -213,8 +230,8 @@
         <div class="eq-rig" aria-label="Методы"><span>шариковый штамп</span><span>срез по поверхности оттаивания</span><span>ГОСТ 12248</span></div>
       </article>
 
-      <article class="eq-card" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">19</span>
+      <article class="eq-card eq-hide" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">20</span>
         <div class="eq-thumb"><img src="/img/devices/trixal.png" alt="Комплекс ЛИГА КЛ-1С ПрогрессГео" loading="lazy"></div>
         <span class="eq-tag">Мерзлота · ×14</span>
         <h3>Комплексы «ЛИГА КЛ-1С»</h3>
@@ -222,8 +239,8 @@
         <div class="eq-rig" aria-label="Методы"><span>одноосное сжатие</span><span>трёхосное сжатие</span></div>
       </article>
 
-      <article class="eq-card" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">20</span>
+      <article class="eq-card eq-hide" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">21</span>
         <div class="eq-thumb"><img src="/img/devices/battipav-expert-500s.jpg" alt="Камнерезный станок Nuova Battipav Expert 500S" loading="lazy"></div>
         <span class="eq-tag">Мерзлота · распил</span>
         <h3>Камнерезный станок Battipav Expert 500S</h3>
@@ -231,8 +248,8 @@
         <div class="eq-rig" aria-label="Характеристики"><span>Nuova Battipav · Италия</span><span>4 кВт</span><span>длина реза 750 мм</span></div>
       </article>
 
-      <article class="eq-card" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">21</span>
+      <article class="eq-card eq-hide" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">22</span>
         <div class="eq-thumb"><img src="/img/devices/cedima-cts-81l.jpg" alt="Камнерезный станок Cedima CTS-81 L" loading="lazy"></div>
         <span class="eq-tag">Мерзлота · распил</span>
         <h3>Камнерезный станок Cedima CTS-81 L</h3>
@@ -240,8 +257,8 @@
         <div class="eq-rig" aria-label="Характеристики"><span>CEDIMA · Германия</span><span>2,2 кВт</span></div>
       </article>
 
-      <article class="eq-card" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">22</span>
+      <article class="eq-card eq-hide" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">23</span>
         <div class="eq-thumb"><img src="/img/devices/kd2-pro.jpg" alt="Анализатор тепловых свойств KD2 Pro" loading="lazy"></div>
         <span class="eq-tag">Мерзлота · теплофизика</span>
         <h3>Анализатор KD2 Pro</h3>
@@ -249,8 +266,8 @@
         <div class="eq-rig" aria-label="Характеристики"><span>Decagon / METER · США</span><span>ASTM D5334</span><span>IEEE 442</span></div>
       </article>
 
-      <article class="eq-card" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">23</span>
+      <article class="eq-card eq-hide" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">24</span>
         <div class="eq-thumb"><img src="/img/devices/tempos.jpg" alt="Анализатор тепловых свойств TEMPOS METER Group" loading="lazy"></div>
         <span class="eq-tag">Мерзлота · теплофизика</span>
         <h3>Анализатор TEMPOS</h3>
@@ -258,8 +275,8 @@
         <div class="eq-rig" aria-label="Характеристики"><span>METER Group · США</span><span>ASTM D5334</span><span>IEEE 442</span></div>
       </article>
 
-      <article class="eq-card" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">24</span>
+      <article class="eq-card eq-hide" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">25</span>
         <div class="eq-thumb"><img src="/img/devices/mit-1.jpg" alt="Измеритель теплопроводности МИТ-1" loading="lazy"></div>
         <span class="eq-tag">Мерзлота · теплофизика</span>
         <h3>Измеритель теплопроводности МИТ-1</h3>
@@ -267,8 +284,8 @@
         <div class="eq-rig" aria-label="Характеристики"><span>«Интерприбор» · Россия</span><span>ГОСТ 30256</span></div>
       </article>
 
-      <article class="eq-card" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">25</span>
+      <article class="eq-card eq-hide" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">26</span>
         <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M12 6v5M9 11h6l1 9H8zM8 3h8"/></svg></div>
         <span class="eq-tag">Мерзлота · ×21</span>
         <h3>Компрессионные приборы GIG</h3>
@@ -276,8 +293,8 @@
         <div class="eq-rig" aria-label="Методы"><span>компрессия мерзлая</span><span>компрессия при оттаивании</span></div>
       </article>
 
-      <article class="eq-card" data-cat="frost">
-        <span class="eq-idx" aria-hidden="true">26</span>
+      <article class="eq-card eq-hide" data-cat="frost">
+        <span class="eq-idx" aria-hidden="true">27</span>
         <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4v10.5a4 4 0 1 1-4 0zM10 8h4"/><circle cx="12" cy="17" r="1.6"/></svg></div>
         <span class="eq-tag">Мерзлота · ×2</span>
         <h3>Установки Kriolab Tbf</h3>
@@ -287,7 +304,7 @@
 
       <!-- флагман · химия · ICP-OES -->
       <article class="eq-card eq-card--xl" data-cat="chem">
-        <span class="eq-idx" aria-hidden="true">27</span>
+        <span class="eq-idx" aria-hidden="true">28</span>
         <div class="eq-thumb"><img src="/img/devices/shimadzu-icpe-9000.jpg" alt="Атомно-эмиссионный спектрометр с индуктивно связанной плазмой Shimadzu ICPE-9000" loading="lazy"></div>
         <div class="eq-body">
           <span class="eq-tag">Химия · флагман · ICP-OES</span>
@@ -301,24 +318,24 @@
         </div>
       </article>
 
-      <article class="eq-card" data-cat="chem">
-        <span class="eq-idx" aria-hidden="true">28</span>
+      <article class="eq-card eq-hide" data-cat="chem">
+        <span class="eq-idx" aria-hidden="true">29</span>
         <div class="eq-thumb"><img src="/img/devices/kapel-104t.jpg" alt="Система капиллярного электрофореза Капель-104Т" loading="lazy"></div>
         <span class="eq-tag">Химия · ×2</span>
         <h3>Капиллярный электрофорез «Капель-104Т»</h3>
         <p>Анионы и катионы водной вытяжки — Cl⁻, SO₄²⁻, NO₃⁻, Na⁺, K⁺, Ca²⁺, Mg²⁺: засолённость и коррозионная агрессивность к бетону и стали. Две системы «Люмэкс» работают параллельно</p>
       </article>
 
-      <article class="eq-card" data-cat="chem">
-        <span class="eq-idx" aria-hidden="true">29</span>
+      <article class="eq-card eq-hide" data-cat="chem">
+        <span class="eq-idx" aria-hidden="true">30</span>
         <div class="eq-thumb"><img src="/img/devices/fritsch-analysette-22.jpg" alt="Лазерный анализатор размера частиц Fritsch Analysette 22" loading="lazy"></div>
         <span class="eq-tag">Химия · лазерная дифракция</span>
         <h3>Лазерный гранулометр Fritsch Analysette 22</h3>
         <p>Гранулометрический состав по ISO 13320: распределение частиц от долей микрона до 2 мм за минуту — пылеватые и глинистые фракции, недоступные ситам</p>
       </article>
 
-      <article class="eq-card" data-cat="chem">
-        <span class="eq-idx" aria-hidden="true">30</span>
+      <article class="eq-card eq-hide" data-cat="chem">
+        <span class="eq-idx" aria-hidden="true">31</span>
         <div class="eq-thumb eq-thumb--icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7L4.5 19a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3L14 9V2M8 2h8M7 15h10"/></svg></div>
         <span class="eq-tag">Химия</span>
         <h3>pH-метры</h3>
@@ -337,7 +354,7 @@
     <div class="eq-facts" aria-label="Факты о парке оборудования">
       <div class="eq-fact"><b>ISO/IEC 17025</b><span>аккредитованная лаборатория — протокол по каждому испытанию</span></div>
       <div class="eq-fact"><b>«Ростест»</b><span>метрологическая калибровка приборов и камер</span></div>
-      <div class="eq-fact"><b>Wille · GIESA · Shimadzu · Fritsch · METER · Battipav · Cedima · «Геотек» · «ПрогрессГео» · «Каменика» · «Люмэкс»</b><span>немецкие, японские, итальянские, американские и российские установки в одном парке</span></div>
+      <div class="eq-fact"><b>Wille · GIESA · Wykeham Farrance · Shimadzu · Fritsch · METER · Battipav · Cedima · «Геотек» · «ПрогрессГео» · «Каменика» · «Люмэкс»</b><span>немецкие, японские, итальянские, американские и российские установки в одном парке</span></div>
     </div>
   </div>
 </section>
@@ -348,18 +365,15 @@
   if (grid) {
     const tabs = Array.from(document.querySelectorAll('.eq-tab'));
     const cards = Array.from(grid.querySelectorAll('.eq-card'));
-    const count = document.getElementById('eq-count');
     tabs.forEach((tab) => tab.addEventListener('click', () => {
       const f = (tab as HTMLElement).dataset.eqf;
       tabs.forEach((t) => { t.classList.toggle('on', t === tab); t.setAttribute('aria-pressed', String(t === tab)); });
-      let n = 0;
       cards.forEach((card) => {
         const isCta = card.hasAttribute('data-cta');
-        const show = isCta || f === 'all' || (card as HTMLElement).dataset.cat === f;
+        const show = isCta || (f === 'flag' ? card.classList.contains('eq-card--xl') : (card as HTMLElement).dataset.cat === f);
         card.classList.toggle('eq-hide', !show);
-        if (show) { if (!isCta) n++; card.classList.remove('eq-pop'); void (card as HTMLElement).offsetWidth; card.classList.add('eq-pop'); }
+        if (show) { card.classList.remove('eq-pop'); void (card as HTMLElement).offsetWidth; card.classList.add('eq-pop'); }
       });
-      if (count) count.textContent = String(n);
       /* высота секции меняется — пусть ScrollTrigger пересчитает пины */
       window.dispatchEvent(new Event('resize'));
     }));

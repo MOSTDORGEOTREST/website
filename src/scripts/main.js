@@ -754,6 +754,22 @@ if(hd){
   })();
 }
 
+/* подсказка «Начать погружение» гаснет по прокрутке. Вступительная анимация
+   дорисовывает её ~1,4 с после загрузки: если пользователь пролистал героя
+   раньше, её твин перекрывал скролловый и подпись зависала на грунте.
+   Поэтому при первом же движении вступительный твин снимается,
+   а прозрачность считаем сами. */
+var cueEl=document.querySelector('.hero-scroll'), cueFreed=false;
+function fadeCue(p){
+  if(!cueEl) return;
+  /* у самого верха подпись всегда видна: во время refresh ScrollTrigger
+     на миг отдаёт ненулевой прогресс при scrollY = 0 */
+  var y=window.scrollY||document.documentElement.scrollTop||0;
+  if(y<8){ if(cueFreed) cueEl.style.opacity='1'; return; }
+  if(!cueFreed){ gsap.killTweensOf(cueEl); cueFreed=true; }
+  cueEl.style.opacity=String(Math.max(0,Math.min(1,1-p*5)));
+}
+
 /* hero pin: camera starts descending */
 ScrollTrigger.matchMedia({
   '(min-width: 901px)': function(){
@@ -762,6 +778,7 @@ ScrollTrigger.matchMedia({
       scrollTrigger:{ trigger:'#hero', start:'top top', end:'+=230%', scrub:.6, pin:true,
         onUpdate:function(self){
           if(window.__setEarthScroll) window.__setEarthScroll(self.progress);
+          fadeCue(self.progress);
           /* глубина тикает только после касания грунта (~56% пина):
              к концу пролёта камера — в толще первого горизонта (~1 м) */
           setDepth(Math.max(0,(self.progress-.56)/.44)*D_MIDS[0]);
@@ -780,6 +797,7 @@ ScrollTrigger.matchMedia({
       scrollTrigger:{ trigger:'#hero', start:'top top', end:'+=170%', scrub:.5, pin:true, anticipatePin:1,
         onUpdate:function(self){
           if(window.__setEarthScroll) window.__setEarthScroll(self.progress);
+          fadeCue(self.progress);
           setDepth(Math.max(0,(self.progress-.56)/.44)*D_MIDS[0]);
         } }
     });
@@ -793,6 +811,7 @@ ScrollTrigger.matchMedia({
     ScrollTrigger.create({ trigger:'#hero', start:'top top', end:'bottom 30%', scrub:1.2,
       onUpdate:function(self){
         if(window.__setEarthScroll) window.__setEarthScroll(Math.min(.22,self.progress*.3));
+        fadeCue(self.progress);
         setDepth(Math.max(0,(self.progress-.62)/.38)*D_MIDS[0]);
       } });
   }
@@ -814,11 +833,25 @@ document.querySelectorAll('.strip-track').forEach(function(track){
       gsap.to(tween,{timeScale:1+Math.min(v,3),duration:.3,overwrite:true});
     }});
 });
+/* Стена заказчиков. Контент дублируется, поэтому цикл — ровно половина ширины:
+   вправо  0 → -50, влево -50 → 0. Раньше обратный ряд ехал -50 → +50, то есть
+   полпериода стоял за экраном — отсюда «нижний ряд не всегда появляется».
+   Длительность считаем от реальной ширины, чтобы оба ряда шли с одной скоростью. */
 document.querySelectorAll('.client-row').forEach(function(row){
   var dir=parseFloat(row.getAttribute('data-row'))||1;
   row.innerHTML+=row.innerHTML;
-  gsap.to(row,{xPercent:-50*dir,duration:52,ease:'none',repeat:-1});
-  if(dir<0) gsap.set(row,{xPercent:-50});
+  var half=row.scrollWidth/2 || 1400;
+  var dur=Math.max(26,Math.min(90,half/34));
+  var tw=gsap.fromTo(row,{xPercent:dir>0?0:-50},{xPercent:dir>0?-50:0,duration:dur,ease:'none',repeat:-1});
+  /* пересчёт после подгрузки логотипов и смены ориентации */
+  var recalc=function(){
+    var h=row.scrollWidth/2; if(!h) return;
+    tw.duration(Math.max(26,Math.min(90,h/34)));
+  };
+  window.addEventListener('load',recalc);
+  window.addEventListener('resize',recalc);
+  row.addEventListener('pointerenter',function(){ gsap.to(tw,{timeScale:.25,duration:.4,overwrite:true}); });
+  row.addEventListener('pointerleave',function(){ gsap.to(tw,{timeScale:1,duration:.5,overwrite:true}); });
 });
 
 /* ================= ACT II : DESCENT ================= */
@@ -1005,8 +1038,10 @@ gsap.from('.fin-head > *, .strat-strip',{y:36,opacity:0,duration:.8,stagger:.09,
   scrollTrigger:{trigger:'.fin',start:'top 80%'}});
 gsap.fromTo('.fin-watermark',{yPercent:30},{yPercent:-10,ease:'none',
   scrollTrigger:{trigger:'#contacts',start:'top bottom',end:'bottom top',scrub:true}});
-gsap.from('.client-rows',{opacity:0,y:24,duration:.8,ease:'power2.out',
-  scrollTrigger:{trigger:'#clients',start:'top 80%'}});
+/* появление стены: fromTo + immediateRender:false — если триггер по какой-то
+   причине не сработает, блок останется видимым, а не застрянет на opacity 0 */
+gsap.fromTo('.client-rows',{opacity:0,y:24},{opacity:1,y:0,duration:.8,ease:'power2.out',immediateRender:false,
+  scrollTrigger:{trigger:'#clients',start:'top 85%',once:true}});
 
 /* ================= LIGHT ZONE (только на главной, свет после разреза) ================= */
 if(document.getElementById('hero') && document.getElementById('objects')){

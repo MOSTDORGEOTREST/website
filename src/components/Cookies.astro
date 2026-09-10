@@ -1,0 +1,46 @@
+---
+/* Плашка про cookie. Текст и имя куки — как на старом сайте (allowCookies=1),
+   поэтому согласие, данное там, здесь тоже засчитывается. Показывается один раз:
+   после «Принять» кука живёт 180 дней. */
+---
+<div class="ck" id="ck" role="dialog" aria-live="polite" aria-label="Использование cookie" hidden>
+  <div class="ck-box">
+    <span class="ck-ico" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3a9 9 0 1 0 9 9 3.4 3.4 0 0 1-4.3-4.3A3.4 3.4 0 0 1 12 3z"/>
+        <circle cx="9" cy="10" r="1"/><circle cx="14" cy="14.5" r="1"/><circle cx="8.5" cy="15" r="1"/>
+      </svg>
+    </span>
+    <p class="ck-text">
+      Мы используем cookie, в том числе сервис веб-аналитики «Яндекс.Метрика». Продолжая пользоваться сайтом, вы даёте
+      <a href="/assets/legal/soglasie-na-obrabotku-pd.pdf" target="_blank" rel="noopener">согласие</a>
+      на обработку данных cookie в соответствии с
+      <a href="/assets/legal/politika-personalnyh-dannyh.pdf" target="_blank" rel="noopener">Политикой</a>.
+    </p>
+    <button type="button" class="ck-btn" id="ck-ok">Принять</button>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var NAME = 'allowCookies';
+    var box = document.getElementById('ck');
+    if (!box) return;
+    var has = document.cookie.split(';').some(function (c) {
+      return c.trim().indexOf(NAME + '=') === 0;
+    });
+    if (has) return;
+    box.hidden = false;
+    /* появление после первого экрана — плашка не спорит с загрузчиком */
+    setTimeout(function () { box.classList.add('ck-in'); }, 1200);
+    var btn = document.getElementById('ck-ok');
+    if (btn) btn.addEventListener('click', function () {
+      var d = new Date();
+      d.setTime(d.getTime() + 180 * 24 * 60 * 60 * 1000);
+      document.cookie = NAME + '=1; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
+      box.classList.remove('ck-in');
+      box.classList.add('ck-out');
+      setTimeout(function () { box.hidden = true; }, 450);
+    });
+  })();
+</script>

@@ -286,9 +286,12 @@ h1 .h-amber{color:var(--amber)}
 .stratum .st-chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:22px}
 .stratum .chip{border-color:var(--mut); color:var(--mut)}
 .chip{font-family:var(--font-m); font-size:11px; letter-spacing:.06em; padding:8px 14px; border-radius:99px; border:1px solid var(--line); color:var(--muted)}
-.st-act{position:absolute; z-index:3; top:clamp(92px,13vh,140px); left:0; right:0; text-align:center; pointer-events:none; color:#F8F2E6; padding:0 4vw}
+/* шапка акта поднята выше волны-границы первого горизонта — в тёмную полосу над ним;
+   для этого первому слою снимаем обрезку, всё остальное (фон, волна, крошка) не тронуто */
+.st-act{position:absolute; z-index:3; top:-24vh; left:0; right:0; text-align:center; pointer-events:none; color:#F8F2E6; padding:0 4vw}
 .st-act .d-eyebrow{display:block; margin-bottom:10px; color:#EBCB9C}
 .st-act h2{font-family:var(--font-d); font-weight:800; font-size:clamp(17px,2.1vw,28px); letter-spacing:.05em}
+@media(max-width:900px){ .st-act{top:-17vh} .st-act h2{font-size:clamp(15px,3.6vw,22px)} }
 
 #devices{position:relative; background:var(--paper); color:var(--ink-d)}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -382,10 +385,12 @@ h1 .h-amber{color:var(--amber)}
 .light-sec .btn-ghost:hover{border-color:var(--amber-d)}
 
 /* ---------- CLIENTS (light) ---------- */
-#clients{padding:clamp(80px,12vh,130px) 0 clamp(50px,8vh,80px); background:var(--paper-2); color:var(--ink-d); overflow:hidden}
-.client-rows{display:flex; flex-direction:column; gap:14px; margin-top:30px;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent); mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-.client-row{display:flex; width:max-content; gap:12px; will-change:transform}
+#clients{padding:clamp(66px,11vh,130px) 0 clamp(40px,6vh,72px); background:var(--paper-2); color:var(--ink-d); overflow:hidden}
+.client-rows{display:flex; flex-direction:column; gap:clamp(6px,1.4vw,18px); margin-top:clamp(26px,4vw,42px);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent); mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.client-row{display:flex; width:max-content; gap:clamp(10px,1.6vw,26px); will-change:transform}
+/* строки видны и без JS: анимация только двигает их, но не проявляет */
+.client-rows{opacity:1}
 
 /* ---------- FINALE (light) ---------- */
 #contacts{padding:clamp(110px,17vh,190px) 0 40px; background:var(--paper); color:var(--ink-d); position:relative; overflow:hidden}
@@ -433,12 +438,69 @@ a.cc-row:hover{color:var(--amber-d)}
 /* фирменная полоса-разрез + футер */
 .strat-strip{height:6px; border-radius:3px; margin-top:clamp(50px,9vh,80px);
   background:linear-gradient(90deg,#6F563C 0 16.6%,#A26A35 0 33.3%,#DDB56A 0 50%,#B9D4E4 0 66.6%,#8E9198 0 83.3%,#47836E 0 100%)}
-footer{margin-top:clamp(50px,9vh,80px); border-top:1px solid var(--line-d); padding:22px 0 26px; font-size:12px; color:var(--mut-d)}
-.foot-row{display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; padding-right:clamp(90px,10vw,150px)}
-.foot-row .mono{font-family:var(--font-m); font-size:11px; color:var(--amber-d)}
-.foot-nav{display:flex; gap:20px; font-size:12.5px}
+/* ---------- COOKIE BAR ----------
+   Тихая карточка внизу слева: не перекрывает контент, не блокирует страницу. */
+.ck{position:fixed; left:clamp(14px,3vw,34px); bottom:clamp(14px,3vh,30px); z-index:1700;
+  width:min(430px,calc(100vw - 28px)); pointer-events:none;
+  opacity:0; transform:translateY(18px); transition:opacity .45s var(--ease),transform .5s var(--ease)}
+.ck-in{opacity:1; transform:none; pointer-events:auto}
+.ck-out{opacity:0; transform:translateY(12px); pointer-events:none}
+.ck-box{display:grid; grid-template-columns:auto 1fr; gap:12px 13px; align-items:start;
+  padding:16px 18px 15px; border-radius:16px; border:1px solid var(--line-d-soft);
+  background:var(--paper-card); color:var(--ink-d);
+  box-shadow:0 18px 44px rgba(24,16,4,.22), 0 2px 8px rgba(24,16,4,.08)}
+.ck-ico{display:grid; place-items:center; width:30px; height:30px; border-radius:9px;
+  background:rgba(232,163,61,.14); color:var(--amber-d)}
+.ck-ico svg{width:17px; height:17px}
+.ck-text{font-size:12.5px; line-height:1.6; color:var(--ink-d-dim)}
+.ck-text a{color:var(--amber-d); text-decoration:underline; text-underline-offset:2px; text-decoration-thickness:1px}
+.ck-text a:hover{color:var(--ink-d)}
+.ck-btn{grid-column:2; justify-self:start; margin-top:2px; padding:9px 22px; border:0; border-radius:99px;
+  background:var(--amber); color:#231d14; font-family:var(--font-m); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; transition:background .25s,transform .25s var(--ease)}
+.ck-btn:hover{background:var(--amber-hi); transform:translateY(-1px)}
+@media(max-width:520px){
+  .ck{left:12px; right:12px; width:auto; bottom:12px}
+  .ck-box{padding:14px 15px; gap:10px 11px; border-radius:14px}
+  .ck-text{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){ .ck{transition:opacity .2s} .ck-in{transform:none} }
+
+/* ---------- FOOTER ----------
+   Верхний ярус: кто мы · разделы · правовые документы. Нижний — тихая строка
+   реквизитов. Правого отступа под глубиномер больше не нужно: к подвалу
+   виджет уже скрыт классом hud-off. */
+footer{margin-top:clamp(54px,9vh,84px); border-top:1px solid var(--line-d); text-align:left;
+  padding:clamp(26px,4vh,40px) 0 clamp(22px,3vh,32px); font-size:12px; color:var(--mut-d)}
+.foot-top{display:grid; grid-template-columns:minmax(0,1.05fr) auto minmax(0,1fr); gap:clamp(22px,4vw,64px); align-items:start}
+.foot-brand{display:flex; align-items:center; min-height:22px}
+.fb-name{font-family:var(--font-d); font-weight:600; font-size:13px; letter-spacing:.01em; color:var(--ink-d)}
+.foot-nav{display:flex; gap:clamp(16px,2vw,26px); font-size:12.5px; justify-self:center; padding-top:2px}
 .foot-nav a{transition:color .25s}
 .foot-nav a:hover{color:var(--amber-d)}
+.foot-docs{display:flex; flex-direction:column; gap:9px; justify-self:end; align-items:flex-end}
+.foot-docs a{display:inline-flex; align-items:center; gap:8px; font-family:var(--font-m); font-size:11px; letter-spacing:.02em; color:var(--mut-d); transition:color .25s}
+.foot-docs a svg{width:13px; height:13px; flex:none; fill:none; stroke:currentColor; stroke-width:1.2; stroke-linejoin:round; opacity:.7}
+.foot-docs a:hover{color:var(--amber-d)}
+.foot-docs a:hover svg{opacity:1}
+.foot-bottom{display:flex; flex-wrap:wrap; align-items:center; gap:7px clamp(16px,2.4vw,30px);
+  margin-top:clamp(22px,3.4vh,32px); padding-top:15px; border-top:1px dashed var(--line-d);
+  font-family:var(--font-m); font-size:11px; letter-spacing:.02em}
+.foot-bottom .mono{color:var(--mut-d)}
+.foot-bottom .fb-coords{margin-left:auto; color:var(--amber-d)}
+@media(max-width:1100px){
+  .foot-top{grid-template-columns:minmax(0,1fr) minmax(0,auto); gap:26px 34px}
+  .foot-nav{justify-self:end}
+  .foot-docs{grid-column:1/-1; justify-self:start; align-items:flex-start;
+    padding-top:16px; border-top:1px dashed var(--line-d); width:100%}
+}
+@media(max-width:640px){
+  .foot-top{grid-template-columns:1fr; gap:20px}
+  .foot-nav{justify-self:start; flex-wrap:wrap; gap:14px 20px}
+  .foot-docs{padding-top:18px}
+  .foot-bottom{flex-direction:column; align-items:flex-start; gap:6px}
+  .foot-bottom .fb-coords{margin-left:0}
+}
 
 /* ---------- RESPONSIVE ---------- */
 @media(max-width:1080px){ .nav-links,.nav-cta{display:none} .burger{display:block} }
@@ -463,7 +525,7 @@ footer{margin-top:clamp(50px,9vh,80px); border-top:1px solid var(--line-d); padd
 .eq-tab.on em{color:var(--amber)}
 .eq-total{font-family:var(--font-m); font-size:11px; letter-spacing:.1em; color:var(--mut-d); text-transform:uppercase}
 .eq-total b{color:var(--amber-d); font-size:15px; font-weight:400; margin-right:2px}
-.eq-grid{display:grid; grid-template-columns:repeat(4,1fr); grid-auto-flow:dense; gap:14px}
+.eq-grid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); grid-auto-flow:dense; gap:14px}
 .eq-card{position:relative; background:var(--paper-card); border:1px solid var(--line-d-soft); border-radius:18px; padding:16px 18px 20px; box-shadow:0 2px 10px rgba(60,42,12,.05); transition:transform .35s var(--ease),border-color .35s,box-shadow .35s; will-change:transform}
 .eq-card:hover{transform:translateY(-5px); border-color:rgba(166,106,20,.5); box-shadow:0 16px 32px rgba(60,42,12,.13)}
 .eq-idx{position:absolute; top:14px; right:16px; z-index:1; font-family:var(--font-m); font-size:10.5px; letter-spacing:.14em; color:var(--mut-d)}
@@ -493,7 +555,7 @@ footer{margin-top:clamp(50px,9vh,80px); border-top:1px solid var(--line-d); padd
   border:1px solid var(--line-d-soft); border-radius:99px; padding:3px 9px; background:rgba(232,163,61,.06); white-space:nowrap}
 .eq-card--xl .eq-rig{margin-top:12px}
 
-.eq-card--cta{grid-column:span 3; display:flex; flex-direction:column; justify-content:center; gap:4px;
+.eq-card--cta{grid-column:span 2; display:flex; flex-direction:column; justify-content:center; gap:4px;
   border:1px dashed rgba(166,106,20,.5); background:linear-gradient(135deg,rgba(232,163,61,.1),rgba(232,163,61,.02)); box-shadow:none}
 .eq-card--cta h3{font-family:var(--font-d); font-size:clamp(16px,1.4vw,20px); margin-top:8px}
 .eq-card--cta p{max-width:44ch}
@@ -510,9 +572,9 @@ footer{margin-top:clamp(50px,9vh,80px); border-top:1px solid var(--line-d); padd
 .eq-fact{display:flex; flex-direction:column; gap:5px; padding:16px 20px; border:1px dashed var(--line-d); border-radius:14px}
 .eq-fact b{font-family:var(--font-m); font-weight:400; font-size:14px; color:var(--amber-d); letter-spacing:.04em}
 .eq-fact span{font-size:12.5px; color:var(--mut-d); line-height:1.5}
-@media(max-width:1100px){ .eq-grid{grid-template-columns:repeat(3,1fr)} }
+@media(max-width:1100px){ .eq-grid{grid-template-columns:repeat(3,minmax(0,1fr))} }
 @media(max-width:900px){
-  .eq-grid{grid-template-columns:repeat(2,1fr)}
+  .eq-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .eq-card--cta{grid-column:span 2}
   .eq-facts{grid-template-columns:1fr; gap:10px}
   .eq-bar{margin-bottom:16px}
@@ -520,7 +582,9 @@ footer{margin-top:clamp(50px,9vh,80px); border-top:1px solid var(--line-d); padd
   .eq-hero-copy{padding-bottom:0}
 }
 @media(max-width:560px){
-  .eq-grid{grid-template-columns:1fr}
+  .eq-grid{grid-template-columns:minmax(0,1fr)}
+  /* на очень узких экранах капсулам разрешаем перенос — иначе они распирают колонку */
+  .eq-rig span{white-space:normal}
   .eq-card--xl,.eq-card--cta{grid-column:auto}
   .eq-card--xl{flex-direction:column}
   .eq-card--xl .eq-thumb{flex:none; min-height:180px}
@@ -529,9 +593,16 @@ footer{margin-top:clamp(50px,9vh,80px); border-top:1px solid var(--line-d); padd
 @media (prefers-reduced-motion: reduce){ .eq-pop{animation:none} }
 
 /* ---------- CLIENT LOGOS ---------- */
-.logo-chip{width:176px; height:92px; flex:none; display:grid; place-items:center; background:#FFFFFF; border:1px solid var(--line-d-soft); border-radius:14px; padding:14px 18px; transition:border-color .3s,transform .3s var(--ease)}
-.logo-chip:hover{border-color:rgba(166,106,20,.45); transform:translateY(-3px)}
-.logo-chip img{max-width:100%; max-height:62px; width:auto; height:auto; object-fit:contain}
+/* стена логотипов: без плашек — знаки живут прямо на бумаге, приглушены до
+   единой плотности и оживают под курсором. Все файлы с прозрачным фоном. */
+.logo-chip{width:clamp(126px,13vw,168px); height:clamp(62px,7vw,80px); flex:none; display:grid; place-items:center; padding:6px 12px}
+/* знаки разной плотности приводим к одной «чернильной» тональности:
+   grayscale + притемнение выравнивает светлые логотипы, цвет возвращается по наведению */
+.logo-chip img{max-width:100%; max-height:54px; width:auto; height:auto; object-fit:contain;
+  filter:grayscale(1) brightness(.42) contrast(1.2); opacity:.58;
+  transition:filter .35s var(--ease),opacity .35s var(--ease),transform .35s var(--ease)}
+.logo-chip:hover img{filter:none; opacity:1; transform:scale(1.07)}
+@media(hover:none){ .logo-chip img{opacity:.66} }
 
 /* ---------- 3D TOUR LINK ---------- */
 
@@ -543,9 +614,7 @@ footer{margin-top:clamp(50px,9vh,80px); border-top:1px solid var(--line-d); padd
   .calc-grid{grid-template-columns:1fr}
   .fin-grid{grid-template-columns:1fr}
   .fm-strat{width:8px}
-  .foot-row{padding-right:0}
   .stratum{flex-direction:column; justify-content:center; align-items:stretch}
-  .st-act{position:static; text-align:left; width:92vw; margin:0 auto 30px; padding:0}
   .stratum .st-in{grid-template-columns:1fr; gap:10px}
   /* номер горизонта уходит вниз: на узком экране он ложился на строку «Тип грунта» */
   .stratum .st-idx{font-size:clamp(64px,18vw,110px); position:absolute; right:0; top:auto; bottom:-52px; opacity:.28}
@@ -554,12 +623,14 @@ footer{margin-top:clamp(50px,9vh,80px); border-top:1px solid var(--line-d); padd
   .pan{width:80vw; height:60vh}
   /* номер панели на мобильном уходит внутрь снимка: снаружи он ложился на строку «Двигаемся вдоль» */
   .pan-idx{top:10px; left:auto; right:14px; font-size:clamp(44px,13vw,58px)}
+  /* лента объектов на узком экране складывается в столбец — горизонтальная подсказка врёт */
+  .h-head .h-arrow{display:none}
+  .h-head{padding-bottom:30px}
   #objects .pan-idx{-webkit-text-stroke-color:rgba(255,255,255,.6)}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important}
   .grain{display:none}
-  .st-act{position:static; text-align:left; width:92vw; margin:0 auto 30px; padding:0}
   .stratum{flex-direction:column; align-items:stretch}
   .h-track{position:relative; flex-wrap:wrap; height:auto}
   .h-view{height:auto; padding:60px 0}
@@ -575,7 +646,6 @@ footer{margin-top:clamp(50px,9vh,80px); border-top:1px solid var(--line-d); padd
 .ph-back:hover{color:var(--amber-d)}
 .ph-title{font-family:var(--font-d); font-weight:800; font-size:clamp(32px,5.6vw,76px); line-height:1.04; margin:14px 0 16px; letter-spacing:-.01em}
 .page-head + section{padding-top:clamp(24px,5vh,50px)!important}
-body:has(.page-head) .foot-row{padding-right:0}
 
 /* ---------- TESTS: графики испытаний + скачивание протоколов ---------- */
 .test-card{display:flex; flex-direction:column}
@@ -652,7 +722,9 @@ a.t-dl:hover .t-dl-ic{transform:translateY(2px)}
 .gx-tag{font-family:var(--font-m); font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--amber)}
 .gx-card h3{font-family:var(--font-d); font-size:clamp(18px,1.8vw,24px); font-weight:600; margin:10px 0 8px}
 .gx-card > p{font-size:14px; color:var(--ink-dim); line-height:1.65}
-.gx-chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:14px}
+/* чипы прижаты к низу: карточки в ряду тянутся по самой высокой, и без этого
+   у коротких («Обработка опытов», «ИИ-помощник») внизу оставалась мёртвая зона */
+.gx-chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:14px}
 .gx-chips span{font-family:var(--font-m); font-size:10.5px; letter-spacing:.05em; padding:6px 12px; border:1px solid rgba(255,255,255,.16); border-radius:99px; color:var(--ink-dim); white-space:nowrap}
 .gx-note{margin-top:14px; padding-top:12px; border-top:1px dashed rgba(255,255,255,.14); font-size:12.5px; color:var(--muted); line-height:1.6}
 
@@ -757,9 +829,9 @@ a.t-dl:hover .t-dl-ic{transform:translateY(2px)}
 .paper-item--vak .paper-copy{-webkit-line-clamp:8; font-size:14px}
 .paper-item--brief .paper-copy{-webkit-line-clamp:3}
 /* длинные названия тоже подрезаем — иначе одна карточка растягивает весь ряд */
-.paper-item-title{display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:5; overflow:hidden}
+.paper-item-title{display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:7; overflow:hidden}
 .paper-item--vak .paper-item-title{-webkit-line-clamp:3}
-.paper-item--brief .paper-item-title{-webkit-line-clamp:4}
+.paper-item--brief .paper-item-title{-webkit-line-clamp:7}
 .paper-item:hover .paper-item-title{color:var(--emerald-d)}
 .paper-item::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:linear-gradient(90deg,var(--emerald-d),var(--emerald)); transform:scaleX(0); transform-origin:left; transition:transform .45s var(--ease)}
 .paper-item:hover::before{transform:scaleX(1)}
@@ -785,7 +857,7 @@ a.t-dl:hover .t-dl-ic{transform:translateY(2px)}
   .paper-item--vak{grid-column:auto; min-height:340px}
   .paper-item--vak::after{font-size:104px; bottom:-24px}
   /* колонка узкая — заголовку нужно больше строк, чем на широкой карточке */
-  .paper-item--vak .paper-item-title{-webkit-line-clamp:5; font-size:clamp(19px,2vw,23px)}
+  .paper-item--vak .paper-item-title{-webkit-line-clamp:7; font-size:clamp(19px,2vw,23px)}
   .paper-item--vak .paper-copy{-webkit-line-clamp:6}
 }
 
@@ -842,8 +914,8 @@ a.t-dl:hover .t-dl-ic{transform:translateY(2px)}
 
 /* тач: мелкие текстовые ссылки получают зону нажатия ≥44px без изменения вёрстки */
 @media (pointer:coarse){
-  .ph-back,.cc-map,.paper-link,.foot-nav a,.foot-row > a{position:relative}
-  .ph-back::after,.cc-map::after,.paper-link::after,.foot-nav a::after,.foot-row > a::after{
+  .ph-back,.cc-map,.paper-link,.foot-nav a,.foot-docs a,.tests-note a{position:relative}
+  .ph-back::after,.cc-map::after,.paper-link::after,.foot-nav a::after,.foot-docs a::after,.tests-note a::after{
     content:""; position:absolute; left:-8px; right:-8px; top:50%; height:44px; transform:translateY(-50%)}
 }
 

@@ -46,14 +46,30 @@ const { subpage = false } = Astro.props;
       </div>
     </div>
     <footer>
-      <div class="foot-row">
-        <span>© АО «МОСТДОРГЕОТРЕСТ», 2008–2026</span>
-        <nav class="foot-nav" aria-label="Разделы">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <span class="fb-name">АО «МОСТДОРГЕОТРЕСТ»</span>
+        </div>
+        <nav class="foot-nav" aria-label="Разделы сайта">
           <a href="/oborudovanie/">Оборудование</a>
           <a href="/kursy/">Курсы</a>
-          <a href="/soft/">Софты</a>
+          <a href="/soft/">Разработки</a>
         </nav>
-        <span class="mono">ИНН 7716750744 · ОГРН 1137746653021{!subpage && ' · 55.87N 37.66E · z = −48.0 м'}</span>
+        <div class="foot-docs">
+          <a href="/assets/legal/politika-personalnyh-dannyh.pdf" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9 1.5H4.5a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V5zM9 1.5V5h3.5"/></svg>
+            Политика обработки персональных данных
+          </a>
+          <a href="/assets/legal/soglasie-na-obrabotku-pd.pdf" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9 1.5H4.5a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V5zM9 1.5V5h3.5"/></svg>
+            Согласие на обработку персональных данных
+          </a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2008—2026</span>
+        <span class="mono">ИНН 7716750744 · ОГРН 1137746653021</span>
+        {!subpage && <span class="mono fb-coords">55.87°N 37.66°E · забой −48.0 м</span>}
       </div>
     </footer>
   </div>
