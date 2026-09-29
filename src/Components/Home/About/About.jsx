@@ -14,7 +14,7 @@ import back_3d from './3d_back.png'
 import AO_doc_1 from './AO_docs/Мосстройсертификация до 09.01.2028.pdf'
 import AO_doc_2 from './AO_docs/Росаккредитация-от-23.04.2020-г.pdf'
 import AO_doc_3 from './AO_docs/РОСС RU.0001.21АГ09 от 01.09.2026.pdf'
-import AO_doc_4 from './AO_docs/Сертификат ИСО СМК - до 24.09.2026.pdf'
+import AO_doc_4 from './AO_docs/Сертификат ИСО СМК - до 24.09.2029.pdf'
 import AO_doc_5 from './AO_docs/СРО - Выписка из Реестра членов от 03.09.2026.pdf'
 import AO_doc_6 from './AO_docs/РОССТАНДАРТ - Заключение о состоянии измерений в лаб.pdf'
 
