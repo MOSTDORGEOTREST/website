@@ -646,16 +646,146 @@ burger.addEventListener('click',function(){
 });
 
 /* ================= PRICE MODAL ================= */
+/* Режим выбирается при открытии: на компьютере — Google Таблица (как раньше), на телефоне и
+   планшете — собственный список из /price.json. Таблицу Google на тач-устройствах не грузим:
+   именно её встраивание вызывало запрос «Открыть в Google Диске» и широкую таблицу вбок. */
 (function(){
   var modal=document.getElementById('price-modal'); if(!modal) return;
   var card=document.getElementById('pm-card'), frame=document.getElementById('pm-frame');
-  var scrim=modal.querySelector('.pm-scrim');
-  var lastFocus=null, isOpen=false;
-  function openM(e){
-    if(e) e.preventDefault();
+  var scrim=modal.querySelector('.pm-scrim'), head=document.getElementById('pm-head');
+  var list=document.getElementById('pm-list'), chipsEl=document.getElementById('pm-chips');
+  var q=document.getElementById('pm-q'), qClear=document.getElementById('pm-clear');
+  var mqNative=matchMedia('(max-width: 900px), (hover: none) and (pointer: coarse)');
+  var lastFocus=null, isOpen=false, native=false, data=null, loading=false, rows=[], secs=[], chipBtns=[];
+
+  /* ---------- данные и отрисовка списка ---------- */
+  var norm=function(s){ return String(s).toLowerCase().replace(/ё/g,'е').replace(/\s+/g,' ').trim(); };
+  var esc=function(s){ return String(s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+  function money(p,d){
+    var whole=Math.abs(p-Math.round(p))<1e-9;
+    var s=p.toFixed(whole?0:(d||2)).split('.');
+    return s[0].replace(/\B(?=(\d{3})+(?!\d))/g,'\u202F')+(s[1]?','+s[1]:'');
+  }
+  function plural(n,a,b,c){ var m10=n%10, m100=n%100; return m10===1&&m100!==11?a:(m10>=2&&m10<=4&&(m100<12||m100>14)?b:c); }
+  var SHORT=[[/физико-механ/i,'Физика и механика'],[/химическ/i,'Химия'],[/международн/i,'По ASTM'],[/мерзл/i,'Мёрзлые грунты'],[/строительн/i,'Стройматериалы']];
+  function shortTitle(t){ for(var i=0;i<SHORT.length;i++) if(SHORT[i][0].test(t)) return SHORT[i][1]; return t.split(' ').slice(0,2).join(' '); }
+  function render(){
+    var h=[], ci=0;
+    h.push('<div class="pm-meta"><span>'+esc(data.vat||'')+'</span><span id="pm-found" aria-live="polite">'+data.count+' '+plural(data.count,'позиция','позиции','позиций')+'</span></div>');
+    data.sections.forEach(function(s,si){
+      h.push('<section class="pm-sec" data-sec="'+si+'"><div class="pm-sec-h" id="pm-sec-'+si+'"><small>Раздел '+esc(s.num)+'</small><b>'+esc(s.title)+'</b></div>');
+      s.subs.forEach(function(u){
+        h.push('<div class="pm-sub">');
+        if(u.title) h.push('<div class="pm-sub-h">'+esc(u.title)+'</div>');
+        u.notes.forEach(function(n){ if(/скидк/i.test(n)) h.push('<p class="pm-note">'+esc(n)+'</p>'); });
+        u.groups.forEach(function(g){
+          h.push('<div class="pm-grp">');
+          if(g.label) h.push('<div class="pm-grp-h">'+esc(g.label)+'</div>');
+          g.items.forEach(function(it){
+            var meta=[]; if(it.code) meta.push('СБЦ '+it.code); if(it.unit) meta.push(it.unit); if(it.std) meta.push(it.std);
+            h.push('<div class="pm-row" data-i="'+(ci++)+'"><span class="pm-row-n">'+esc(it.n)+'</span>'+(meta.length?'<span class="pm-row-m">'+esc(meta.join(' · '))+'</span>':'')+'<span class="pm-row-p">'+money(it.p,it.d)+'<small>₽</small></span></div>');
+          });
+          h.push('</div>');
+        });
+        u.notes.forEach(function(n){ if(!/скидк/i.test(n)) h.push('<p class="pm-note">'+esc(n)+'</p>'); });
+        h.push('</div>');
+      });
+      s.notes.forEach(function(n){ h.push('<p class="pm-note">'+esc(n)+'</p>'); });
+      h.push('</section>');
+    });
+    if((data.options&&data.options.length)||(data.notes&&data.notes.length)){
+      h.push('<div class="pm-extra" id="pm-extra"><h4>Дополнительно</h4>');
+      (data.options||[]).forEach(function(o){ h.push('<p>'+esc(o)+'</p>'); });
+      (data.notes||[]).forEach(function(o){ h.push('<p>'+esc(o)+'</p>'); });
+      h.push('</div>');
+    }
+    h.push('<div class="pm-empty" id="pm-empty" hidden><b>Ничего не нашли</b>Попробуйте другое слово или номер пункта СБЦ — или <a href="/assets/price.pdf" target="_blank" rel="noopener">откройте полный PDF</a>.</div>');
+    list.innerHTML=h.join('');
+    /* индекс для поиска */
+    var flat=[]; data.sections.forEach(function(s){ s.subs.forEach(function(u){ u.groups.forEach(function(g){ g.items.forEach(function(it){ flat.push({it:it, hay:norm([it.n,it.code||'',it.unit||'',it.std||'',g.label||'',u.title,s.title].join(' '))}); }); }); }); });
+    rows=Array.prototype.map.call(list.querySelectorAll('.pm-row'),function(el,i){ var m=el.querySelector('.pm-row-m'); return {el:el, nEl:el.querySelector('.pm-row-n'), mEl:m, mTxt:m?m.textContent:'', it:flat[i].it, hay:flat[i].hay}; });
+    secs=Array.prototype.slice.call(list.querySelectorAll('.pm-sec'));
+    /* разделы-чипы: переход к разделу, подсветка текущего при прокрутке */
+    chipsEl.innerHTML=data.sections.map(function(s,si){ return '<button type="button" class="pm-chip'+(si?'':' on')+'" data-go="'+si+'"><i>'+esc(s.num)+'</i>'+esc(shortTitle(s.title))+'</button>'; }).join('');
+    chipBtns=Array.prototype.slice.call(chipsEl.querySelectorAll('.pm-chip'));
+    chipBtns.forEach(function(b){ b.addEventListener('click',function(){
+      var sec=secs[+b.getAttribute('data-go')]; if(!sec) return;
+      spyLock=Date.now()+900;
+      list.scrollTo({top:sec.offsetTop+1, behavior:reduced?'auto':'smooth'});   /* .pm-list — offsetParent разделов */
+      setChip(+b.getAttribute('data-go'));
+    }); });
+  }
+  function setChip(i){
+    chipBtns.forEach(function(b,k){ b.classList.toggle('on',k===i); });
+    var b=chipBtns[i]; if(b) chipsEl.scrollTo({left:b.offsetLeft-chipsEl.clientWidth/2+b.offsetWidth/2, behavior:reduced?'auto':'smooth'});
+  }
+  var chipRaf=0, spyLock=0;
+  list.addEventListener('scroll',function(){
+    if(chipRaf||!secs.length||Date.now()<spyLock) return;   /* пока едем к разделу по чипу — подсветку не дёргаем */
+    chipRaf=requestAnimationFrame(function(){
+      chipRaf=0; var top=list.scrollTop+8, cur=0;
+      for(var i=0;i<secs.length;i++){ if(secs[i].style.display==='none') continue; if(secs[i].offsetTop<=top) cur=i; }
+      if(chipBtns[cur] && !chipBtns[cur].disabled && !chipBtns[cur].classList.contains('on')) setChip(cur);
+    });
+  },{passive:true});
+
+  /* ---------- поиск ---------- */
+  function hl(text,toks){
+    if(!toks.length) return esc(text);
+    /* режем исходный текст по совпадениям и экранируем куски по отдельности — разметка не ломается */
+    var re=new RegExp('('+toks.map(function(x){ return x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/е/g,'[её]'); }).join('|')+')','i');
+    return text.split(re).map(function(part,i){ return i%2 ? '<mark>'+esc(part)+'</mark>' : esc(part); }).join('');
+  }
+  function filter(){
+    if(!data) return;                                   /* до загрузки данных искать не в чем */
+    var v=norm(q.value), toks=v?v.split(' ').filter(function(x){ return x.length>0; }):[];
+    qClear.hidden=!q.value;
+    var n=0;
+    rows.forEach(function(r){
+      var ok=!toks.length||toks.every(function(t){ return r.hay.indexOf(t)>=0; });
+      r.el.style.display=ok?'':'none';
+      r.nEl.innerHTML=ok&&toks.length?hl(r.it.n,toks):esc(r.it.n);
+      if(r.mEl) r.mEl.innerHTML=ok&&toks.length?hl(r.mTxt,toks):esc(r.mTxt);
+      if(ok) n++;
+    });
+    list.querySelectorAll('.pm-grp,.pm-sub,.pm-sec').forEach(function(box){
+      box.style.display=box.querySelector('.pm-row:not([style*="none"])')?'':'none';
+    });
+    var ex=document.getElementById('pm-extra'); if(ex) ex.style.display=toks.length?'none':'';
+    list.querySelectorAll('.pm-note').forEach(function(nt){ nt.style.display=toks.length?'none':''; });
+    document.getElementById('pm-empty').hidden=n>0;
+    var f=document.getElementById('pm-found'); if(f) f.textContent=toks.length?('найдено: '+n):(data.count+' '+plural(data.count,'позиция','позиции','позиций'));
+    chipBtns.forEach(function(b,k){ b.disabled=secs[k].style.display==='none'; });
+    /* подсвечен первый раздел, где есть совпадения; если совпадений нет — ни один */
+    var firstOn=-1; for(var k=0;k<chipBtns.length;k++){ if(!chipBtns[k].disabled){ firstOn=k; break; } }
+    chipBtns.forEach(function(b,k){ b.classList.toggle('on',k===firstOn); });
+    list.scrollTop=0;
+  }
+  var ft; q.addEventListener('input',function(){ clearTimeout(ft); ft=setTimeout(filter,90); });
+  q.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); q.blur(); } });
+  qClear.addEventListener('click',function(){ q.value=''; filter(); q.focus(); });
+
+  function loadNative(){
+    if(data||loading) return; loading=true;
+    fetch(modal.getAttribute('data-json')).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(function(j){
+      if(!j || !j.count) throw 0;
+      data=j; q.disabled=false; render();
+      if(q.value) filter();                               /* запрос, набранный до загрузки, применяем сразу */
+    }).catch(function(){
+      list.innerHTML='<div class="pm-empty"><b>Не удалось загрузить прайс</b>Проверьте соединение или скачайте прайс-лист файлом — кнопки ниже.</div>';
+      chipsEl.innerHTML=''; q.disabled=true;
+    }).then(function(){ loading=false; });
+  }
+
+  /* ---------- открытие / закрытие ---------- */
+  function openM(e,fromHistory){
+    if(e && e.preventDefault) e.preventDefault();
     if(isOpen) return; isOpen=true;
     lastFocus=document.activeElement;
-    if(frame && !frame.src){
+    native=mqNative.matches;
+    modal.classList.toggle('is-native',native);
+    if(native) loadNative();
+    else if(frame && !frame.src){
       frame.src=frame.getAttribute('data-src');
       var w=document.getElementById('pm-wait');
       frame.addEventListener('load',function(){ if(w) w.classList.add('off'); },{once:true});
@@ -664,23 +794,105 @@ burger.addEventListener('click',function(){
     modal.hidden=false;
     document.body.style.overflow='hidden';
     if(lenis) lenis.stop();
+    if(fromHistory!==true){ try{ history.pushState({priceModal:1},''); }catch(err){} }
     if(hasGsap && !reduced){
       gsap.fromTo(scrim,{opacity:0},{opacity:1,duration:.35,ease:'power2.out'});
-      gsap.fromTo(card,{y:46,scale:.96,opacity:0},{y:0,scale:1,opacity:1,duration:.55,ease:'expo.out'});
+      if(native && innerWidth<=640) gsap.fromTo(card,{yPercent:100},{yPercent:0,duration:.6,ease:'expo.out'});
+      else gsap.fromTo(card,{y:46,scale:.96,opacity:0},{y:0,scale:1,opacity:1,duration:.55,ease:'expo.out'});
     }
-    var cb=modal.querySelector('.pm-close'); if(cb) cb.focus();
+    var cb=modal.querySelector('.pm-close'); if(cb) cb.focus({preventScroll:true});
   }
-  function closeM(){
+  function closeM(fromHistory){
     if(!isOpen) return; isOpen=false;
-    function done(){ modal.hidden=true; document.body.style.overflow=''; if(lenis) lenis.start(); if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+    if(fromHistory!==true && history.state && history.state.priceModal){ try{ history.back(); }catch(err){} }
+    function done(){ modal.hidden=true; gsap.set(card,{clearProps:'all'}); document.body.style.overflow=''; if(lenis) lenis.start(); if(lastFocus&&lastFocus.focus) lastFocus.focus({preventScroll:true}); }
+    if(document.activeElement===q) q.blur();
     if(hasGsap && !reduced){
       gsap.to(scrim,{opacity:0,duration:.28,ease:'power1.in'});
-      gsap.to(card,{y:30,scale:.97,opacity:0,duration:.3,ease:'power2.in',onComplete:done});
+      if(native && innerWidth<=640) gsap.to(card,{yPercent:100,duration:.32,ease:'power2.in',onComplete:done});
+      else gsap.to(card,{y:30,scale:.97,opacity:0,duration:.3,ease:'power2.in',onComplete:done});
     } else done();
   }
   document.querySelectorAll('[data-price-open]').forEach(function(b){ b.addEventListener('click', openM); });
-  modal.querySelectorAll('[data-price-close]').forEach(function(b){ b.addEventListener('click', closeM); });
-  addEventListener('keydown', function(e){ if(e.key==='Escape') closeM(); });
+  modal.querySelectorAll('[data-price-close]').forEach(function(b){ b.addEventListener('click', function(){ closeM(); }); });
+  addEventListener('keydown', function(e){ if(e.key==='Escape' && isOpen){ if(document.activeElement===q && q.value){ q.value=''; filter(); return; } closeM(); } });
+  /* «назад» на телефоне закрывает окно, а не уводит со страницы; «вперёд» открывает его снова */
+  addEventListener('popstate', function(){
+    var st=history.state && history.state.priceModal;
+    if(isOpen && !st) closeM(true);
+    else if(!isOpen && st) openM(null,true);
+  });
+  /* после перезагрузки с открытым окном запись истории «окно открыто» уже ничего не значит */
+  if(history.state && history.state.priceModal){ try{ history.replaceState(null,''); }catch(err){} }
+  /* фокус не уходит из окна по Tab */
+  modal.addEventListener('keydown',function(e){
+    if(e.key!=='Tab') return;
+    var f=Array.prototype.filter.call(card.querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),iframe'),function(x){ return x.offsetParent!==null; });
+    if(!f.length) return; var a=f[0], z=f[f.length-1];
+    if(e.shiftKey && document.activeElement===a){ e.preventDefault(); z.focus(); }
+    else if(!e.shiftKey && document.activeElement===z){ e.preventDefault(); a.focus(); }
+  });
+  /* нижний лист можно смахнуть вниз за шапку */
+  var sy=null, dy=0;
+  head.addEventListener('touchstart',function(e){ if(!native||innerWidth>640||e.target.closest('.pm-close')) return; sy=e.touches[0].clientY; dy=0; },{passive:true});
+  /* сдвиг ведём через GSAP (gsap.set), чтобы его кеш трансформаций совпадал с тем, что на экране */
+  head.addEventListener('touchmove',function(e){ if(sy===null) return; dy=Math.max(0,e.touches[0].clientY-sy); gsap.set(card,{y:dy}); },{passive:true});
+  head.addEventListener('touchend',function(){
+    if(sy===null) return; sy=null;
+    if(dy>90) closeM();
+    else gsap.to(card,{y:0,duration:.3,ease:'power2.out'});
+  });
+  head.addEventListener('touchcancel',function(){ if(sy===null) return; sy=null; dy=0; gsap.to(card,{y:0,duration:.3,ease:'power2.out'}); });
+})();
+
+/* ================= ЛОГОТИПЫ ЗАКАЗЧИКОВ (по образцу «Brands using GSAP®» с gsap.com) ================= */
+/* Хореография повторяет gsap.com один в один: у каждой колонки свой бесконечный таймлайн;
+   логотип за 0,3 с встаёт за край колонки, за 0,5 с въезжает с проявлением (power2.out),
+   держится 3 с и за 0,3 с уезжает (power2.in) по другой оси. Чётные колонки въезжают по
+   вертикали и уходят по горизонтали, нечётные — наоборот; направление (±200%) случайное
+   для колонки, старт колонок сдвинут на 0,2 с — смена идёт волной слева направо.
+   Свои доработки: ряд стартует, когда появился в кадре (знаки въезжают по очереди);
+   вне кадра — пауза; под курсором смена плавно замирает, чтобы логотип можно было
+   рассмотреть. При prefers-reduced-motion — без движения, мягкая смена прозрачностью. */
+(function(){
+  var row=document.getElementById('client-row'); if(!row||!hasGsap) return;
+  var cols=Array.prototype.slice.call(row.querySelectorAll('.cl-col'));
+  var tls=[], started=false, inView=false, hovered=false;
+  cols.forEach(function(col,i){
+    var logos=Array.prototype.slice.call(col.querySelectorAll('.cl-logo'));
+    gsap.set(logos,{autoAlpha:0});
+    var a=gsap.utils.random(['-200%','200%']), v=i%2===0;
+    var tl=gsap.timeline({repeat:-1, paused:true});
+    logos.forEach(function(f,k){
+      if(reduced){   /* без движения: соседние знаки перетекают друг в друга прозрачностью */
+        tl.to(f,{keyframes:[{autoAlpha:1,duration:.6,ease:'power1.out'},{delay:4,autoAlpha:0,duration:.6,ease:'power1.in'}]}, k ? '-=.6' : 0);
+      } else {
+        tl.to(f,{keyframes:[
+          {y:v?a:0, x:v?0:a, duration:.3},
+          {autoAlpha:1, x:0, y:0, duration:.5, ease:'power2.out'},
+          {delay:3, y:v?0:a, x:v?a:0, duration:.3, ease:'power2.in'}
+        ]}).set(f,{autoAlpha:0});
+      }
+    });
+    tls.push(tl);
+  });
+  function sync(){
+    var run=inView && !hovered && !document.hidden;
+    tls.forEach(function(tl){ gsap.to(tl,{timeScale:run?1:0, duration:run?.6:.45, ease:'power1.inOut', overwrite:true}); });
+  }
+  function start(){
+    if(started) return; started=true;
+    tls.forEach(function(tl,i){ tl.timeScale(1); gsap.delayedCall(i*.2,function(){ tl.play(0); }); });
+  }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){
+      inView=en[en.length-1].isIntersecting;
+      if(inView && !started) start(); else sync();
+    },{threshold:.25}).observe(row);
+  } else { inView=true; start(); }
+  row.addEventListener('pointerenter',function(e){ if(e.pointerType==='mouse'){ hovered=true; sync(); } });
+  row.addEventListener('pointerleave',function(){ if(hovered){ hovered=false; sync(); } });
+  document.addEventListener('visibilitychange',sync);
 })();
 
 /* ================= PRELOADER: запуск фильма по реальной загрузке ================= */
@@ -833,27 +1045,6 @@ document.querySelectorAll('.strip-track').forEach(function(track){
       gsap.to(tween,{timeScale:1+Math.min(v,3),duration:.3,overwrite:true});
     }});
 });
-/* Стена заказчиков. Контент дублируется, поэтому цикл — ровно половина ширины:
-   вправо  0 → -50, влево -50 → 0. Раньше обратный ряд ехал -50 → +50, то есть
-   полпериода стоял за экраном — отсюда «нижний ряд не всегда появляется».
-   Длительность считаем от реальной ширины, чтобы оба ряда шли с одной скоростью. */
-document.querySelectorAll('.client-row').forEach(function(row){
-  var dir=parseFloat(row.getAttribute('data-row'))||1;
-  row.innerHTML+=row.innerHTML;
-  var half=row.scrollWidth/2 || 1400;
-  var dur=Math.max(26,Math.min(90,half/34));
-  var tw=gsap.fromTo(row,{xPercent:dir>0?0:-50},{xPercent:dir>0?-50:0,duration:dur,ease:'none',repeat:-1});
-  /* пересчёт после подгрузки логотипов и смены ориентации */
-  var recalc=function(){
-    var h=row.scrollWidth/2; if(!h) return;
-    tw.duration(Math.max(26,Math.min(90,h/34)));
-  };
-  window.addEventListener('load',recalc);
-  window.addEventListener('resize',recalc);
-  row.addEventListener('pointerenter',function(){ gsap.to(tw,{timeScale:.25,duration:.4,overwrite:true}); });
-  row.addEventListener('pointerleave',function(){ gsap.to(tw,{timeScale:1,duration:.5,overwrite:true}); });
-});
-
 /* ================= ACT II : DESCENT ================= */
 ScrollTrigger.matchMedia({
   '(min-width: 641px)': function(){
@@ -1038,10 +1229,6 @@ gsap.from('.fin-head > *, .strat-strip',{y:36,opacity:0,duration:.8,stagger:.09,
   scrollTrigger:{trigger:'.fin',start:'top 80%'}});
 gsap.fromTo('.fin-watermark',{yPercent:30},{yPercent:-10,ease:'none',
   scrollTrigger:{trigger:'#contacts',start:'top bottom',end:'bottom top',scrub:true}});
-/* появление стены: fromTo + immediateRender:false — если триггер по какой-то
-   причине не сработает, блок останется видимым, а не застрянет на opacity 0 */
-gsap.fromTo('.client-rows',{opacity:0,y:24},{opacity:1,y:0,duration:.8,ease:'power2.out',immediateRender:false,
-  scrollTrigger:{trigger:'#clients',start:'top 85%',once:true}});
 
 /* ================= LIGHT ZONE (только на главной, свет после разреза) ================= */
 if(document.getElementById('hero') && document.getElementById('objects')){
@@ -1053,13 +1240,15 @@ if(document.getElementById('hero') && document.getElementById('objects')){
 }
 
 /* ================= NAV ACTIVE ================= */
+/* только на главной: на подстраницах «Контакты» ведут на главную, и подсвечен должен быть
+   один пункт — текущая страница. При уходе из секции подсветка снимается */
 ['contacts'].forEach(function(id){
-  if(!document.getElementById(id)) return;
+  if(!document.getElementById(id) || !document.getElementById('hero')) return;
   ScrollTrigger.create({ trigger:'#'+id, start:'top 40%', end:'bottom 40%',
     onToggle:function(self){
-      if(self.isActive) document.querySelectorAll('[data-nav]').forEach(function(a){
+      document.querySelectorAll('[data-nav]').forEach(function(a){
         var h=a.getAttribute('href')||'';
-        a.classList.toggle('active', h.indexOf('#'+id)>=0);
+        if(h.indexOf('#'+id)>=0) a.classList.toggle('active', self.isActive);
       });
     }});
 });
@@ -1103,7 +1292,9 @@ if(!hasGsap||reduced){
   var lightSec=document.getElementById('objects');
   if(lightSec && document.getElementById('hero')){
     addEventListener('scroll',function(){
-      document.body.classList.toggle('on-light', scrollY > lightSec.offsetTop - innerHeight*.7);
+      var lit=scrollY > lightSec.offsetTop - innerHeight*.7;
+      document.body.classList.toggle('on-light', lit);
+      document.body.classList.toggle('hud-off', lit);   /* глубиномер не висит поверх светлых секций */
     },{passive:true});
   }
 }

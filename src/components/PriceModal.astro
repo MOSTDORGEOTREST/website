@@ -1,26 +1,59 @@
-<div class="price-modal" id="price-modal" role="dialog" aria-modal="true" aria-label="Прайс-лист" hidden>
+---
+/* Окно прайс-листа.
+   Логика окна: шапка — что это и как закрыть (крестик один, в углу), подвал — что можно
+   сделать (скачать PDF / Excel). Кнопки действия и закрытие больше не стоят в одном ряду.
+   Два режима содержимого, выбираются при открытии:
+   • компьютер — встроенная Google Таблица, как раньше;
+   • телефон и планшет — собственный список из price.xlsx (/price.json): поиск, разделы,
+     читаемые строки. Google Таблица на телефоне не грузится вовсе, поэтому нет запроса
+     «Открыть в Google Диске» и не нужно листать широкую таблицу вбок. */
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+let ver = 'x';
+try { ver = createHash('sha1').update(readFileSync(join(process.cwd(), 'public', 'assets', 'price.xlsx'))).digest('hex').slice(0, 10); } catch {}
+const SHEET = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTCkoICrb5eT2LMl4AvjrUEoGdm_YuXYnsEg2M0ALBlJBCVZWba9v0VtSFQAvd8Vg/pubhtml?gid=1786408555&single=true';
+const DL = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>';
+---
+<div class="price-modal" id="price-modal" role="dialog" aria-modal="true" aria-labelledby="pm-title" hidden data-json={`/price.json?v=${ver}`}>
   <div class="pm-scrim" data-price-close></div>
   <div class="pm-card" id="pm-card">
-    <div class="pm-head">
+    <header class="pm-head" id="pm-head">
+      <span class="pm-grip" aria-hidden="true"></span>
       <div class="pm-title">
         <span class="d-eyebrow">Прайс-лист · от 27.07.2026</span>
-        <h3>Стоимость испытаний</h3>
+        <h3 id="pm-title">Стоимость испытаний</h3>
       </div>
-      <div class="pm-actions">
-        <a class="pm-dl" href="/assets/price.xlsx" download="ПРАЙС_ЛИСТ_МОСТДОРГЕОТРЕСТ.xlsx"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>XLS</a>
-        <a class="pm-dl" href="/assets/price.pdf" download="ПРАЙС_ЛИСТ_МОСТДОРГЕОТРЕСТ.pdf"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>PDF</a>
-        <button class="pm-close" type="button" data-price-close aria-label="Закрыть прайс-лист"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg></button>
+      <button class="pm-close" type="button" data-price-close aria-label="Закрыть прайс-лист"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </header>
+
+    <div class="pm-native">
+      <div class="pm-tools">
+        <label class="pm-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+          <span class="sr-only">Поиск по прайс-листу</span>
+          <input type="search" id="pm-q" placeholder="Испытание или пункт СБЦ" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" />
+          <button type="button" class="pm-clear" id="pm-clear" aria-label="Очистить поиск" hidden><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg></button>
+        </label>
+        <nav class="pm-chips" id="pm-chips" aria-label="Разделы прайс-листа"></nav>
+      </div>
+      <div class="pm-list" id="pm-list" data-lenis-prevent>
+        <div class="pm-wait pm-wait--list" id="pm-list-wait" aria-hidden="true"><i></i><span>Загружаем прайс…</span></div>
       </div>
     </div>
+
     <div class="pm-body">
       <div class="pm-wait" id="pm-wait" aria-hidden="true"><i></i><span>Загружаем прайс…</span></div>
-      <iframe id="pm-frame" title="Прайс-лист лаборатории" loading="lazy"
-        data-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTCkoICrb5eT2LMl4AvjrUEoGdm_YuXYnsEg2M0ALBlJBCVZWba9v0VtSFQAvd8Vg/pubhtml?gid=1786408555&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+      <iframe id="pm-frame" title="Прайс-лист лаборатории" loading="lazy" data-src={`${SHEET}&widget=true&headers=false`}></iframe>
     </div>
-    <div class="pm-foot">
-      <span>Не открылось или неудобно на телефоне?</span>
-      <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTCkoICrb5eT2LMl4AvjrUEoGdm_YuXYnsEg2M0ALBlJBCVZWba9v0VtSFQAvd8Vg/pubhtml?gid=1786408555&amp;single=true" target="_blank" rel="noopener">Открыть в новой вкладке ↗</a>
-      <a href="/assets/price.pdf" target="_blank" rel="noopener">PDF ↗</a>
-    </div>
+
+    <footer class="pm-foot">
+      <a class="pm-gs" href={SHEET} target="_blank" rel="noopener">Открыть в Google Таблицах&nbsp;↗</a>
+      <div class="pm-dls">
+        <a class="pm-dl pm-dl--main" href="/assets/price.pdf" download="ПРАЙС_ЛИСТ_МОСТДОРГЕОТРЕСТ.pdf"><Fragment set:html={DL} /><span>Скачать PDF</span></a>
+        <a class="pm-dl" href="/assets/price.xlsx" download="ПРАЙС_ЛИСТ_МОСТДОРГЕОТРЕСТ.xlsx"><Fragment set:html={DL} /><span>Скачать Excel</span></a>
+      </div>
+    </footer>
   </div>
 </div>

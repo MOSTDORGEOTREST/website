@@ -1,5 +1,6 @@
 ---
-/* Разрешительные документы: PDF в public/assets/docs/, превью первой страницы в public/assets/docs/prev/ */
+/* Разрешительные документы (страница /dokumenty/): PDF в public/assets/docs/, превью первой страницы в public/assets/docs/prev/.
+   Заголовок и подводка — в PageHead страницы, здесь только сводка, фильтр и сетка. */
 type Doc = {
   id: string;            // имя файла без расширения
   org: 'ao' | 'ooo' | 'mge';
@@ -21,12 +22,12 @@ const docs: Doc[] = [
   { id: 'ao-fsa-vypiska', org: 'ao', kind: 'Выписка из реестра', title: 'Выписка из реестра аккредитованных лиц', issuer: 'Росаккредитация · fsa.gov.ru', num: 'РОСС RU.0001.21АГ09', issued: '01.10.2026', untilLabel: 'Актуальная выписка', pages: 2, size: '0,1 МБ', landscape: true },
   { id: 'ao-mosstroysert', org: 'ao', kind: 'Аттестат аккредитации', title: 'Аттестат аккредитации испытательной лаборатории', issuer: 'АО «МОССТРОЙСЕРТИФИКАЦИЯ»', num: '№ RU.MCC.АЛ.988', issued: '09.01.2020', until: '2028-01-09', pages: 14, size: '12,9 МБ', landscape: true },
   { id: 'ao-sro-vypiska', org: 'ao', kind: 'Членство в СРО', title: 'Выписка из реестра членов СРО', issuer: 'Ассоциация «Инженерные изыскания в строительстве» · СРО-И-001-28042009', num: '7716750744-20261004-1952', issued: '04.10.2026', untilLabel: 'Член СРО с 04.09.2013', pages: 2, size: '0,1 МБ' },
-  { id: 'ao-iso-9001', org: 'ao', kind: 'Сертификат СМК', title: 'Сертификат соответствия ГОСТ Р ИСО 9001-2015', issuer: 'Система сертификации «Евро-Регистр»', num: 'РОСС RU.31968.04ЕР01/СМК.03301-26', issued: '25.09.2026', until: '2029-09-24', pages: 1, size: '0,5 МБ' },
+  { id: 'ao-iso-9001', org: 'ao', kind: 'Сертификат СМК', title: 'Сертификат соответствия ГОСТ\u00a0Р\u00a0ИСО\u00a09001-2015', issuer: 'Система сертификации «Евро-Регистр»', num: 'РОСС RU.31968.04ЕР01/СМК.03301-26', issued: '25.09.2026', until: '2029-09-24', pages: 1, size: '0,5 МБ' },
 
   { id: 'ooo-rosstandart', org: 'ooo', kind: 'Заключение', title: 'Заключение о состоянии измерений лаборатории', issuer: 'ФБУ «НИЦ ПМ – РОСТЕСТ» · Росстандарт', num: '№ 07-24-645-2026', issued: '28.08.2026', until: '2029-08-27', pages: 28, size: '11,6 МБ' },
   { id: 'ooo-mosstroysert', org: 'ooo', kind: 'Аттестат аккредитации', title: 'Аттестат аккредитации испытательной лаборатории', issuer: 'АО «МОССТРОЙСЕРТИФИКАЦИЯ»', num: '№ RU.MCC.АЛ.1251', issued: '25.12.2023', until: '2028-06-05', pages: 14, size: '14,1 МБ', landscape: true },
   { id: 'ooo-sro-vypiska', org: 'ooo', kind: 'Членство в СРО', title: 'Выписка из реестра членов СРО', issuer: 'Ассоциация «Центризыскания» · СРО-И-003-14092009', num: '7734191376-20261004-1950', issued: '04.10.2026', untilLabel: 'Член СРО с 14.10.2009', pages: 2, size: '0,1 МБ' },
-  { id: 'ooo-iso-9001', org: 'ooo', kind: 'Сертификат СМК', title: 'Сертификат соответствия ГОСТ Р ИСО 9001-2015', issuer: 'Система сертификации «Евро-Регистр»', num: 'РОСС RU.31968.04ЕР01/СМК.03296-26', issued: '22.06.2026', until: '2029-06-21', pages: 1, size: '0,5 МБ' },
+  { id: 'ooo-iso-9001', org: 'ooo', kind: 'Сертификат СМК', title: 'Сертификат соответствия ГОСТ\u00a0Р\u00a0ИСО\u00a09001-2015', issuer: 'Система сертификации «Евро-Регистр»', num: 'РОСС RU.31968.04ЕР01/СМК.03296-26', issued: '22.06.2026', until: '2029-06-21', pages: 1, size: '0,5 МБ' },
 
   { id: 'mosgosexpertiza-polozhenie', org: 'mge', kind: 'Положение', title: 'Положение об Экспертном Совете Московской государственной экспертизы', issuer: 'Мосгосэкспертиза · согласовано и утверждено', issued: '2011', untilLabel: 'Действующий регламент', pages: 5, size: '0,6 МБ' },
 ];
@@ -42,11 +43,7 @@ const count = (o: Doc['org']) => docs.filter(d => d.org === o).length;
 <section id="docs" class="light-sec" aria-labelledby="docs-title">
   <div class="wrap">
     <div class="docs-head">
-      <div class="sec-head">
-        <span class="d-eyebrow">Акт 06 · Досье</span>
-        <h2 id="docs-title">Право работать&nbsp;— подтверждено документами</h2>
-        <p class="sec-sub">Аккредитации, членство в СРО и сертификаты менеджмента качества обоих юридических лиц. Оригиналы — в один клик: смотрите, листайте, скачивайте.</p>
-      </div>
+      <h2 id="docs-title" class="sr-only">Разрешительные документы</h2>
       <ul class="docs-ledger" aria-label="Кратко о досье">
         <li><b data-docs-total>{docs.length}</b><span>документов<br>в досье</span></li>
         <li><b>17025</b><span>ISO/IEC · аккредитация<br>лаборатории</span></li>
@@ -81,10 +78,11 @@ const count = (o: Doc['org']) => docs.filter(d => d.org === o).length;
           <div class="doc-body">
             <span class="doc-kicker">{d.kind}</span>
             <h3 class="doc-title">{d.title}</h3>
-            <p class="doc-issuer">{d.issuer}</p>
+            {/* коды реестров (СРО-И-003-…, fsa.gov.ru) не рвём по дефису; разделитель «·» остаётся в конце строки */}
+            <p class="doc-issuer">{d.issuer.split(' · ').map((p, k) => (<Fragment>{k > 0 ? '\u00a0· ' : ''}{p.includes(' ') ? p : <span class="nw">{p}</span>}</Fragment>))}</p>
             <div class="doc-meta">
               {d.num && <span class="doc-num">{d.num}</span>}
-              {d.issued && <span class="doc-date">{d.num ? '· ' : ''}{d.issued}</span>}
+              {d.issued && <span class="doc-date">{d.issued}</span>}
             </div>
             <div class="doc-foot">
               <span class="doc-status" data-label={d.untilLabel || ''}><i></i><span>{d.untilLabel || `до ${d.until!.split('-').reverse().join('.')}`}</span></span>
@@ -188,7 +186,9 @@ const count = (o: Doc['org']) => docs.filter(d => d.org === o).length;
   var dv=document.getElementById('doc-viewer'), dvCard=document.getElementById('dv-card');
   var img=document.getElementById('dv-img'), loading=document.getElementById('dv-loading');
   var el=function(id){ return document.getElementById(id); };
-  var cur=-1, isOpen=false, lastFocus=null, lenis=window.__lenis||null;
+  var cur=-1, isOpen=false, lastFocus=null;
+  /* Lenis создаётся в main.js позже этого скрипта — берём его в момент открытия, а не при загрузке */
+  var lenisNow=function(){ return window.__lenis||null; };
   var pre={};
   function preload(i){ var d=docs[i]; if(!d||pre[d.id]) return; var im=new Image(); im.src='/assets/docs/prev/'+d.id+'.webp'; pre[d.id]=im; }
   function pad(n){ return (n<10?'0':'')+n; }
@@ -216,7 +216,7 @@ const count = (o: Doc['org']) => docs.filter(d => d.org === o).length;
   }
   function open(i){
     if(isOpen) return; isOpen=true; lastFocus=document.activeElement;
-    dv.hidden=false; document.body.style.overflow='hidden'; if(lenis) lenis.stop();
+    dv.hidden=false; document.body.style.overflow='hidden'; var ln=lenisNow(); if(ln) ln.stop();
     show(i,0);
     if(window.gsap && !reduced){
       gsap.fromTo(dv.querySelector('.dv-scrim'),{opacity:0},{opacity:1,duration:.35,ease:'power2.out'});
@@ -226,7 +226,7 @@ const count = (o: Doc['org']) => docs.filter(d => d.org === o).length;
   }
   function close(){
     if(!isOpen) return; isOpen=false;
-    function done(){ dv.hidden=true; document.body.style.overflow=''; if(lenis) lenis.start(); if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+    function done(){ dv.hidden=true; document.body.style.overflow=''; var ln=lenisNow(); if(ln) ln.start(); if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
     if(window.gsap && !reduced){ gsap.to(dv.querySelector('.dv-scrim'),{opacity:0,duration:.25}); gsap.to(dvCard,{y:24,scale:.97,opacity:0,duration:.28,ease:'power2.in',onComplete:done}); }
     else done();
   }

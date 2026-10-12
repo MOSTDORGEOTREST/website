@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Docs from '../components/Docs.astro';
+import Contacts from '../components/Contacts.astro';
+---
+<Base
+  title="Разрешительные документы — МОСТДОРГЕОТРЕСТ"
+  description="Аттестаты аккредитации, выписки из реестров СРО и сертификаты ISO 9001 испытательной лаборатории МОСТДОРГЕОТРЕСТ. Оригиналы в PDF — смотрите и скачивайте."
+  active="docs"
+  light
+>
+  <PageHead
+    eyebrow="Досье"
+    title="Разрешительные документы"
+    sub="Аккредитации, членство в СРО и сертификаты менеджмента качества обоих юридических лиц. Оригиналы — в один клик: смотрите, листайте, скачивайте."
+  />
+  <Docs />
+  <Contacts subpage />
+</Base>

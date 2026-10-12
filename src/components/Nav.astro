@@ -16,6 +16,7 @@ const { active = '', home = false } = Astro.props;
       <li><a href="/oborudovanie/" class:list={[active === "eq" && "active"]}>Оснащение</a></li>
       <li><a href="/kursy/" class:list={[active === "edu" && "active"]}>Курсы</a></li>
       <li><a href="/soft/" class:list={[active === "soft" && "active"]}>Разработки</a></li>
+      <li><a href="/dokumenty/" class:list={["nl-docs", active === "docs" && "active"]} aria-label="Разрешительные документы"><span class="nl-full">Разрешительные документы</span><span class="nl-short" aria-hidden="true">Документы</span></a></li>
       <li><a href="/#contacts" data-scroll data-nav>Контакты</a></li>
     </ul>
   </nav>
@@ -33,6 +34,7 @@ const { active = '', home = false } = Astro.props;
   <a href="/oborudovanie/"><i>02</i>Оснащение</a>
   <a href="/kursy/"><i>03</i>Курсы</a>
   <a href="/soft/"><i>04</i>Разработки</a>
-  <a href="/#contacts" data-scroll><i>05</i>Контакты</a>
+  <a href="/dokumenty/"><i>05</i>Разрешительные документы</a>
+  <a href="/#contacts" data-scroll><i>06</i>Контакты</a>
   <a href="/3d/output-3/index.html" target="_blank" rel="noopener"><i>3D</i>Онлайн-тур</a>
 </div>

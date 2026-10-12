@@ -33,3 +33,6 @@ pnpm-debug.log*
 wget-log.1
 wget-log
 Claude outputs/*
+
+# локальные настройки Claude Code
+.claude/settings.local.json

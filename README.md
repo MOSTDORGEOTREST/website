@@ -9,7 +9,9 @@
 ```text
 .
 ├── src/
-│   ├── pages/             # /, /oborudovanie/, /kursy/, /soft/
+│   ├── pages/             # /, /oborudovanie/, /kursy/, /soft/, /dokumenty/, price.json
+│   ├── lib/price-xlsx.ts  # разбор price.xlsx при сборке (мобильный прайс)
+├── scripts/logo-ink.py    # одноцветные версии логотипов заказчиков
 │   ├── layouts/Base.astro # каркас: head, nav, прайс-модалка, скрипты
 │   ├── components/        # секции-«акты» главной и модули подстраниц
 │   ├── scripts/main.js    # GSAP + ScrollTrigger, Lenis, WebGL-планета, reveal
@@ -67,12 +69,19 @@ docker compose up -d --build
 
 - тексты секций — `src/components/*.astro`;
 - оборудование — `src/components/Equipment.astro`, фото — `public/img/devices/`;
-- логотипы клиентов — `public/img/logos/` и `src/logos.json`;
-- разрешительные документы — массив `docs` в `src/components/Docs.astro`, файлы — `public/assets/docs/`;
+- логотипы клиентов — `public/img/logos/` и `src/logos.json` (`w`/`h` — размер содержимого без пустых полей:
+  по ним считается оптический размер знака; новый логотип лучше сразу обрезать по содержимому).
+  На сайте показываются одноцветные версии из `public/img/logos/ink/` — после добавления или замены
+  логотипа их нужно пересоздать: `python3 scripts/logo-ink.py` (нужен Pillow);
+- разрешительные документы (страница `/dokumenty/`) — массив `docs` в `src/components/Docs.astro`, файлы — `public/assets/docs/`;
   превью первой страницы: `pdftoppm -f 1 -l 1 -r 110 -png файл.pdf` → WebP 1200px (`{id}.webp`) и 560px (`{id}-t.webp`) в `public/assets/docs/prev/`;
 - курсы — `src/components/Edu.astro`, программа — `public/assets/edu/`;
 - публикации и продукты — `src/components/SoftGrid.astro`;
-- прайс — `public/assets/price.pdf`, `public/assets/price.xlsx` и ссылка на Google-таблицу в `src/components/PriceModal.astro`;
+- прайс — `public/assets/price.pdf`, `public/assets/price.xlsx` и ссылка на Google-таблицу в `src/components/PriceModal.astro`.
+  На компьютере окно показывает Google-таблицу, на телефоне и планшете — собственный список с поиском,
+  который собирается при сборке из `price.xlsx` (`src/lib/price-xlsx.ts` → `/price.json`). Чтобы обновить
+  цены: заменить `price.xlsx` и `price.pdf` (и Google-таблицу) и пересобрать сайт. Если структура
+  листа изменится настолько, что позиций не найдётся, сборка напишет предупреждение `[price]`;
 - цвета и типографика — переменные в начале `src/styles/global.css`;
 - анимации — `src/scripts/main.js`.
 

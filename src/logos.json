@@ -1,150 +1,224 @@
 [
  {
   "file": "/img/logos/mosgiptotrans.png",
-  "alt": "mosgiptotrans"
+  "alt": "Мосгипротранс",
+  "w": 177,
+  "h": 50
  },
  {
   "file": "/img/logos/rosatom-gspi.png",
-  "alt": "rosatom gspi"
+  "alt": "ГСПИ (Росатом)",
+  "w": 220,
+  "h": 100
  },
  {
   "file": "/img/logos/avtodoproekt.png",
-  "alt": "АВТОДОПРОЕКТ"
+  "alt": "АВТОДОПРОЕКТ",
+  "w": 195,
+  "h": 75
  },
  {
   "file": "/img/logos/analiticheskiytsentrmgu.png",
-  "alt": "АналитическийЦентрМГУ"
+  "alt": "Аналитический центр МГУ",
+  "w": 256,
+  "h": 125
  },
  {
   "file": "/img/logos/geoproektizyskaniya.png",
-  "alt": "ГЕОПРОЕКТИЗЫСКАНИЯ"
+  "alt": "ГЕОПРОЕКТИЗЫСКАНИЯ",
+  "w": 134,
+  "h": 80
  },
  {
   "file": "/img/logos/giprostroymost.png",
-  "alt": "ГИПРОСТРОЙМОСТ"
+  "alt": "ГИПРОСТРОЙМОСТ",
+  "w": 274,
+  "h": 54
  },
  {
   "file": "/img/logos/geoinzhstroy.png",
-  "alt": "ГеоИнжСтрой"
+  "alt": "ГеоИнжСтрой",
+  "w": 290,
+  "h": 153
  },
  {
   "file": "/img/logos/geospetsizyskaniya.png",
-  "alt": "ГеоСпецИзыскания"
+  "alt": "ГеоСпецИзыскания",
+  "w": 140,
+  "h": 140
  },
  {
   "file": "/img/logos/geogradstroy.png",
-  "alt": "Геоградстрой"
+  "alt": "Геоградстрой",
+  "w": 621,
+  "h": 140
  },
  {
   "file": "/img/logos/delta40.png",
-  "alt": "Дельта40"
+  "alt": "Дельта40",
+  "w": 215,
+  "h": 68
  },
  {
   "file": "/img/logos/zheldorproekt.svg",
-  "alt": "ЖЕЛДОРПРОЕКТ"
+  "alt": "ЖЕЛДОРПРОЕКТ",
+  "w": 267,
+  "h": 63
  },
  {
   "file": "/img/logos/inzhgeo.png",
-  "alt": "ИнжГео"
+  "alt": "ИнжГео",
+  "w": 223,
+  "h": 267
  },
  {
   "file": "/img/logos/inzhgeokom.png",
-  "alt": "Инжгеоком"
+  "alt": "Инжгеоком",
+  "w": 80,
+  "h": 50
  },
  {
   "file": "/img/logos/lenmorniiproekt.png",
-  "alt": "ЛЕНМОРНИИПРОЕКТ"
+  "alt": "ЛЕНМОРНИИПРОЕКТ",
+  "w": 529,
+  "h": 75
  },
  {
   "file": "/img/logos/mage.png",
-  "alt": "МАГЭ"
+  "alt": "МАГЭ",
+  "w": 786,
+  "h": 526
  },
  {
   "file": "/img/logos/metrogiprtrans.png",
-  "alt": "Метрогипртранс"
+  "alt": "Метрогипртранс",
+  "w": 364,
+  "h": 124
  },
  {
   "file": "/img/logos/mosenergoproet.png",
-  "alt": "МосЭнергоПроет"
+  "alt": "Мосэнергопроект",
+  "w": 180,
+  "h": 28
  },
  {
   "file": "/img/logos/mosgeoproekt.png",
-  "alt": "Мосгеопроект"
+  "alt": "Мосгеопроект",
+  "w": 384,
+  "h": 91
  },
  {
   "file": "/img/logos/npts-osnova.png",
-  "alt": "НПЦ Основа"
+  "alt": "НПЦ Основа",
+  "w": 496,
+  "h": 412
  },
  {
   "file": "/img/logos/nptsiz.png",
-  "alt": "НПЦИЗ"
+  "alt": "НПЦИЗ",
+  "w": 178,
+  "h": 140
  },
  {
   "file": "/img/logos/nizhegordaproekt.png",
-  "alt": "Нижегордапроект"
+  "alt": "ЗАО «Нижегородагропроект»",
+  "w": 434,
+  "h": 40
  },
  {
   "file": "/img/logos/petrakomplekt.png",
-  "alt": "ПЕТРАКОМПЛЕКТ"
+  "alt": "ПЕТРАКОМПЛЕКТ",
+  "w": 497,
+  "h": 72
  },
  {
   "file": "/img/logos/permaprost-inzhiniring.png",
-  "alt": "Пермапрост Инжиниринг"
+  "alt": "Permafrost Engineering",
+  "w": 330,
+  "h": 80
  },
  {
   "file": "/img/logos/proinzhgrupp.png",
-  "alt": "Проинжгрупп"
+  "alt": "Проинжгрупп",
+  "w": 62,
+  "h": 76
  },
  {
   "file": "/img/logos/roszheldorproekt.svg",
-  "alt": "РОСЖЕЛДОРПРОЕКТ"
+  "alt": "РОСЖЕЛДОРПРОЕКТ",
+  "w": 480,
+  "h": 100
  },
  {
   "file": "/img/logos/rosgeologiya.png",
-  "alt": "Росгеология"
+  "alt": "Росгеология",
+  "w": 500,
+  "h": 63
  },
  {
   "file": "/img/logos/russkayaburovayakompaniya.png",
-  "alt": "РусскаяБуроваяКомпания"
+  "alt": "Русская буровая компания",
+  "w": 218,
+  "h": 59
  },
  {
   "file": "/img/logos/spb-nii-energoizyskaniya.png",
-  "alt": "СПБ НИИ ЭНЕРГОИЗЫСКАНИЯ"
+  "alt": "СПб НИИ «Энергоизыскания»",
+  "w": 196,
+  "h": 132
  },
  {
   "file": "/img/logos/sahalin-tisiz.png",
-  "alt": "Сахалин ТИСИЗ"
+  "alt": "Сахалин ТИСИЗ",
+  "w": 350,
+  "h": 265
  },
  {
   "file": "/img/logos/soyuzgeostroyservis.png",
-  "alt": "СоюзГеоСтройСервис"
+  "alt": "СоюзГеоСтройСервис",
+  "w": 181,
+  "h": 103
  },
  {
   "file": "/img/logos/spetsproektput.png",
-  "alt": "СпецПроектПуть"
+  "alt": "СпецПроектПуть",
+  "w": 254,
+  "h": 40
  },
  {
   "file": "/img/logos/stroyizyskaniya.png",
-  "alt": "Стройизыскания"
+  "alt": "Стройизыскания",
+  "w": 439,
+  "h": 42
  },
  {
   "file": "/img/logos/tihookeanskaya-inzh-kompaniya.png",
-  "alt": "Тихоокеанская инж.компания"
+  "alt": "Тихоокеанская инженерная компания",
+  "w": 277,
+  "h": 80
  },
  {
   "file": "/img/logos/energotransproekt.png",
-  "alt": "ЭНЕРГОТРАНСПРОЕКТ"
+  "alt": "ЭНЕРГОТРАНСПРОЕКТ",
+  "w": 300,
+  "h": 156
  },
  {
   "file": "/img/logos/eusp.png",
-  "alt": "ЭУСП"
+  "alt": "Экспертное управление строительными проектами",
+  "w": 122,
+  "h": 80
  },
  {
   "file": "/img/logos/ktb-zhb.png",
-  "alt": "ктб жб"
+  "alt": "КТБ ЖБ",
+  "w": 60,
+  "h": 80
  },
  {
   "file": "/img/logos/nits.png",
-  "alt": "ниц"
+  "alt": "НИЦ «Строительство»",
+  "w": 280,
+  "h": 49
  }
 ]
