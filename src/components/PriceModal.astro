@@ -13,7 +13,7 @@ import { join } from 'node:path';
 
 let ver = 'x';
 try { ver = createHash('sha1').update(readFileSync(join(process.cwd(), 'public', 'assets', 'price.xlsx'))).digest('hex').slice(0, 10); } catch {}
-const SHEET = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTCkoICrb5eT2LMl4AvjrUEoGdm_YuXYnsEg2M0ALBlJBCVZWba9v0VtSFQAvd8Vg/pubhtml?gid=1786408555&single=true';
+const SHEET = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTlgR9cuFirOhRkQ4zf0Pa1o0eq5W5run6iA-fLy1tBlilENi3Z-SH4xiZaZpsDIA/pubhtml?gid=1412003894&amp;single=true&amp;widget=true&amp;headers=false';
 const DL = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>';
 ---
 <div class="price-modal" id="price-modal" role="dialog" aria-modal="true" aria-labelledby="pm-title" hidden data-json={`/price.json?v=${ver}`}>
