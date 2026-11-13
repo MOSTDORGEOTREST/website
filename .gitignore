@@ -5,34 +5,48 @@
 /.pnp
 .pnp.js
 
-/cert/crt.crt
-/cert/key.key
+# certificates & ACME runtime data
+/cert/*
+!/cert/.gitkeep
+/letsencrypt
+/letsencrypt-challenges
+*.crt
+*.key
+*.pem
+*.bak
 
-# testing
+# testing & build outputs
 /coverage
-
-# production
 /dist
+/build
 /.astro
+/.cache
 
-# misc
+# misc & logs
 .DS_Store
+Thumbs.db
+Desktop.ini
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+wget-log*
+*.tmp
+*.temp
 
+# IDE & AI assistant local state
 /.idea
-*.crt
-*.key
-wget-log.1
-wget-log
+/.vscode
+/.cursor
+/.codex
+/.aider*
 Claude outputs/*
-
-# локальные настройки Claude Code
 .claude/settings.local.json
+.claude/*.local.*

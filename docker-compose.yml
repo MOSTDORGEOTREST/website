@@ -10,31 +10,59 @@ services:
       - "${HTTPS_PORT:-443}:443"
     volumes:
       - ./cert:/etc/nginx/cert
-      - ./letsencrypt-challenges:/var/www/letsencrypt
+      - ./letsencrypt-challenges:/var/www/letsencrypt:ro
+    security_opt:
+      - no-new-privileges:true
     restart: unless-stopped
+    stop_grace_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     deploy:
       resources:
         limits:
-          cpus: '0.50'
-          memory: 1800M
+          # 1.00 работает даже на 1-ядерном старом ПК и не урезает nginx пополам (в отличие от 0.50)
+          cpus: '${WEB_CPUS:-1.00}'
+          # Статическому nginx с кэшем дескрипторов и SSL нужно ~30–50 МБ; 256M даёт запас без перерасхода ОЗУ
+          memory: ${WEB_MEM_LIMIT:-256M}
+        reservations:
+          memory: 32M
 
   acme:
+    container_name: sitelab-acme
     build:
       context: .
       dockerfile: Dockerfile.acme
+    image: mdgt-acme:latest
     depends_on:
-      - sitelab
+      sitelab:
+        condition: service_healthy
     environment:
-      ACME_DOMAINS: mdgt.ru,www.mdgt.ru
-      CERTBOT_EMAIL: sheepdolly2023@gmail.com
-      CHECK_URL: http://mdgt.ru/
+      ACME_DOMAINS: ${ACME_DOMAINS:-mdgt.ru,www.mdgt.ru}
+      CERTBOT_EMAIL: ${CERTBOT_EMAIL:-sheepdolly2023@gmail.com}
+      CHECK_URL: ${CHECK_URL:-http://mdgt.ru/}
       NGINX_CONTAINER: sitelab
-      RENEW_BEFORE_DAYS: "30"
-      RENEW_INTERVAL_SECONDS: "43200"
-      ACME_STAGING: "false"
+      RENEW_BEFORE_DAYS: "${RENEW_BEFORE_DAYS:-30}"
+      RENEW_INTERVAL_SECONDS: "${RENEW_INTERVAL_SECONDS:-43200}"
+      ACME_STAGING: "${ACME_STAGING:-false}"
     volumes:
       - ./cert:/cert-out
       - ./letsencrypt:/etc/letsencrypt
       - ./letsencrypt-challenges:/var/www/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock
+    security_opt:
+      - no-new-privileges:true
     restart: unless-stopped
+    stop_grace_period: 5s
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"
+    deploy:
+      resources:
+        limits:
+          cpus: '${ACME_CPUS:-0.50}'
+          memory: ${ACME_MEM_LIMIT:-256M}

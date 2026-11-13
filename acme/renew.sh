@@ -7,6 +7,8 @@ WEBROOT="${WEBROOT:-/var/www/letsencrypt}"
 CERT_DIR="${CERT_DIR:-/cert-out}"
 RENEW_BEFORE_DAYS="${RENEW_BEFORE_DAYS:-30}"
 RENEW_INTERVAL_SECONDS="${RENEW_INTERVAL_SECONDS:-43200}"
+RETRY_INTERVAL_SECONDS="${RETRY_INTERVAL_SECONDS:-60}"
+MAX_QUICK_RETRIES="${MAX_QUICK_RETRIES:-3}"
 CHECK_URL="${CHECK_URL:-http://mdgt.ru/}"
 CHECK_TIMEOUT="${CHECK_TIMEOUT:-15}"
 NGINX_CONTAINER="${NGINX_CONTAINER:-sitelab}"
@@ -15,6 +17,7 @@ RUN_ONCE="${RUN_ONCE:-false}"
 
 DOMAINS=()
 CERT_NAME="${CERT_NAME:-}"
+SLEEP_PID=""
 
 log() {
   printf '[acme] %s\n' "$*"
@@ -23,6 +26,24 @@ log() {
 fail() {
   log "ERROR: $*"
   return 1
+}
+
+cleanup_and_exit() {
+  log "Stopping ACME renewal service"
+  if [ -n "$SLEEP_PID" ] && kill -0 "$SLEEP_PID" 2>/dev/null; then
+    kill "$SLEEP_PID" 2>/dev/null || true
+  fi
+  exit 0
+}
+
+trap cleanup_and_exit TERM INT
+
+sleep_interruptible() {
+  local seconds="$1"
+  sleep "$seconds" &
+  SLEEP_PID=$!
+  wait "$SLEEP_PID" || true
+  SLEEP_PID=""
 }
 
 normalize_domains() {
@@ -168,6 +189,20 @@ reload_nginx() {
   docker kill --signal=HUP "$NGINX_CONTAINER" >/dev/null
 }
 
+prune_old_backups() {
+  # Оставляем только 3 последние резервные копии сертификатов, чтобы не засорять диск
+  local f i=0
+  for f in $(ls -1t "$CERT_DIR"/crt_*.crt.bak 2>/dev/null || true); do
+    i=$((i + 1))
+    [ "$i" -gt 3 ] && rm -f "$f"
+  done
+  i=0
+  for f in $(ls -1t "$CERT_DIR"/key_*.key.bak 2>/dev/null || true); do
+    i=$((i + 1))
+    [ "$i" -gt 3 ] && rm -f "$f"
+  done
+}
+
 install_certificate() {
   local live_dir="/etc/letsencrypt/live/$CERT_NAME"
   local source_crt="$live_dir/fullchain.pem"
@@ -216,6 +251,8 @@ install_certificate() {
     return 1
   fi
 
+  prune_old_backups
+
   if [ -n "$CHECK_URL" ]; then
     sleep 2
     curl --fail --silent --show-error --max-time "$CHECK_TIMEOUT" "$CHECK_URL" >/dev/null || {
@@ -246,13 +283,24 @@ main() {
     return
   fi
 
+  local quick_retries=0
   while true; do
-    if ! run_once; then
+    if run_once; then
+      quick_retries=0
+      log "Sleeping for ${RENEW_INTERVAL_SECONDS} seconds"
+      sleep_interruptible "$RENEW_INTERVAL_SECONDS"
+    else
       log "Renewal attempt failed; keeping the current certificate"
+      if [ "$quick_retries" -lt "$MAX_QUICK_RETRIES" ]; then
+        quick_retries=$((quick_retries + 1))
+        log "Quick retry ${quick_retries}/${MAX_QUICK_RETRIES} in ${RETRY_INTERVAL_SECONDS} seconds"
+        sleep_interruptible "$RETRY_INTERVAL_SECONDS"
+      else
+        quick_retries=0
+        log "Sleeping for ${RENEW_INTERVAL_SECONDS} seconds"
+        sleep_interruptible "$RENEW_INTERVAL_SECONDS"
+      fi
     fi
-
-    log "Sleeping for ${RENEW_INTERVAL_SECONDS} seconds"
-    sleep "$RENEW_INTERVAL_SECONDS"
   done
 }
 

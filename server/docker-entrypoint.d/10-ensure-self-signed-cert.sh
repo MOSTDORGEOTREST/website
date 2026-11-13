@@ -7,7 +7,20 @@ KEY="$CERT_DIR/key.key"
 
 mkdir -p "$CERT_DIR"
 
-if [ ! -s "$CRT" ] || [ ! -s "$KEY" ]; then
+# Каталог challenge смонтирован в nginx только для чтения (:ro).
+# Пишет в него контейнер acme. mkdir здесь нужен лишь если каталог доступен на запись;
+# на read-only томе не должен ронять старт nginx (set -e).
+if ! mkdir -p /var/www/letsencrypt/.well-known/acme-challenge 2>/dev/null; then
+  echo "ACME webroot is read-only; skipping directory create"
+fi
+
+cert_valid() {
+  [ -s "$CRT" ] && [ -s "$KEY" ] \
+    && openssl x509 -in "$CRT" -noout >/dev/null 2>&1 \
+    && openssl pkey -in "$KEY" -noout >/dev/null 2>&1
+}
+
+if ! cert_valid; then
   echo "Creating temporary self-signed certificate in $CERT_DIR"
   openssl req \
     -x509 \
