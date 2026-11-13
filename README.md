@@ -65,6 +65,8 @@ docker compose up -d --build
 
 Логи и остановка: `docker compose logs -f`, `docker compose down`.
 
+> [Информация о работе серверного скрипта `start.sh`](START-SCRIPT.md)
+
 ## Где менять контент
 
 - тексты секций — `src/components/*.astro`;

@@ -14,6 +14,7 @@ CHECK_TIMEOUT="${CHECK_TIMEOUT:-15}"
 NGINX_CONTAINER="${NGINX_CONTAINER:-sitelab}"
 ACME_STAGING="${ACME_STAGING:-false}"
 RUN_ONCE="${RUN_ONCE:-false}"
+FORCE_RENEWAL="${FORCE_RENEWAL:-false}"
 
 DOMAINS=()
 CERT_NAME="${CERT_NAME:-}"
@@ -77,6 +78,11 @@ needs_renewal() {
   local cert_path="$CERT_DIR/crt.crt"
   local check_seconds=$((RENEW_BEFORE_DAYS * 86400))
 
+  if [ "$FORCE_RENEWAL" = "true" ]; then
+    log "Forced renewal was requested"
+    return 0
+  fi
+
   if [ ! -s "$cert_path" ]; then
     log "Certificate file is missing, requesting a certificate"
     return 0
@@ -106,7 +112,8 @@ check_site_health() {
 }
 
 check_acme_webroot() {
-  local token="acme-health-$(date +%s)-$$"
+  local token
+  token="acme-health-$(date +%s)-$$"
   local challenge_dir="$WEBROOT/.well-known/acme-challenge"
   local challenge_file="$challenge_dir/$token"
   local domain
@@ -152,6 +159,10 @@ request_certificate() {
 
   if [ "$ACME_STAGING" = "true" ]; then
     args+=(--staging)
+  fi
+
+  if [ "$FORCE_RENEWAL" = "true" ]; then
+    args+=(--force-renewal)
   fi
 
   log "Requesting certificate for: ${DOMAINS[*]}"

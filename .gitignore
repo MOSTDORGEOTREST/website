@@ -41,6 +41,11 @@ wget-log*
 *.tmp
 *.temp
 
+# start.sh runtime data and local-change backups
+/Mysor/
+/.start-logs/
+/.start-cocon-enabled
+
 # IDE & AI assistant local state
 /.idea
 /.vscode
