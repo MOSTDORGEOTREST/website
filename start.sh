@@ -15,6 +15,10 @@ readonly COCON_MARKER="$PROJECT_DIR/.start-cocon-enabled"
 readonly LOG_DIR="$PROJECT_DIR/.start-logs"
 readonly BACKUP_ROOT="$PROJECT_DIR/Mysor"
 
+# Лимит CPU сайта = все ядра сервера: совпадает с nginx worker_processes auto (см. docker-compose.yml)
+WEB_CPUS="${WEB_CPUS:-$(nproc 2>/dev/null || echo 1)}"
+export WEB_CPUS
+
 COMMAND="${1:-help}"
 ASSUME_YES="${START_ASSUME_YES:-false}"
 if [[ "${2:-}" == "--yes" || "${1:-}" == "--yes" ]]; then

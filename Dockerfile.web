@@ -8,7 +8,9 @@ ENV ASTRO_TELEMETRY_DISABLED=1 \
     NODE_OPTIONS="--max-old-space-size=768"
 
 COPY package.json package-lock.json ./
-RUN npm ci --no-audit --no-fund
+# Кэш npm переживает пересборки: «лёгкий» запуск не качает зависимости заново
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --no-audit --no-fund --prefer-offline
 
 # В стадию сборки копируем из public/ только те файлы, которые реально читаются скриптами при сборке
 # (price.xlsx для генерации /price.json и ink-логотипы для подсчёта хешей ?v=).
@@ -44,7 +46,8 @@ COPY --from=build --chown=nginx:nginx /app/dist /usr/share/nginx/html
 # экономит процессорное время старого сервера и уменьшает размер файлов при загрузке
 RUN find /usr/share/nginx/html -type f \
       \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.mjs' \
-         -o -name '*.json' -o -name '*.svg' -o -name '*.xml' -o -name '*.txt' \) \
+         -o -name '*.json' -o -name '*.svg' -o -name '*.xml' -o -name '*.txt' \
+         -o -name '*.ico' -o -name '*.webmanifest' \) \
       -exec sh -c 'for f do gzip -9 -c "$f" > "$f.gz" && (touch -r "$f" "$f.gz" 2>/dev/null || true) && chown nginx:nginx "$f.gz"; done' sh {} +
 
 EXPOSE 80 443

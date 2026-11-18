@@ -49,10 +49,8 @@ const total = String(OBJECTS.length).padStart(2, '0');
         <div class="pan" data-i={String(i + 1).padStart(2, '0')}>
           <span class="pan-idx" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
           <div class="pan-mask">
-            {/* первые две панели грузим сразу, остальные — по приближении секции */}
-            {i < 2
-              ? <div class="pan-img" style={`background-image:url('/img/objects/${o.img}.webp')`} role="img" aria-label={o.alt}></div>
-              : <div class="pan-img" data-bg={`/img/objects/${o.img}.webp`} role="img" aria-label={o.alt}></div>}
+            {/* кадры подставляет фоновый прогрев в main.js — секция лежит за несколько экранов */}
+            <div class="pan-img" data-bg={`/img/objects/${o.img}.webp`} role="img" aria-label={o.alt}></div>
           </div>
           <div class="pan-cap">
             <span class="pc-tag">{o.tag}</span>

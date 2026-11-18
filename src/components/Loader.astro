@@ -39,11 +39,26 @@
   if(!ldName){ finish(); return; }
   var spans=[];
   for(var i=0;i<NAME.length;i++){ var s=document.createElement('span'); s.className='dec'; s.textContent=NAME[i]; ldName.appendChild(s); spans.push(s); }
-  if(reduced){ pct.textContent='100'; addEventListener('load', finish); setTimeout(finish, 3000); return; }
+  /* первому экрану нужны только разметка, стили и шрифты: картинки ниже сгиба
+     догружаются фоном уже после подъёма занавеса (прогрев в main.js) */
+  var loaded=false;
+  function ready(){ loaded=true; }
+  function whenReady(){
+    var fonts=document.fonts&&document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    var minShow=new Promise(function(r){ setTimeout(r, reduced?0:1100); });
+    Promise.all([fonts, minShow]).then(ready, ready);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', whenReady, {once:true});
+  else whenReady();
+  addEventListener('load', ready);
+  setTimeout(ready, 4000); /* фолбэк, если шрифты задержались */
+  if(reduced){
+    pct.textContent='100';
+    (function wait(){ if(loaded) finish(); else setTimeout(wait, 50); })();
+    return;
+  }
   var statuses=['Выход на орбиту…','Сканирование поверхности…','Расчёт точки входа…','Готово к погружению'];
-  var p=0, loaded=false, start=performance.now(), last=0, lastGl=0, ended=false;
-  addEventListener('load', function(){ loaded=true; });
-  setTimeout(function(){ loaded=true; }, 8000); /* фолбэк, если load задержался */
+  var p=0, start=performance.now(), last=0, lastGl=0, ended=false;
   function tick(now){
     if(ended) return;
     var dt=Math.min(200, now-(last||now)); last=now;

@@ -83,48 +83,85 @@
   if (sec) {
     const cards = Array.from(sec.querySelectorAll('.live-card'));
     let started = false;
+    let near = false;
     let Hls: typeof HlsType;
+    /* эфир идёт, только пока секция рядом с кадром и вкладка открыта:
+       иначе шесть потоков качались бы и декодировались до закрытия страницы */
+    const active = () => near && !document.hidden;
+    const players: { pause: () => void; resume: () => void }[] = [];
 
     function initCard(card: Element) {
       const video = card.querySelector('video');
       const src = (card as HTMLElement).dataset.src;
       if (!video || !src) return;
-      const off = () => { card.classList.remove('is-live'); card.classList.add('is-off'); };
+      let dead = false;
+      let watchdog = 0;
+      const off = () => { dead = true; card.classList.remove('is-live'); card.classList.add('is-off'); };
       const live = () => { card.classList.remove('is-off'); card.classList.add('is-live'); };
       video.addEventListener('playing', live);
+      /* сторожок: если эфир не пошёл за 12 с — честно показываем «офлайн» */
+      const arm = () => {
+        clearTimeout(watchdog);
+        watchdog = window.setTimeout(() => { if (active() && !card.classList.contains('is-live')) off(); }, 12000);
+      };
+      /* после паузы возвращаемся к живому краю, а не доигрываем старый буфер */
+      const toLiveEdge = () => {
+        const s = video.seekable;
+        if (s.length) video.currentTime = Math.max(0, s.end(s.length - 1) - 1);
+      };
 
       if (video.canPlayType('application/vnd.apple.mpegurl')) {
         /* Safari — нативный HLS */
         video.addEventListener('error', off);
         video.src = src;
-        video.play().catch(() => {});
+        players.push({
+          pause: () => { clearTimeout(watchdog); video.pause(); },
+          resume: () => { if (dead) return; toLiveEdge(); video.play().catch(() => {}); arm(); },
+        });
       } else if (Hls.isSupported()) {
-        const hls = new Hls({ enableWorker: true, maxBufferLength: 12, liveSyncDurationCount: 3, manifestLoadingMaxRetry: 2 });
+        const hls = new Hls({ enableWorker: true, maxBufferLength: 12, liveSyncDurationCount: 3, manifestLoadingMaxRetry: 2, autoStartLoad: false });
         hls.on(Hls.Events.ERROR, (_e: unknown, data: { fatal?: boolean }) => {
           if (data && data.fatal) { hls.destroy(); off(); }
         });
-        hls.on(Hls.Events.MANIFEST_PARSED, () => { video.play().catch(() => {}); });
+        /* сегменты качаем только после разбора плейлиста и только пока секция рядом */
+        let parsed = false;
+        const go = () => { hls.startLoad(-1); toLiveEdge(); video.play().catch(() => {}); };
+        hls.on(Hls.Events.MANIFEST_PARSED, () => { parsed = true; if (active()) go(); });
         hls.loadSource(src);
         hls.attachMedia(video);
+        players.push({
+          pause: () => { clearTimeout(watchdog); if (parsed) hls.stopLoad(); video.pause(); },
+          resume: () => { if (dead) return; if (parsed) go(); arm(); },
+        });
       } else { off(); return; }
 
-      /* сторожок: если эфир не пошёл за 12 с — честно показываем «офлайн» */
-      setTimeout(() => { if (!card.classList.contains('is-live')) off(); }, 12000);
+      if (active()) players[players.length - 1].resume();
     }
+
+    function sync() {
+      const on = active();
+      players.forEach((p) => (on ? p.resume() : p.pause()));
+    }
+    document.addEventListener('visibilitychange', sync);
 
     async function boot() {
       if (started) return; started = true;
-      /* hls.js тяжёлый — грузим его лениво, только когда секция в зоне видимости */
-      try { Hls = (await import('hls.js')).default; }
-      catch { cards.forEach((c) => c.classList.add('is-off')); return; }
+      /* hls.js тяжёлый — грузим его лениво, только когда секция в зоне видимости,
+         и только там, где нет нативного HLS (Safari и iOS обходятся без него) */
+      const probe = document.createElement('video');
+      if (!probe.canPlayType('application/vnd.apple.mpegurl')) {
+        try { Hls = (await import('hls.js')).default; }
+        catch { cards.forEach((c) => c.classList.add('is-off')); return; }
+      }
       /* камеры включаются каскадом — не бьём канал шестью манифестами разом */
       cards.forEach((card, i) => setTimeout(() => initCard(card), i * 450));
     }
 
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver((entries, io) => {
-        if (entries.some((e) => e.isIntersecting)) { io.disconnect(); boot(); }
+      new IntersectionObserver((entries) => {
+        near = entries[entries.length - 1].isIntersecting;
+        if (near && !started) boot(); else sync();
       }, { rootMargin: '480px' }).observe(sec);
-    } else boot();
+    } else { near = true; boot(); }
   }
 </script>

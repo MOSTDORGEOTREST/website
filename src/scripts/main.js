@@ -493,40 +493,60 @@ if (!isTouch && !reduced && hasGsap){
     var type=strat.getAttribute('data-soil'), box=strat.querySelector('.st-particles');
     if(!type||!box||!makers[type]) return;
     var n = type==='sand' ? 110 : (type==='frost' ? 52 : 38);
+    var frag=document.createDocumentFragment();
     for(var i=0;i<n;i++){
       var el=document.createElement('i');
       el.style.left=(Math.random()*100)+'%';
       el.style.top=(9+Math.random()*89)+'%';
       makers[type](el);
-      box.appendChild(el);
+      frag.appendChild(el);
     }
+    box.appendChild(frag);
   });
-  /* ---- живые анимации слоёв: у каждой лаборатории своя ---- */
+  /* ---- живые анимации слоёв: у каждой лаборатории своя ----
+     Бесконечные твины горизонта крутятся, только пока он рядом с кадром:
+     за экраном они на паузе и не нагружают главный поток во время скролла. */
   if(typeof gsap!=='undefined' && !matchMedia('(prefers-reduced-motion: reduce)').matches){
     var q=function(soil,k){ return gsap.utils.toArray('.stratum[data-soil="'+soil+'"] [data-k="'+k+'"]'); };
+    var layer=function(soil,fn){
+      var strat=document.querySelector('.stratum[data-soil="'+soil+'"]');
+      if(!strat) return;
+      var ctx=gsap.context(fn);
+      if(!('IntersectionObserver' in window)) return;
+      var roots=ctx.data.filter(function(a){ return a.parent===gsap.globalTimeline; });
+      new IntersectionObserver(function(en){
+        var on=en[en.length-1].isIntersecting;
+        roots.forEach(function(a){ a.paused(!on); });
+      },{rootMargin:'30% 0px'}).observe(strat);
+    };
 
     /* 01 Физика · почва: корни медленно прорастают, комки едва дышат */
+    layer('humus',function(){
     q('humus','root').forEach(function(el){
       gsap.fromTo(el,{scaleY:.25,opacity:.4},{scaleY:1,opacity:1,duration:rnd(5,9),ease:'power1.inOut',
         repeat:-1,yoyo:true,repeatDelay:rnd(1,4),delay:rnd(0,6)});
     });
+    });
 
     /* 02 Механика · суглинок: консолидация — галька медленно оседает и приподнимается */
+    layer('loam',function(){
     q('loam','pebble').forEach(function(el,i){
       if(i%2) return;
       gsap.to(el,{y:'+='+rnd(3,7),duration:rnd(4,8),ease:'power1.inOut',repeat:-1,yoyo:true,delay:rnd(0,5)});
     });
+    });
 
     /* 03 Динамика · песок: сейсмо-дрожь 0.5 Гц (период 2 с) */
     var dyn=document.querySelector('.stratum[data-soil="sand"]');
-    if(dyn){
+    if(dyn) layer('sand',function(){
       gsap.to(dyn.querySelector('.st-band'),{x:5,duration:1,ease:'sine.inOut',yoyo:true,repeat:-1});
       gsap.to(dyn.querySelector('.st-particles'),{x:-6,y:2.5,duration:1,ease:'sine.inOut',yoyo:true,repeat:-1});
       gsap.to(dyn.querySelector('.st-in'),{x:2.5,duration:1,ease:'sine.inOut',yoyo:true,repeat:-1});
-    }
+    });
 
     /* 04 Мерзлота: линзы льда вспыхивают холодным глинтом, кристаллы дышат,
        иней искрится, вдоль слоя плывёт позёмка, с линз капает оттаивание */
+    layer('frost',function(){
     q('frost','lens').forEach(function(el){
       gsap.to(el,{opacity:rnd(.5,.78),scaleX:rnd(1.05,1.14),duration:rnd(2,4),ease:'sine.inOut',repeat:-1,yoyo:true,delay:rnd(0,3)});
       /* редкий яркий глинт по льду */
@@ -565,9 +585,11 @@ if (!isTouch && !reduced && hasGsap){
           .to(d,{opacity:0,duration:.25},'-=.2');
       });
     }
+    });
 
     /* 05 Скала: трещины прорастают рывками; на разрыве — микротолчок слоя
        и осыпь мелких обломков, затем трещина затягивается */
+    layer('rock',function(){
     var rockBox=document.querySelector('.stratum[data-soil="rock"] .st-particles');
     var tremorBusy=false;
     function rockTremor(){
@@ -594,8 +616,10 @@ if (!isTouch && !reduced && hasGsap){
         .to(el,{opacity:0,duration:1.3,ease:'power1.in'},'+='+rnd(2,5))
         .set(el,{scaleX:0,opacity:1});
     });
+    });
 
     /* 06 Химия · водоносный: пузырьки всплывают, течение дрейфует */
+    layer('aqua',function(){
     q('aqua','bubble').forEach(function(el){
       gsap.timeline({repeat:-1,repeatDelay:rnd(.5,3),delay:rnd(0,5)})
         .fromTo(el,{y:rnd(10,30),opacity:0},{opacity:.9,duration:.6})
@@ -604,6 +628,7 @@ if (!isTouch && !reduced && hasGsap){
     });
     q('aqua','flow').forEach(function(el){
       gsap.to(el,{x:'+='+rnd(20,50),duration:rnd(4,7),ease:'sine.inOut',repeat:-1,yoyo:true,delay:rnd(0,4)});
+    });
     });
   }
 })();
@@ -895,6 +920,73 @@ burger.addEventListener('click',function(){
   document.addEventListener('visibilitychange',sync);
 })();
 
+/* ================= ПРОГРЕВ: ФОНОВАЯ ДОГРУЗКА ОТЛОЖЕННЫХ КАРТИНОК =================
+   Первый экран не ждёт картинок ниже сгиба, но и пользователь не должен ловить
+   их на скролле. Как только поднят занавес, отложенные кадры (data-bg) и ленивые
+   <img> догружаются в фоне по порядку документа, по 4 за раз; фоновые кадры
+   подставляются уже декодированными, поэтому их появление не дёргает скролл.
+   Секция, к которой пользователь подъехал раньше очереди, грузится вне очереди.
+   При включённой экономии трафика фонового прогрева нет — только по приближении. */
+(function(){
+  var items=Array.prototype.slice.call(document.querySelectorAll('[data-bg], img[loading="lazy"]'));
+  if(!items.length) return;
+  function done(p){ return p.then(function(){},function(){}); }
+  function bg(el){
+    var u=el.getAttribute('data-bg');
+    if(!u) return Promise.resolve();
+    el.removeAttribute('data-bg');
+    var im=new Image(), set=function(){ el.style.backgroundImage="url('"+u+"')"; };
+    im.decoding='async'; im.src=u;
+    return done(im.decode ? im.decode() : new Promise(function(r){ im.onload=im.onerror=r; })).then(set);
+  }
+  function img(el){
+    if(el.complete && el.naturalWidth) return Promise.resolve();
+    el.loading='eager';
+    return new Promise(function(r){
+      el.addEventListener('load',r,{once:true});
+      el.addEventListener('error',r,{once:true});
+      setTimeout(r,10000);
+    });
+  }
+  function load(el){ return el.hasAttribute('data-bg') ? bg(el) : (el.tagName==='IMG' && el.loading==='lazy' ? img(el) : Promise.resolve()); }
+
+  if('IntersectionObserver' in window){
+    var hosts=[];
+    items.forEach(function(el){
+      if(!el.hasAttribute('data-bg')) return;
+      var h=el.closest('section')||el.parentNode;
+      if(hosts.indexOf(h)<0) hosts.push(h);
+    });
+    var io=new IntersectionObserver(function(en){
+      en.forEach(function(e){
+        if(!e.isIntersecting) return;
+        io.unobserve(e.target);
+        e.target.querySelectorAll('[data-bg]').forEach(bg);
+      });
+    },{rootMargin:'150% 0px'});
+    hosts.forEach(function(h){ io.observe(h); });
+  } else { items.forEach(load); return; }
+
+  var conn=navigator.connection;
+  if(conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType||''))) return;
+
+  var started=false;
+  function warm(){
+    if(started) return; started=true;
+    var i=0, active=0, LIMIT=4;
+    (function next(){
+      while(active<LIMIT && i<items.length){
+        active++;
+        load(items[i++]).then(function(){ active--; next(); });
+      }
+    })();
+  }
+  function later(){ setTimeout(function(){ ('requestIdleCallback' in window) ? requestIdleCallback(warm,{timeout:1500}) : warm(); },400); }
+  if(document.getElementById('loader') && !window.__ldFinished) addEventListener('mdgt:loaded',later,{once:true});
+  else later();
+  addEventListener('load',later,{once:true});
+})();
+
 /* ================= PRELOADER: запуск фильма по реальной загрузке ================= */
 var introDone=false;
 function startFilm(){
@@ -911,7 +1003,7 @@ function startFilm(){
 var loaderEl=document.getElementById('loader');
 if(loaderEl){
   if(window.__ldFinished){ startFilm(); }
-  else { addEventListener('mdgt:loaded', startFilm, {once:true}); setTimeout(startFilm, 9000); }
+  else { addEventListener('mdgt:loaded', startFilm, {once:true}); setTimeout(startFilm, 6000); }
 } else { startFilm(); }
 
 /* ================= HERO ENTRANCE + PIN ================= */
@@ -1039,7 +1131,9 @@ document.querySelectorAll('.strip-track').forEach(function(track){
   track.innerHTML+=track.innerHTML;
   var tween=gsap.to(track,{xPercent:-50*dir,duration:26,ease:'none',repeat:-1});
   if (dir<0) gsap.set(track,{xPercent:-50}); /* start shifted so reverse dir loops seamlessly */
+  tween.pause();
   ScrollTrigger.create({ trigger:track, start:'top bottom', end:'bottom top',
+    onToggle:function(self){ tween.paused(!self.isActive); },
     onUpdate:function(self){
       var v=Math.abs(self.getVelocity())/900;
       gsap.to(tween,{timeScale:1+Math.min(v,3),duration:.3,overwrite:true});
@@ -1102,30 +1196,6 @@ ScrollTrigger.matchMedia({
     });
   }
 });
-
-/* ================= ОТЛОЖЕННАЯ ЗАГРУЗКА КАДРОВ ОБЪЕКТОВ =================
-   Восемь снимков — это ~1,6 МБ, и все они лежат ниже двух экранов разреза.
-   Подставляем их не в первый заход, а когда до секции остаётся полтора экрана:
-   к моменту, когда лента поедет, картинки уже на месте. Работает и без
-   IntersectionObserver — тогда просто грузим сразу. */
-(function(){
-  var lazy=document.querySelectorAll('.pan-img[data-bg]');
-  if(!lazy.length) return;
-  var load=function(){
-    lazy.forEach(function(el){
-      var u=el.getAttribute('data-bg');
-      if(!u) return;
-      el.style.backgroundImage="url('"+u+"')";
-      el.removeAttribute('data-bg');
-    });
-  };
-  var host=document.getElementById('objects');
-  if(!host || !('IntersectionObserver' in window)){ load(); return; }
-  var io=new IntersectionObserver(function(en){
-    if(en[0].isIntersecting){ load(); io.disconnect(); }
-  },{rootMargin:'150% 0px'});
-  io.observe(host);
-})();
 
 /* ================= ACT IV : HORIZONTAL DOLLY ================= */
 ScrollTrigger.matchMedia({
